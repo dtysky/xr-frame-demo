@@ -1,5 +1,3 @@
-const sceneReady = require("../../pages/behavior-scene/scene-ready");
-
 Component({
   scene: null,
   shadowRoot: null,

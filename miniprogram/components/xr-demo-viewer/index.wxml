@@ -12,6 +12,15 @@
       </t-collapse-panel>
     </t-collapse>
   </view>
+  <view wx:if="{{js.length > 0}}">
+    <t-collapse value="{{activeValuesJs}}" bind:change="handleChangeJs">
+      <t-collapse-panel header="脚本演示" value="{{0}}">
+        <view class="code-inner">
+          <rich-text nodes="{{js}}"></rich-text>
+        </view>
+      </t-collapse-panel>
+    </t-collapse>
+  </view>
   <view wx:if="{{json.length > 0}}">
     <t-collapse value="{{activeValuesJson}}" bind:change="handleChangeJson">
       <t-collapse-panel header="动画数据结构" value="{{0}}">

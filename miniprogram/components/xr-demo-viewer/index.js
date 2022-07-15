@@ -16,10 +16,15 @@ Component({
       type: String,
       value: '',
     },
+    js: {
+      type: String,
+      value: '',
+    },
   },
   data: {
     activeValues: [1],
     activeValuesJson: [1],
+    activeValuesJs: [1],
   },
   methods: {
     handleChange(e) {
@@ -30,6 +35,11 @@ Component({
     handleChangeJson(e) {
       this.setData({
         activeValuesJson: e.detail.value,
+      });
+    },
+    handleChangeJs(e) {
+      this.setData({
+        activeValuesJs: e.detail.value,
       });
     }
   }
