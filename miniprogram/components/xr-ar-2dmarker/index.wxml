@@ -1,0 +1,20 @@
+<xr-scene ar-system="modes:Marker" id="xr-scene" bind:ready="handleReady" bind:arReady="handleARReady" bind:log="handleLog">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-material asset-id="ar-anchor" effect="standrand" uniforms="u_baseColorFactor:0 1 0 1"></xr-asset-material>
+  </xr-assets>
+  <xr-node>
+    <xr-node node-id="id2" scale="2 2 2" position="0 0 0"></xr-node>
+    <xr-ar-tracker mode="Marker" src="{{markerImg}}">
+      <xr-mesh geometry="cylinder" material="ar-anchor" />
+    </xr-ar-tracker>
+    <xr-camera
+      id="camera" node-id="camera" position="0.8 2.2 -5" clear-color="0.925 0.925 0.925 1"
+      target="id2" background="ar" is-ar-camera
+      camera-orbit-control
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

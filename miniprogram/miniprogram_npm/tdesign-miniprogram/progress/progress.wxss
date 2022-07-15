@@ -1,0 +1,95 @@
+.t-float-left {
+  float: left;
+}
+.t-float-right {
+  float: right;
+}
+@keyframes tdesign-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.hotspot-expanded.relative {
+  position: relative;
+}
+.hotspot-expanded::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: scale(1.5);
+}
+.t-progress__inner {
+  display: flex;
+  align-items: center;
+  min-height: 64rpx;
+}
+.t-progress__bar {
+  position: relative;
+  flex: 1;
+  height: 8rpx;
+  background: #e7e7e7;
+}
+.t-progress__bar-percent {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: #0052d9;
+  transition: all 0.3s ease-out;
+}
+.t-progress__label {
+  display: inline-block;
+  width: 84rpx;
+  text-align: right;
+  margin-left: 32rpx;
+  font-size: 32rpx;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 48rpx;
+}
+.t-progress--status--active .t-progress__bar-percent::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  content: '';
+  animation: progress-active-animation 2s cubic-bezier(0.23, 0.99, 0.86, 0.2) infinite;
+  background: #fff;
+  opacity: 0.2;
+}
+.t-progress--status--success .t-progress__bar-percent {
+  background: #078d5c;
+}
+.t-progress--status--warning .t-progress__bar-percent {
+  background: #ed7b2f;
+}
+.t-progress--status--warning .t-progress__label {
+  color: #ed7b2f;
+}
+.t-progress--status--error .t-progress__bar-percent {
+  background: #e34d59;
+}
+.t-progress--status--error .t-progress__label {
+  color: #e34d59;
+}
+@keyframes progress-active-animation {
+  0% {
+    width: 0;
+    opacity: 0.1;
+  }
+  35% {
+    width: 50%;
+    opacity: 0.4;
+  }
+  100% {
+    width: 100%;
+    opacity: 0;
+  }
+}

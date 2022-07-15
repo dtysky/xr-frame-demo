@@ -1,0 +1,30 @@
+<xr-scene id="xr-scene">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load asset-id="gltf-anim" type="keyframe" src="/assets/animation/gltf-animation.json"/>
+    <xr-asset-load type="gltf" asset-id="gltf-Sponza" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/Sponza/glTF/Sponza.gltf" />
+  </xr-assets>
+  <xr-node wx:if="{{loaded}}">
+    <xr-node node-id="camera-target" position="0 5 0"></xr-node>
+    <xr-gltf node-id="mesh-gltf-Sponza" position="0 -2 0.3" rotation="0 0 0" scale="2 2 2" model="gltf-Sponza"></xr-gltf>
+    <xr-camera
+      id="camera" node-id="camera" position="-1 5 0" clear-color="0.925 0.925 0.925 1"
+      draw-sky target="camera-target" far="1000"
+      camera-orbit-control=""
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.4" />
+    <xr-light
+      type="directional" rotation="200 155 0" color="1 1 1" intensity="3"
+      anim-keyframe="gltf-anim" anim-clipmap="default:directionalLight" anim-autoplay="clip:directionalLight, speed:1"
+    />
+    <xr-light
+      type="point" position="10 0 0" color="1 1 1" range="10" intensity="30"
+      anim-keyframe="gltf-anim" anim-autoplay="clip:pointLight, speed:1"
+      />
+    <xr-light
+      type="spot" color="1 0 0" position="0 8 0" range="30" intensity="60" rotation="0 90 0" inner-cone-angle="18" outer-cone-angle="24"
+      anim-keyframe="gltf-anim" anim-autoplay="clip:spotLight, speed:1"
+    />
+  </xr-node>
+</xr-scene>

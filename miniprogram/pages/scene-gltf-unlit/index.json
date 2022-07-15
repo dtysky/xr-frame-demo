@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "xr-gltf-unlit": "../../components/xr-gltf-unlit/index"
+  },
+  "disableScroll": true
+}

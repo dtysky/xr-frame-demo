@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/scene-basic/index",
+    "pages/scene-basic-light/index",
+    "pages/scene-basic-animation/index",
+    "pages/scene-basic-touch/index",
+    "pages/scene-basic-shadow/index",
+    "pages/scene-gltf-damageHelmet/index",
+    "pages/scene-gltf-multi/index",
+    "pages/scene-gltf-unlit/index",
+    "pages/scene-gltf-light-loading/index",
+    "pages/scene-ar-basic/index",
+    "pages/scene-ar-2dmarker/index",
+    "pages/scene-ar-osdmarker/index",
+    "pages/scene-ar-camera/index"
+  ],
+  "usingComponents": {
+    "pull-down-list": "./components/pull-down-list/index",
+    "xr-demo-viewer": "./components/xr-demo-viewer/index",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-cell": "tdesign-miniprogram/cell/cell",
+    "t-collapse": "tdesign-miniprogram/collapse/collapse",
+    "t-collapse-panel": "tdesign-miniprogram/collapse/collapse-panel",
+    "xr-basic": "./components/xr-basic/index",
+    "xr-basic-light": "./components/xr-basic-light/index",
+    "xr-basic-animation": "./components/xr-basic-animation/index",
+    "xr-basic-touch": "./components/xr-basic-touch/index",
+    "xr-basic-multi": "./components/xr-basic-multi/index",
+    "xr-basic-shadow": "./components/xr-basic-shadow/index",
+    "xr-gltf-damageHelmet": "./components/xr-gltf-damageHelmet/index",
+    "xr-gltf-multi": "./components/xr-gltf-multi/index",
+    "xr-gltf-light-loading": "./components/xr-gltf-light-loading/index",
+    "xr-ar-camera": "./components/xr-ar-camera/index",
+    "xr-ar-basic": "./components/xr-ar-basic/index",
+    "xr-ar-2dmarker": "./components/xr-ar-2dmarker/index",
+    "xr-ar-osdmarker": "./components/xr-ar-osdmarker/index"
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f6f6f6",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

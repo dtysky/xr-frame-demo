@@ -1,0 +1,37 @@
+.demo-viewer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.holder {
+  height: 60rpx;
+}
+
+.intro {
+  display: block;
+  margin: 10px 0;
+}
+
+.code-inner {
+  margin: 0rpx;
+  padding: 30rpx;
+  font-size: 30rpx;
+  background-color: #f9f9fa;
+}
+
+.block-name {
+  display: inline-block;
+  color: #b457ff;
+}
+
+.attr-name {
+  display: inline-block;
+  color: #ff4d00;
+}
+
+.ml20 {
+  margin-left: 20rpx;
+}
