@@ -22,6 +22,10 @@
   background-color: #f9f9fa;
 }
 
+.code-inner rich-text {
+  word-wrap: break-word;
+}
+
 .block-name {
   display: inline-block;
   color: #b457ff;

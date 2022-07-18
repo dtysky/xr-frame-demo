@@ -2,6 +2,7 @@
   title="ShadowNode案例"
   intro="可以使用xml中的xr-shadow节点，来动态在其下添加节点，以及用代码加载资源"
   code="{{xmlCode}}"
+  js="{{jsCode}}"
 >
   <xr-basic-shadow
     disable-scroll
@@ -12,6 +13,8 @@
     meshCount="{{meshCount}}"
   />
 
-  <button bindtap="handleIncMeshCount">增加一个模型</button>
-  <button bindtap="handleDecMeshCount">减少一个模型</button>
+  <view class="button-wrap">
+    <button class="change-button" bindtap="handleIncMeshCount">增加一个模型</button>
+    <button class="change-button" bindtap="handleDecMeshCount">减少一个模型</button>
+  </view>
 </xr-demo-viewer>

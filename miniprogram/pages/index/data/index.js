@@ -58,8 +58,8 @@ const gltf = {
       path: '/pages/scene-gltf-unlit/index',
     },
     {
-      name: 'Light-Loading',
-      label: '加载界面，多光源光照场景',
+      name: 'Loading',
+      label: '加载界面与多光源场景',
       path: '/pages/scene-gltf-light-loading/index',
     },
   ],
