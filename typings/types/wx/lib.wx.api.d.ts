@@ -19,6 +19,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ***************************************************************************** */
+/// <reference path="./xr-frame.d.ts" />
 
 declare namespace WechatMiniprogram {
     interface AccessFailCallbackResult {
@@ -11534,6 +11535,7 @@ worker.postMessage({
         terminate(): void
     }
     interface Wx {
+      getXrFrameSystem(): import('XrFrame').IXrFrameSystem;
         /**
 小程序云开发
 */

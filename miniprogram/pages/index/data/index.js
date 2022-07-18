@@ -95,4 +95,17 @@ const ar = {
     // },
   ],
 };
-export default [base, gltf, ar];
+
+const custom = {
+  name: '高级定制',
+  icon: 'scan',
+  childArr: [
+    {
+      name: 'Logic',
+      label: '定制组件和元素',
+      path: '/pages/scene-custom-logic/index',
+    }
+  ]
+};
+
+export default [base, gltf, ar, custom];
