@@ -96,9 +96,19 @@ const ar = {
   ],
 };
 
+const scan = {
+  name: '扫描还原案例',
+  icon: 'photo',
+  childArr: [{
+      name: 'Render',
+      label: '扫描渲染案例(全景、模型)',
+      path: '/pages/scene-scan-render/index',
+    }
+  ],
+};
 const custom = {
   name: '高级定制',
-  icon: 'scan',
+  icon: 'tools',
   childArr: [
     {
       name: 'Logic',
@@ -112,5 +122,4 @@ const custom = {
     }
   ]
 };
-
-export default [base, gltf, ar, custom];
+export default [base, gltf, ar, scan, custom];

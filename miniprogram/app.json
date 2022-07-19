@@ -15,7 +15,8 @@
     "pages/scene-ar-osdmarker/index",
     "pages/scene-ar-camera/index",
     "pages/scene-custom-logic/index",
-    "pages/scene-custom-render/index"
+    "pages/scene-custom-render/index",
+    "pages/scene-scan-render/index"
   ],
   "usingComponents": {
     "pull-down-list": "./components/pull-down-list/index",
@@ -38,7 +39,8 @@
     "xr-ar-2dmarker": "./components/xr-ar-2dmarker/index",
     "xr-ar-osdmarker": "./components/xr-ar-osdmarker/index",
     "xr-custom-logic": "./components/xr-custom-logic/index",
-    "xr-custom-render": "./components/xr-custom-render/index"
+    "xr-custom-render": "./components/xr-custom-render/index",
+    "xr-scan-render": "./components/xr-scan-render/index"
   },
   "window": {
     "backgroundTextStyle": "light",
