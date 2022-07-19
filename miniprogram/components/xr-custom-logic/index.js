@@ -1,13 +1,9 @@
 Component({
-  properties: {
-    a: Number,
-  },
+  properties: {},
   data: {
     loaded: false
   },
-  lifetimes: {
-
-  },
+  lifetimes: {},
   methods: {
     handleReady: function({detail}) {
       const scene = detail.value;

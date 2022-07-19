@@ -104,6 +104,11 @@ const custom = {
       name: 'Logic',
       label: '定制组件和元素',
       path: '/pages/scene-custom-logic/index',
+    },
+    {
+      name: 'Render',
+      label: '定制渲染资源',
+      path: '/pages/scene-custom-render/index',
     }
   ]
 };

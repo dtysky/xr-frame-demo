@@ -115,6 +115,8 @@ declare module 'XrFrame' {
   export type BoundBall = xrFrameSystem.BoundBall;
   export type BoundBox = xrFrameSystem.BoundBox;
   export type Spherical = xrFrameSystem.Spherical;
+  export type ShapeTouchEvent = xrFrameSystem.ShapeTouchEvent;
+  export type ShapeDrageEvent = xrFrameSystem.ShapeDrageEvent;
   export type Transform = xrFrameSystem.Transform;
   export type AssetLoad = xrFrameSystem.AssetLoad;
   export type Assets = xrFrameSystem.Assets;
@@ -128,6 +130,8 @@ declare module 'XrFrame' {
   export type Animator = xrFrameSystem.Animator;
   export type CameraOrbitControl = xrFrameSystem.CameraOrbitControl;
   export type ARTracker = xrFrameSystem.ARTracker;
+  export type SphereShape = xrFrameSystem.SphereShape;
+  export type MeshShape = xrFrameSystem.MeshShape;
   export type Scene = xrFrameSystem.Scene;
   export type XRNode = xrFrameSystem.XRNode;
   export type XRShadow = xrFrameSystem.XRShadow;
@@ -160,6 +164,7 @@ declare module 'XrFrame' {
       registerEffect: typeof xrFrameSystem.registerEffect;
       registerGeometry: typeof xrFrameSystem.registerGeometry;
       registerTexture: typeof xrFrameSystem.registerTexture;
+      registerMaterial: typeof xrFrameSystem.registerMaterial;
       registerUniformDesc: typeof xrFrameSystem.registerUniformDesc;
       registerVertexDataDesc: typeof xrFrameSystem.registerVertexDataDesc;
       registerVertexLayout: typeof xrFrameSystem.registerVertexLayout;
@@ -183,6 +188,8 @@ declare module 'XrFrame' {
       BoundBall: typeof xrFrameSystem.BoundBall;
       BoundBox: typeof xrFrameSystem.BoundBox;
       Spherical: typeof xrFrameSystem.Spherical;
+      ShapeTouchEvent: typeof xrFrameSystem.ShapeTouchEvent;
+      ShapeDrageEvent: typeof xrFrameSystem.ShapeDrageEvent;
       Transform: typeof xrFrameSystem.Transform;
       AssetLoad: typeof xrFrameSystem.AssetLoad;
       Assets: typeof xrFrameSystem.Assets;
@@ -196,6 +203,8 @@ declare module 'XrFrame' {
       Animator: typeof xrFrameSystem.Animator;
       CameraOrbitControl: typeof xrFrameSystem.CameraOrbitControl;
       ARTracker: typeof xrFrameSystem.ARTracker;
+      SphereShape: typeof xrFrameSystem.SphereShape;
+      MeshShape: typeof xrFrameSystem.MeshShape;
       Scene: typeof xrFrameSystem.Scene;
       XRNode: typeof xrFrameSystem.XRNode;
       XRShadow: typeof xrFrameSystem.XRShadow;
@@ -310,7 +319,8 @@ declare module 'XrFrame/xrFrameSystem' {
   export { default as EnvData, IEnvDataOptions } from 'XrFrame/assets/EnvData';
   export { default as Animation, TDirection } from 'XrFrame/animation/Animation';
   export { default as KeyframeAnimation, IKeyframeAnimationData, IKeyframeAnimationInfo, IKeyframeAnimationOptions } from 'XrFrame/animation/KeyframeAnimation';
-  export { registerEffect, registerGeometry, registerTexture, registerUniformDesc, registerVertexDataDesc, registerVertexLayout } from 'XrFrame/assets/factories';
+  export { registerEffect, registerGeometry, registerTexture, registerMaterial, registerUniformDesc, registerVertexDataDesc, registerVertexLayout } from 'XrFrame/assets/factories';
+  export { ShapeTouchEvent, ShapeDrageEvent } from 'XrFrame/systems/PhysicsSystem';
   export { default as Vector2 } from 'XrFrame/math/vector2';
   export { default as Vector3 } from 'XrFrame/math/vector3';
   export { default as Vector4 } from 'XrFrame/math/vector4';
@@ -542,6 +552,8 @@ declare module 'XrFrame/components' {
   export { default as Animator, IAnimatorData, AnimatorSchema } from 'XrFrame/components/Animator';
   export { default as CameraOrbitControl, ICameraOrbitControlData, CameraOrbitControlSchema } from 'XrFrame/components/CameraOrbitControl';
   export { default as ARTracker, IARTrackerData, ARTrackSchema } from 'XrFrame/components/ARTracker';
+  export { default as SphereShape } from 'XrFrame/components/physics/SphereShape';
+  export { default as MeshShape } from 'XrFrame/components/physics/MeshShape';
 }
 
 declare module 'XrFrame/elements' {
@@ -996,6 +1008,7 @@ declare module 'XrFrame/assets/factories' {
   import Scene from "XrFrame/core/Scene";
   import Effect from "XrFrame/assets/Effect";
   import Geometry from "XrFrame/assets/Geometry";
+  import Material from "XrFrame/components/Material";
   export function getAssetFactory<T = any>(type: string, id: string): (scene: Scene) => T;
   export const registerGeometry: (id: string, factory: (scene: Scene) => Geometry) => void;
   export const registerEffect: (id: string, factory: (scene: Scene) => Effect) => void;
@@ -1004,6 +1017,65 @@ declare module 'XrFrame/assets/factories' {
   export const registerVertexDataDesc: (id: string, factory: (scene: Scene) => import('XrFrame/kanata/lib/index').VertexDataDescriptor) => void;
   export const registerUniformDesc: (id: string, factory: (scene: Scene) => import('XrFrame/kanata/lib/index').UniformDescriptor) => void;
   export const registerVertexLayout: (id: string, factory: (scene: Scene) => import('XrFrame/kanata/lib/index').VertexLayout) => void;
+  export const registerMaterial: (id: string, factory: (scene: Scene) => Material) => void;
+}
+
+declare module 'XrFrame/systems/PhysicsSystem' {
+  import { Camera } from 'XrFrame/components';
+  import Component from 'XrFrame/core/Component';
+  import { Kanata } from 'XrFrame/ext';
+  import { RaycastDesc } from 'XrFrame/physics/raycast';
+  import Element from "XrFrame/core/Element";
+  import Shape from 'XrFrame/components/physics/Shape';
+  /**
+      * @field camera 渲染物体的相机
+      * @field target Shape所在的xml元素
+      * @field shape 点击选中的Shape
+      * @field x,y 二维canvas中的位置
+      * @field origin 相机在世界空间中的位置
+      * @field dir 相机向点击方向投射的射线，在世界空间中的单位向量
+      */
+  export interface ShapeTouchEvent {
+          camera: Camera;
+          target: Element;
+          shape: Shape;
+          x: number;
+          y: number;
+          origin: [number, number, number];
+          dir: [number, number, number];
+          force: number;
+  }
+  /**
+      * @field camera 渲染物体的相机
+      * @field target Shape所在的xml元素
+      * @field shape 点击选中的Shape
+      * @field x,y 二维canvas中的位置
+      * @field origin 相机在世界空间中的位置
+      * @field dir 相机向点击方向投射的射线，在世界空间中的单位向量
+      * @field deltaX,deltaY 二维canvas中的位置变化量
+      */
+  export interface ShapeDrageEvent extends ShapeTouchEvent {
+          deltaX: number;
+          deltaY: number;
+  }
+  export interface IPhysicsSystemData {
+  }
+  export default class PhysicsSystem extends Component<IPhysicsSystemData> {
+          /**
+              * @internal
+              */
+          nativeSystem: phys3D.PhysSystem;
+          constructor();
+          addShape(shape: Shape): void;
+          removeShape(shape: Shape): void;
+          onAdd(): void;
+          onTick(deltaTime: number, data: IPhysicsSystemData): void;
+          bindRigidbodyWithEntity(rigidbody: phys3D.Rigidbody, entity: Kanata.Entity3D): void;
+          /**
+              * 射线检测，判断给定射线是否与至少一个碰撞体相交，并返回与**最近**的那个碰撞体相交的信息。
+              */
+          raycast(desc: RaycastDesc): boolean;
+  }
 }
 
 declare module 'XrFrame/math/vector2' {
@@ -2762,6 +2834,7 @@ declare module 'XrFrame/core/Scene' {
       get rootNode(): import('XrFrame/kanata/lib/index').Entity3D;
       get canvas(): HTMLCanvasElement;
       get backendVersion(): number[];
+      versionBefore(major: number, minor: number): boolean;
       get backendCommit(): string;
       get backendUsePuppetSokol(): boolean;
       createElement<T extends Element>(clz: new (...args: any) => T): T;
@@ -3498,6 +3571,59 @@ declare module 'XrFrame/components/ARTracker' {
   }
 }
 
+declare module 'XrFrame/components/physics/SphereShape' {
+  import Shape, { ShapeType, IShapeData } from "XrFrame/components/physics/Shape";
+  import Vector3 from "XrFrame/math/vector3";
+  import Element from "XrFrame/core/Element";
+  import { IComponentSchema } from "XrFrame/xrFrameSystem";
+  export interface ISphereShapeData extends IShapeData {
+          radius?: number;
+  }
+  export const SphereShapeSchema: IComponentSchema;
+  export default class SphereShape extends Shape {
+          readonly schema: IComponentSchema;
+          protected _type: ShapeType;
+          /**
+              * 碰撞体相对于LocalTransform中心点的偏移。
+              * @default (0, 0, 0)
+              */
+          get center(): Vector3;
+          set center(v: Vector3);
+          static defaultRadius: number;
+          /**
+              * 碰撞体球的半径。
+              * @default 1
+              */
+          get radius(): number;
+          set radius(v: number);
+          onAdd(parent: Element, data: IShapeData): void;
+          onUpdate(parent: Element, data: ISphereShapeData): void;
+          protected _create(data: ISphereShapeData): void;
+  }
+}
+
+declare module 'XrFrame/components/physics/MeshShape' {
+  import Shape, { IShapeData } from "XrFrame/components/physics/Shape";
+  import Element from "XrFrame/core/Element";
+  import { IComponentSchema } from "XrFrame/xrFrameSystem";
+  export interface IMeshShapeData extends IShapeData {
+  }
+  export const MeshShapeSchema: IComponentSchema;
+  /**
+      * 在所有shape中，MeshShape是特殊的，
+      * 给GLTF标签添加MeshShape的话，MeshShape只起到一个管理shadowroot下节点的作用，
+      * 给shadowroot下每个mesh新建一个真实的MeshCollider，而自己不持有任何MeshCollider。
+      */
+  export default class MeshShape extends Shape {
+          readonly schema: IComponentSchema;
+          readonly priority: number;
+          onUpdate(parent: Element, data: IMeshShapeData): void;
+          onTick(dateTime: number, data: IMeshShapeData): void;
+          protected _createIfNeeded(data: IMeshShapeData): void;
+          protected _create(data: IMeshShapeData): void;
+  }
+}
+
 declare module 'XrFrame/elements/xr-node' {
   /**
     * xr-node.ts
@@ -3845,53 +3971,6 @@ declare module 'XrFrame/systems/RenderSystem' {
   }
 }
 
-declare module 'XrFrame/systems/PhysicsSystem' {
-  import { Camera } from 'XrFrame/components';
-  import Component from 'XrFrame/core/Component';
-  import { Kanata } from 'XrFrame/ext';
-  import { RaycastDesc } from 'XrFrame/physics/raycast';
-  import Element from "XrFrame/core/Element";
-  import Shape from 'XrFrame/components/physics/Shape';
-  export interface ShapeTouchEvent {
-          camera: Camera;
-          target: Element;
-          shape?: Shape;
-          x: number;
-          y: number;
-          dir: [number, number, number];
-          force: number;
-  }
-  export interface ShapeDrageEvent {
-          camera: Camera;
-          target: Element;
-          shape?: Shape;
-          deltaX: number;
-          deltaY: number;
-          x: number;
-          y: number;
-          dir: [number, number, number];
-          force: number;
-  }
-  export interface IPhysicsSystemData {
-  }
-  export default class PhysicsSystem extends Component<IPhysicsSystemData> {
-          /**
-              * @internal
-              */
-          nativeSystem: phys3D.PhysSystem;
-          constructor();
-          addShape(shape: Shape): void;
-          removeShape(shape: Shape): void;
-          onAdd(): void;
-          onTick(deltaTime: number, data: IPhysicsSystemData): void;
-          bindRigidbodyWithEntity(rigidbody: phys3D.Rigidbody, entity: Kanata.Entity3D): void;
-          /**
-              * 射线检测，判断给定射线是否与至少一个碰撞体相交，并返回与**最近**的那个碰撞体相交的信息。
-              */
-          raycast(desc: RaycastDesc): boolean;
-  }
-}
-
 declare module 'XrFrame/systems/ARSystem' {
   import { Camera, Mesh } from 'XrFrame/components';
   import ARTracker, { TTrackMode } from 'XrFrame/components/ARTracker';
@@ -4212,6 +4291,109 @@ declare module 'XrFrame/loader/glTF/GLTFRootNode' {
         * 每个子节点的raw也会释放掉（以防数据是dataURI的形式）。
         */
       releaseRawBuffer(): void;
+  }
+}
+
+declare module 'XrFrame/physics/raycast' {
+  import Vector3 from "XrFrame/math/vector3";
+  import RaycastHit from "XrFrame/physics/RaycastHit";
+  /**
+      * raycast函数的参数。
+      * @field origin 射线起点。
+      * @field unitDir 射线方向（单位向量）。
+      * @field distance 射线的最大长度。
+      * @field hit 用来接收碰撞信息的容器。
+      * @field layerMask 可以用来屏蔽一些碰撞体。
+      * @field （未实现）queryTriggerInteraction，是否能与Trigger相交（默认能）。
+      */
+  export type RaycastDesc = {
+          origin: Vector3;
+          unitDir: Vector3;
+          distance?: number;
+          hit?: RaycastHit;
+          layerMask?: number;
+  };
+  /**
+      * 射线检测，判断给定射线是否与至少一个碰撞体相交，并返回与**最近**的那个碰撞体相交的信息。
+      */
+  export function raycast(Phys3D: typeof phys3D, system: phys3D.PhysSystem, desc: RaycastDesc): boolean;
+}
+
+declare module 'XrFrame/components/physics/Shape' {
+  import Component from "XrFrame/core/Component";
+  import Element from "XrFrame/core/Element";
+  import Vector3 from "XrFrame/math/vector3";
+  import { Kanata } from "XrFrame/ext";
+  import Rigidbody from "XrFrame/components/physics/Rigidbody";
+  export const shapeMap: Map<phys3D.Collider, Shape>;
+  export enum ShapeType {
+          None = 0,
+          Box = 1,
+          CharacterController = 2,
+          Capsule = 3,
+          Mesh = 4,
+          Sphere = 5
+  }
+  export interface IShapeData {
+  }
+  /**
+      * 碰撞体的基类。
+      * @abstract
+      */
+  export default class Shape extends Component<IShapeData> {
+          /**
+              * 物理组件在节点上的执行顺序，排在渲染节点之后、用户脚本之前。
+              */
+          readonly priority: number;
+          _nativeStaticRigidbody: phys3D.Rigidbody | null;
+          _nativeColliders: Array<phys3D.Collider>;
+          protected _rigidbodyComp: Rigidbody | null;
+          protected _type: ShapeType;
+          onAdd(parent: Element, data: IShapeData): void;
+          onRelease(): void;
+          get entity(): Kanata.Entity3D;
+          get type(): ShapeType;
+          set type(v: ShapeType);
+          /**
+              * 碰撞体是否是Trigger，开启后不参与碰撞，但是能触发Trigger系列的事件：
+              * {@link onTriggerEnter}, {@link onTriggerStay}, {@link onTriggerExit}。
+              * @default false
+              */
+          get isTrigger(): boolean;
+          set isTrigger(v: boolean);
+          /**
+              * @internal
+              */
+          get scale(): Vector3;
+          set scale(v: Vector3);
+          /**
+              * 获取碰撞体附着的刚体组件。
+              * 目前不支持刚体，必定返回null。
+              */
+          get attachedRigidbody(): any;
+          /**
+              * 设置碰撞体的contactOffset，必须为正数。
+              * *一对*碰撞体，如果他们之间的最近距离小于他们的contactOffset之和，那么物理系统在一次*物理模拟*后就会产生一次碰撞。
+              */
+          get contactOffset(): number;
+          set contactOffset(v: number);
+          /** @internal */
+          constructor();
+          enable(): void;
+          disable(): void;
+          /**
+              * 交给子类重载实现
+              * @deprecated
+              */
+          protected _create(data: IShapeData): void;
+          /** @internal */
+          onAddRigidbody(rigidbody: Rigidbody): void;
+          /** @internal */
+          onRemoveRigidbody(): void;
+          /**
+              * @virtual 子类调用该方法之前必须确保_nativeCollider已经创建
+              */
+          protected _baseInit(): void;
   }
 }
 
@@ -5359,109 +5541,6 @@ declare module 'XrFrame/systems/LightManager' {
   }
 }
 
-declare module 'XrFrame/physics/raycast' {
-  import Vector3 from "XrFrame/math/vector3";
-  import RaycastHit from "XrFrame/physics/RaycastHit";
-  /**
-      * raycast函数的参数。
-      * @field origin 射线起点。
-      * @field unitDir 射线方向（单位向量）。
-      * @field distance 射线的最大长度。
-      * @field hit 用来接收碰撞信息的容器。
-      * @field layerMask 可以用来屏蔽一些碰撞体。
-      * @field （未实现）queryTriggerInteraction，是否能与Trigger相交（默认能）。
-      */
-  export type RaycastDesc = {
-          origin: Vector3;
-          unitDir: Vector3;
-          distance?: number;
-          hit?: RaycastHit;
-          layerMask?: number;
-  };
-  /**
-      * 射线检测，判断给定射线是否与至少一个碰撞体相交，并返回与**最近**的那个碰撞体相交的信息。
-      */
-  export function raycast(Phys3D: typeof phys3D, system: phys3D.PhysSystem, desc: RaycastDesc): boolean;
-}
-
-declare module 'XrFrame/components/physics/Shape' {
-  import Component from "XrFrame/core/Component";
-  import Element from "XrFrame/core/Element";
-  import Vector3 from "XrFrame/math/vector3";
-  import { Kanata } from "XrFrame/ext";
-  import Rigidbody from "XrFrame/components/physics/Rigidbody";
-  export const shapeMap: Map<phys3D.Collider, Shape>;
-  export enum ShapeType {
-          None = 0,
-          Box = 1,
-          CharacterController = 2,
-          Capsule = 3,
-          Mesh = 4,
-          Sphere = 5
-  }
-  export interface IShapeData {
-  }
-  /**
-      * 碰撞体的基类。
-      * @abstract
-      */
-  export default class Shape extends Component<IShapeData> {
-          /**
-              * 物理组件在节点上的执行顺序，排在渲染节点之后、用户脚本之前。
-              */
-          readonly priority: number;
-          _nativeStaticRigidbody: phys3D.Rigidbody | null;
-          _nativeColliders: Array<phys3D.Collider>;
-          protected _rigidbodyComp: Rigidbody | null;
-          protected _type: ShapeType;
-          onAdd(parent: Element, data: IShapeData): void;
-          onRelease(): void;
-          get entity(): Kanata.Entity3D;
-          get type(): ShapeType;
-          set type(v: ShapeType);
-          /**
-              * 碰撞体是否是Trigger，开启后不参与碰撞，但是能触发Trigger系列的事件：
-              * {@link onTriggerEnter}, {@link onTriggerStay}, {@link onTriggerExit}。
-              * @default false
-              */
-          get isTrigger(): boolean;
-          set isTrigger(v: boolean);
-          /**
-              * @internal
-              */
-          get scale(): Vector3;
-          set scale(v: Vector3);
-          /**
-              * 获取碰撞体附着的刚体组件。
-              * 目前不支持刚体，必定返回null。
-              */
-          get attachedRigidbody(): any;
-          /**
-              * 设置碰撞体的contactOffset，必须为正数。
-              * *一对*碰撞体，如果他们之间的最近距离小于他们的contactOffset之和，那么物理系统在一次*物理模拟*后就会产生一次碰撞。
-              */
-          get contactOffset(): number;
-          set contactOffset(v: number);
-          /** @internal */
-          constructor();
-          enable(): void;
-          disable(): void;
-          /**
-              * 交给子类重载实现
-              * @deprecated
-              */
-          protected _create(data: IShapeData): void;
-          /** @internal */
-          onAddRigidbody(rigidbody: Rigidbody): void;
-          /** @internal */
-          onRemoveRigidbody(): void;
-          /**
-              * @virtual 子类调用该方法之前必须确保_nativeCollider已经创建
-              */
-          protected _baseInit(): void;
-  }
-}
-
 declare module 'XrFrame/loader/AssetLoader' {
   import { IAssetLoadData } from 'XrFrame/loader/types';
   type Scene = import('XrFrame/core/Scene').default;
@@ -5835,6 +5914,48 @@ declare module 'XrFrame/loader/glTF/textures/GLTFTexturesNode' {
       getLoadedResource(): GLTFTexturesLoaded;
   }
   export {};
+}
+
+declare module 'XrFrame/physics/RaycastHit' {
+  import { Scene } from "XrFrame/elements";
+  import Vector3 from "XrFrame/math/vector3";
+  import Shape from "XrFrame/components/physics/Shape";
+  export default class RaycastHit {
+          constructor(scene: Scene, nativeComp?: phys3D.RaycastHit);
+          /**
+              * native层真正的raycastHit对象，业务侧无需关心
+              */
+          get nativeRaycastHit(): phys3D.RaycastHit;
+          /**
+              * 被射线射中的collider所附的Rigidbody，如果collider没有附着在一个Rigidbody上，则为null
+              */
+          get rigidbody(): any;
+          /**
+              * 被射线射中的collider
+              */
+          get collider(): Shape;
+          /**
+              * 从光线的原点到碰撞点的距离
+              */
+          get distance(): number;
+          set distance(v: number);
+          /**
+              * 射线锁碰到的表面的法线
+              */
+          get normal(): Vector3;
+          set normal(v: Vector3);
+          /**
+              * 在世界空间中，射线碰到collider的碰撞点
+              */
+          get point(): Vector3;
+          set point(v: Vector3);
+  }
+}
+
+declare module 'XrFrame/components/physics/Rigidbody' {
+  export default class Rigidbody {
+      nativeComp: phys3D.Rigidbody;
+  }
 }
 
 declare module 'XrFrame/kanata/lib/frontend/component/MeshRendererComponent' {
@@ -7169,48 +7290,6 @@ declare module 'XrFrame/render-graph/RGNode' {
   export {};
 }
 
-declare module 'XrFrame/physics/RaycastHit' {
-  import { Scene } from "XrFrame/elements";
-  import Vector3 from "XrFrame/math/vector3";
-  import Shape from "XrFrame/components/physics/Shape";
-  export default class RaycastHit {
-          constructor(scene: Scene, nativeComp?: phys3D.RaycastHit);
-          /**
-              * native层真正的raycastHit对象，业务侧无需关心
-              */
-          get nativeRaycastHit(): phys3D.RaycastHit;
-          /**
-              * 被射线射中的collider所附的Rigidbody，如果collider没有附着在一个Rigidbody上，则为null
-              */
-          get rigidbody(): any;
-          /**
-              * 被射线射中的collider
-              */
-          get collider(): Shape;
-          /**
-              * 从光线的原点到碰撞点的距离
-              */
-          get distance(): number;
-          set distance(v: number);
-          /**
-              * 射线锁碰到的表面的法线
-              */
-          get normal(): Vector3;
-          set normal(v: Vector3);
-          /**
-              * 在世界空间中，射线碰到collider的碰撞点
-              */
-          get point(): Vector3;
-          set point(v: Vector3);
-  }
-}
-
-declare module 'XrFrame/components/physics/Rigidbody' {
-  export default class Rigidbody {
-      nativeComp: phys3D.Rigidbody;
-  }
-}
-
 declare module 'XrFrame/loader/glTF/animations/GLTFAnimationNode' {
   import { Kanata } from "XrFrame/ext";
   import { GLTFAccessorsLoaded } from "XrFrame/loader/glTF/buffers/GLTFAccessorsNode";
@@ -8413,3 +8492,4 @@ declare module 'XrFrame/loader/glTF/geometry/primitives/attributes/GLTFAttribute
           getLoadedResource(): GLTFAttributesLoaded;
   }
 }
+

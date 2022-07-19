@@ -1,6 +1,9 @@
 // app.ts
 import './xr-custom/components/AutoRotate';
 import './xr-custom/elements/xr-auto-rotate-touchable-gltf';
+import './xr-custom/assets/geometry-star';
+import './xr-custom/assets/effect-shining';
+import './xr-custom/elements/xr-shining-star';
 
 App<IAppOption>({
   globalData: {},
