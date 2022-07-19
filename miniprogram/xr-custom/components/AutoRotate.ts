@@ -40,8 +40,8 @@ xrFrameSystem.registerComponent('auto-rotate', class AutoRotate extends xrFrameS
   }
 
   private _processData(data: IAutoRotateData) {
-    this._speedX = data.speed?.[0] || 1;
-    this._speedY = data.speed?.[1] || 1;
-    this._speedZ = data.speed?.[2] || 1;
+    this._speedX = data.speed?.[0] !== undefined ? data.speed[0] : 1;
+    this._speedY = data.speed?.[1] !== undefined ? data.speed[1] : 1;
+    this._speedZ = data.speed?.[2] !== undefined ? data.speed[2] : 1;
   }
 });

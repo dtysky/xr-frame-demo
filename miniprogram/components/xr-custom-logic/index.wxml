@@ -6,11 +6,12 @@
     <xr-asset-load type="gltf" asset-id="gltf-damageHelmet" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/damage-helmet/index.glb" />
   </xr-assets>
   <xr-env env-data="env1" />
-  <xr-node id="target">
-    <xr-gltf node-id="gltf-damageHelmet" position="0 0 0" model="gltf-damageHelmet" auto-rotate="speed:2 1 3"></xr-gltf>
+  <xr-node node-id="target">
+    <xr-gltf model="gltf-damageHelmet" position="2 0 0" auto-rotate="speed:2 1 3" />
+    <xr-auto-rotate-touchable-gltf position="-2 0 0" model="gltf-damageHelmet" speed="1 0 0" bind:dragShape="handleDrag" bind:touchShape="handleTouchStart" bind:untouchShape="handleTouchEnd" />
     <xr-camera
       id="camera" node-id="camera" position="0 0 8" clear-color="0.925 0.925 0.925 1"
-      draw-sky target="target"
+      background="skybox" target="target"
       camera-orbit-control=""
     ></xr-camera>
   </xr-node>
