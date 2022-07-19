@@ -1,4 +1,7 @@
 // app.ts
+import './xr-custom/components/AutoRotate';
+import './xr-custom/elements/xr-auto-rotate-touchable-gltf';
+
 App<IAppOption>({
   globalData: {},
   onLaunch() {
