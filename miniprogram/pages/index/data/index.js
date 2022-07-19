@@ -95,4 +95,15 @@ const ar = {
     // },
   ],
 };
-export default [base, gltf, ar];
+
+const scan = {
+  name: '扫描还原案例',
+  icon: 'file',
+  childArr: [{
+      name: 'Render',
+      label: '扫描渲染案例(全景、模型)',
+      path: '/pages/scene-scan-render/index',
+    }
+  ],
+};
+export default [base, gltf, ar, scan];
