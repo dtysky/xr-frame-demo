@@ -13,7 +13,6 @@ Component({
   methods: {
     async handleReady({detail}) {
       const xrScene = detail.value;
-      const xrFrameSystem = await wx.getXrFrameSystem()
       console.log('xr-scene', xrScene);
     },
     handleAssetsProgress: function({detail}) {

@@ -1,4 +1,4 @@
-<xr-scene id="xr-scene">
+<xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load asset-id="basic-anim" type="keyframe" src="/assets/animation/basic-animation.json"/>
     <xr-asset-material asset-id="standard-mat" effect="standard" />
