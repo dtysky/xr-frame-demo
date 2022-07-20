@@ -1,4 +1,4 @@
-<xr-scene id="xr-scene">
+<xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>

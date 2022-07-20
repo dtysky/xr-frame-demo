@@ -1,4 +1,4 @@
-<xr-scene id="xr-scene">
+<xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load type="gltf" asset-id="gltf-just_a_girl" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/just_a_girl/scene.gltf" />
   </xr-assets>

@@ -25,6 +25,7 @@ Page({
   behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
+    markerImg: '/assets/2dmarker-test.jpg'
   },
   handleChangeMarkerImg: function() {
     wx.chooseImage({

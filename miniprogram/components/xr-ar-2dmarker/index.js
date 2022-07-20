@@ -11,16 +11,15 @@ Component({
     arReady: false,
   },
   lifetimes: {
-    async attached() {
+    attached() {
       console.log('data', this.data)
     }
   },
   methods: {
-    async handleReady({
+    handleReady({
       detail
     }) {
       const xrScene = this.scene = detail.value;
-      const xrFrameSystem = await wx.getXrFrameSystem()
       console.log('xr-scene', xrScene);
     },
     handleAssetsProgress: function ({

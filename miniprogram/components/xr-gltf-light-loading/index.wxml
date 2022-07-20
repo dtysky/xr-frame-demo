@@ -1,4 +1,4 @@
-<xr-scene id="xr-scene">
+<xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load asset-id="gltf-anim" type="keyframe" src="/assets/animation/gltf-animation.json"/>
     <xr-asset-load type="gltf" asset-id="gltf-Sponza" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/Sponza/glTF/Sponza.gltf" />

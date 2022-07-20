@@ -1,4 +1,4 @@
-<xr-scene id="xr-scene">
+<xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load type="texture" asset-id="waifu" src="/assets/waifu.png" />
     <xr-asset-load type="texture" asset-id="waifu-cdn" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/waifu.png" />
