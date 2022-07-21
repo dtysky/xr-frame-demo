@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="AR OSDMarker案例"
-  intro="Marker识别案例，点击渲染区域可以上传OSDMarker。识别成功后，会于屏幕绘制一个纯色立方体展示位置。"
+  intro="Marker识别案例，点击可以上传OSDMarker。识别成功后，会于屏幕绘制一个纯色立方体展示位置。"
   code="{{xmlCode}}"
 >
   <xr-ar-osdmarker
