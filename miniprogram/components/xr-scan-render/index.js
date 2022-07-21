@@ -1,6 +1,9 @@
 Component({
   properties: {
-    a: Number,
+    envIndex: {
+      type: Number,
+      value: 0
+    }
   },
   data: {
     loaded: false
