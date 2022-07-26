@@ -1,0 +1,21 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+    <xr-asset-load asset-id="env" type="env-data" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/env-data.bin"/>
+    <xr-asset-load type="gltf" asset-id="hikari" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/hikari.gltf" />
+    <xr-asset-load type="gltf" asset-id="roam" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/roam.gltf" />
+    <xr-asset-load type="gltf" asset-id="xinyi" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/xinyi.gltf" />
+  </xr-assets>
+  <xr-env env-data="env" />
+  <xr-node>
+    <xr-node node-id="camera-target" position="0 0.5 0"></xr-node>
+    <xr-gltf node-id="hikari" position="0 0 0" model="hikari"></xr-gltf>
+    <xr-gltf node-id="roam" position="-2 0 0" model="roam"></xr-gltf>
+    <xr-gltf node-id="xinyi" position="2 0 0" model="xinyi"></xr-gltf>
+  </xr-node>
+  <xr-camera
+    id="camera" position="0 0.5 2" clear-color="0.925 0.925 0.925 1"
+    draw-sky target="camera-target"
+    camera-orbit-control=""
+  ></xr-camera>
+  <xr-light type="ambient" color="1 1 1" intensity="0.4" />
+</xr-scene>

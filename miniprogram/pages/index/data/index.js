@@ -62,6 +62,11 @@ const gltf = {
       label: '加载界面与多光源场景',
       path: '/pages/scene-gltf-light-loading/index',
     },
+    {
+      name: 'Animation',
+      label: 'gltf动画',
+      path: '/pages/scene-gltf-animation/index',
+    },
   ],
 };
 
@@ -99,10 +104,16 @@ const ar = {
 const scan = {
   name: '扫描还原案例',
   icon: 'photo',
-  childArr: [{
+  childArr: [
+    {
       name: 'Render',
       label: '扫描渲染案例(全景、模型)',
       path: '/pages/scene-scan-render/index',
+    },
+    {
+      name: 'XRFrameTeam',
+      label: '卡其脱离太',
+      path: '/pages/scene-scan-team/index',
     }
   ],
 };

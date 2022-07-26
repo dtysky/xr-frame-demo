@@ -19,7 +19,8 @@ Component({
             Math.random(),
             Math.random(),
             1
-          ].join(' ')
+          ].join(' '),
+          speed: Math.random() * 3
         };
       });
       console.log(stars)

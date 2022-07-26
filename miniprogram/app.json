@@ -9,6 +9,7 @@
     "pages/scene-gltf-damageHelmet/index",
     "pages/scene-gltf-multi/index",
     "pages/scene-gltf-unlit/index",
+    "pages/scene-gltf-animation/index",
     "pages/scene-gltf-light-loading/index",
     "pages/scene-ar-basic/index",
     "pages/scene-ar-2dmarker/index",
@@ -16,7 +17,8 @@
     "pages/scene-ar-camera/index",
     "pages/scene-custom-logic/index",
     "pages/scene-custom-render/index",
-    "pages/scene-scan-render/index"
+    "pages/scene-scan-render/index",
+    "pages/scene-scan-team/index"
   ],
   "usingComponents": {
     "pull-down-list": "./components/pull-down-list/index",
@@ -34,13 +36,15 @@
     "xr-gltf-damageHelmet": "./components/xr-gltf-damageHelmet/index",
     "xr-gltf-multi": "./components/xr-gltf-multi/index",
     "xr-gltf-light-loading": "./components/xr-gltf-light-loading/index",
+    "xr-gltf-animation": "./components/xr-gltf-animation/index",
     "xr-ar-camera": "./components/xr-ar-camera/index",
     "xr-ar-basic": "./components/xr-ar-basic/index",
     "xr-ar-2dmarker": "./components/xr-ar-2dmarker/index",
     "xr-ar-osdmarker": "./components/xr-ar-osdmarker/index",
     "xr-custom-logic": "./components/xr-custom-logic/index",
     "xr-custom-render": "./components/xr-custom-render/index",
-    "xr-scan-render": "./components/xr-scan-render/index"
+    "xr-scan-render": "./components/xr-scan-render/index",
+    "xr-scan-team": "./components/xr-scan-team/index"
   },
   "window": {
     "backgroundTextStyle": "light",

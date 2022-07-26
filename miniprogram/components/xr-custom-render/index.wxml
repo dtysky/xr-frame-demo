@@ -6,7 +6,7 @@
   <xr-node node-id="target">
     <xr-mesh geometry="star" material="shining-mat" rotation="90 0 0" />
     <xr-node wx:for="{{stars}}" wx:for-item="star">
-      <xr-shining-star rotation="90 0 0" position="{{star.pos}}" uniforms="u_color:{{star.color}},u_reflection:waifu" />
+      <xr-shining-star rotation="90 0 0" position="{{star.pos}}" uniforms="u_color:{{star.color}},u_reflection:waifu,u_speed:{{star.speed}}" />
     </xr-node>
     <xr-camera
       id="camera" node-id="camera" position="0 0 10" clear-color="0.4 0.6 0.7 1"
