@@ -11,10 +11,12 @@
   <!-- <xr-env env-data="env1" /> -->
   <xr-node>
     <xr-node node-id="target" position="0 1 0" />
-    <xr-gltf position="0 0 0" scale="1 1 1" model="cloud-station"></xr-gltf>
-    <xr-gltf position="1.8 -0.5 1.5" scale="0.12 0.12 0.12" rotation="0 180 0" model="miku"></xr-gltf>
+    <xr-gltf position="0 0 0" scale="1 1 1" model="cloud-station" anim-autoplay></xr-gltf>
+    <xr-gltf position="1.8 -0.5 1.5" scale="0.12 0.12 0.12" rotation="0 180 0" model="miku" anim-autoplay></xr-gltf>
     <xr-node anim-keyframe="anim" anim-autoplay="clip:parent">
-      <xr-gltf position="0 -0.5 3" scale="1 1 1" rotation="0 90 0" model="miku-kawaii" anim-keyframe="anim" anim-autoplay="clip:child"></xr-gltf>
+      <xr-node position="0 -0.5 3" rotation="0 90 0" anim-keyframe="anim" anim-autoplay="clip:child">
+        <xr-gltf model="miku-kawaii" anim-keyframe="anim" anim-autoplay></xr-gltf>
+      </xr-node>
     </xr-node>
     <xr-camera
       id="camera" node-id="camera" position="0 1 7" clear-color="0.925 0.925 0.925 1"

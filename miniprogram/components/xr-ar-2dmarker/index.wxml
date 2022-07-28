@@ -1,4 +1,4 @@
-<xr-scene ar-system="modes:Marker" id="xr-scene" bind:ready="handleReady" bind:arReady="handleARReady" bind:log="handleLog">
+<xr-scene ar-system="modes:Marker" id="xr-scene" bind:ready="handleReady" bind:ar-ready="handleARReady" bind:log="handleLog">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-material asset-id="ar-anchor" effect="standrand" uniforms="u_baseColorFactor:0 1 0 1"></xr-asset-material>
   </xr-assets>

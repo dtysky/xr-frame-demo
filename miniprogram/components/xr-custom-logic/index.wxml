@@ -8,7 +8,7 @@
   <xr-env env-data="env1" />
   <xr-node node-id="target">
     <xr-gltf model="gltf-damageHelmet" position="2 0 0" auto-rotate="speed:2 1 3" />
-    <xr-auto-rotate-touchable-gltf id="artg" position="-2 0 0" model="gltf-damageHelmet" speed="1 0 0" bind:dragShape="handleDrag" bind:touchShape="handleTouchStart" bind:untouchShape="handleTouchEnd" />
+    <xr-auto-rotate-touchable-gltf id="artg" position="-2 0 0" model="gltf-damageHelmet" speed="1 0 0" bind:drag-shape="handleDrag" bind:touch-shape="handleTouchStart" bind:untouch-shape="handleTouchEnd" />
     <xr-camera
       id="camera" node-id="camera" position="0 0 8" clear-color="0.925 0.925 0.925 1"
       background="skybox" target="target"

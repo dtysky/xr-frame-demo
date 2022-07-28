@@ -1,5 +1,5 @@
 <xr-demo-viewer
-  title="卡其脱离太"
+  title="卡 其 脱 离 太"
   intro="xr-frame团队的办公区和成员三维重建的例子。点击`卡其脱离太`开始奔跑，奔跑之后点击成员可以跳跃。"
   code="{{xmlCode}}"
 >
@@ -14,6 +14,12 @@
     bind:assetsLoaded="handleLoaded"
     bind:syncPositions="handleSyncPositions"
   />
+
+  <block wx:if="{{loaded}}" wx:for="{{positions}}" wx:for-item="pos">
+    <view style="display: block; position: absolute;left: {{pos[0]}}px;top: {{pos[1]}}px;background: rgba(44, 44, 44, 0.5);transform: translate(-50%, -50%);">
+      <view style="text-align: center;color: white;font-size: 16px;padding: 8px;">{{pos[2]}}</view>
+    </view>
+  </block>
 
   <view wx:if="{{!loaded}}">等待加载完成...</view>
   <button wx:if="{{loaded}}" bindtap="handleRun">卡其脱离太！</button>

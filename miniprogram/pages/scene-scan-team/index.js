@@ -7,7 +7,7 @@ Page({
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
     loaded: false,
     run: false,
-    positions: [[0, 0], [0, 0], [0, 0]]
+    positions: [[0, 0, '瞬光'], [0, 0, 'roam'], [0, 0, 'xinyi']],
   },
   handleLoaded: function({detail}) {
     console.log('assets loaded', detail);
@@ -15,7 +15,7 @@ Page({
     this.setData({loaded: true});
   },
   handleSyncPositions: function({detail}) {
-    const info = detail.value;
+    const info = detail;
     this.setData({positions: info});
   },
   handleRun: function() {
