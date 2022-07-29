@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="卡 其 脱 离 太"
-  intro="xr-frame团队的办公区和成员三维重建的例子。点击`卡其脱离太`开始奔跑，奔跑之后点击成员可以跳跃。"
+  intro="xr-frame团队的办公区和成员三维重建，以及与小程序音频系统、2dview协作的例子。点击`卡其脱离太`开始奔跑，奔跑之后点击成员可以跳跃（建议打开声音（不是"
   code="{{xmlCode}}"
 >
   <xr-scan-team
@@ -22,5 +22,5 @@
   </block>
 
   <view wx:if="{{!loaded}}">等待加载完成...</view>
-  <button wx:if="{{loaded}}" bindtap="handleRun">卡其脱离太！</button>
+  <button wx:if="{{loaded}}" bindtap="handleRun">卡 其 脱 离 太！</button>
 </xr-demo-viewer>
