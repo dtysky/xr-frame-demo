@@ -47,11 +47,17 @@ declare module 'XrFrame' {
       IAnimatorData,
       ICameraOrbitControlData,
       IARTrackerData,
+      ISphereShapeData,
+      IMeshShapeData,
+      ICapsuleShapeData,
       IAssetsSystemData,
+      INodeSystemData,
       ITickSystemData,
       IAnimationSystemData,
       IRenderSystemData,
       IPhysicsSystemData,
+      IShapeDrageEvent,
+      IShapeTouchEvent,
       IARSystemData,
       ITextureLoaderOptions,
       IImageLoaderOptions,
@@ -92,7 +98,8 @@ declare module 'XrFrame' {
       EUseDefaultAddedAction,
       EUseDefaultRetainedAction,
       EUseDefaultRemovedAction,
-      EEventType
+      EEventType,
+      ECapsuleColliderDirection
   } from 'XrFrame/xrFrameSystem';
   
   export type Component<IData> = xrFrameSystem.Component<IData>;
@@ -115,8 +122,6 @@ declare module 'XrFrame' {
   export type BoundBall = xrFrameSystem.BoundBall;
   export type BoundBox = xrFrameSystem.BoundBox;
   export type Spherical = xrFrameSystem.Spherical;
-  export type ShapeTouchEvent = xrFrameSystem.ShapeTouchEvent;
-  export type ShapeDrageEvent = xrFrameSystem.ShapeDrageEvent;
   export type Transform = xrFrameSystem.Transform;
   export type AssetLoad = xrFrameSystem.AssetLoad;
   export type Assets = xrFrameSystem.Assets;
@@ -132,6 +137,7 @@ declare module 'XrFrame' {
   export type ARTracker = xrFrameSystem.ARTracker;
   export type SphereShape = xrFrameSystem.SphereShape;
   export type MeshShape = xrFrameSystem.MeshShape;
+  export type CapsuleShape = xrFrameSystem.CapsuleShape;
   export type Scene = xrFrameSystem.Scene;
   export type XRNode = xrFrameSystem.XRNode;
   export type XRShadow = xrFrameSystem.XRShadow;
@@ -145,6 +151,7 @@ declare module 'XrFrame' {
   export type XREnv = xrFrameSystem.XREnv;
   export type XRARTracker = xrFrameSystem.XRARTracker;
   export type AssetsSystem = xrFrameSystem.AssetsSystem;
+  export type NodeSystem = xrFrameSystem.NodeSystem;
   export type TickSystem = xrFrameSystem.TickSystem;
   export type AnimationSystem = xrFrameSystem.AnimationSystem;
   export type RenderSystem = xrFrameSystem.RenderSystem;
@@ -188,8 +195,6 @@ declare module 'XrFrame' {
       BoundBall: typeof xrFrameSystem.BoundBall;
       BoundBox: typeof xrFrameSystem.BoundBox;
       Spherical: typeof xrFrameSystem.Spherical;
-      ShapeTouchEvent: typeof xrFrameSystem.ShapeTouchEvent;
-      ShapeDrageEvent: typeof xrFrameSystem.ShapeDrageEvent;
       Transform: typeof xrFrameSystem.Transform;
       AssetLoad: typeof xrFrameSystem.AssetLoad;
       Assets: typeof xrFrameSystem.Assets;
@@ -205,6 +210,7 @@ declare module 'XrFrame' {
       ARTracker: typeof xrFrameSystem.ARTracker;
       SphereShape: typeof xrFrameSystem.SphereShape;
       MeshShape: typeof xrFrameSystem.MeshShape;
+      CapsuleShape: typeof xrFrameSystem.CapsuleShape;
       Scene: typeof xrFrameSystem.Scene;
       XRNode: typeof xrFrameSystem.XRNode;
       XRShadow: typeof xrFrameSystem.XRShadow;
@@ -218,6 +224,7 @@ declare module 'XrFrame' {
       XREnv: typeof xrFrameSystem.XREnv;
       XRARTracker: typeof xrFrameSystem.XRARTracker;
       AssetsSystem: typeof xrFrameSystem.AssetsSystem;
+      NodeSystem: typeof xrFrameSystem.NodeSystem;
       TickSystem: typeof xrFrameSystem.TickSystem;
       AnimationSystem: typeof xrFrameSystem.AnimationSystem;
       RenderSystem: typeof xrFrameSystem.RenderSystem;
@@ -257,7 +264,10 @@ declare module 'XrFrame' {
       EUseDefaultAddedAction: typeof xrFrameSystem.EUseDefaultAddedAction;
       EUseDefaultRetainedAction: typeof xrFrameSystem.EUseDefaultRetainedAction;
       EUseDefaultRemovedAction: typeof xrFrameSystem.EUseDefaultRemovedAction;
-      EEventType: typeof xrFrameSystem.EEventType
+      EEventType: typeof xrFrameSystem.EEventType;
+      ECapsuleColliderDirection: typeof xrFrameSystem.ECapsuleColliderDirection;
+      useParamsEaseFuncs: typeof xrFrameSystem.useParamsEaseFuncs;
+      noneParamsEaseFuncs: typeof xrFrameSystem.noneParamsEaseFuncs
       TransformSchema: IComponentSchema;
       AssetLoadSchema: IComponentSchema;
       AssetsSchema: IComponentSchema;
@@ -270,7 +280,10 @@ declare module 'XrFrame' {
       EnvSchema: IComponentSchema;
       AnimatorSchema: IComponentSchema;
       CameraOrbitControlSchema: IComponentSchema;
-      ARTrackSchema: IComponentSchema
+      ARTrackSchema: IComponentSchema;
+      SphereShapeSchema: IComponentSchema;
+      MeshShapeSchema: IComponentSchema;
+      CapsuleShapeSchema: IComponentSchema
       BasicDefaultComponents: IEntityComponents;
       SceneDefaultComponents: IEntityComponents;
       NodeDefaultComponents: IEntityComponents;
@@ -320,7 +333,7 @@ declare module 'XrFrame/xrFrameSystem' {
   export { default as Animation, TDirection } from 'XrFrame/animation/Animation';
   export { default as KeyframeAnimation, IKeyframeAnimationData, IKeyframeAnimationInfo, IKeyframeAnimationOptions } from 'XrFrame/animation/KeyframeAnimation';
   export { registerEffect, registerGeometry, registerTexture, registerMaterial, registerUniformDesc, registerVertexDataDesc, registerVertexLayout } from 'XrFrame/assets/factories';
-  export { ShapeTouchEvent, ShapeDrageEvent } from 'XrFrame/systems/PhysicsSystem';
+  export { useParamsEaseFuncs, noneParamsEaseFuncs } from 'XrFrame/assets/easeFunctions';
   export { default as Vector2 } from 'XrFrame/math/vector2';
   export { default as Vector3 } from 'XrFrame/math/vector3';
   export { default as Vector4 } from 'XrFrame/math/vector4';
@@ -414,6 +427,7 @@ declare module 'XrFrame/core/Element' {
           [key: string]: string[];
       };
       readonly neverTick: boolean;
+      get inXML(): boolean;
       get scene(): import('XrFrame/core/Scene').default;
       get parent(): Element;
       get event(): EventManager;
@@ -425,6 +439,7 @@ declare module 'XrFrame/core/Element' {
       getChildrenByClass<T extends Element>(clz: new (...args: any[]) => T): T[];
       dfs<T extends any>(callback: (element: Element, params?: T) => T, defaultParams?: T, excludeRoot?: boolean): void;
       addComponent<T extends Component<any>>(clz: new () => T, options?: T['__DATA_TYPE']): T;
+      getComponent<T extends Component<any>>(clzName: string): T;
       getComponent<T extends Component<any>>(clz: new () => T): T;
       removeComponent(clz: new () => Component<any>): void;
       _associateValue(_v: any): void;
@@ -552,8 +567,9 @@ declare module 'XrFrame/components' {
   export { default as Animator, IAnimatorData, AnimatorSchema } from 'XrFrame/components/Animator';
   export { default as CameraOrbitControl, ICameraOrbitControlData, CameraOrbitControlSchema } from 'XrFrame/components/CameraOrbitControl';
   export { default as ARTracker, IARTrackerData, ARTrackSchema } from 'XrFrame/components/ARTracker';
-  export { default as SphereShape } from 'XrFrame/components/physics/SphereShape';
-  export { default as MeshShape } from 'XrFrame/components/physics/MeshShape';
+  export { default as SphereShape, ISphereShapeData, SphereShapeSchema } from 'XrFrame/components/physics/SphereShape';
+  export { default as MeshShape, IMeshShapeData, MeshShapeSchema } from 'XrFrame/components/physics/MeshShape';
+  export { default as CapsuleShape, ICapsuleShapeData, CapsuleShapeSchema, ECapsuleColliderDirection } from 'XrFrame/components/physics/CapsuleShape';
 }
 
 declare module 'XrFrame/elements' {
@@ -573,10 +589,11 @@ declare module 'XrFrame/elements' {
 
 declare module 'XrFrame/systems' {
   export { default as AssetsSystem, IAssetsSystemData } from 'XrFrame/systems/AssetsSystem';
+  export { default as NodeSystem, INodeSystemData } from 'XrFrame/systems/NodeSystem';
   export { default as TickSystem, ITickSystemData } from 'XrFrame/systems/TickSystem';
   export { default as AnimationSystem, IAnimationSystemData } from 'XrFrame/systems/AnimationSystem';
   export { default as RenderSystem, IRenderSystemData } from 'XrFrame/systems/RenderSystem';
-  export { default as PhysicsSystem, IPhysicsSystemData } from 'XrFrame/systems/PhysicsSystem';
+  export { default as PhysicsSystem, IPhysicsSystemData, IShapeDrageEvent, IShapeTouchEvent } from 'XrFrame/systems/PhysicsSystem';
   export { default as ARSystem, IARSystemData } from 'XrFrame/systems/ARSystem';
 }
 
@@ -857,9 +874,16 @@ declare module 'XrFrame/assets/Geometry' {
 }
 
 declare module 'XrFrame/assets/GLTFModel' {
+  /**
+      * GlTF.ts
+      *
+      *         * @Date    : 2022/4/1下午3:34:15
+      */
+  import NativeAnimation from 'XrFrame/animation/NativeAnimation';
   import Element from 'XrFrame/core/Element';
   import { Kanata } from 'XrFrame/ext';
   import { GLTFRootLoaded } from 'XrFrame/loader/glTF/GLTFRootNode';
+  import { GLTFTreeNode } from 'XrFrame/loader/glTF/scenes/GLTFNodesNode';
   type Scene = import('XrFrame/core/Scene').default;
   /**
       * 收集glTF实例化过程中创建的对象，避免其GC。
@@ -875,7 +899,11 @@ declare module 'XrFrame/assets/GLTFModel' {
           /**
               * @param scene verify context consistency
               */
-          instantiate(parent: Element): Array<Element>;
+          instantiate(parent: Element): [
+                  subRoots: Array<Element>,
+                  treeNodeMap: Map<GLTFTreeNode, Element>,
+                  animations: Array<NativeAnimation>
+          ];
   }
   export {};
 }
@@ -1008,7 +1036,7 @@ declare module 'XrFrame/assets/factories' {
   import Scene from "XrFrame/core/Scene";
   import Effect from "XrFrame/assets/Effect";
   import Geometry from "XrFrame/assets/Geometry";
-  import Material from "XrFrame/components/Material";
+  import { Material } from "XrFrame/components";
   export function getAssetFactory<T = any>(type: string, id: string): (scene: Scene) => T;
   export const registerGeometry: (id: string, factory: (scene: Scene) => Geometry) => void;
   export const registerEffect: (id: string, factory: (scene: Scene) => Effect) => void;
@@ -1020,62 +1048,20 @@ declare module 'XrFrame/assets/factories' {
   export const registerMaterial: (id: string, factory: (scene: Scene) => Material) => void;
 }
 
-declare module 'XrFrame/systems/PhysicsSystem' {
-  import { Camera } from 'XrFrame/components';
-  import Component from 'XrFrame/core/Component';
-  import { Kanata } from 'XrFrame/ext';
-  import { RaycastDesc } from 'XrFrame/physics/raycast';
-  import Element from "XrFrame/core/Element";
-  import Shape from 'XrFrame/components/physics/Shape';
+declare module 'XrFrame/assets/easeFunctions' {
   /**
-      * @field camera 渲染物体的相机
-      * @field target Shape所在的xml元素
-      * @field shape 点击选中的Shape
-      * @field x,y 二维canvas中的位置
-      * @field origin 相机在世界空间中的位置
-      * @field dir 相机向点击方向投射的射线，在世界空间中的单位向量
-      */
-  export interface ShapeTouchEvent {
-          camera: Camera;
-          target: Element;
-          shape: Shape;
-          x: number;
-          y: number;
-          origin: [number, number, number];
-          dir: [number, number, number];
-          force: number;
-  }
-  /**
-      * @field camera 渲染物体的相机
-      * @field target Shape所在的xml元素
-      * @field shape 点击选中的Shape
-      * @field x,y 二维canvas中的位置
-      * @field origin 相机在世界空间中的位置
-      * @field dir 相机向点击方向投射的射线，在世界空间中的单位向量
-      * @field deltaX,deltaY 二维canvas中的位置变化量
-      */
-  export interface ShapeDrageEvent extends ShapeTouchEvent {
-          deltaX: number;
-          deltaY: number;
-  }
-  export interface IPhysicsSystemData {
-  }
-  export default class PhysicsSystem extends Component<IPhysicsSystemData> {
-          /**
-              * @internal
-              */
-          nativeSystem: phys3D.PhysSystem;
-          constructor();
-          addShape(shape: Shape): void;
-          removeShape(shape: Shape): void;
-          onAdd(): void;
-          onTick(deltaTime: number, data: IPhysicsSystemData): void;
-          bindRigidbodyWithEntity(rigidbody: phys3D.Rigidbody, entity: Kanata.Entity3D): void;
-          /**
-              * 射线检测，判断给定射线是否与至少一个碰撞体相交，并返回与**最近**的那个碰撞体相交的信息。
-              */
-          raycast(desc: RaycastDesc): boolean;
-  }
+    * easeFunctions.ts
+    *
+    *       * @Date    : 6/21/2022, 11:24:27 AM
+    */
+  type TEaseFunction = (progress: number) => number;
+  export const useParamsEaseFuncs: {
+      [name: string]: (params: number[]) => TEaseFunction;
+  };
+  export const noneParamsEaseFuncs: {
+      [name: string]: TEaseFunction;
+  };
+  export {};
 }
 
 declare module 'XrFrame/math/vector2' {
@@ -2840,6 +2826,7 @@ declare module 'XrFrame/core/Scene' {
       createElement<T extends Element>(clz: new (...args: any) => T): T;
       getElementById(id: string): Element;
       getNodeById(nodeId: string): Transform;
+      };
       createImage(): Kanata.IImage;
       createTexture(options: Kanata.ITextureOptions): Kanata.Texture;
       createEffect(description: IEffectAsset): Effect;
@@ -2904,7 +2891,8 @@ declare module 'XrFrame/components/Transform' {
       position: number[];
       rotation: number[];
       scale: number[];
-      visible: boolean;
+      visible?: boolean;
+      layer?: number;
   }
   export const TransformSchema: IComponentSchema;
   export default class Transform extends Component<ITransformData> {
@@ -2924,6 +2912,8 @@ declare module 'XrFrame/components/Transform' {
       get scale(): Vector3;
       get visible(): boolean;
       set visible(value: boolean);
+      get layer(): number;
+      set layer(value: number);
       setLocalMatrix(mat: Matrix4): void;
       onAdd(parent: Element, data: ITransformData): void;
       onUpdate(data: ITransformData, preData: ITransformData): void;
@@ -2981,6 +2971,7 @@ declare module 'XrFrame/components/Camera' {
   import Matrix4 from 'XrFrame/math/matrix4';
   import { IRenderTarget } from 'XrFrame/components/RenderTexture';
   import Transform from 'XrFrame/components/Transform';
+  import Light from 'XrFrame/components/Light';
   export type TCameraBackground = 'default' | 'skybox' | 'ar';
   export interface ICameraData {
           target: Transform;
@@ -3014,6 +3005,7 @@ declare module 'XrFrame/components/Camera' {
           get target(): Transform;
           get near(): number;
           get far(): number;
+          get cullMask(): number;
           /**
               * @internal
               */
@@ -3026,6 +3018,7 @@ declare module 'XrFrame/components/Camera' {
               * @internal
               */
           draw(renderList: Kanata.ScalableList, lightMode: string): void;
+          drawLight(light: Light, renderList: Kanata.ScalableList, lightMode: string): void;
           /**
               * 将世界坐标系位置转换到齐次裁剪空间。
               */
@@ -3070,9 +3063,14 @@ declare module 'XrFrame/components/GLTF' {
   export default class GLTF extends Component<IGLTFElementData> {
       readonly schema: IComponentSchema;
       readonly priority: number;
+      _subRoots: Array<Element>;
       onUpdate(data: IGLTFElementData, preData: IGLTFElementData): void;
       onRemove(parent: Element, data: IGLTFElementData): void;
       onRelease(data: IGLTFElementData): void;
+      /**
+        * 根据gltf文件里的node.name来获取内部节点。
+        */
+      getInternalNodeByName(name: string): Element | undefined;
   }
 }
 
@@ -3097,6 +3095,8 @@ declare module 'XrFrame/components/Light' {
       range: number;
       innerConeAngle: number;
       outerConeAngle: number;
+      castShadow?: boolean;
+      shadowDistance?: number;
   }
   export const LightSchema: IComponentSchema;
   export default class Light extends Component<ILightData> {
@@ -3108,6 +3108,10 @@ declare module 'XrFrame/components/Light' {
       get range(): number;
       get innerConeAngle(): number;
       get outerConeAngle(): number;
+      get castShadow(): boolean;
+      get shadowDistance(): number;
+      /**@internal */
+      get lightCamera(): import('XrFrame/kanata/lib/index').LightCameraComponent;
       onAdd(parent: Element, data: ILightData): void;
       onUpdate(data: ILightData, preData: ILightData): void;
       onTick(deltaTime: number, data: ILightData): void;
@@ -3242,10 +3246,11 @@ declare module 'XrFrame/components/Mesh' {
   import Element from 'XrFrame/core/Element';
   import { Kanata } from 'XrFrame/ext';
   import Material from 'XrFrame/components/Material';
+  import Transform from 'XrFrame/components/Transform';
   export interface IMeshData {
       neverCull?: boolean;
       geometry: Geometry;
-      material: Material;
+      material?: Material;
       uniforms?: [string, string][];
       states?: [string, string][];
   }
@@ -3253,25 +3258,24 @@ declare module 'XrFrame/components/Mesh' {
   export default class Mesh extends Component<IMeshData> {
       readonly schema: IComponentSchema;
       readonly priority: number;
-      protected getUniformDesc(): Kanata.UniformDescriptor;
-      protected getMeshType(): Kanata.EMeshRenderType;
       protected _cull: Kanata.CullingComponent;
       protected _mesh: Kanata.MeshRendererComponent;
       protected _sourceMaterial: Material;
       protected _geometry: Geometry;
       protected _material: Material;
+      protected _trs: Transform;
       get geometry(): Geometry;
       get material(): Material;
       set material(value: Material);
       get id(): number;
-      get visible(): boolean;
-      set visible(value: boolean);
       onAdd(parent: Element, data: IMeshData): void;
       onTick(deltaTime: number, data: IMeshData): void;
       onUpdate(data: IMeshData, preData: IMeshData): void;
       onRemove(parent: Element, data: IMeshData): void;
       onRelease(data: IMeshData): void;
       protected _getMarcos(geometry: Geometry): {};
+      protected _getUniformDesc(): Kanata.UniformDescriptor;
+      protected _getMeshType(): Kanata.EMeshRenderType;
   }
 }
 
@@ -3390,23 +3394,25 @@ declare module 'XrFrame/components/Animator' {
       Paused = 1,
       Stopt = 2
   }
+  interface IAutoPlay {
+      clip?: string;
+      speed?: string;
+      loop?: string;
+      delay?: string;
+      direction?: 'forwards' | 'backwards' | 'both';
+      [key: string]: string;
+  }
   export interface IAnimatorData {
       keyframe: Animation;
       clipMap?: {
           [key: string]: string;
       };
-      autoPlay?: {
-          clip?: string;
-          speed?: string;
-          loop?: string;
-          delay?: string;
-          direction?: 'forwards' | 'backwards' | 'both';
-          [key: string]: string;
-      };
+      autoPlay?: IAutoPlay;
   }
   export const AnimatorSchema: IComponentSchema;
   export default class Animator extends Component<IAnimatorData> {
       readonly schema: IComponentSchema;
+      readonly priority: number;
       onAdd(parent: Element, data: IAnimatorData): void;
       onUpdate(data: IAnimatorData, preData: IAnimatorData): void;
       onRemove(parent: Element, data: IAnimatorData): void;
@@ -3418,10 +3424,12 @@ declare module 'XrFrame/components/Animator' {
       play(name: string, options?: IAnimationPlayOptions & {
           [key: string]: any;
       }): void;
-      pause(): void;
-      resume(): void;
-      stop(): void;
+      pauseToFrame(name: string, progress: number): void;
+      pause(name?: string): void;
+      resume(name?: string): void;
+      stop(name?: string): void;
   }
+  export {};
 }
 
 declare module 'XrFrame/components/CameraOrbitControl' {
@@ -3621,6 +3629,56 @@ declare module 'XrFrame/components/physics/MeshShape' {
           onTick(dateTime: number, data: IMeshShapeData): void;
           protected _createIfNeeded(data: IMeshShapeData): void;
           protected _create(data: IMeshShapeData): void;
+  }
+}
+
+declare module 'XrFrame/components/physics/CapsuleShape' {
+  import Shape, { ShapeType, IShapeData } from "XrFrame/components/physics/Shape";
+  import Vector3 from "XrFrame/math/vector3";
+  import Element from "XrFrame/core/Element";
+  import { IComponentSchema } from "XrFrame/xrFrameSystem";
+  export interface ICapsuleShapeData extends IShapeData {
+          radius?: number;
+          height?: number;
+          direction?: number;
+  }
+  export const CapsuleShapeSchema: IComponentSchema;
+  /**
+      * 胶囊碰撞体的朝向。
+      *
+      * @category Physics
+      */
+  export enum ECapsuleColliderDirection {
+          "X-Axis" = 0,
+          "Y-Axis" = 1,
+          "Z-Axis" = 2
+  }
+  export default class CapsuleShape extends Shape {
+          readonly schema: IComponentSchema;
+          protected _type: ShapeType;
+          set center(v: Vector3);
+          static defaultRadius: number;
+          /**
+              * 碰撞体球的半径。
+              * @default 1
+              */
+          get radius(): number;
+          set radius(v: number);
+          static defaultHeight: number;
+          /**
+              * 碰撞体球的半径。
+              * @default 1
+              */
+          get height(): number;
+          set height(v: number);
+          /**
+              * 碰撞体胶囊的朝向。
+              */
+          get direction(): ECapsuleColliderDirection;
+          set direction(v: ECapsuleColliderDirection);
+          onAdd(parent: Element, data: IShapeData): void;
+          onUpdate(parent: Element, data: ICapsuleShapeData): void;
+          protected _create(data: ICapsuleShapeData): void;
   }
 }
 
@@ -3850,6 +3908,16 @@ declare module 'XrFrame/systems/AssetsSystem' {
   }
 }
 
+declare module 'XrFrame/systems/NodeSystem' {
+  import Component from 'XrFrame/core/Component';
+  export interface INodeSystemData {
+  }
+  export default class NodeSystem extends Component<INodeSystemData> {
+      readonly priority: number;
+      onTick(deltaTime: number, data: INodeSystemData): void;
+  }
+}
+
 declare module 'XrFrame/systems/TickSystem' {
   /**
     * TickSystem.ts
@@ -3968,6 +4036,64 @@ declare module 'XrFrame/systems/RenderSystem' {
               */
           protected _sortCameras(): void;
           dispose(): void;
+  }
+}
+
+declare module 'XrFrame/systems/PhysicsSystem' {
+  import { Camera } from 'XrFrame/components';
+  import Component from 'XrFrame/core/Component';
+  import { Kanata } from 'XrFrame/ext';
+  import { RaycastDesc } from 'XrFrame/physics/raycast';
+  import Element from "XrFrame/core/Element";
+  import Shape from 'XrFrame/components/physics/Shape';
+  /**
+      * @field camera 渲染物体的相机
+      * @field target Shape所在的xml元素
+      * @field shape 点击选中的Shape
+      * @field x,y 二维canvas中的位置
+      * @field origin 相机在世界空间中的位置
+      * @field dir 相机向点击方向投射的射线，在世界空间中的单位向量
+      */
+  export interface IShapeTouchEvent {
+          camera: Camera;
+          target: Element;
+          shape: Shape;
+          x: number;
+          y: number;
+          origin: [number, number, number];
+          dir: [number, number, number];
+          force: number;
+  }
+  /**
+      * @field camera 渲染物体的相机
+      * @field target Shape所在的xml元素
+      * @field shape 点击选中的Shape
+      * @field x,y 二维canvas中的位置
+      * @field origin 相机在世界空间中的位置
+      * @field dir 相机向点击方向投射的射线，在世界空间中的单位向量
+      * @field deltaX,deltaY 二维canvas中的位置变化量
+      */
+  export interface IShapeDrageEvent extends IShapeTouchEvent {
+          deltaX: number;
+          deltaY: number;
+  }
+  export interface IPhysicsSystemData {
+  }
+  export default class PhysicsSystem extends Component<IPhysicsSystemData> {
+          /**
+              * @internal
+              */
+          nativeSystem: phys3D.PhysSystem;
+          constructor();
+          addShape(shape: Shape): void;
+          removeShape(shape: Shape): void;
+          onAdd(): void;
+          onTick(deltaTime: number, data: IPhysicsSystemData): void;
+          bindRigidbodyWithEntity(rigidbody: phys3D.Rigidbody, entity: Kanata.Entity3D): void;
+          /**
+              * 射线检测，判断给定射线是否与至少一个碰撞体相交，并返回与**最近**的那个碰撞体相交的信息。
+              */
+          raycast(desc: RaycastDesc): boolean;
   }
 }
 
@@ -4217,6 +4343,29 @@ declare module 'XrFrame/loader/types' {
   export {};
 }
 
+declare module 'XrFrame/animation/NativeAnimation' {
+  import { Kanata } from "XrFrame/ext";
+  import Animation, { TDirection } from "XrFrame/animation/Animation";
+  import Element from "XrFrame/core/Element";
+  export interface INativeAnimationData {
+      clip: Kanata.AnimationClipModel;
+      bindings: Array<Kanata.Entity3D>;
+      frameCount: number;
+      names: string[];
+  }
+  export const DefaultNativeAnimationFPS = 60;
+  export default class NativeAnimation extends Animation<INativeAnimationData> {
+      onInit(data: INativeAnimationData): void;
+      onPlay(el: Element, clipName: string, options: any): {
+          duration: number;
+          loop?: number;
+          delay?: number;
+          direction?: TDirection;
+      };
+      onUpdate(el: Element, progress: number, reverse: boolean): void;
+  }
+}
+
 declare module 'XrFrame/loader/glTF/GLTFRootNode' {
   import Scene from "XrFrame/core/Scene";
   import { GLTFAnimationsLoaded, GLTFAnimationsNodeRaw } from "XrFrame/loader/glTF/animations/GLTFAnimationsNode";
@@ -4294,107 +4443,28 @@ declare module 'XrFrame/loader/glTF/GLTFRootNode' {
   }
 }
 
-declare module 'XrFrame/physics/raycast' {
-  import Vector3 from "XrFrame/math/vector3";
-  import RaycastHit from "XrFrame/physics/RaycastHit";
-  /**
-      * raycast函数的参数。
-      * @field origin 射线起点。
-      * @field unitDir 射线方向（单位向量）。
-      * @field distance 射线的最大长度。
-      * @field hit 用来接收碰撞信息的容器。
-      * @field layerMask 可以用来屏蔽一些碰撞体。
-      * @field （未实现）queryTriggerInteraction，是否能与Trigger相交（默认能）。
-      */
-  export type RaycastDesc = {
-          origin: Vector3;
-          unitDir: Vector3;
-          distance?: number;
-          hit?: RaycastHit;
-          layerMask?: number;
+declare module 'XrFrame/loader/glTF/scenes/GLTFNodesNode' {
+  import { GLTFArrayNode } from "XrFrame/loader/glTF/GLTFBaseNode";
+  import GLTFNodeNode, { GLTFNodeLoaded, GLTFNodeNodeRaw, GLTFNodePrerequisites } from "XrFrame/loader/glTF/scenes/GLTFNodeNode";
+  type ChildNode = GLTFNodeNode;
+  export type GLTFNodesNodeRaw = Array<GLTFNodesNodeRaw>;
+  export type GLTFTreeNode = {
+      data: GLTFNodeLoaded;
+      children: Array<GLTFTreeNode>;
+      parent: GLTFTreeNode | null;
+      index: number;
+      extension?: object;
   };
-  /**
-      * 射线检测，判断给定射线是否与至少一个碰撞体相交，并返回与**最近**的那个碰撞体相交的信息。
-      */
-  export function raycast(Phys3D: typeof phys3D, system: phys3D.PhysSystem, desc: RaycastDesc): boolean;
-}
-
-declare module 'XrFrame/components/physics/Shape' {
-  import Component from "XrFrame/core/Component";
-  import Element from "XrFrame/core/Element";
-  import Vector3 from "XrFrame/math/vector3";
-  import { Kanata } from "XrFrame/ext";
-  import Rigidbody from "XrFrame/components/physics/Rigidbody";
-  export const shapeMap: Map<phys3D.Collider, Shape>;
-  export enum ShapeType {
-          None = 0,
-          Box = 1,
-          CharacterController = 2,
-          Capsule = 3,
-          Mesh = 4,
-          Sphere = 5
+  export type GLTFNodesLoaded = Array<GLTFTreeNode>;
+  export default class GLTFNodesNode extends GLTFArrayNode<ChildNode> {
+      ChildCtor(childRaw: GLTFNodeNodeRaw): GLTFNodeNode;
+      readonly raw: GLTFNodesNodeRaw;
+      get nodeName(): string;
+      res: GLTFNodesLoaded;
+      preload(prerequisites: GLTFNodePrerequisites): Promise<GLTFNodesLoaded>;
+      getLoadedResource(): GLTFNodesLoaded;
   }
-  export interface IShapeData {
-  }
-  /**
-      * 碰撞体的基类。
-      * @abstract
-      */
-  export default class Shape extends Component<IShapeData> {
-          /**
-              * 物理组件在节点上的执行顺序，排在渲染节点之后、用户脚本之前。
-              */
-          readonly priority: number;
-          _nativeStaticRigidbody: phys3D.Rigidbody | null;
-          _nativeColliders: Array<phys3D.Collider>;
-          protected _rigidbodyComp: Rigidbody | null;
-          protected _type: ShapeType;
-          onAdd(parent: Element, data: IShapeData): void;
-          onRelease(): void;
-          get entity(): Kanata.Entity3D;
-          get type(): ShapeType;
-          set type(v: ShapeType);
-          /**
-              * 碰撞体是否是Trigger，开启后不参与碰撞，但是能触发Trigger系列的事件：
-              * {@link onTriggerEnter}, {@link onTriggerStay}, {@link onTriggerExit}。
-              * @default false
-              */
-          get isTrigger(): boolean;
-          set isTrigger(v: boolean);
-          /**
-              * @internal
-              */
-          get scale(): Vector3;
-          set scale(v: Vector3);
-          /**
-              * 获取碰撞体附着的刚体组件。
-              * 目前不支持刚体，必定返回null。
-              */
-          get attachedRigidbody(): any;
-          /**
-              * 设置碰撞体的contactOffset，必须为正数。
-              * *一对*碰撞体，如果他们之间的最近距离小于他们的contactOffset之和，那么物理系统在一次*物理模拟*后就会产生一次碰撞。
-              */
-          get contactOffset(): number;
-          set contactOffset(v: number);
-          /** @internal */
-          constructor();
-          enable(): void;
-          disable(): void;
-          /**
-              * 交给子类重载实现
-              * @deprecated
-              */
-          protected _create(data: IShapeData): void;
-          /** @internal */
-          onAddRigidbody(rigidbody: Rigidbody): void;
-          /** @internal */
-          onRemoveRigidbody(): void;
-          /**
-              * @virtual 子类调用该方法之前必须确保_nativeCollider已经创建
-              */
-          protected _baseInit(): void;
-  }
+  export {};
 }
 
 declare module 'XrFrame/kanata/lib/frontend' {
@@ -4902,6 +4972,10 @@ declare module 'XrFrame/kanata/lib/backend/interface' {
           Clear = 1,
           WriteBack = 2
   }
+  export enum ESkinnedSkeletonFlag {
+          Use3x4Matrix = 1,
+          UseTextureMatrix = 2
+  }
   export const RENDER_ENV_OFFSETS: {
           size: number;
           resetFlag: number;
@@ -5371,6 +5445,7 @@ declare module 'XrFrame/kanata/lib/backend/interface' {
                   attributeName: string;
                   type: EUniformType;
           }[], ignored: string[]): void;
+          getErrors(): string[];
           supportCompressTextures: TCompressTexture[];
           features: IFeatures;
           commit_version: string;
@@ -5412,6 +5487,85 @@ declare module 'XrFrame/kanata/lib/index' {
       * 根据数据，返回三维节点对应结构的Float32array
       */
   export function composeRawBufferEntity3DWhole(useEuler: boolean, rotation: ArrayLike<number>, position: ArrayLike<number>, scale: ArrayLike<number>): Float32Array;
+}
+
+declare module 'XrFrame/components/physics/Shape' {
+  import Component from "XrFrame/core/Component";
+  import Element from "XrFrame/core/Element";
+  import Vector3 from "XrFrame/math/vector3";
+  import { Kanata } from "XrFrame/ext";
+  import Rigidbody from "XrFrame/components/physics/Rigidbody";
+  export const shapeMap: Map<phys3D.Collider, Shape>;
+  export enum ShapeType {
+          None = 0,
+          Box = 1,
+          CharacterController = 2,
+          Capsule = 3,
+          Mesh = 4,
+          Sphere = 5
+  }
+  export interface IShapeData {
+  }
+  /**
+      * 碰撞体的基类。
+      * @abstract
+      */
+  export default class Shape extends Component<IShapeData> {
+          /**
+              * 物理组件在节点上的执行顺序，排在渲染节点之后、用户脚本之前。
+              */
+          readonly priority: number;
+          _nativeStaticRigidbody: phys3D.Rigidbody | null;
+          _nativeColliders: Array<phys3D.Collider>;
+          protected _rigidbodyComp: Rigidbody | null;
+          protected _type: ShapeType;
+          onAdd(parent: Element, data: IShapeData): void;
+          onRemove(parent: Element, data: IShapeData): void;
+          onRelease(): void;
+          get entity(): Kanata.Entity3D;
+          get type(): ShapeType;
+          set type(v: ShapeType);
+          /**
+              * 碰撞体是否是Trigger，开启后不参与碰撞，但是能触发Trigger系列的事件：
+              * {@link onTriggerEnter}, {@link onTriggerStay}, {@link onTriggerExit}。
+              * @default false
+              */
+          get isTrigger(): boolean;
+          set isTrigger(v: boolean);
+          /**
+              * @internal
+              */
+          get scale(): Vector3;
+          set scale(v: Vector3);
+          /**
+              * 获取碰撞体附着的刚体组件。
+              * 目前不支持刚体，必定返回null。
+              */
+          get attachedRigidbody(): any;
+          /**
+              * 设置碰撞体的contactOffset，必须为正数。
+              * *一对*碰撞体，如果他们之间的最近距离小于他们的contactOffset之和，那么物理系统在一次*物理模拟*后就会产生一次碰撞。
+              */
+          get contactOffset(): number;
+          set contactOffset(v: number);
+          /** @internal */
+          constructor();
+          enable(): void;
+          disable(): void;
+          /**
+              * 交给子类重载实现
+              * @deprecated
+              */
+          protected _create(data: IShapeData): void;
+          /** @internal */
+          onAddRigidbody(rigidbody: Rigidbody): void;
+          /** @internal */
+          onRemoveRigidbody(): void;
+          /**
+              * @virtual 子类调用该方法之前必须确保_nativeCollider已经创建
+              */
+          protected _baseInit(): void;
+  }
 }
 
 declare module 'XrFrame/render-graph/RenderGraph' {
@@ -5539,6 +5693,31 @@ declare module 'XrFrame/systems/LightManager' {
   }
   export default class LightManager {
   }
+}
+
+declare module 'XrFrame/physics/raycast' {
+  import Vector3 from "XrFrame/math/vector3";
+  import RaycastHit from "XrFrame/physics/RaycastHit";
+  /**
+      * raycast函数的参数。
+      * @field origin 射线起点。
+      * @field unitDir 射线方向（单位向量）。
+      * @field distance 射线的最大长度。
+      * @field hit 用来接收碰撞信息的容器。
+      * @field layerMask 可以用来屏蔽一些碰撞体。
+      * @field （未实现）queryTriggerInteraction，是否能与Trigger相交（默认能）。
+      */
+  export type RaycastDesc = {
+          origin: Vector3;
+          unitDir: Vector3;
+          distance?: number;
+          hit?: RaycastHit;
+          layerMask?: number;
+  };
+  /**
+      * 射线检测，判断给定射线是否与至少一个碰撞体相交，并返回与**最近**的那个碰撞体相交的信息。
+      */
+  export function raycast(Phys3D: typeof phys3D, system: phys3D.PhysSystem, desc: RaycastDesc): boolean;
 }
 
 declare module 'XrFrame/loader/AssetLoader' {
@@ -5790,30 +5969,6 @@ declare module 'XrFrame/loader/glTF/materials/GLTFMaterialsNode' {
   export {};
 }
 
-declare module 'XrFrame/loader/glTF/scenes/GLTFNodesNode' {
-  import { GLTFArrayNode } from "XrFrame/loader/glTF/GLTFBaseNode";
-  import GLTFNodeNode, { GLTFNodeLoaded, GLTFNodeNodeRaw, GLTFNodePrerequisites } from "XrFrame/loader/glTF/scenes/GLTFNodeNode";
-  type ChildNode = GLTFNodeNode;
-  export type GLTFNodesNodeRaw = Array<GLTFNodesNodeRaw>;
-  export type GLTFTreeNode = {
-      data: GLTFNodeLoaded;
-      children: Array<GLTFTreeNode>;
-      parent: GLTFTreeNode | null;
-      index: number;
-      extension?: object;
-  };
-  export type GLTFNodesLoaded = Array<GLTFTreeNode>;
-  export default class GLTFNodesNode extends GLTFArrayNode<ChildNode> {
-      ChildCtor(childRaw: GLTFNodeNodeRaw): GLTFNodeNode;
-      readonly raw: GLTFNodesNodeRaw;
-      get nodeName(): string;
-      res: GLTFNodesLoaded;
-      preload(prerequisites: GLTFNodePrerequisites): Promise<GLTFNodesLoaded>;
-      getLoadedResource(): GLTFNodesLoaded;
-  }
-  export {};
-}
-
 declare module 'XrFrame/loader/glTF/scenes/GLTFSceneNode' {
   import { GLTFBaseNode } from "XrFrame/loader/glTF/GLTFBaseNode";
   import { GLTFNodesLoaded, GLTFTreeNode } from "XrFrame/loader/glTF/scenes/GLTFNodesNode";
@@ -5916,45 +6071,39 @@ declare module 'XrFrame/loader/glTF/textures/GLTFTexturesNode' {
   export {};
 }
 
-declare module 'XrFrame/physics/RaycastHit' {
-  import { Scene } from "XrFrame/elements";
-  import Vector3 from "XrFrame/math/vector3";
-  import Shape from "XrFrame/components/physics/Shape";
-  export default class RaycastHit {
-          constructor(scene: Scene, nativeComp?: phys3D.RaycastHit);
-          /**
-              * native层真正的raycastHit对象，业务侧无需关心
-              */
-          get nativeRaycastHit(): phys3D.RaycastHit;
-          /**
-              * 被射线射中的collider所附的Rigidbody，如果collider没有附着在一个Rigidbody上，则为null
-              */
-          get rigidbody(): any;
-          /**
-              * 被射线射中的collider
-              */
-          get collider(): Shape;
-          /**
-              * 从光线的原点到碰撞点的距离
-              */
-          get distance(): number;
-          set distance(v: number);
-          /**
-              * 射线锁碰到的表面的法线
-              */
-          get normal(): Vector3;
-          set normal(v: Vector3);
-          /**
-              * 在世界空间中，射线碰到collider的碰撞点
-              */
-          get point(): Vector3;
-          set point(v: Vector3);
+declare module 'XrFrame/loader/glTF/scenes/GLTFNodeNode' {
+  import { GLTFMeshesLoaded } from "XrFrame/loader/glTF/geometry/GLTFMeshesNode";
+  import { GLTFMeshLoaded } from "XrFrame/loader/glTF/geometry/GLTFMeshNode";
+  import { GLTFBaseNode } from "XrFrame/loader/glTF/GLTFBaseNode";
+  import { GLTFSkinLoaded } from "XrFrame/loader/glTF/skins/GLTFSkinNode";
+  import { GLTFSkinsLoaded } from "XrFrame/loader/glTF/skins/GLTFSkinsNode";
+  import { GLTF } from "XrFrame/loader/glTF/utils/types";
+  export interface GLTFNodeNodeRaw {
+      children?: Array<number>;
+      mesh?: number;
+      matrix?: Array<number>;
+      rotation?: [number, number, number, number];
+      scale?: [number, number, number];
+      translation?: [number, number, number];
+      weights?: number;
+      skin?: number;
+      name?: string;
+      extension?: object;
   }
-}
-
-declare module 'XrFrame/components/physics/Rigidbody' {
-  export default class Rigidbody {
-      nativeComp: phys3D.Rigidbody;
+  export interface GLTFNodeLoaded {
+      children: Array<number>;
+      transform: GLTF.Transform;
+      mesh?: GLTFMeshLoaded;
+      skin?: GLTFSkinLoaded;
+      name: string;
+  }
+  export type GLTFNodePrerequisites = [meshes: GLTFMeshesLoaded, skins: GLTFSkinsLoaded];
+  export default class GLTFNodeNode extends GLTFBaseNode {
+      get nodeName(): string;
+      readonly raw: GLTFNodeNodeRaw;
+      build(): void;
+      preload(prerequisites: GLTFNodePrerequisites): Promise<GLTFNodeLoaded>;
+      getLoadedResource(): GLTFNodeLoaded;
   }
 }
 
@@ -6095,6 +6244,7 @@ declare module 'XrFrame/kanata/lib/frontend/resource/renderEnv' {
       get isWrongWrapMapping(): boolean;
       get isNotWrongEffectSort(): boolean;
       get isGoodInstance(): boolean;
+      get isGoodPhysAndScalableList(): boolean;
       constructor();
       supportCompressTexture(type: TCompressTexture): boolean;
       registerFallbackEffect(lightMode: string, effect?: Effect): void;
@@ -6116,6 +6266,7 @@ declare module 'XrFrame/kanata/lib/frontend/resource/renderEnv' {
           attributeName: string;
           type: EUniformType;
       }[], ignored: string[]): void;
+      getErrors(): string[];
   }
   const renderEnv: RenderEnv;
   export default renderEnv;
@@ -7148,6 +7299,12 @@ declare module 'XrFrame/kanata/lib/frontend/shared/crossContext' {
   export default crossContext;
 }
 
+declare module 'XrFrame/components/physics/Rigidbody' {
+  export default class Rigidbody {
+      nativeComp: phys3D.Rigidbody;
+  }
+}
+
 declare module 'XrFrame/render-graph/RGNode' {
   /**
       * RGNode.ts
@@ -7290,6 +7447,42 @@ declare module 'XrFrame/render-graph/RGNode' {
   export {};
 }
 
+declare module 'XrFrame/physics/RaycastHit' {
+  import { Scene } from "XrFrame/elements";
+  import Vector3 from "XrFrame/math/vector3";
+  import Shape from "XrFrame/components/physics/Shape";
+  export default class RaycastHit {
+          constructor(scene: Scene, nativeComp?: phys3D.RaycastHit);
+          /**
+              * native层真正的raycastHit对象，业务侧无需关心
+              */
+          get nativeRaycastHit(): phys3D.RaycastHit;
+          /**
+              * 被射线射中的collider所附的Rigidbody，如果collider没有附着在一个Rigidbody上，则为null
+              */
+          get rigidbody(): any;
+          /**
+              * 被射线射中的collider
+              */
+          get collider(): Shape;
+          /**
+              * 从光线的原点到碰撞点的距离
+              */
+          get distance(): number;
+          set distance(v: number);
+          /**
+              * 射线锁碰到的表面的法线
+              */
+          get normal(): Vector3;
+          set normal(v: Vector3);
+          /**
+              * 在世界空间中，射线碰到collider的碰撞点
+              */
+          get point(): Vector3;
+          set point(v: Vector3);
+  }
+}
+
 declare module 'XrFrame/loader/glTF/animations/GLTFAnimationNode' {
   import { Kanata } from "XrFrame/ext";
   import { GLTFAccessorsLoaded } from "XrFrame/loader/glTF/buffers/GLTFAccessorsNode";
@@ -7386,6 +7579,7 @@ declare module 'XrFrame/loader/glTF/buffers/GLTFAccessorNode' {
       componentType: EnumGLTFAccessorComponentType;
       max?: Array<number>;
       min?: Array<number>;
+      compact: boolean;
       getCompAt(element: number, comp: number): any;
   }
   export default class GLTFAccessorNode extends GLTFBaseNode {
@@ -7520,40 +7714,6 @@ declare module 'XrFrame/loader/glTF/materials/GLTFMaterialNode' {
   }
 }
 
-declare module 'XrFrame/loader/glTF/scenes/GLTFNodeNode' {
-  import { GLTFMeshesLoaded } from "XrFrame/loader/glTF/geometry/GLTFMeshesNode";
-  import { GLTFMeshLoaded } from "XrFrame/loader/glTF/geometry/GLTFMeshNode";
-  import { GLTFBaseNode } from "XrFrame/loader/glTF/GLTFBaseNode";
-  import { GLTFSkinLoaded } from "XrFrame/loader/glTF/skins/GLTFSkinNode";
-  import { GLTFSkinsLoaded } from "XrFrame/loader/glTF/skins/GLTFSkinsNode";
-  import { GLTF } from "XrFrame/loader/glTF/utils/types";
-  export interface GLTFNodeNodeRaw {
-      children?: Array<number>;
-      mesh?: number;
-      matrix?: Array<number>;
-      rotation?: [number, number, number, number];
-      scale?: [number, number, number];
-      translation?: [number, number, number];
-      weights?: number;
-      skin?: number;
-      extension?: object;
-  }
-  export interface GLTFNodeLoaded {
-      children: Array<number>;
-      transform: GLTF.Transform;
-      mesh?: GLTFMeshLoaded;
-      skin?: GLTFSkinLoaded;
-  }
-  export type GLTFNodePrerequisites = [meshes: GLTFMeshesLoaded, skins: GLTFSkinsLoaded];
-  export default class GLTFNodeNode extends GLTFBaseNode {
-      get nodeName(): string;
-      readonly raw: GLTFNodeNodeRaw;
-      build(): void;
-      preload(prerequisites: GLTFNodePrerequisites): Promise<GLTFNodeLoaded>;
-      getLoadedResource(): GLTFNodeLoaded;
-  }
-}
-
 declare module 'XrFrame/loader/glTF/skins/GLTFSkinNode' {
   import { Kanata } from "XrFrame/ext";
   import { GLTFAccessorsLoaded } from "XrFrame/loader/glTF/buffers/GLTFAccessorsNode";
@@ -7565,6 +7725,7 @@ declare module 'XrFrame/loader/glTF/skins/GLTFSkinNode' {
   }
   export interface GLTFSkinLoaded {
       inverseBindMatrices: Kanata.SkeletonBoneInverseModel;
+      skeleton?: number;
       joints: Array<number>;
   }
   export default class GLTFSkinNode extends GLTFBaseNode {
@@ -7655,6 +7816,52 @@ declare module 'XrFrame/loader/glTF/textures/GLTFTextureNode' {
       build(): void;
       preload(prerequisites: [images: GLTFImagesLoaded, samplers: GLTFSamplersLoaded]): Promise<GLTFTextureLoaded>;
       getLoadedResource(): GLTFTextureLoaded;
+  }
+}
+
+declare module 'XrFrame/loader/glTF/utils/types' {
+  import { ITransformData } from "XrFrame/components";
+  import { Kanata } from "XrFrame/ext";
+  import Quaternion from "XrFrame/math/quaternion";
+  import Vector3 from "XrFrame/math/vector3";
+  export namespace GLTF {
+          type BufferView = Int8Array | Uint8Array | Uint16Array | Uint32Array | Float32Array;
+          type IndexBufferView = Uint16Array | Uint32Array | Uint8Array;
+          interface BoundingBox {
+                  min: Vector3;
+                  max: Vector3;
+          }
+          namespace BoundingBox {
+                  function createZero(): BoundingBox;
+                  function createInfinite(): BoundingBox;
+          }
+          interface VertexLayoutDesc extends Kanata.IVertexLayoutOptions {
+                  stride: number;
+          }
+          interface VertexProperties {
+                  buffer: Float32Array;
+                  layoutDesc: VertexLayoutDesc;
+                  layout: Kanata.VertexLayout;
+                  macros: object;
+                  boundingBox: BoundingBox;
+                  /**
+                      * 是否需要自行生成normal和tangent的顶点数据。
+                      */
+                  lackNormal: boolean;
+                  lackTangent: boolean;
+                  /**
+                      * 如果需要生成的话，生成在layoutDesc的哪个attribute里。
+                      */
+                  normalSlot: number;
+                  tangentSlot: number;
+          }
+          interface Transform extends ITransformData {
+                  /**
+                      * 同时有quat和rotation的情况下，quat优先；
+                      * 目前只会填写quat，不会填写rotation。
+                      */
+                  quat?: Quaternion;
+          }
   }
 }
 
@@ -7893,52 +8100,6 @@ declare module 'XrFrame/kanata/lib/backend/native/worker' {
   export function GET_MAIN_CANVAS(): HTMLCanvasElement;
   export function IS_VALID(): boolean;
   export { Phys3D };
-}
-
-declare module 'XrFrame/loader/glTF/utils/types' {
-  import { ITransformData } from "XrFrame/components";
-  import { Kanata } from "XrFrame/ext";
-  import Quaternion from "XrFrame/math/quaternion";
-  import Vector3 from "XrFrame/math/vector3";
-  export namespace GLTF {
-          type BufferView = Int8Array | Uint8Array | Uint16Array | Uint32Array | Float32Array;
-          type IndexBufferView = Uint16Array | Uint32Array | Uint8Array;
-          interface BoundingBox {
-                  min: Vector3;
-                  max: Vector3;
-          }
-          namespace BoundingBox {
-                  function createZero(): BoundingBox;
-                  function createInfinite(): BoundingBox;
-          }
-          interface VertexLayoutDesc extends Kanata.IVertexLayoutOptions {
-                  stride: number;
-          }
-          interface VertexProperties {
-                  buffer: Float32Array;
-                  layoutDesc: VertexLayoutDesc;
-                  layout: Kanata.VertexLayout;
-                  macros: object;
-                  boundingBox: BoundingBox;
-                  /**
-                      * 是否需要自行生成normal和tangent的顶点数据。
-                      */
-                  lackNormal: boolean;
-                  lackTangent: boolean;
-                  /**
-                      * 如果需要生成的话，生成在layoutDesc的哪个attribute里。
-                      */
-                  normalSlot: number;
-                  tangentSlot: number;
-          }
-          interface Transform extends ITransformData {
-                  /**
-                      * 同时有quat和rotation的情况下，quat优先；
-                      * 目前只会填写quat，不会填写rotation。
-                      */
-                  quat?: Quaternion;
-          }
-  }
 }
 
 declare module 'XrFrame/loader/glTF/animations/channels/GLTFChannelsNode' {
@@ -8324,7 +8485,7 @@ declare module 'XrFrame/loader/glTF/animations/channels/GLTFChannelNode' {
           vectorGroups: number;
           headerBytesNeeded: number;
           bodyBytesNeeded: number;
-          serializeHeaderOnBuffer(stream: StreamReader): void;
+          serializeHeaderOnBuffer(stream: StreamReader, channelIndex: number): void;
           serializeBodyOnBuffer(stream: StreamReader): number;
   }
   export default class GLTFChannelNode extends GLTFBaseNode {
@@ -8405,7 +8566,7 @@ declare module 'XrFrame/loader/glTF/geometry/primitives/GLTFPrimitiveNode' {
 declare module 'XrFrame/core/utils' {
   export function assert(pred: boolean, msg: string): void;
   export function decode(data: ArrayBuffer, format: "utf-8" | "gbk"): string;
-  export function wxPromiseWrapper(executor: any, args: any): Promise<any>;
+  export function wxPromiseWrapper<T>(executor: any, args: any): Promise<T>;
   export class StreamReader {
       constructor(buffer: ArrayBuffer);
       get size(): number;

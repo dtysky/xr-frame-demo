@@ -1,3 +1,5 @@
+import XrTeamCameraAnimation from '../../xr-custom/animations/XrTeamCameraAnimation';
+
 Component({
   properties: {
     loaded: false,
@@ -18,17 +20,23 @@ Component({
       console.log('xr-scene', xrScene);
       this.bgm = wx.createInnerAudioContext();
       this.bgm.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/kaqituolitai.mp3';
+      this.bgm.volume = 0.5;
       this.voice = wx.createInnerAudioContext({useWebAudioImplement: true});
       this.voice.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/homo.m4a';
       this.voiceFrag = {
-        preXinyi: [4, 2],
-        preRoam: [6.5, 2],
-        preHikari: [48, 3],
-        jump: [53.5, 2]
+        xinyi: [4, 2],
+        roam: [6.8, 2],
+        hikari: [53.9, 2],
+        jump: [8.9, 1.5]
       };
+      this.tmpV3 = new (wx.getXrFrameSystem().Vector3)();
     },
     handleAssetsLoaded: function({detail}) {
       this.triggerEvent('assetsLoaded', detail.value);
+    },
+    handleDestory: function() {
+      this.voice.stop();
+      this.bgm.stop();
     },
     handleRaf: function({detail}) {
       if (!this.init()) {
@@ -36,7 +44,6 @@ Component({
       }
       
       if (this.requireRun) {
-        console.log('requireRun');
         this.requireRun = false;
         this.run();
       }
@@ -48,18 +55,38 @@ Component({
       ]);
     },
     getScreenPosition: function(char, name) {
-      const clipPos = this.camera.convertWorldPositionToClip(char.worldPosition);
+      this.tmpV3.set(char.worldPosition);
+      this.tmpV3.x += -0.1;
+      this.tmpV3.y += 1.2;
+      const clipPos = this.camera.convertWorldPositionToClip(this.tmpV3);
       const {frameWidth, frameHeight} = this.scene;
       return [((clipPos.x + 1) / 2) * frameWidth, (1 - (clipPos.y + 1) / 2) * frameHeight, name];
     },
     init: function() {
       if (!this.camera) {
-        this.camera = this.scene.getElementById('camera').getComponent(wx.getXrFrameSystem().Camera);
-        this.cameraCtrl = this.camera.el.getComponent('camera-orbit-control');
-        this.cameraTarget = this.scene.getNodeById('camera-target');
+        const camEl = this.scene.getElementById('camera');
+        this.camera = camEl.getComponent(wx.getXrFrameSystem().Camera);
+        this.cameraCtrl = camEl.getComponent('camera-orbit-control');
       }
 
-      return this.camera && this.hikari && this.roam && this.xinyi;
+      const inited = this.camera && this.hikari && this.roam && this.xinyi;
+
+      if (inited && !this.cameraAnim) {
+        const {Vector3} = wx.getXrFrameSystem();
+        this.cameraAnim = this.camera.el.addComponent(wx.getXrFrameSystem().Animator);
+        this.cameraAnim.addAnimation(new XrTeamCameraAnimation(this.scene, {
+          targets: {
+            hikari: this.hikari.position,
+            roam: this.roam.position,
+            xinyi: this.xinyi.position,
+            final: this.hikari.position
+          },
+          startY: 1.2,
+          finalY: 0.8
+        }));
+      }
+
+      return inited;
     },
     handleModelLoaded: function({detail}) {
       const {target} = detail.value;
@@ -68,9 +95,11 @@ Component({
     run: async function() {
       this.cameraCtrl.disable();
 
-      await this.prepareRun(this.xinyi, this.voiceFrag.preXinyi);
-      await this.prepareRun(this.roam, this.voiceFrag.preRoam);
-      await this.prepareRun(this.hikari, this.voiceFrag.preHikari);
+      await this.prepareRun('xinyi');
+      await this.prepareRun('roam');
+      await this.prepareRun('hikari');
+
+      await this.prepareCamera();
 
       this.runOne(this.hikari);
       this.runOne(this.roam);
@@ -78,39 +107,56 @@ Component({
 
       this.cameraCtrl.enable();
     },
-    prepareRun: async function(char, voiceFrag) {
-      return new Promise(resolve => {
-        this.voice.seek(voiceFrag[0]);
-        this.voice.play();
-        const trs = this.camera.el.getComponent(wx.getXrFrameSystem().Transform);
-        trs.position.setValue(char.position.x, 0.8, 2);
-        this.cameraTarget.position.setValue(char.position.x, 0.8, 0);
-        const animator = char.el.getComponent(wx.getXrFrameSystem().Animator);
+    prepareRun: async function(char) {
+      const voiceFrag = this.voiceFrag[char];
 
-        setTimeout(() => {
-          this.voice.stop();
-          animator.stop();
-          animator.pauseToFrame('Run', 0);
-          setTimeout(() => resolve(), 300);
-        }, voiceFrag[1] * 1000);
+      return new Promise(resolve => {
+        const animator = this[char].el.getComponent(wx.getXrFrameSystem().Animator);
+
+        this.cameraAnim.play(char);
+        this.cameraAnim.el.event.addOnce('anim-stop', () => {
+          this.voice.seek(voiceFrag[0]);
+          this.voice.play();
+
+          setTimeout(() => {
+            this.voice.stop();
+            animator.stop();
+            animator.pauseToFrame('Run', 0);
+            setTimeout(() => resolve(), 200);
+          }, voiceFrag[1] * 1000);
+        });
       });
     },
     prepareCamera: async function() {
       this.bgm.play();
-      this.bgm.seek(43);
-      const trs = this.camera.el.getComponent(wx.getXrFrameSystem().Transform);
-      trs.position.setValue(0, 0.8, 3);
-      this.cameraTarget.position.setValue(0, 0.8, 0);
+      this.bgm.seek(46);
+
+      return new Promise(resolve => {
+        this.cameraAnim.play('final');
+        this.cameraAnim.el.event.addOnce('anim-stop', () => {
+          setTimeout(() => {
+            resolve();
+          }, 1000);
+        });
+      });
     },
     runOne: function(char) {
       const animator = char.el.getComponent(wx.getXrFrameSystem().Animator);
       animator.resume();
 
-      char.el.event.add('touch-shape', () => {
+      const jump = () => {
+        this.voice.seek(this.voiceFrag.jump[0]);
+        this.voice.play();
         animator.stop();
-        animator.play('Jump', {loop: 1});
-        animator.el.event.addOnce('anim-stop', () => animator.play('Run'));
-      });
+        animator.play('Jump', {loop: 0});
+        animator.el.event.addOnce('anim-stop', () => {
+          animator.play('Run');
+          this.voice.stop();
+        });
+        char.el.event.addOnce('touch-shape', jump);
+      }
+
+      char.el.event.addOnce('touch-shape', jump);
     }
   }
 })

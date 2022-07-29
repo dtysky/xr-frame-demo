@@ -21,6 +21,6 @@
     </view>
   </block>
 
-  <view wx:if="{{!loaded}}">等待加载完成...</view>
-  <button wx:if="{{loaded}}" bindtap="handleRun">卡 其 脱 离 太！</button>
+  <view wx:if="{{!loaded}}" style="text-align: center;">等待加载完成...</view>
+  <button wx:if="{{loaded}}" bindtap="handleRun" style="margin-top: 12px; padding: 8px; font-size: 20px; background: #f22; color: white; text-align: center;">卡 其 脱 离 太！</button>
 </xr-demo-viewer>
