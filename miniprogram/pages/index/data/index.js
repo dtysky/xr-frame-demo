@@ -28,6 +28,11 @@ const base = {
       path: '/pages/scene-basic-touch/index',
     },
     {
+      name: 'VisibleLayer',
+      label: '显示和图层',
+      path: '/pages/scene-basic-visible-layer/index',
+    },
+    {
       name: 'Shadow',
       label: '动态节点',
       path: '/pages/scene-basic-shadow/index',
