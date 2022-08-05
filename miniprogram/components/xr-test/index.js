@@ -159,7 +159,7 @@ Component({
 
       // this.arMat.setTexture('u_yTexture', this.yTex);
       // this.arMat.setTexture('u_uvTexture', this.uvTex);
-      this.arMat.setTexture('u_baseColorSampler', this.uvTex);
+      this.arMat.setTexture('u_baseColorMap', this.uvTex);
     },
   }
 })

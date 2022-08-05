@@ -29,14 +29,14 @@
       <xr-mesh node-id="mesh-sphere" position="0 1.25 -5" scale="1.2 1.2 1.2" geometry="sphere" material="standard-mat" uniforms="u_baseColorFactor:0.937 0.176 0.368 1"></xr-mesh>
       <xr-mesh node-id="mesh-cylinder" position="1 0.75 -3" scale="1 0.7 1" geometry="cylinder" material="standard-mat" uniforms="u_baseColorFactor:1 0.776 0.364 1"></xr-mesh>
     </xr-node>
-    <xr-mesh node-id="mesh-cube-texture-cdn" position="2 -0.4 2" rotation="0 10 0" scale="0.9 0.9 0.9" geometry="cube" material="standard-mat" uniforms="u_metallicRoughnessValues: 0 0.5, u_baseColorSampler: waifu-cdn"></xr-mesh>
-    <xr-mesh node-id="mesh-cube-texture-cloud" position="2.5 -0.4 0.6" rotation="0 10 0" scale="0.9 0.9 0.9" geometry="cube" material="standard-mat" uniforms="u_metallicRoughnessValues: 0 0, u_baseColorSampler: waifu-cloud"></xr-mesh>
-    <xr-mesh node-id="mesh-cube-texture" position="-2 -0.4 2" rotation="0 -10 0" scale="0.9 0.9 0.9" geometry="cube" material="standard-mat" uniforms="u_metallicRoughnessValues: 0.5 0, u_baseColorSampler: waifu"></xr-mesh>
+    <xr-mesh node-id="mesh-cube-texture-cdn" position="2 -0.4 2" rotation="0 10 0" scale="0.9 0.9 0.9" geometry="cube" material="standard-mat" uniforms="u_metallicRoughnessValues: 0 0.5, u_baseColorMap: waifu-cdn"></xr-mesh>
+    <xr-mesh node-id="mesh-cube-texture-cloud" position="2.5 -0.4 0.6" rotation="0 10 0" scale="0.9 0.9 0.9" geometry="cube" material="standard-mat" uniforms="u_metallicRoughnessValues: 0 0, u_baseColorMap: waifu-cloud"></xr-mesh>
+    <xr-mesh node-id="mesh-cube-texture" position="-2 -0.4 2" rotation="0 -10 0" scale="0.9 0.9 0.9" geometry="cube" material="standard-mat" uniforms="u_metallicRoughnessValues: 0.5 0, u_baseColorMap: waifu"></xr-mesh>
     <xr-mesh node-id="mesh-cube-metal" position="-2.5 -0.4 0.6" rotation="0 -10 0" scale="0.9 0.9 0.9" geometry="cube" material="standard-mat" uniforms="u_metallicRoughnessValues: 1 0"></xr-mesh>
     <xr-mesh node-id="mesh-sphere-metal" position="-2.4 0.2 -1" scale="0.8 0.8 0.8" geometry="sphere" material="standard-mat" uniforms="u_metallicRoughnessValues: 1 0"></xr-mesh>
     <xr-mesh node-id="mesh-sphere-rough" position="2.4 0.2 -1" scale="0.8 0.8 0.8" geometry="sphere" material="standard-mat" uniforms="u_metallicRoughnessValues: 0 0"></xr-mesh>
     <xr-mesh node-id="mesh-sphere-roughmetal" position="1.6 0.2 -3" scale="0.8 0.8 0.8" geometry="sphere" material="standard-mat" uniforms="u_metallicRoughnessValues: 0.5 0.5"></xr-mesh>
-    <xr-mesh node-id="mesh-sphere-pbr-texture" position="-1.6 0.2 -3" scale="0.8 0.8 0.8" geometry="sphere" material="standard-mat" uniforms="u_metallicRoughnessValues: 1 0, u_baseColorSampler: albedo, u_metallicSampler: metallic, u_roughnessSampler: roughness, u_occlusionSampler: ao"></xr-mesh>
+    <xr-mesh node-id="mesh-sphere-pbr-texture" position="-1.6 0.2 -3" scale="0.8 0.8 0.8" geometry="sphere" material="standard-mat" uniforms="u_metallicRoughnessValues: 1 0, u_baseColorMap: albedo, u_metallicSampler: metallic, u_roughnessSampler: roughness, u_occlusionSampler: ao"></xr-mesh>
    <xr-camera
       id="camera" node-id="camera" position="0 2 7" clear-color="0.925 0.925 0.925 1"
       draw-sky target="id1"
