@@ -1,14 +1,10 @@
 <xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
-    <!-- <xr-asset-load
-      type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin"
-    /> -->
     <xr-asset-load asset-id="anim" type="keyframe" src="/assets/animation/miku-kawaii-animation.json"/>
     <xr-asset-load type="gltf" asset-id="cloud-station" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/cloud-station/index.glb" />
     <xr-asset-load type="gltf" asset-id="miku-kawaii" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/shiteyanyo-hatsune-miku/index.glb" />
     <xr-asset-load type="gltf" asset-id="miku" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/miku.glb" />
   </xr-assets>
-  <!-- <xr-env env-data="env1" /> -->
   <xr-node>
     <xr-node node-id="target" position="0 1 0" />
     <xr-gltf position="0 0 0" scale="1 1 1" model="cloud-station" anim-autoplay></xr-gltf>

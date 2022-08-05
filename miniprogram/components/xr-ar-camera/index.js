@@ -11,8 +11,8 @@ Component({
     }
   },
   methods: {
-    async handleReady({detail}) {
-      const xrScene = detail.value;
+    handleReady({detail}) {
+      const xrScene = this.scene = detail.value;
       console.log('xr-scene', xrScene);
     },
     handleAssetsProgress: function({detail}) {
@@ -22,8 +22,11 @@ Component({
       console.log('assets loaded', detail.value);
       this.setData({loaded: true});
     },
-    handleTick: function({detail}) {
-      const {el, value} = detail;
+    handleARReady: function({detail}) {
+      console.log('ar-ready', this.scene.ar.arModes, this.scene.ar.arVersion);
+    },
+    handleARError: function({detail}) {
+      console.log('ar-error', detail);
     },
     handleLog: function({detail}) {
       const {el, value} = detail;

@@ -41,6 +41,7 @@ declare module 'XrFrame' {
       ILightData,
       IMaterialData,
       IMeshData,
+      ITextData,
       IRenderTextureData,
       IRenderTarget,
       IEnvData,
@@ -59,6 +60,7 @@ declare module 'XrFrame' {
       IShapeDrageEvent,
       IShapeTouchEvent,
       IARSystemData,
+      IARRawData,
       ITextureLoaderOptions,
       IImageLoaderOptions,
       ICubeTextureLoaderOptions,
@@ -130,6 +132,7 @@ declare module 'XrFrame' {
   export type Light = xrFrameSystem.Light;
   export type Material = xrFrameSystem.Material;
   export type Mesh = xrFrameSystem.Mesh;
+  export type Text = xrFrameSystem.Text;
   export type RenderTexture = xrFrameSystem.RenderTexture;
   export type Env = xrFrameSystem.Env;
   export type Animator = xrFrameSystem.Animator;
@@ -150,6 +153,7 @@ declare module 'XrFrame' {
   export type XRAssets = xrFrameSystem.XRAssets;
   export type XREnv = xrFrameSystem.XREnv;
   export type XRARTracker = xrFrameSystem.XRARTracker;
+  export type XRText = xrFrameSystem.XRText;
   export type AssetsSystem = xrFrameSystem.AssetsSystem;
   export type NodeSystem = xrFrameSystem.NodeSystem;
   export type TickSystem = xrFrameSystem.TickSystem;
@@ -203,6 +207,7 @@ declare module 'XrFrame' {
       Light: typeof xrFrameSystem.Light;
       Material: typeof xrFrameSystem.Material;
       Mesh: typeof xrFrameSystem.Mesh;
+      Text: typeof xrFrameSystem.Text;
       RenderTexture: typeof xrFrameSystem.RenderTexture;
       Env: typeof xrFrameSystem.Env;
       Animator: typeof xrFrameSystem.Animator;
@@ -223,6 +228,7 @@ declare module 'XrFrame' {
       XRAssets: typeof xrFrameSystem.XRAssets;
       XREnv: typeof xrFrameSystem.XREnv;
       XRARTracker: typeof xrFrameSystem.XRARTracker;
+      XRText: typeof xrFrameSystem.XRText;
       AssetsSystem: typeof xrFrameSystem.AssetsSystem;
       NodeSystem: typeof xrFrameSystem.NodeSystem;
       TickSystem: typeof xrFrameSystem.TickSystem;
@@ -276,6 +282,7 @@ declare module 'XrFrame' {
       LightSchema: IComponentSchema;
       MaterialSchema: IComponentSchema;
       MeshSchema: IComponentSchema;
+      TextSchema: IComponentSchema;
       RenderTextureSchema: IComponentSchema;
       EnvSchema: IComponentSchema;
       AnimatorSchema: IComponentSchema;
@@ -283,7 +290,8 @@ declare module 'XrFrame' {
       ARTrackSchema: IComponentSchema;
       SphereShapeSchema: IComponentSchema;
       MeshShapeSchema: IComponentSchema;
-      CapsuleShapeSchema: IComponentSchema
+      CapsuleShapeSchema: IComponentSchema;
+      RenderSystemSchema: IComponentSchema
       BasicDefaultComponents: IEntityComponents;
       SceneDefaultComponents: IEntityComponents;
       NodeDefaultComponents: IEntityComponents;
@@ -295,7 +303,8 @@ declare module 'XrFrame' {
       MaterialDefaultComponents: IEntityComponents;
       AssetsDefaultComponents: IEntityComponents;
       EnvDefaultComponents: IEntityComponents;
-      ARTrackerDefaultComponents: IEntityComponents
+      ARTrackerDefaultComponents: IEntityComponents;
+      TextDefaultComponents: IEntityComponents
       BasicDataMapping: {[key: string]: string[]};
       SceneDataMapping: {[key: string]: string[]};
       NodeDataMapping: {[key: string]: string[]};
@@ -307,7 +316,8 @@ declare module 'XrFrame' {
       MaterialDataMapping: {[key: string]: string[]};
       AssetLoadDataMapping: {[key: string]: string[]};
       EnvDataMapping: {[key: string]: string[]};
-      ARTrackerDataMapping: {[key: string]: string[]}
+      ARTrackerDataMapping: {[key: string]: string[]};
+      TextDataMapping: {[key: string]: string[]}
   }
 }
 
@@ -562,6 +572,7 @@ declare module 'XrFrame/components' {
   export { default as Light, ILightData, LightSchema } from 'XrFrame/components/Light';
   export { default as Material, IMaterialData, MaterialSchema } from 'XrFrame/components/Material';
   export { default as Mesh, IMeshData, MeshSchema } from 'XrFrame/components/Mesh';
+  export { default as Text, ITextData, TextSchema } from 'XrFrame/components/Text';
   export { default as RenderTexture, IRenderTextureData, RenderTextureSchema, IRenderTarget } from 'XrFrame/components/RenderTexture';
   export { default as Env, IEnvData, EnvSchema } from 'XrFrame/components/Env';
   export { default as Animator, IAnimatorData, AnimatorSchema } from 'XrFrame/components/Animator';
@@ -585,6 +596,7 @@ declare module 'XrFrame/elements' {
   export { default as XRAssets, AssetsDefaultComponents } from 'XrFrame/elements/xr-assets';
   export { default as XREnv, EnvDataMapping, EnvDefaultComponents } from 'XrFrame/elements/xr-env';
   export { default as XRARTracker, ARTrackerDataMapping, ARTrackerDefaultComponents } from 'XrFrame/elements/xr-ar-tracker';
+  export { default as XRText, TextDataMapping, TextDefaultComponents } from 'XrFrame/elements/xr-text';
 }
 
 declare module 'XrFrame/systems' {
@@ -592,9 +604,9 @@ declare module 'XrFrame/systems' {
   export { default as NodeSystem, INodeSystemData } from 'XrFrame/systems/NodeSystem';
   export { default as TickSystem, ITickSystemData } from 'XrFrame/systems/TickSystem';
   export { default as AnimationSystem, IAnimationSystemData } from 'XrFrame/systems/AnimationSystem';
-  export { default as RenderSystem, IRenderSystemData } from 'XrFrame/systems/RenderSystem';
+  export { default as RenderSystem, IRenderSystemData, RenderSystemSchema } from 'XrFrame/systems/RenderSystem';
   export { default as PhysicsSystem, IPhysicsSystemData, IShapeDrageEvent, IShapeTouchEvent } from 'XrFrame/systems/PhysicsSystem';
-  export { default as ARSystem, IARSystemData } from 'XrFrame/systems/ARSystem';
+  export { default as ARSystem, IARSystemData, IARRawData } from 'XrFrame/systems/ARSystem';
 }
 
 declare module 'XrFrame/loader' {
@@ -1346,7 +1358,7 @@ declare module 'XrFrame/math/vector3' {
               * @returns {number[]} 矩阵数据，以JSArray返回
               * @memberof Vector3
               */
-          toArray(): number[];
+          toArray(): [number, number, number];
           /**
               * 判断与目标向量的值是否相等
               *
@@ -2789,7 +2801,7 @@ declare module 'XrFrame/core/Scene' {
   import AssetsSystem from 'XrFrame/systems/AssetsSystem';
   import RenderSystem from 'XrFrame/systems/RenderSystem';
   import Element, { IEntityComponents } from 'XrFrame/core/Element';
-  import { Material } from 'XrFrame/components';
+  import { IRenderTextureData, RenderTexture, Material } from 'XrFrame/components';
   import Effect, { IEffectAsset } from 'XrFrame/assets/Effect';
   import Geometry from 'XrFrame/assets/Geometry';
   import AnimationSystem from 'XrFrame/systems/AnimationSystem';
@@ -2800,6 +2812,9 @@ declare module 'XrFrame/core/Scene' {
   export const SceneDataMapping: {
       [key: string]: string[];
   };
+  export interface TDict<T> {
+      [key: string]: T;
+  }
   export default class Scene extends Element {
       readonly defaultComponents: IEntityComponents;
       readonly isScene: boolean;
@@ -2826,7 +2841,6 @@ declare module 'XrFrame/core/Scene' {
       createElement<T extends Element>(clz: new (...args: any) => T): T;
       getElementById(id: string): Element;
       getNodeById(nodeId: string): Transform;
-      };
       createImage(): Kanata.IImage;
       createTexture(options: Kanata.ITextureOptions): Kanata.Texture;
       createEffect(description: IEffectAsset): Effect;
@@ -2837,6 +2851,7 @@ declare module 'XrFrame/core/Scene' {
       }): Material;
       createVertexLayout(options: Kanata.IVertexLayoutOptions): Kanata.VertexLayout;
       createGeometry(vertexLayout: Kanata.VertexLayout, vBuffer: ArrayBufferView, iBuffer: ArrayBufferView, indexType?: Kanata.EIndexType): Geometry;
+      createRenderTexture(options?: IRenderTextureData): RenderTexture;
   }
 }
 
@@ -2976,6 +2991,7 @@ declare module 'XrFrame/components/Camera' {
   export interface ICameraData {
           target: Transform;
           depth: number;
+          cullMask: number;
           isPerspective: boolean;
           fov: number;
           near: number;
@@ -3082,6 +3098,7 @@ declare module 'XrFrame/components/Light' {
     */
   import Component, { IComponentSchema } from 'XrFrame/core/Component';
   import Element from 'XrFrame/core/Element';
+  import { Kanata } from 'XrFrame/ext';
   export enum ELightType {
       Ambient = "ambient",
       Directional = "directional",
@@ -3097,6 +3114,8 @@ declare module 'XrFrame/components/Light' {
       outerConeAngle: number;
       castShadow?: boolean;
       shadowDistance?: number;
+      shadowStrength?: number;
+      shadowBias?: number;
   }
   export const LightSchema: IComponentSchema;
   export default class Light extends Component<ILightData> {
@@ -3110,6 +3129,8 @@ declare module 'XrFrame/components/Light' {
       get outerConeAngle(): number;
       get castShadow(): boolean;
       get shadowDistance(): number;
+      get shadowStrength(): number;
+      get shadowBias(): number;
       /**@internal */
       get lightCamera(): import('XrFrame/kanata/lib/index').LightCameraComponent;
       onAdd(parent: Element, data: ILightData): void;
@@ -3249,6 +3270,8 @@ declare module 'XrFrame/components/Mesh' {
   import Transform from 'XrFrame/components/Transform';
   export interface IMeshData {
       neverCull?: boolean;
+      castShadow?: boolean;
+      receiveShadow?: boolean;
       geometry: Geometry;
       material?: Material;
       uniforms?: [string, string][];
@@ -3279,6 +3302,53 @@ declare module 'XrFrame/components/Mesh' {
   }
 }
 
+declare module 'XrFrame/components/Text' {
+  /**
+    * Model.ts
+    *
+    *       * @Date    : 2022/3/16下午4:48:09
+    */
+  import Geometry from 'XrFrame/assets/Geometry';
+  import Component, { IComponentSchema } from 'XrFrame/core/Component';
+  import Element from 'XrFrame/core/Element';
+  import { Kanata } from 'XrFrame/ext';
+  import Material from 'XrFrame/components/Material';
+  import Transform from 'XrFrame/components/Transform';
+  export interface ITextData {
+      neverCull?: boolean;
+      geometry: Geometry;
+      material?: Material;
+      uniforms?: [string, string][];
+      states?: [string, string][];
+      value?: string;
+  }
+  export const TextSchema: IComponentSchema;
+  export default class Mesh extends Component<ITextData> {
+      readonly schema: IComponentSchema;
+      readonly priority: number;
+      protected _cull: Kanata.CullingComponent;
+      protected _mesh: Kanata.MeshRendererComponent;
+      protected _sourceMaterial: Material;
+      protected _geometry: Geometry;
+      protected _material: Material;
+      protected _trs: Transform;
+      protected _value: string;
+      get value(): string;
+      get geometry(): Geometry;
+      get material(): Material;
+      set material(value: Material);
+      get id(): number;
+      onAdd(parent: Element, data: ITextData): void;
+      onTick(deltaTime: number, data: ITextData): void;
+      onUpdate(data: ITextData, preData: ITextData): void;
+      onRemove(parent: Element, data: ITextData): void;
+      onRelease(data: ITextData): void;
+      protected _getMarcos(geometry: Geometry): {};
+      protected _getUniformDesc(): Kanata.UniformDescriptor;
+      protected _getMeshType(): Kanata.EMeshRenderType;
+  }
+}
+
 declare module 'XrFrame/components/RenderTexture' {
   /**
       * RenderTexture.ts
@@ -3297,6 +3367,7 @@ declare module 'XrFrame/components/RenderTexture' {
           assetId?: string;
           width: number;
           height: number;
+          pixelFormat?: Kanata.ETextureFormat;
   }
   export const RenderTextureSchema: IComponentSchema;
   export default class RenderTexture extends Component<IRenderTextureData> {
@@ -3605,7 +3676,7 @@ declare module 'XrFrame/components/physics/SphereShape' {
           get radius(): number;
           set radius(v: number);
           onAdd(parent: Element, data: IShapeData): void;
-          onUpdate(parent: Element, data: ISphereShapeData): void;
+          onUpdate(data: ISphereShapeData, preData: ISphereShapeData): void;
           protected _create(data: ISphereShapeData): void;
   }
 }
@@ -3625,7 +3696,7 @@ declare module 'XrFrame/components/physics/MeshShape' {
   export default class MeshShape extends Shape {
           readonly schema: IComponentSchema;
           readonly priority: number;
-          onUpdate(parent: Element, data: IMeshShapeData): void;
+          onUpdate(data: IMeshShapeData, preData: IMeshShapeData): void;
           onTick(dateTime: number, data: IMeshShapeData): void;
           protected _createIfNeeded(data: IMeshShapeData): void;
           protected _create(data: IMeshShapeData): void;
@@ -3677,7 +3748,7 @@ declare module 'XrFrame/components/physics/CapsuleShape' {
           get direction(): ECapsuleColliderDirection;
           set direction(v: ECapsuleColliderDirection);
           onAdd(parent: Element, data: IShapeData): void;
-          onUpdate(parent: Element, data: ICapsuleShapeData): void;
+          onUpdate(data: ICapsuleShapeData, preData: ICapsuleShapeData): void;
           protected _create(data: ICapsuleShapeData): void;
   }
 }
@@ -3890,6 +3961,20 @@ declare module 'XrFrame/elements/xr-ar-tracker' {
   }
 }
 
+declare module 'XrFrame/elements/xr-text' {
+  import Element, { IEntityComponents } from 'XrFrame/core/Element';
+  export const TextDefaultComponents: IEntityComponents;
+  export const TextDataMapping: {
+      [key: string]: string[];
+  };
+  export default class XRMesh extends Element {
+      readonly defaultComponents: IEntityComponents;
+      readonly dataMapping: {
+          [key: string]: string[];
+      };
+  }
+}
+
 declare module 'XrFrame/systems/AssetsSystem' {
   import Component from 'XrFrame/core/Component';
   import Element from 'XrFrame/core/Element';
@@ -3955,7 +4040,7 @@ declare module 'XrFrame/systems/RenderSystem' {
       *
       *         * @Date    : 2022/3/16下午4:20:58
       */
-  import Component from 'XrFrame/core/Component';
+  import Component, { IComponentSchema } from 'XrFrame/core/Component';
   import Element from 'XrFrame/core/Element';
   import Camera from 'XrFrame/components/Camera';
   import Env from 'XrFrame/components/Env';
@@ -3963,9 +4048,12 @@ declare module 'XrFrame/systems/RenderSystem' {
   import LightManager from 'XrFrame/systems/LightManager';
   import Observable from 'XrFrame/core/Observable';
   export interface IRenderSystemData {
+          shadowColor: number[];
   }
+  export const RenderSystemSchema: IComponentSchema;
   export default class RenderSystem extends Component<IRenderSystemData> {
           readonly priority: number;
+          readonly schema: IComponentSchema;
           protected _lights: LightManager;
           protected _renderGraph?: RenderGraph;
           protected _sortedCameras: Camera[];
@@ -4000,6 +4088,7 @@ declare module 'XrFrame/systems/RenderSystem' {
               * 当前正在使用的RenderGraph。
               */
           get renderGraph(): RenderGraph<any>;
+          get shadowColor(): number[];
           /**
               * 修改全局宏信息。
               */
@@ -4102,6 +4191,14 @@ declare module 'XrFrame/systems/ARSystem' {
   import ARTracker, { TTrackMode } from 'XrFrame/components/ARTracker';
   import Component, { IComponentSchema } from 'XrFrame/core/Component';
   type Element = import('XrFrame/core/Element').default;
+  export interface IARRawData {
+      width: number;
+      height: number;
+      yBuffer: ArrayBuffer;
+      uvBuffer: ArrayBuffer;
+      intrinsics: Float32Array;
+      viewMatrix: Float32Array;
+  }
   export interface IARSystemData {
       modes: TTrackMode[];
   }
@@ -4117,6 +4214,7 @@ declare module 'XrFrame/systems/ARSystem' {
       onRelease(data: IARSystemData): void;
       placeHere(nodeIdOrElement: string | Element, switchVisible?: boolean): void;
       resetPlane(): void;
+      getARRawData(): IARRawData;
   }
   export {};
 }
@@ -4383,6 +4481,7 @@ declare module 'XrFrame/loader/glTF/GLTFRootNode' {
   import { GLTFImagesLoaded, GLTFImagesNodeRaw } from "XrFrame/loader/glTF/textures/GLTFImagesNode";
   import { GLTFSamplersLoaded, GLTFSamplersNodeRaw } from "XrFrame/loader/glTF/textures/GLTFSamplersNode";
   import { GLTFTexturesLoaded, GLTFTexturesNodeRaw } from "XrFrame/loader/glTF/textures/GLTFTexturesNode";
+  import { GLTF } from "XrFrame/loader/glTF/utils/types";
   export interface GLTFRootNodeRaw {
       buffers?: GLTFBuffersNodeRaw;
       bufferViews?: GLTFBufferViewsNodeRaw;
@@ -4415,6 +4514,7 @@ declare module 'XrFrame/loader/glTF/GLTFRootNode' {
       scene: GLTFSceneLoaded;
       skins: GLTFSkinsLoaded;
       animations: GLTFAnimationsLoaded;
+      boundingBox: GLTF.BoundingBox;
   }
   export interface GLTFDesc {
       raw: object;
@@ -5004,6 +5104,11 @@ declare module 'XrFrame/kanata/lib/backend/interface' {
           worldOffset: number;
           worldMatrix: number;
   };
+  export const ENTITY3D_EXT_OFFSETS: {
+          size: number;
+          layer: number;
+          mixedLayerMask: number;
+  };
   export const CULLING_OFFSETS: {
           size: number;
           active: number;
@@ -5505,7 +5610,13 @@ declare module 'XrFrame/components/physics/Shape' {
           Sphere = 5
   }
   export interface IShapeData {
+          center?: [number, number, number];
   }
+  export const ShapeSchema: {
+          center: {
+                  type: string;
+          };
+  };
   /**
       * 碰撞体的基类。
       * @abstract
@@ -6071,6 +6182,52 @@ declare module 'XrFrame/loader/glTF/textures/GLTFTexturesNode' {
   export {};
 }
 
+declare module 'XrFrame/loader/glTF/utils/types' {
+  import { ITransformData } from "XrFrame/components";
+  import { Kanata } from "XrFrame/ext";
+  import Quaternion from "XrFrame/math/quaternion";
+  import Vector3 from "XrFrame/math/vector3";
+  export namespace GLTF {
+          type BufferView = Int8Array | Uint8Array | Uint16Array | Uint32Array | Float32Array;
+          type IndexBufferView = Uint16Array | Uint32Array | Uint8Array;
+          interface BoundingBox {
+                  min: Vector3;
+                  max: Vector3;
+          }
+          namespace BoundingBox {
+                  function createZero(): BoundingBox;
+                  function createInfinite(): BoundingBox;
+          }
+          interface VertexLayoutDesc extends Kanata.IVertexLayoutOptions {
+                  stride: number;
+          }
+          interface VertexProperties {
+                  buffer: Float32Array;
+                  layoutDesc: VertexLayoutDesc;
+                  layout: Kanata.VertexLayout;
+                  macros: object;
+                  boundingBox: BoundingBox;
+                  /**
+                      * 是否需要自行生成normal和tangent的顶点数据。
+                      */
+                  lackNormal: boolean;
+                  lackTangent: boolean;
+                  /**
+                      * 如果需要生成的话，生成在layoutDesc的哪个attribute里。
+                      */
+                  normalSlot: number;
+                  tangentSlot: number;
+          }
+          interface Transform extends ITransformData {
+                  /**
+                      * 同时有quat和rotation的情况下，quat优先；
+                      * 目前只会填写quat，不会填写rotation。
+                      */
+                  quat?: Quaternion;
+          }
+  }
+}
+
 declare module 'XrFrame/loader/glTF/scenes/GLTFNodeNode' {
   import { GLTFMeshesLoaded } from "XrFrame/loader/glTF/geometry/GLTFMeshesNode";
   import { GLTFMeshLoaded } from "XrFrame/loader/glTF/geometry/GLTFMeshNode";
@@ -6227,6 +6384,7 @@ declare module 'XrFrame/kanata/lib/frontend/resource/renderEnv' {
   export class RenderEnv {
       id: number;
       __handle: IRenderEnv;
+      useExtendedMemory: boolean;
       get version(): number[];
       get backendType(): string;
       get canvasWidth(): number;
@@ -6523,9 +6681,15 @@ declare module 'XrFrame/kanata/lib/frontend/entity/Entity3D' {
       localPositionOffset: number;
       localScaleOffset: number;
       worldMatrixOffset: number;
+      extOffset: number;
+      layerOffset: number;
+      mixedLayerMaskOffset: number;
       constructor();
       setUsingEuler(on: boolean): void;
       isUsingEuler(): boolean;
+      setLayer(layer: number): void;
+      getLayer(): number;
+      getMixedLayerMask(): number;
       addChild(child: Entity3D): void;
       addChildAtIndex(child: Entity3D, index: number): void;
       removeFromParent(): void;
@@ -7819,52 +7983,6 @@ declare module 'XrFrame/loader/glTF/textures/GLTFTextureNode' {
   }
 }
 
-declare module 'XrFrame/loader/glTF/utils/types' {
-  import { ITransformData } from "XrFrame/components";
-  import { Kanata } from "XrFrame/ext";
-  import Quaternion from "XrFrame/math/quaternion";
-  import Vector3 from "XrFrame/math/vector3";
-  export namespace GLTF {
-          type BufferView = Int8Array | Uint8Array | Uint16Array | Uint32Array | Float32Array;
-          type IndexBufferView = Uint16Array | Uint32Array | Uint8Array;
-          interface BoundingBox {
-                  min: Vector3;
-                  max: Vector3;
-          }
-          namespace BoundingBox {
-                  function createZero(): BoundingBox;
-                  function createInfinite(): BoundingBox;
-          }
-          interface VertexLayoutDesc extends Kanata.IVertexLayoutOptions {
-                  stride: number;
-          }
-          interface VertexProperties {
-                  buffer: Float32Array;
-                  layoutDesc: VertexLayoutDesc;
-                  layout: Kanata.VertexLayout;
-                  macros: object;
-                  boundingBox: BoundingBox;
-                  /**
-                      * 是否需要自行生成normal和tangent的顶点数据。
-                      */
-                  lackNormal: boolean;
-                  lackTangent: boolean;
-                  /**
-                      * 如果需要生成的话，生成在layoutDesc的哪个attribute里。
-                      */
-                  normalSlot: number;
-                  tangentSlot: number;
-          }
-          interface Transform extends ITransformData {
-                  /**
-                      * 同时有quat和rotation的情况下，quat优先；
-                      * 目前只会填写quat，不会填写rotation。
-                      */
-                  quat?: Quaternion;
-          }
-  }
-}
-
 declare module 'XrFrame/kanata/lib/backend' {
   /**
     * index.ts
@@ -7948,7 +8066,7 @@ declare module 'XrFrame/kanata/lib/frontend/pool/PoolManager' {
   import PoolObject, { INativePools } from 'XrFrame/kanata/lib/frontend/pool/PoolObject';
   export default class PoolManager {
       pools: INativePools;
-      constructor(template: ArrayBuffer, templateView: Float32Array, allocateFunc: (size: number) => IHandle);
+      constructor(template: ArrayBuffer, templateView: Float32Array, allocateFunc: (size: number) => IHandle, extendedMemSize?: number);
       allocateOne(): number;
       dispose(obj: PoolObject): void;
   }
@@ -8421,15 +8539,12 @@ declare module 'XrFrame/kanata/lib/backend/interface/IWorker' {
 }
 
 declare module 'XrFrame/kanata/lib/frontend/pool/Pool' {
-  /**
-    * Pool.ts
-    *
-    *       * @Date    : 9/3/2020, 9:18:35 PM
-    */
   import { IHandle } from 'XrFrame/kanata/lib/backend';
   import NativeObject from 'XrFrame/kanata/lib/frontend/shared/NativeObject';
   export default class Pool extends NativeObject {
       constructor(nativeObj: IHandle);
+      u32viewExt: Uint32Array;
+      supplyExtendedMemory(buffer: ArrayBuffer): void;
   }
 }
 
