@@ -9,7 +9,7 @@
     <xr-mesh node-id="mesh-cylinder" position="1 0.7 -3.5" scale="1 0.7 1" geometry="cylinder" material="standard-mat" uniforms="u_baseColorFactor:1 0.776 0.364 1"></xr-mesh>
     <xr-camera
       id="camera" node-id="camera" position="0 1.6 0" clear-color="0.925 0.925 0.925 1"
-      draw-sky target="mesh-sphere"
+      background="skybox" target="mesh-sphere"
       camera-orbit-control=""
     ></xr-camera>
   </xr-node>

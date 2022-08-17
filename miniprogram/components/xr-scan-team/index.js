@@ -72,9 +72,8 @@ Component({
       const inited = this.camera && this.hikari && this.roam && this.xinyi;
 
       if (inited && !this.cameraAnim) {
-        const {Vector3} = wx.getXrFrameSystem();
         this.cameraAnim = this.camera.el.addComponent(wx.getXrFrameSystem().Animator);
-        this.cameraAnim.addAnimation(new XrTeamCameraAnimation(this.scene, {
+        this.cameraAnim.createAnimation(XrTeamCameraAnimation, {
           targets: {
             hikari: this.hikari.position,
             roam: this.roam.position,
@@ -83,7 +82,7 @@ Component({
           },
           startY: 1.2,
           finalY: 0.8
-        }));
+        });
       }
 
       return inited;

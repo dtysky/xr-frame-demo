@@ -33,6 +33,7 @@ Component({
       console.log('log', detail.value);
     },
     placeNode(event) {
+      console.log('ar raw data', this.scene.ar.getARRawData());
       const {clientX, clientY} = event.touches[0];
       const {frameWidth: width, frameHeight: height} = this.scene;
 
