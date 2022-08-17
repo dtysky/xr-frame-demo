@@ -11,10 +11,10 @@
     style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
     envIndex="{{envIndex}}"
   />
+  <view class="env-words"><span class="tips">目前使用: </span><span class="content">{{envWord}}</span></view>
   <view class="button-wrap">
     <view class="change-button" bindtap="handleEnv0">TiT创意园白天</view>
     <view class="change-button" bindtap="handleEnv1">TiT创意园晚上</view>
     <view class="change-button" bindtap="handleEnv2">海滩天空盒</view>
   </view>
-  <view class="env-words"><span class="tips">目前使用: </span><span class="content">{{envWord}}</span></view>
 </xr-demo-viewer>

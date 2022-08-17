@@ -8,7 +8,7 @@
     <xr-gltf node-id="mesh-gltf-Sponza" position="0 -2 0.3" rotation="0 0 0" scale="2 2 2" model="gltf-Sponza"></xr-gltf>
     <xr-camera
       id="camera" node-id="camera" position="-1 5 0" clear-color="0.925 0.925 0.925 1"
-      draw-sky target="camera-target" far="1000"
+      target="camera-target" far="1000"
       camera-orbit-control=""
     ></xr-camera>
   </xr-node>

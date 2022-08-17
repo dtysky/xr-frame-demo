@@ -7,8 +7,8 @@
     <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>
   <xr-node>
-    <xr-mesh node-id="mesh-earth" position="0 0 0" scale="8 8 8" geometry="sphere" material="standard-mat" uniforms="u_baseColorMap: earth-texture" bind:drag-shape="handleEarthRotation" sphere-shape></xr-mesh>
-    <xr-mesh node-id="mesh-moon" position="10 0 0" scale="1.5 1.5 1.5" rotation="0 90 0" geometry="sphere" material="standard-mat" uniforms="u_baseColorMap: moon-texture" bind:drag-shape="handleDragMoon" bind:touch-shape="handleTouchMoon" bind:untouch-shape="handleUntouchMoon" sphere-shape="radius: 1.5">
+    <xr-mesh node-id="mesh-earth" position="0 0 0" scale="8 8 8" geometry="sphere" material="standard-mat" uniforms="u_baseColorMap: earth-texture" bind:drag-shape="handleEarthRotation" sphere-shape receive-shadow></xr-mesh>
+    <xr-mesh node-id="mesh-moon" position="10 0 0" scale="1.5 1.5 1.5" rotation="0 90 0" geometry="sphere" material="standard-mat" uniforms="u_baseColorMap: moon-texture" bind:drag-shape="handleDragMoon" bind:touch-shape="handleTouchMoon" bind:untouch-shape="handleUntouchMoon" sphere-shape="radius: 1.5" cast-shadow>
     </xr-mesh>
     <xr-camera
       id="camera" node-id="camera" position="0 20 -35" clear-color="0 0 0 1"
@@ -17,6 +17,6 @@
   </xr-node>
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="0.1" />
-    <xr-light id="directional-light" type="directional" rotation="0 60 0" color="1 1 1" intensity="5" />
+    <xr-light id="directional-light" type="directional" rotation="0 60 0" color="1 1 1" intensity="5" cast-shadow/>
   </xr-node>
 </xr-scene>

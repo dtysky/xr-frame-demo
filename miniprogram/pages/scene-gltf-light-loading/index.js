@@ -9,7 +9,7 @@ var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
   &lt;xr-gltf node-id=&quot;mesh-gltf-Sponza&quot; position=&quot;0 -2 0.3&quot; rotation=&quot;0 0 0&quot; scale=&quot;2 2 2&quot; model=&quot;gltf-Sponza&quot;&gt;&lt;/xr-gltf&gt;
   &lt;xr-camera
     id=&quot;camera&quot; node-id=&quot;camera&quot; position=&quot;-1 5 0&quot; clear-color=&quot;0.925 0.925 0.925 1&quot;
-    draw-sky target=&quot;camera-target&quot;
+    target=&quot;camera-target&quot;
     camera-orbit-control=&quot;&quot;
   &gt;&lt;/xr-camera&gt;
 &lt;/xr-node&gt;
