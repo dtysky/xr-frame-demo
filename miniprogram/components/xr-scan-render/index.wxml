@@ -23,11 +23,12 @@
     <xr-mesh node-id="mesh-floor-wxmail" position="0.95 -0.63 0.9" rotation="5 -10 -2" scale="0.9 0.02 1.7" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor: 0.32 0.32 0.36 1, u_metallicRoughnessValues: 0 0.1"></xr-mesh>
     <xr-mesh node-id="mesh-floor-roughmetal" position="-0.6 -0.6 0.6" rotation="0 -10 0" scale="1.6 0.02 1.6" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor: 0.28 0.51 0.34 1, u_metallicRoughnessValues: 0.6 0.1"></xr-mesh>
     <xr-camera
-      id="camera" node-id="camera" position="-2 2 2" clear-color="0.8 0.8 0.8 1"
+      id="camera" node-id="camera" position="-1.4 1.4 1.4" clear-color="0.8 0.8 0.8 1"
       target="id2" far="2000" background="skybox"
       camera-orbit-control=""
     ></xr-camera>
   </xr-node>
   <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
   </xr-node>
 </xr-scene>

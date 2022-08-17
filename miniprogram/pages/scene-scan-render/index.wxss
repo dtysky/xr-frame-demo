@@ -17,6 +17,7 @@
 .env-words {
   text-align: center;
   vertical-align: baseline;
+  margin: 10rpx 0;
 }
 
 .env-words .tips {

@@ -12,7 +12,7 @@ var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
   &lt;xr-mesh node-id=&quot;mesh-cylinder&quot; position=&quot;1 0.7 -3.5&quot; scale=&quot;1 0.7 1&quot; geometry=&quot;cylinder&quot; material=&quot;standard-mat&quot; uniforms=&quot;u_baseColorFactor:1 0.776 0.364 1&quot;&gt;&lt;/xr-mesh&gt;
   &lt;xr-camera
     id=&quot;camera&quot; node-id=&quot;camera&quot; position=&quot;0 1.6 0&quot; clear-color=&quot;0.925 0.925 0.925 1&quot;
-    draw-sky target=&quot;mesh-sphere&quot;
+    target=&quot;mesh-sphere&quot;
     camera-orbit-control=&quot;&quot;
   &gt;&lt;/xr-camera&gt;
 &lt;/xr-node&gt;

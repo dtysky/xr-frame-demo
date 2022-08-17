@@ -39,7 +39,7 @@
     <xr-mesh node-id="mesh-sphere-pbr-texture" position="-1.6 0.2 -3" scale="0.8 0.8 0.8" geometry="sphere" material="standard-mat" uniforms="u_metallicRoughnessValues: 1 0, u_baseColorMap: albedo, u_metallicSampler: metallic, u_roughnessSampler: roughness, u_occlusionSampler: ao"></xr-mesh>
    <xr-camera
       id="camera" node-id="camera" position="0 2 7" clear-color="0.925 0.925 0.925 1"
-      draw-sky target="id1"
+      target="id1"
       camera-orbit-control=""
     ></xr-camera>
   </xr-node>

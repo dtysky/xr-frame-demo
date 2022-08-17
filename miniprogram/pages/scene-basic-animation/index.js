@@ -26,7 +26,7 @@ var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
   &lt;xr-mesh node-id=&quot;mesh-light-cube&quot; position=&quot;-5 1 0&quot; scale=&quot;0.5 2 10&quot; rotation=&quot;0 0 0&quot; geometry=&quot;cube&quot; material=&quot;standard-mat&quot; uniforms=&quot;u_baseColorFactor:0.3 0.3 0.3 1&quot;&gt;&lt;/xr-mesh&gt;
   &lt;xr-camera
     id=&quot;camera&quot; node-id=&quot;camera&quot; position=&quot;5 3 0&quot; clear-color=&quot;0.925 0.925 0.925 1&quot;
-    draw-sky target=&quot;camera-target&quot;
+    target=&quot;camera-target&quot;
     camera-orbit-control=&quot;&quot;
   &gt;&lt;/xr-camera&gt;
 &lt;/xr-node&gt;

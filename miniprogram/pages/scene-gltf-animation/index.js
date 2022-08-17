@@ -12,7 +12,7 @@ var xmlCode = `&lt;xr-scene id=&quot;xr-scene&quot;&gt;
   &lt;xr-gltf node-id=&quot;gltf-damageHelmet&quot; position=&quot;0 0 0&quot; rotation=&quot;0 0 0&quot; scale=&quot;1.2 1.2 1.2&quot; model=&quot;gltf-damageHelmet&quot;&gt;&lt;/xr-gltf&gt;
   &lt;xr-camera
     id=&quot;camera&quot; node-id=&quot;camera&quot; position=&quot;0 0 3&quot; clear-color=&quot;0.925 0.925 0.925 1&quot;
-    draw-sky target=&quot;gltf-damageHelmet&quot;
+    target=&quot;gltf-damageHelmet&quot;
     camera-orbit-control=&quot;&quot;
   &gt;&lt;/xr-camera&gt;
 &lt;/xr-node&gt;
