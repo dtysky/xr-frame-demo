@@ -72,6 +72,11 @@ const gltf = {
       label: 'gltf动画',
       path: '/pages/scene-gltf-animation/index',
     },
+    {
+      name: 'Morph',
+      label: 'gltf morph',
+      path: '/pages/scene-gltf-morph/index',
+    },
   ],
 };
 

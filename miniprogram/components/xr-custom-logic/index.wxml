@@ -12,7 +12,6 @@
     <xr-camera
       id="camera" node-id="camera" position="0 0 8" clear-color="0.925 0.925 0.925 1"
       background="skybox" target="target"
-      camera-orbit-control=""
     ></xr-camera>
   </xr-node>
   <xr-node node-id="lights">
