@@ -6,7 +6,7 @@
   <xr-node>
     <xr-node node-id="camera-target" position="0 0 0"></xr-node>
     <xr-mesh
-      node-id="mesh-plane" position="0 -0.8 0" rotation="0 0 0" scale="10 1 8" geometry="plane" material="standard-mat" uniforms="u_baseColorFactor:0.48 0.78 0.64 1"
+      node-id="mesh-plane" position="0 -0.8 0" rotation="0 0 0" scale="10 1 8" geometry="plane" material="standard-mat" uniforms="u_baseColorFactor:0.48 0.78 0.64 1" states="cullOn: false"
       anim-keyframe="basic-anim" anim-autoplay="clip:plane, speed:4"
       receive-shadow
     ></xr-mesh>
