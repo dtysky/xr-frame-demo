@@ -53,11 +53,6 @@ const gltf = {
       path: '/pages/scene-gltf-damageHelmet/index',
     },
     {
-      name: 'Multi',
-      label: '普通、三维重建模型',
-      path: '/pages/scene-gltf-multi/index',
-    },
-    {
       name: 'Unlit',
       label: '无光照材质卡通模型',
       path: '/pages/scene-gltf-unlit/index',
@@ -102,6 +97,11 @@ const ar = {
       name: 'Marker-2',
       label: 'AR OSDMarker',
       path: '/pages/scene-ar-osdmarker/index',
+    },
+    {
+      name: 'WXBALL',
+      label: '识别播放微信纪念球动画',
+      path: '/pages/scene-ar-wxball/index',
     },
     // {
     //     name: 'Scene',

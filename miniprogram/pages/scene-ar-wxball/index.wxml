@@ -1,9 +1,9 @@
 <xr-demo-viewer
-  title="普通、三维重建模型案例"
-  intro="早餐与沙发餐桌为标准的glTF资源，三文鱼土豆泥为现实扫描生成的glTF资源"
+  title="AR 识别微信纪念球"
+  intro="平面物体案例，识别微信纪念球后会播放模型动画"
   code="{{xmlCode}}"
 >
-  <xr-gltf-multi
+  <xr-ar-wxball
     disable-scroll
     id="main-frame"
     width="{{renderWidth}}"
