@@ -23,6 +23,11 @@ const base = {
       path: '/pages/scene-basic-animation/index',
     },
     {
+      name: 'Video',
+      label: '视频纹理',
+      path: '/pages/scene-basic-video/index',
+    },
+    {
       name: 'Interaction',
       label: '交互',
       path: '/pages/scene-basic-touch/index',
