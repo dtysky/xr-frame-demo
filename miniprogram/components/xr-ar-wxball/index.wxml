@@ -7,8 +7,11 @@
   <xr-node wx:if="loaded">
     <xr-node node-id="camera-target" position="0 0 0"></xr-node>
 
-    <xr-gltf node-id="mesh-gltf-wxball" position="0 0 0" rotation="0 0 0" scale="1 1 1" model="gltf-wxball"
-      anim-autoplay="speed: 0.6, loop: 4">
+    <xr-gltf id="wxball" node-id="mesh-gltf-wxball" position="0 0 0" rotation="0 0 0" scale="1 1 1" model="gltf-wxball"
+      bind:gltf-loaded="handleGltfLoaded"
+      bind:touch-shape="handleTouchWXball" sphere-shape="radius: 1.5"
+      anim-stop:="gltfAnimation: handleAnimationStop"
+    >
     </xr-gltf>
 
     <xr-camera
