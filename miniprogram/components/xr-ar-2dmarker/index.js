@@ -2,8 +2,7 @@ Component({
   scene: null,
   properties: {
     markerImg: {
-      type: String,
-      value: '/assets/2dmarker-test.jpg'
+      type: String
     },
   },
   data: {

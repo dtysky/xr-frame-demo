@@ -24,7 +24,7 @@
       uniforms="u_baseColorMap:video-drone-boom"
     />
     <xr-camera
-      id="camera" node-id="camera" position="0 0 4" clear-color="0.925 0.925 0.925 1"
+      id="camera" node-id="camera" position="0 0 3" clear-color="0.925 0.925 0.925 1"
       target="target" camera-orbit-control=""
     ></xr-camera>
   </xr-node>
