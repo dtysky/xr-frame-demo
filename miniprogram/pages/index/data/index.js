@@ -1,3 +1,35 @@
+const classic = {
+  name: '典型案例',
+  icon: 'photo',
+  childArr: [
+    {
+      name: 'Video',
+      label: '扫描图片视频',
+      path: '/pages/scene-classic-video/index',
+    },
+    {
+      name: 'Perspect',
+      label: '扫描透视模型',
+      path: '/pages/scene-classic-perspect/index',
+    },
+    {
+      name: 'Portal',
+      label: '平面传送门',
+      path: '/pages/scene-classic-portal/index',
+    },
+    {
+      name: 'OSD',
+      label: '扫描人物查看信息',
+      path: '/pages/scene-classic-osd/index',
+    },
+    {
+      name: 'Ball',
+      label: '扫描微信球',
+      path: '/pages/scene-classic-wxball/index',
+    }
+  ],
+};
+
 const base = {
   name: '基础案例',
   icon: 'app',
@@ -117,28 +149,6 @@ const ar = {
   ],
 };
 
-const classic = {
-  name: '典型案例',
-  icon: 'photo',
-  childArr: [
-    {
-      name: 'Ball',
-      label: '扫描微信球',
-      path: '/pages/scene-classic-wxball/index',
-    },
-    {
-      name: 'Video',
-      label: '扫描视频纹理',
-      path: '/pages/scene-classic-video/index',
-    },
-    {
-      name: 'Portal',
-      label: '传送门纹理',
-      path: '/pages/scene-classic-portal/index',
-    }
-  ],
-};
-
 const scan = {
   name: '扫描还原案例',
   icon: 'photo',
@@ -171,4 +181,4 @@ const custom = {
     }
   ]
 };
-export default [base, gltf, ar, classic, scan, custom];
+export default [classic, base, gltf, ar, scan, custom];

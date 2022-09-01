@@ -24,8 +24,9 @@
     "pages/scene-scan-team/index",
     "pages/scene-classic-wxball/index",
     "pages/scene-classic-video/index",
-    "pages/scene-classic-portal/index"
-
+    "pages/scene-classic-perspect/index",
+    "pages/scene-classic-portal/index",
+    "pages/scene-classic-osd/index"
   ],
   "usingComponents": {
     "pull-down-list": "./components/pull-down-list/index",
@@ -56,7 +57,9 @@
     "xr-scan-team": "./components/xr-scan-team/index",
     "xr-classic-wxball": "./components/xr-classic-wxball/index",
     "xr-classic-video": "./components/xr-classic-video/index",
-    "xr-classic-portal": "./components/xr-classic-portal/index"
+    "xr-classic-portal": "./components/xr-classic-portal/index",
+    "xr-classic-perspect": "./components/xr-classic-perspect/index",
+    "xr-classic-osd": "./components/xr-classic-osd/index"
   },
   "window": {
     "backgroundTextStyle": "light",

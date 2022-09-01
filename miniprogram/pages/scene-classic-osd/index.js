@@ -5,7 +5,6 @@ Page({
   behaviors:[sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
-    // markerImg: '/assets/wxball.jpg'
     markerImg: '/assets/portalImage.jpg'
   }
 });
