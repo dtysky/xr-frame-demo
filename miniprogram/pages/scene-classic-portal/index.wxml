@@ -1,7 +1,6 @@
 <xr-demo-viewer
-  title="传送门案例"
-  intro=""
-  code="{{xmlCode}}"
+  title="三维透视案例"
+  intro="基于Stencil实现的传送门特效案例. Model By @Omar Faruq Tawsif"
 >
   <xr-classic-portal
     disable-scroll
