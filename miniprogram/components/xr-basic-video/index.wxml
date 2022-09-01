@@ -1,23 +1,23 @@
 <xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
-    <!-- <xr-asset-load
+    <xr-asset-load
       type="video-texture" asset-id="cat"
-      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4" options="autoPlay:true,loop:true,abortAudio:true"
-    /> -->
+      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4" options="autoPlay:true,loop:true"
+    />
     <xr-asset-load
       type="video-texture" asset-id="drone-boom"
-      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/drone.mp4" options="autoPlay:true,loop:true,abortAudio:true"
+      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/drone.mp4" options="autoPlay:true,loop:true"
     />
     <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>
   <xr-node>
     <xr-node node-id="target" />
-    <!-- <xr-mesh
+    <xr-mesh
       node-id="mesh-plane" position="0 -0.8 0" rotation="90 0 0" scale="1.6 0.9 1"
       geometry="plane" material="standard-mat"
       uniforms="u_baseColorMap:video-cat"
       states="cullOn:false"
-    /> -->
+    />
     <xr-mesh
       node-id="mesh-cube" position="0 0.8 0" scale="1.6 1.2 1.2"
       geometry="cube" material="standard-mat"

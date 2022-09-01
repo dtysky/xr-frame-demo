@@ -42,6 +42,11 @@ const base = {
       label: '动态节点',
       path: '/pages/scene-basic-shadow/index',
     },
+    {
+      name: 'RenderTexture',
+      label: '渲染目标',
+      path: '/pages/scene-basic-render-texture/index',
+    },
     // {
     //   name: 'Physic',
     //   label: '物理',
