@@ -18,11 +18,14 @@
     "pages/scene-ar-2dmarker/index",
     "pages/scene-ar-osdmarker/index",
     "pages/scene-ar-camera/index",
-    "pages/scene-ar-wxball/index",
     "pages/scene-custom-logic/index",
     "pages/scene-custom-render/index",
     "pages/scene-scan-render/index",
-    "pages/scene-scan-team/index"
+    "pages/scene-scan-team/index",
+    "pages/scene-classic-wxball/index",
+    "pages/scene-classic-video/index",
+    "pages/scene-classic-portal/index"
+
   ],
   "usingComponents": {
     "pull-down-list": "./components/pull-down-list/index",
@@ -47,11 +50,13 @@
     "xr-ar-basic": "./components/xr-ar-basic/index",
     "xr-ar-2dmarker": "./components/xr-ar-2dmarker/index",
     "xr-ar-osdmarker": "./components/xr-ar-osdmarker/index",
-    "xr-ar-wxball": "./components/xr-ar-wxball/index",
     "xr-custom-logic": "./components/xr-custom-logic/index",
     "xr-custom-render": "./components/xr-custom-render/index",
     "xr-scan-render": "./components/xr-scan-render/index",
-    "xr-scan-team": "./components/xr-scan-team/index"
+    "xr-scan-team": "./components/xr-scan-team/index",
+    "xr-classic-wxball": "./components/xr-classic-wxball/index",
+    "xr-classic-video": "./components/xr-classic-video/index",
+    "xr-classic-portal": "./components/xr-classic-portal/index"
   },
   "window": {
     "backgroundTextStyle": "light",
