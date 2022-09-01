@@ -1,6 +1,6 @@
 <xr-demo-viewer
-  title="三维透视案例"
-  intro="基于Stencil实现的传送门特效案例. Model By @Omar Faruq Tawsif"
+  title="传送门效果案例"
+  intro="基于 Stencil裁剪 实现的基本传送门效果案例. Model from SketchFab By @Omar Faruq Tawsif"
 >
   <xr-classic-portal
     disable-scroll
