@@ -2,11 +2,10 @@
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
    <xr-asset-load
       type="video-texture" asset-id="cat"
-      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4" options="autoPlay:true,loop:true,abortAudio:true"
+      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4" options="autoPlay:true,loop:true,abortAudio:true,placeHolder:https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.jpg"
     />
   </xr-assets>
-  <xr-node wx:if="loaded">
-
+  <xr-node wx:if="{{loaded}}">
     <xr-ar-tracker mode="Marker" src="{{markerImg}}">
       <xr-mesh
         node-id="mesh-plane" position="0 0.8 0" scale="1.6 1.2 1.2"
