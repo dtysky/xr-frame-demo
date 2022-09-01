@@ -8,7 +8,7 @@
     <xr-node node-id="camera-target" position="0 0 0"></xr-node>
 
     <xr-ar-tracker mode="OSD" src="{{markerImg}}">
-      <xr-gltf id="wxball" node-id="mesh-gltf-wxball" position="0 0 0" rotation="0 90 0" scale="0.2 0.2 0.2" model="gltf-wxball"
+      <xr-gltf id="wxball" node-id="mesh-gltf-wxball" position="0 0 0" rotation="0 0 0" scale="0.2 0.2 0.2" model="gltf-wxball"
         bind:gltf-loaded="handleGltfLoaded"
         bind:touch-shape="handleTouchWXball" sphere-shape="radius: 1.5"
         anim-stop:="gltfAnimation: handleAnimationStop"

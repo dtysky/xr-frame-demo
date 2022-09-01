@@ -1,0 +1,14 @@
+<xr-demo-viewer
+  title="传送门案例"
+  intro=""
+  code="{{xmlCode}}"
+>
+  <xr-classic-portal
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    markerImg="{{markerImg}}"
+  />
+</xr-demo-viewer>

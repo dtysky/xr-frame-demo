@@ -1,9 +1,9 @@
 <xr-demo-viewer
-  title="AR 识别微信纪念球"
-  intro="平面物体案例，识别微信纪念球后会播放模型动画"
+  title="平面视频案例"
+  intro=""
   code="{{xmlCode}}"
 >
-  <xr-ar-wxball
+  <xr-classic-video
     disable-scroll
     id="main-frame"
     width="{{renderWidth}}"

@@ -102,17 +102,35 @@ const ar = {
       name: 'Marker-2',
       label: 'AR OSDMarker',
       path: '/pages/scene-ar-osdmarker/index',
-    },
-    {
-      name: 'WXBALL',
-      label: '识别播放微信纪念球动画',
-      path: '/pages/scene-ar-wxball/index',
-    },
+    }
+
     // {
     //     name: 'Scene',
     //     label: '多个Scene',
     //     path: '/pages/scene7/index',
     // },
+  ],
+};
+
+const classic = {
+  name: '典型案例',
+  icon: 'photo',
+  childArr: [
+    {
+      name: 'Ball',
+      label: '扫描微信球',
+      path: '/pages/scene-classic-wxball/index',
+    },
+    {
+      name: 'Video',
+      label: '扫描视频纹理',
+      path: '/pages/scene-classic-video/index',
+    },
+    {
+      name: 'Portal',
+      label: '传送门纹理',
+      path: '/pages/scene-classic-portal/index',
+    }
   ],
 };
 
@@ -148,4 +166,4 @@ const custom = {
     }
   ]
 };
-export default [base, gltf, ar, scan, custom];
+export default [base, gltf, ar, classic, scan, custom];
