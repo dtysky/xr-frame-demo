@@ -1,7 +1,6 @@
 <xr-demo-viewer
   title="微信球案例"
-  intro=""
-  code="{{xmlCode}}"
+  intro="扫描手握着的微信纪念球，会显示三维纪念球.点击三维纪念球会播放动画."
 >
   <xr-classic-wxball
     disable-scroll

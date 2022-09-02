@@ -1,7 +1,6 @@
 <xr-demo-viewer
   title="平面视频案例"
   intro=""
-  code="{{xmlCode}}"
 >
   <xr-classic-video
     disable-scroll
