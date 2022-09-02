@@ -1,8 +1,8 @@
 <xr-demo-viewer
-  title="传送门效果案例"
-  intro="基于 Stencil裁剪 实现的基本传送门效果案例. Model from SketchFab By @Omar Faruq Tawsif"
+  title="扫描人物查看信息"
+  intro=""
 >
-  <xr-classic-portal
+  <xr-classic-osd
     disable-scroll
     id="main-frame"
     width="{{renderWidth}}"
