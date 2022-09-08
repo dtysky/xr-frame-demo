@@ -11,27 +11,28 @@ Component({
     }
   },
   methods: {
-    handleReady({
-      detail
-    }) {
+    handleReady: function ({detail}) {
       const xrScene = this.scene = detail.value;
       console.log('xr-scene', xrScene);
-
-
     },
-    handleAssetsProgress: function ({
-      detail
-    }) {
+    handleAssetsProgress: function ({detail}) {
       console.log('assets progress', detail.value);
     },
-    handleAssetsLoaded: function ({
-      detail
-    }) {
+    handleAssetsLoaded: function ({detail}) {
       console.log('assets loaded', detail.value);
       this.setData({
         loaded: true
       });
+    },
+    handleTrackerSwitch: function ({detail}) {
+      const active = detail.value;
+      console.log('handleTrackerSwitch', detail);
+      const video = this.scene.assets.getAsset('video-texture', 'hikari');
+      if (active) {
+        video.play();
+      } else {
+        video.stop();
+      }
     }
-
   }
 })

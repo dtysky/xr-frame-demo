@@ -15,6 +15,7 @@ Component({
   methods: {
     handleReady({detail}) {
       const xrScene = this.scene = detail.value;
+      this.mat = new (wx.getXrFrameSystem().Matrix4)();
       console.log('xr-scene', xrScene);
     },
     handleAssetsProgress: function({detail}) {
@@ -27,13 +28,8 @@ Component({
     },
     handleARReady: function({detail}) {
       console.log('arReady', this.scene.ar.arVersion);
-    //   this.setData({arReady: true})
-    },
-    handleLog: function({detail}) {
-      console.log('log', detail.value);
     },
     placeNode(event) {
-      console.log('ar raw data', this.scene.ar.getARRawData());
       const {clientX, clientY} = event.touches[0];
       const {frameWidth: width, frameHeight: height} = this.scene;
 
