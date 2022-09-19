@@ -6,6 +6,7 @@ Component({
     loaded: false,
     scene: null,
     touchingMoon: false,
+    touchingEarth: false,
     θ: Math.PI,
     r: 10,
     ω: 5e-4,
@@ -29,6 +30,16 @@ Component({
         this.setData({
             scene: detail.value
         });
+    },
+    handleTouchEarth: function() {
+      this.setData({
+        touchingEarth: true
+      });
+    },
+    handleUntouchEarth: function() {
+      this.setData({
+        touchingEarth: false
+      });
     },
     handleEarthRotation: function({detail}) {
         const { target, deltaX } = detail.value;
