@@ -9,7 +9,7 @@ Component({
     },
     cullMask: {
       type: Number,
-      value: 0xfffffff0 | 0b1101,
+      value: 0b001,
       observer: function (newVal, oldVal) {
         
       }
