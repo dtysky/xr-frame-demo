@@ -10,6 +10,10 @@ Component({
     handleReady({detail}) {
       const xrScene = this.scene = detail.value;
       console.log('xr-scene', xrScene);
+
+      setTimeout(() => {
+        xrScene.share.captureToFriends();
+      }, 1000);
     },
     handleAssetsProgress: function({detail}) {
       console.log('assets progress', detail.value);

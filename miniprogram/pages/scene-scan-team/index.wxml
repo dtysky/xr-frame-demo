@@ -15,7 +15,7 @@
     bind:syncPositions="handleSyncPositions"
   />
 
-  <block wx:if="{{loaded}}" wx:for="{{positions}}" wx:for-item="pos">
+  <block wx:if="{{loaded}}" wx:for="{{positions}}" wx:for-item="pos" wx:key="*this">
     <view style="display: block; position: absolute;left: {{pos[0]}}px;top: {{pos[1]}}px;background: rgba(44, 44, 44, 0.5);transform: translate(-50%, -50%);">
       <view style="text-align: center;color: white;font-size: 16px;padding: 8px;">{{pos[2]}}</view>
     </view>
