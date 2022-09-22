@@ -41,11 +41,6 @@ Component({
       this.setData({
         arReady: true
       })
-    },
-    handleLog: function ({
-      detail
-    }) {
-      console.log('log', detail.value);
     }
   }
 })
