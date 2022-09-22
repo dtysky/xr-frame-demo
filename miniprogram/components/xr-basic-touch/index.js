@@ -4,7 +4,6 @@ Component({
   },
   data: {
     loaded: false,
-    scene: null,
     touchingMoon: false,
     touchingEarth: false,
     θ: Math.PI,
