@@ -12,11 +12,11 @@ const classic = {
       label: '扫描透视模型',
       path: '/pages/scene-classic-perspect/index',
     },
-    {
-      name: 'Portal',
-      label: '平面传送门',
-      path: '/pages/scene-classic-portal/index',
-    },
+    // {
+    //   name: 'Portal',
+    //   label: '平面传送门',
+    //   path: '/pages/scene-classic-portal/index',
+    // },
     // {
     //   name: 'OSD',
     //   label: '扫描人物查看信息',
