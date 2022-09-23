@@ -12,6 +12,8 @@
     <xr-gltf node-id="gltf-damageHelmet" position="0 0 0" rotation="0 0 0" scale="1.2 1.2 1.2" model="gltf-damageHelmet"></xr-gltf>
     <xr-camera
       id="camera" node-id="camera" position="0 0 3" clear-color="0.925 0.925 0.925 1"
+      near="0.1"
+      far="2000"
       target="camera-target" background="skybox" camera-orbit-control=""
     ></xr-camera>
   </xr-node>

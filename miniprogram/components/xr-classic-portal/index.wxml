@@ -2,20 +2,44 @@
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin" />
     <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-load
+      type="video-texture" asset-id="skybox"
+      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/office-skybox.mp4" options="autoPlay:true,loop:true,placeHolder:https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/office-skybox.jpg"
+    />
+    <xr-asset-render-texture asset-id="rt" width="800" height="1600" />
     <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>
-  <xr-env env-data="env1"/>
+  <xr-env env-data="env1" sky-map="video-skybox" />
   <xr-node>
     <xr-ar-tracker mode="Plane">
       <xr-gltf model="anchor"></xr-gltf>
     </xr-ar-tracker>
+
     <xr-node id="setitem" node-id="setitem" visible="false">
-      <xr-mesh id="cube" node-id="mesh-cube" position="0 0 0" scale="1 1 1" rotation="0 45 0" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.298 0.764 0.85 1"></xr-mesh>
+      <!-- <xr-mesh id="door" node-id="mesh-door" position="0 0.5 -0.2" scale="0.5 1 0.02" rotation="0 0 0" geometry="cube" material="standard-mat"></xr-mesh> -->
+      <xr-mesh id="rt" node-id="mesh-rt" position="0 0.7 0" scale="0.7 1.4 1.4" rotation="-90 180 0" geometry="plane" material="standard-mat" 
+      uniforms="u_baseColorMap:render-rt"></xr-mesh>
+
     </xr-node>
+
+    <xr-node position="1000 0 0">
+      <xr-mesh id="cube" node-id="mesh-cube" position="-1 0.5 1.5" scale="1 1 1" rotation="0 45 0" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.298 0.764 0.85 1" />
+      <xr-mesh node-id="mesh-sphere" position="0 1.25 0" scale="1.25 1.25 1.25" geometry="sphere" material="standard-mat" uniforms="u_baseColorFactor:0.937 0.176 0.368 1" />
+      <xr-mesh node-id="mesh-cylinder" position="1 0.7 1.5" scale="1 0.7 1" geometry="cylinder" material="standard-mat" uniforms="u_baseColorFactor:1 0.776 0.364 1" />
+    </xr-node>
+
+    <xr-node node-id="rt-camera-target" position="1000 1 0"></xr-node>
+
+    <xr-camera
+      position="1000 4 6" clear-color="0.925 0.925 0.925 1"
+      target="rt-camera-target" render-target="rt"  background="skybox"
+    ></xr-camera>
+
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
       background="ar" is-ar-camera
     ></xr-camera>
+
   </xr-node>
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="0.3" />
