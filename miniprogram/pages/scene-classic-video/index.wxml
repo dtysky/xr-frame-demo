@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="平面视频案例"
-  intro=""
+  intro="基于 2DMarker 实现，扫描工卡照片显示对应的生活场景."
 >
   <xr-classic-video
     disable-scroll

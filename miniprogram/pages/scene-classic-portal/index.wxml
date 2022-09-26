@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="传送门效果案例"
-  intro="基于 RenderTexture 实现的基本传送门效果案例."
+  intro="基于 平面识别与模版剔除 实现的基本传送门效果案例."
 >
   <xr-classic-portal
     disable-scroll
