@@ -12,6 +12,9 @@ Component({
   data: {
     loaded: false,
     arReady: false,
+    avatarReady: false,
+    avatarName: 'Your Name',
+    avatarTextureId: '0',
   },
   lifetimes: {
     async attached() {
@@ -24,6 +27,15 @@ Component({
     }) {
       const xrScene = this.scene = detail.value;
       console.log('xr-scene', xrScene);
+
+      wx.getUserProfile({
+        desc: '获取头像名称',
+        success: (res) => {
+          this.scene.assets.loadAsset({
+            type: 'texture', assetId: 'avatar', src: res.userInfo.avatarUrl
+          }).then(() => this.setData({avatarReady: true, avatarName: res.userInfo.nickName, avatarTextureId: 'avatar'}));
+        }
+      })
 
     },
     handleAssetsProgress: function ({
