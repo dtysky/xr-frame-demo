@@ -1,18 +1,16 @@
 <xr-scene ar-system="modes:OSD" id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-material asset-id="simple" effect="simple" />
+    <xr-asset-material asset-id="text-simple" effect="simple" />
   </xr-assets>
   <xr-node>
 
     <xr-ar-tracker mode="OSD" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/portalImage.jpg">
-      <xr-node rotation="90 0 0">
-        <xr-mesh node-id="box" position="0 0 0" scale="1.2 1 1.2" geometry="plane" 
-          uniforms="u_baseColorFactor:1 1 1 0.2"
-          states="cullOn: false, alphaMode: BLEND"
-        >
-        </xr-mesh>
-        <xr-text position="0 0 0" rotation="90 0 0" scale="1 1 1" material="simple"
-          value="Kiki's Delivery Service"
+      <xr-node>
+        <xr-mesh node-id="text-wrap" position="0 0 0" rotation="-90 0 0" scale="0.05 1 2" geometry="plane" material="simple"></xr-mesh>
+        <!-- 文本处于beta版本 -->
+        <xr-text node-id="text-name" position="0 0 0.01" rotation="0 180 0" scale="0.1 0.1 1" material="text-simple"
+          value="roamye"
         ></xr-text>
       </xr-node>
     </xr-ar-tracker>
