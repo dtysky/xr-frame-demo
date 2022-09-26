@@ -9,4 +9,9 @@
     height="{{renderHeight}}"
     style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
   />
+
+  <text style="display:block;width:100%;color:red;text-align:center;">
+    默认扫描图片见官网开发文档
+    组件->xr-frame->示例
+  </text>
 </xr-demo-viewer>

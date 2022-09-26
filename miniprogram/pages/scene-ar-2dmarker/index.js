@@ -34,7 +34,6 @@ Page({
       mediaType: ['image'],
       sourceType: ['album'],
       success: res => {
-        console.log('handleChangeMarkerImg', res)
         const fp = res.tempFiles[0].tempFilePath;
         this.setData({markerImg: fp});
       },

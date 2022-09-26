@@ -35,7 +35,7 @@ Page({
       mediaType: ['image'],
       sourceType: ['album'],
       success: res => {
-        const fp = res.tempFiles[0].path;
+        const fp = res.tempFiles[0].tempFilePath;
         this.setData({markerImg: fp});
       },
       fail: err => {
