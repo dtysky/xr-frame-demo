@@ -1,9 +1,5 @@
 Component({
   scene: null,
-  wxball: null,
-  wxballTransform: null,
-  wxballAnimator: null,
-  animationRuning: false,
   properties: {
     markerImg: {
       type: String
@@ -12,9 +8,9 @@ Component({
   data: {
     loaded: false,
     arReady: false,
-    avatarReady: false,
-    avatarName: 'Your Name',
-    avatarTextureId: '0',
+    toyReady: false,
+    gzDayReady: false,
+    gzNightReady: false,
   },
   lifetimes: {
     async attached() {
@@ -27,15 +23,6 @@ Component({
     }) {
       const xrScene = this.scene = detail.value;
       console.log('xr-scene', xrScene);
-
-      wx.getUserProfile({
-        desc: '获取头像名称',
-        success: (res) => {
-          this.scene.assets.loadAsset({
-            type: 'texture', assetId: 'avatar', src: res.userInfo.avatarUrl
-          }).then(() => this.setData({avatarReady: true, avatarName: res.userInfo.nickName, avatarTextureId: 'avatar'}));
-        }
-      })
 
     },
     handleAssetsProgress: function ({
@@ -50,6 +37,14 @@ Component({
       this.setData({
         loaded: true
       });
+    },
+    handleToySwitch: function ({detail}) {
+      const active = detail.value;
+      if (active) {
+        this.setData({toyReady: true});
+      } else {
+        this.setData({toyReady: false});
+      }
     }
   }
 })
