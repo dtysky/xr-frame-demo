@@ -1,9 +1,6 @@
 Component({
   scene: null,
   properties: {
-    markerImg: {
-      type: String
-    },
   },
   data: {
     loaded: false,

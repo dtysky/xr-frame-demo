@@ -7,7 +7,7 @@
   <xr-env env-data="env1"/>
   <xr-node wx:if="{{loaded}}">
 
-    <xr-ar-tracker mode="Marker" src="{{markerImg}}">
+    <xr-ar-tracker mode="Marker" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/portalImage.jpg">
       <xr-node scale="1.1 0.9 1">
         <xr-gltf node-id="mesh-gltf-fiesta_tea" position="0 -1.6 1" rotation="-90 0 0" scale="0.6 0.6 0.6" model="gltf-fiesta_tea"
           states="stencilTestOn: true, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
