@@ -16,24 +16,11 @@
     </xr-ar-tracker>
 
     <xr-node id="setitem" node-id="setitem" visible="false">
-      <!-- <xr-mesh id="door" node-id="mesh-door" position="0 0.5 -0.2" scale="0.5 1 0.02" rotation="0 0 0" geometry="cube" material="standard-mat"></xr-mesh> -->
-      <xr-mesh id="rt" node-id="mesh-rt" position="0 0.7 0" scale="0.7 1.4 1.4" rotation="-90 180 0" geometry="plane" material="standard-mat" 
-      uniforms="u_baseColorMap:render-rt"></xr-mesh>
+      <xr-mesh id="door" node-id="mesh-door" position="0 0.5 -0.2" scale="0.5 1 0.02" rotation="0 0 0" geometry="cube" material="standard-mat"></xr-mesh>
+
 
     </xr-node>
 
-    <xr-node position="1000 0 0">
-      <xr-mesh id="cube" node-id="mesh-cube" position="-1 0.5 1.5" scale="1 1 1" rotation="0 45 0" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.298 0.764 0.85 1" />
-      <xr-mesh node-id="mesh-sphere" position="0 1.25 0" scale="1.25 1.25 1.25" geometry="sphere" material="standard-mat" uniforms="u_baseColorFactor:0.937 0.176 0.368 1" />
-      <xr-mesh node-id="mesh-cylinder" position="1 0.7 1.5" scale="1 0.7 1" geometry="cylinder" material="standard-mat" uniforms="u_baseColorFactor:1 0.776 0.364 1" />
-    </xr-node>
-
-    <xr-node node-id="rt-camera-target" position="1000 1 0"></xr-node>
-
-    <xr-camera
-      position="1000 4 6" clear-color="0.925 0.925 0.925 1"
-      target="rt-camera-target" render-target="rt"  background="skybox"
-    ></xr-camera>
 
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"

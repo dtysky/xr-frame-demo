@@ -17,11 +17,11 @@ const classic = {
     //   label: '平面传送门',
     //   path: '/pages/scene-classic-portal/index',
     // },
-    // {
-    //   name: 'OSD',
-    //   label: '扫描人物查看信息',
-    //   path: '/pages/scene-classic-osd/index',
-    // },
+    {
+      name: 'OSD',
+      label: '扫描人物查看信息',
+      path: '/pages/scene-classic-osd/index',
+    },
     {
       name: 'Ball',
       label: '扫描微信球',
