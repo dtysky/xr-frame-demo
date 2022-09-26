@@ -5,7 +5,7 @@
   <xr-node>
     <xr-node node-id="id2" scale="2 2 2" position="0 0 0"></xr-node>
     <xr-ar-tracker mode="OSD" src="{{markerImg}}">
-      <xr-mesh geometry="plane" position="0 0 0" rotation="-90 0 0" scale="0.4 1 0.3" uniforms="u_baseColorFactor:1 0 0 1" />
+      <xr-mesh geometry="plane" rotation="-90 0 0" scale="1 1 1" uniforms="u_baseColorFactor:0 1 0 1" />
     </xr-ar-tracker>
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"

@@ -4,8 +4,7 @@ var xmlCode = ``;
 Page({
   behaviors:[sceneReadyBehavior],
   data: {
-    xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
-    markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/wxball.jpg'
+    xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>'
   }
 });
 
