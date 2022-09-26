@@ -5,9 +5,6 @@ Component({
   wxballAnimator: null,
   animationRuning: false,
   properties: {
-    markerImg: {
-      type: String
-    },
   },
   data: {
     loaded: false,

@@ -5,13 +5,12 @@
   </xr-assets>
   <xr-env env-data="env1"/>
   <xr-node>
-    <xr-ar-tracker mode="Marker" src="{{markerImg}}">
+    <xr-ar-tracker mode="Marker" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/wxball.jpg">
       <xr-gltf id="wxball" node-id="mesh-gltf-wxball" position="0 -0.1 0" rotation="-10 0 0" scale="0.18 0.18 0.18" model="gltf-wxball"
         bind:gltf-loaded="handleGltfLoaded"
         bind:touch-shape="handleTouchWXball" sphere-shape="radius: 1.5"
         anim-stop:="gltfAnimation: handleAnimationStop"
-      >
-      </xr-gltf>
+      />
     </xr-ar-tracker>
     <xr-camera
       id="camera" node-id="camera" position="1 1 1" clear-color="0.925 0.925 0.925 1"
