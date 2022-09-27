@@ -19,7 +19,7 @@ const classic = {
     },
     {
       name: 'OSD',
-      label: '扫描人物查看信息',
+      label: '扫描物体查看信息',
       path: '/pages/scene-classic-osd/index',
     },
     {

@@ -1,6 +1,6 @@
 <xr-demo-viewer
-  title="扫描人物查看信息"
-  intro="基于 OSD扫描 实现的扫描人物查看案例，识别成功后会在人物框右上角加上人物信息提示"
+  title="扫描物体查看信息"
+  intro="基于 OSD 实现的扫描 广州塔 或 虎年公仔，识别成功后会在物体右上角加上信息提示"
 >
   <xr-classic-osd
     disable-scroll

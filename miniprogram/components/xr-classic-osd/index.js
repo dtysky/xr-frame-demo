@@ -45,6 +45,22 @@ Component({
       } else {
         this.setData({toyReady: false});
       }
+    },
+    handleDaySwitch: function ({detail}) {
+      const active = detail.value;
+      if (active) {
+        this.setData({gzDayReady: true});
+      } else {
+        this.setData({gzDayReady: false});
+      }
+    },
+    handleNightSwitch: function ({detail}) {
+      const active = detail.value;
+      if (active) {
+        this.setData({gzNightReady: true});
+      } else {
+        this.setData({gzNightReady: false});
+      }
     }
   }
 })
