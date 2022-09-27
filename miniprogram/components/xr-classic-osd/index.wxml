@@ -5,12 +5,25 @@
   </xr-assets>
   <xr-node>
 
-    <xr-ar-tracker mode="OSD" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/portalImage.jpg">
-      <xr-node>
-        <xr-mesh node-id="text-wrap" position="0 0 0" rotation="-90 0 0" scale="0.05 1 2" geometry="plane" material="simple"></xr-mesh>
-        <!-- 文本处于beta版本 -->
-        <xr-text node-id="text-name" position="0 0 0.01" rotation="0 180 0" scale="0.1 0.1 1" material="text-simple"
-          value="roamye"
+    <xr-ar-tracker mode="OSD" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/2dmarker/hikari.jpg"  bind:ar-tracker-switch="handleToySwitch">
+      <xr-node wx:if="{{toyReady}}" rotation="0 180 0">
+        <xr-mesh node-id="text-wrap" position="0.8 0.4 0" rotation="90 0 0" scale="0.6 1 0.2" geometry="plane" material="simple"
+          uniforms="u_baseColorFactor: 0.2 0.2 0.2 0.6"
+          states="alphaMode: BLEND"
+        ></xr-mesh>
+        <xr-mesh node-id="text-wrap-sub" position="0.8 -0.1 0" rotation="90 0 0" scale="0.6 1 0.8" geometry="plane" material="simple"
+          uniforms="u_baseColorFactor: 0.4 0.4 0.4 0.6"
+          states="alphaMode: BLEND"
+        ></xr-mesh>
+        <!-- 文本处于beta版本，功能不完备，仅支持使用独立材质的基础渲染，不能更新渲染（修复中） -->
+        <xr-text node-id="text-name" position="0.55 0.4 0.01" scale="0.08 0.08 1" material="text-simple"
+          value="牛年公仔"
+        ></xr-text>
+        <xr-text node-id="text-name" position="0.55 0.1 0.01" scale="0.04 0.04 1" material="text-simple"
+          value="牛年发行的公仔"
+        ></xr-text>
+        <xr-text node-id="text-name" position="0.55 0.0 0.01" scale="0.04 0.04 1" material="text-simple"
+          value="礼盒中还包含玩具盲盒、钥匙扣"
         ></xr-text>
       </xr-node>
     </xr-ar-tracker>

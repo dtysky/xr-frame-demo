@@ -1,26 +1,24 @@
 <xr-scene ar-system="modes:Plane" id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
-    <xr-asset-load type="env-data" asset-id="env1" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/env-test.bin" />
-    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
-    <xr-asset-load
-      type="video-texture" asset-id="skybox"
-      src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/office-skybox.mp4" options="autoPlay:true,loop:true,placeHolder:https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/office-skybox.jpg"
-    />
-    <xr-asset-render-texture asset-id="rt" width="800" height="1600" />
+    <xr-asset-load type="env-data" asset-id="env1" src="xr-frame-team-workspace-day" />
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" /> 
     <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>
-  <xr-env env-data="env1" sky-map="video-skybox" />
+  <xr-env env-data="env1" />
   <xr-node>
     <xr-ar-tracker mode="Plane">
       <xr-gltf model="anchor"></xr-gltf>
     </xr-ar-tracker>
 
     <xr-node id="setitem" node-id="setitem" visible="false">
-      <xr-mesh id="door" node-id="mesh-door" position="0 0.5 -0.2" scale="0.5 1 0.02" rotation="0 0 0" geometry="cube" material="standard-mat"></xr-mesh>
-
-
+      <xr-mesh id="door" node-id="mesh-door"
+        position="0 0.8 0" scale="0.6 1.6 0.1" rotation="0 0 0"
+        geometry="cube" material="standard-mat" uniforms="u_baseColorFactor: 0.298 0.764 0.85 1"
+      ></xr-mesh>
+      <xr-mesh node-id="door-cull" position="0 0 0.11" rotation="90 0 0" scale="0.6 1.6 1" geometry="plane"
+      ></xr-mesh>
+      <!-- states="renderQueue: 1, stencilTestOn: true, stencilComp: 7, stencilRef: 1, stencilReadMask: 1, stencilWriteMask: 1, stencilPass: 1, stencilFail: 2, stencilZFail: 2" -->
     </xr-node>
-
 
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
@@ -29,7 +27,7 @@
 
   </xr-node>
   <xr-node node-id="lights">
-    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
-    <xr-light type="directional" rotation="30 60 0" color="1 1 1" intensity="1" />
+    <xr-light type="ambient" color="1 1 1" intensity="0.6" />
+    <xr-light type="directional" rotation="20 40 0" color="1 1 1" intensity="2" />
   </xr-node>
 </xr-scene>
