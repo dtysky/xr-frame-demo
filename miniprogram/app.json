@@ -31,10 +31,6 @@
   "usingComponents": {
     "pull-down-list": "./components/pull-down-list/index",
     "xr-demo-viewer": "./components/xr-demo-viewer/index",
-    "t-icon": "tdesign-miniprogram/icon/icon",
-    "t-cell": "tdesign-miniprogram/cell/cell",
-    "t-collapse": "tdesign-miniprogram/collapse/collapse",
-    "t-collapse-panel": "tdesign-miniprogram/collapse/collapse-panel",
     "xr-basic": "./components/xr-basic/index",
     "xr-basic-light": "./components/xr-basic-light/index",
     "xr-basic-animation": "./components/xr-basic-animation/index",
