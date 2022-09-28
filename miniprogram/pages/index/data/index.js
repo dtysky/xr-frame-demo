@@ -178,6 +178,11 @@ const custom = {
       name: 'Render',
       label: '定制渲染资源',
       path: '/pages/scene-custom-render/index',
+    },
+    {
+      name: '    ',
+      label: '    ',
+      path: '/pages/scene-last-record/index',
     }
   ]
 };
