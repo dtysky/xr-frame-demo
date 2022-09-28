@@ -27,12 +27,12 @@
     </xr-node>
 
     <xr-camera
-      id="magic-camera" background="default" cull-mask="0" depth="2"
-      is-clear-color="false" is-clear-stencil="false" is-clear-depth="false"
+      id="main-camera" near="0.1" far="2000"
+      background="ar" is-ar-camera clear-color="1 0 0 1"
     />
     <xr-camera
-      id="main-camera" near="0.1" far="2000" depth="1"
-      background="ar" is-ar-camera clear-color="1 0 0 1"
+      id="magic-camera" background="default" cull-mask="0"
+      is-clear-color="false" is-clear-stencil="false" is-clear-depth="false"
     />
   </xr-node>
 

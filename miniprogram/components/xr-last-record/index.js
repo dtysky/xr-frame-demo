@@ -47,8 +47,6 @@ Component({
         return;
       }
 
-      console.log('diff', preDis, dis, diff.z, this.inRealWorld);
-
       if (this.inRealWorld && diff.z < 0) {
         return;
       }
@@ -61,8 +59,6 @@ Component({
       const magicCam = magicCamEl.getComponent(xrSystem.Camera);
       const doorMesh = this.scene.getElementById('door-mesh').getComponent(xrSystem.Mesh);
       const sceneMesh = this.scene.getElementById('scene-mesh').getComponent(xrSystem.GLTF);
-
-      console.log('swith to', this.inRealWorld ? 'v' : 'r');
 
       if (!this.inRealWorld) {
         // 现实世界
@@ -87,10 +83,6 @@ Component({
         sceneMesh._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
         // super hack start
         // will be fixed in next version
-        if (!mainCam.depth) {
-          Object.defineProperty(mainCam, 'depth', {get() {return 1}});
-          Object.defineProperty(magicCam, 'depth', {get() {return 2}});
-        }
         const check = () => {
           const skyMat = this.scene.ar._camerasMeshes[magicCam.id]?.mesh?.material;
           if (!skyMat){
