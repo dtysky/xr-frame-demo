@@ -68,12 +68,17 @@ Component({
       this.scene.getElementById('hikari').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
       this.scene.getElementById('roam').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
       this.scene.getElementById('xinyi').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
-      this.bgm.play();
       this.inRealWorld = false;
     },
     handleShowDoor() {
       this.scene.ar.placeHere('setitem', true);
+      this.bgm.play();
       this.setData({placed: true});
+    },
+    handleResume() {
+      if (this.data.placed) {
+        this.bgm.play();
+      }
     },
     handleTouchNote() {
       this.triggerEvent('showNote', this.note);
