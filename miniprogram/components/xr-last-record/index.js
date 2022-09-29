@@ -74,7 +74,6 @@ Component({
     handleShowDoor() {
       this.scene.ar.placeHere('setitem', true);
       this.setData({placed: true});
-      this.scene.getNodeById('anchor').setData({visible: false});
     },
     handleTouchNote() {
       this.triggerEvent('showNote', this.note);
