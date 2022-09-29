@@ -1,20 +1,64 @@
-<xr-scene ar-system="modes:Plane" id="xr-scene" bind:ready="handleReady" bind:tick="handleTick">
+<xr-scene ar-system="modes:Plane" id="xr-scene" bind:ready="handleReady" bind:tick="handleTick" bind:ar-ready="handleARReady">
+<!-- <xr-scene id="xr-scene" bind:ready="handleReady" bind:tick="handleTick"> -->
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
-    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" /> 
-    <xr-asset-load type="gltf" asset-id="gltf-model" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ship_in_clouds/scene.gltf" />
-    <xr-asset-material asset-id="mat" effect="simple" />
+    <xr-asset-load type="raw" asset-id="records" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-record.json" options="encoding:utf-8" />
+    <xr-asset-load type="raw" asset-id="note" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-note.txt" options="encoding:utf-8" />
+    <xr-asset-load asset-id="anchor" type="keyframe" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-record-anchor-animation.json"/>
+    <xr-asset-load type="gltf" asset-id="loading" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/loading.glb" />
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-load type="gltf" asset-id="butterfly" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/butterfly/index.glb" />
+    <xr-asset-load type="gltf" asset-id="office" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-record.glb" />
+    <xr-asset-load type="gltf" asset-id="hikari" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/hikari.gltf" />
+    <xr-asset-load type="gltf" asset-id="roam" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/roam.gltf" />
+    <xr-asset-load type="gltf" asset-id="xinyi" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/xinyi.gltf" />
+    <xr-asset-material asset-id="text-simple" effect="simple" />
   </xr-assets>
-  <xr-env env-data="xr-frame-team-workspace-day" />
   <xr-node>
     <xr-ar-tracker mode="Plane">
-      <xr-gltf id="anchor" model="anchor" />
+      <xr-node wx:if="{{loaded}}" node-id="anchor" anim-keyframe="anchor" anim-autoplay="clip:parent">
+        <xr-gltf model="anchor" bind:touch-shape="handleShowDoor" cube-shape="autoFit:true" />
+        <xr-node
+          position="0 0 0.3" rotation="0 180 0" scale="0.3 0.3 0.3"
+          anim-keyframe="anchor" anim-autoplay="clip:child"
+        >
+          <xr-gltf
+            model="butterfly" anim-autoplay
+            bind:touch-shape="handleShowDoor" cube-shape="autoFit:true"
+          />
+        </xr-node>
+      </xr-node>
     </xr-ar-tracker>
 
     <xr-node id="setitem" node-id="setitem" visible="false">
       <xr-gltf
-        id="scene-mesh" model="gltf-model"
-        position="0 0 8" rotation="0 0 0" scale="20 20 20"
-        states="stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+        id="scene-mesh" model="office"
+        states="cullOn: false, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+      />
+
+      <xr-gltf id="hikari"
+        position="-0.192 0.073 -5.403" rotation="0 106 0" model="hikari"
+        anim-autoplay="clip:Sitting" capsule-shape="height:1.2;raduis:0.3;center:0 0.6 0"
+        states="cullOn: false, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+        bind:touch-shape="handleTouchObj"
+      />
+
+      <xr-gltf id="roam"
+        position="-2.404 0.015 -5.152" rotation="0 -84 0" model="roam"
+        anim-autoplay="clip:Sitting" capsule-shape="height:1.2;raduis:0.3;center:0 0.6 0"
+        states="cullOn: false, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+        bind:touch-shape="handleTouchObj"
+      />
+
+      <xr-gltf id="xinyi"
+        position="-0.883 0.089 -7.118" rotation="0 -60 0" model="xinyi"
+        anim-autoplay="clip:Sitting" capsule-shape="height:1.2;raduis:0.3;center:0 0.6 0"
+        states="cullOn: false, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+        bind:touch-shape="handleTouchObj"
+      />
+
+      <xr-mesh
+        id="note" position="-0.718 0.728 -5.015" rotation="18"
+        cube-shape="size:0.2 0.03 0.15" bind:touch-shape="handleTouchNote"
       />
 
       <xr-node id="door" position="0 1 0">
@@ -28,15 +72,23 @@
 
     <xr-camera
       id="main-camera" near="0.1" far="2000"
-      background="ar" is-ar-camera clear-color="1 0 0 1"
-    />
-    <xr-camera
-      id="magic-camera" background="default" cull-mask="0"
-      is-clear-color="false" is-clear-stencil="false" is-clear-depth="false"
-    />
+      background="ar" is-ar-camera
+    >
+      <xr-gltf wx:if="{{arReady && !loaded}}" position="0 0 10" model="loading" anim-autoplay />
+    </xr-camera>
   </xr-node>
 
+  <!-- <xr-node node-id="target" position="0 1.7 -2"></xr-node>
+  <xr-gltf id="hikari"
+    position="-0.192 0.073 -5.403" rotation="0 106 0" model="hikari"
+    anim-autoplay="clip:Sitting" capsule-shape="height:1.2;raduis:0.3;center:0 0.6 0"
+    bind:touch-shape="handleTouchObj"
+  />
+  <xr-camera
+    id="main-camera" near="0.1" far="2000" fov="60"
+    camera-orbit-control position="0 1.7 0" target="target" clear-color="0.4 0.8 0.6 1"
+  /> -->
   <xr-node node-id="lights">
-    <xr-light type="ambient" color="1 1 1" intensity="0.6" />
+    <xr-light type="ambient" color="1 1 1" intensity="2" />
   </xr-node>
 </xr-scene>

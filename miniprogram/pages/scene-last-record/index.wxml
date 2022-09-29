@@ -5,5 +5,13 @@
     width="{{renderWidth}}"
     height="{{renderHeight}}"
     style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+    bind:changeTexts="handleChangeTexts"
+    bind:showNote="handleShowNote"
   />
+
+  <block wx:for="{{texts}}" wx:for-item="text" wx:key="*this">
+    <view style="display: block; width: 196px; position: absolute;left: {{text.x}}px;top: {{text.y}}px;transform: translate(-50%, -50%);">
+      <view style="display: inlin-block;background: rgba(44, 44, 44, 0.5);text-align: center;color: white;font-size: 20px;padding: 8px;word-break: break-all;">{{text.content}}</view>
+    </view>
+  </block>
 </view>

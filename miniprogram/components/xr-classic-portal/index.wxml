@@ -5,7 +5,7 @@
     <xr-asset-material asset-id="mat" effect="simple" />
   </xr-assets>
   <xr-env env-data="xr-frame-team-workspace-day" />
-  <xr-node>
+  <xr-node wx:if="{{loaded}}">
     <xr-ar-tracker mode="Plane">
       <xr-gltf id="anchor" model="anchor" />
     </xr-ar-tracker>

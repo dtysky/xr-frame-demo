@@ -22,7 +22,9 @@ Component({
     },
     handleAssetsLoaded: function ({detail}) {
       console.log('assets loaded', detail.value);
+      this.setData({loaded: true});
       this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
+      wx.showToast({title: '点击屏幕放置'});
     },
     handleTick() {
       if (!this.placed) {

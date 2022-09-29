@@ -7,4 +7,3 @@ Page({
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>'
   }
 });
-

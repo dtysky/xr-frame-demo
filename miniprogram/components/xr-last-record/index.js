@@ -15,23 +15,29 @@ Component({
     handleReady({detail}) {
       const xrScene = this.scene = detail.value;
       this.inRealWorld = true;
-      console.log('xr-scene', xrScene);
+      this.texts = {};
     },
     handleAssetsProgress: function ({detail}) {
       console.log('assets progress', detail.value);
     },
+    handleARReady() {
+      this.setData({arReady: true});
+    },
     handleAssetsLoaded: function ({detail}) {
       console.log('assets loaded', detail.value);
-      this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
+      this.records = JSON.parse(this.scene.assets.getAsset('raw', 'records'));
+      this.note = this.scene.assets.getAsset('raw', 'note');
+      this.setData({loaded: true});
     },
     handleTick() {
-      if (!this.placed) {
+      this.syncTexts();
+
+      if (!this.placed || !this.inRealWorld) {
         return;
       }
 
       const xrSystem = wx.getXrFrameSystem();
       const mainCamEl = this.scene.getElementById('main-camera');
-      const magicCamEl = this.scene.getElementById('magic-camera');
       const mainTrs = mainCamEl.getComponent(xrSystem.Transform);
       const door = this.scene.getElementById('door').getComponent(xrSystem.Transform);
 
@@ -47,71 +53,75 @@ Component({
         return;
       }
 
-      if (this.inRealWorld && diff.z < 0) {
-        return;
-      }
-
-      if (!this.inRealWorld && diff.z > 0) {
-        return;
-      }
-
-      const mainCam = mainCamEl.getComponent(xrSystem.Camera);
-      const magicCam = magicCamEl.getComponent(xrSystem.Camera);
-      const doorMesh = this.scene.getElementById('door-mesh').getComponent(xrSystem.Mesh);
       const sceneMesh = this.scene.getElementById('scene-mesh').getComponent(xrSystem.GLTF);
 
-      if (!this.inRealWorld) {
-        // 现实世界
-        // mainCam: ar -> stencil -> scene
-        // magicCam: nothing
-        this.inRealWorld = true;
-        mainCam.setData({background: 'ar'});
-        magicCam.setData({isClearDepth: false});
-        magicCam.setData({background: 'default'});
-        doorMesh.material.renderQueue = 1;
-        doorMesh.material.setRenderState('cullFace', 2);
-        sceneMesh._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 3));
-      } else {
-        // 虚拟世界
-        // mainCam: scene -> stencil
-        // magicCam: ar
-        this.inRealWorld = false;
-        mainCam.setData({background: 'default'});
-        magicCam.setData({background: 'ar'});
-        doorMesh.material.renderQueue = 9999;
-        doorMesh.material.setRenderState('cullFace', 1);
-        sceneMesh._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
-        // super hack start
-        // will be fixed in next version
-        const check = () => {
-          const skyMat = this.scene.ar._camerasMeshes[magicCam.id]?.mesh?.material;
-          if (!skyMat){
-            return;
-          }
+      // 虚拟世界
+      // mainCam: scene -> stencil
+      // magicCam: ar
+      door.setData({visible: false});
+      sceneMesh._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
+      this.scene.getElementById('hikari').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
+      this.scene.getElementById('roam').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
+      this.scene.getElementById('xinyi').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
+      this.inRealWorld = false;
+    },
+    handleShowDoor() {
+      this.scene.ar.placeHere('setitem', true);
+      this.scene.getNodeById('anchor').setData({visible: false});
+      this.placed = true;
+    },
+    handleTouchNote() {
+      this.triggerEvent('showNote', this.note);
+    },
+    handleTouchObj({detail}) {
+      const {el, value} = detail;
+      const {camera, target} = value;
+      const xrSystem = wx.getXrFrameSystem();
+      const camTrs = camera.el.getComponent(xrSystem.Transform);
+      const targetTrs = target.getComponent(xrSystem.Transform);
+      const diff = camTrs.worldPosition.sub(targetTrs.worldPosition);
+      const distance = Math.sqrt(diff.x * diff.x + diff.z * diff.z);
+      if (distance > 2) {
+        return;
+      }
 
-          magicCam.setData({isClearDepth: true});
-          skyMat.setRenderState('stencilComp', 3);
-          skyMat.setRenderState('stencilRef', 1);
-          skyMat.setRenderState('stencilReadMask', 1);
-          this.scene.event.remove('tick', check);
+      const id = target.id;
+      let text = this.texts[id];
+      if (text) {
+        clearTimeout(text.timerId);
+      }
+
+      if (!this.records[id]) {
+        return;
+      }
+
+      const {y, texts: records} = this.records[id];
+      this.texts[id] = {
+        content: records[Math.floor(Math.random() * (records.length - 0.1))],
+        camera, target, y,
+        timerId: setTimeout(() => {
+          delete this.texts[id];
+        }, 4000)
+      };
+    },
+    syncTexts: function() {
+      const texts = Object.keys(this.texts).map(id => {
+        const {camera, target, content, y} = this.texts[id];
+        const xrSystem = wx.getXrFrameSystem();
+        const trs = target.getComponent(xrSystem.Transform);
+        const tmp = trs.worldPosition.clone();
+        tmp.y += y;
+        const clipPos = camera.convertWorldPositionToClip(tmp);
+        const {frameWidth, frameHeight} = this.scene;
+  
+        return {
+          content,
+          x: ((clipPos.x + 1) / 2) * frameWidth,
+          y: (1 - (clipPos.y + 1) / 2) * frameHeight
         };
-        this.scene.event.add('tick', check);
-        // super hack end
-      }
-    },
-    placeNode(event) {
-      const {clientX, clientY} = event.touches[0];
-      const {frameWidth: width, frameHeight: height} = this.scene;
+      });
 
-      if (clientY / height > 0.8 && clientX / width > 0.8) {
-        this.scene.getNodeById('setitem').visible = false;
-        this.scene.ar.resetPlane();
-        this.scene.event.addOnce('touchstart', this.placeNode.bind(this));
-      } else {
-        this.scene.ar.placeHere('setitem', true);
-        this.scene.getElementById('anchor').getComponent(wx.getXrFrameSystem().Transform).setData({visible: false});
-        this.placed = true;
-      }
-    },
+      this.triggerEvent('changeTexts', texts);
+    }
   }
 })
