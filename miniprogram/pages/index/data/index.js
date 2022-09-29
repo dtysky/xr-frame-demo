@@ -178,12 +178,16 @@ const custom = {
       name: 'Render',
       label: '定制渲染资源',
       path: '/pages/scene-custom-render/index',
-    },
-    {
-      name: '    ',
-      label: '    ',
-      path: '/pages/scene-last-record/index',
     }
   ]
 };
+
+if (Math.random() < 0.1) {
+  custom.childArr.push({
+    name: '    ',
+    label: '    ',
+    path: '/pages/scene-last-record/index',
+  });
+}
+
 export default [classic, base, gltf, ar, scan, custom];
