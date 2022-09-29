@@ -19,9 +19,6 @@ Page({
     this.setData({texts: detail});
   },
   handleShowNote: function({detail}) {
-    wx.showToast({
-      title: '最后的记录',
-    });
     wx.showModal({
       title: '最后的记录',
       content: detail,

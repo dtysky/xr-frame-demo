@@ -15,7 +15,7 @@
   </xr-assets>
   <xr-node>
     <xr-ar-tracker mode="Plane">
-      <xr-node wx:if="{{loaded}}" node-id="anchor" anim-keyframe="anchor" anim-autoplay="clip:parent">
+      <xr-node wx:if="{{loaded && !placed}}" node-id="anchor" anim-keyframe="anchor" anim-autoplay="clip:parent">
         <xr-gltf model="anchor" bind:touch-shape="handleShowDoor" cube-shape="autoFit:true" />
         <xr-node
           position="0 0 0.3" rotation="0 180 0" scale="0.3 0.3 0.3"

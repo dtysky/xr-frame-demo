@@ -5,6 +5,7 @@ Component({
   data: {
     loaded: false,
     arReady: false,
+    placed: false
   },
   lifetimes: {
     async attached() {
@@ -16,6 +17,7 @@ Component({
       const xrScene = this.scene = detail.value;
       this.inRealWorld = true;
       this.texts = {};
+      this.textsIndex = {};
     },
     handleAssetsProgress: function ({detail}) {
       console.log('assets progress', detail.value);
@@ -32,7 +34,7 @@ Component({
     handleTick() {
       this.syncTexts();
 
-      if (!this.placed || !this.inRealWorld) {
+      if (!this.data.placed || !this.inRealWorld) {
         return;
       }
 
@@ -67,8 +69,8 @@ Component({
     },
     handleShowDoor() {
       this.scene.ar.placeHere('setitem', true);
+      this.setData({placed: true});
       this.scene.getNodeById('anchor').setData({visible: false});
-      this.placed = true;
     },
     handleTouchNote() {
       this.triggerEvent('showNote', this.note);
@@ -96,8 +98,16 @@ Component({
       }
 
       const {y, texts: records} = this.records[id];
+      let index = this.textsIndex[id] === undefined ? -1 : this.textsIndex[id];
+      if (index >= records.length - 1) {
+        index = 0;
+      } else {
+        index += 1;
+      }
+      this.textsIndex[id] = index;
+
       this.texts[id] = {
-        content: records[Math.floor(Math.random() * (records.length - 0.1))],
+        content: records[index],
         camera, target, y,
         timerId: setTimeout(() => {
           delete this.texts[id];
