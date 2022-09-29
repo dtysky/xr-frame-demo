@@ -17,6 +17,10 @@ Component({
             type: String,
             value: '',
         },
+        root: {
+            type: String,
+            value: '',
+        },
         childArr: {
             type: Array,
             value: [],
@@ -35,7 +39,10 @@ Component({
             });
         },
         tapChild(e) {
-            this.triggerEvent('click', e.target.dataset);
+            this.triggerEvent('click', {
+                ...e.target.dataset,
+                root: this.data.root
+            });
         },
     },
 });
