@@ -14,10 +14,13 @@ Component({
   },
   methods: {
     handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
+      this.scene = detail.value;
       this.inRealWorld = true;
       this.texts = {};
       this.textsIndex = {};
+      this.bgm = wx.createInnerAudioContext({obeyMuteSwitch: false});
+      this.bgm.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/cannon.mp3';
+      this.bgm.loop = true;
     },
     handleAssetsProgress: function ({detail}) {
       console.log('assets progress', detail.value);
@@ -65,6 +68,7 @@ Component({
       this.scene.getElementById('hikari').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
       this.scene.getElementById('roam').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
       this.scene.getElementById('xinyi').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
+      this.bgm.play();
       this.inRealWorld = false;
     },
     handleShowDoor() {
