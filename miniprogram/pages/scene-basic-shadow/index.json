@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "xr-demo-viewer": "../../components/xr-demo-viewer/index",
+    "xr-basic-shadow": "../../components/xr-basic-shadow/index"
+  },
   "disableScroll": true
 }
