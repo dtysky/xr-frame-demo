@@ -57,8 +57,8 @@
       />
 
       <!-- <xr-particle
-        wx:if="{{placed}}" material="particle-mat" position="1 1 0"
-        states="capacity:2000, emitRate:1000, minSize:0.1, maxSize:0.1, minLifeTime:1, maxLifeTime:1, particleEmitterType:SphereShape, particleEmitterStates:radius=1 radiusRange=0"
+        wx:if="{{gateClosed}}" material="particle-mat" position="1 1 0"
+        props="capacity:2000, emitRate:1000, minSize:0.1, maxSize:0.1, minLifeTime:1, maxLifeTime:1, particleEmitterType:SphereShape, particleEmitterStates:radius=1 radiusRange=0"
         uniforms="u_baseColorMap:flarePicture"
       /> -->
 

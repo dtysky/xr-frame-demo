@@ -31,7 +31,7 @@ Page({
     }
 
     lastCount += 1;
-    if (Math.random() >= 0.3) {
+    if (Math.random() >= (0.2 + lastCount * 0.1)) {
       return;
     }
 

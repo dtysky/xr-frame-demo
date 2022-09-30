@@ -5,7 +5,8 @@ Component({
   data: {
     loaded: false,
     arReady: false,
-    placed: false
+    placed: false,
+    gateClosed: false
   },
   lifetimes: {
     async attached() {
@@ -71,6 +72,7 @@ Component({
           .getElementById(id)
           .getComponent(xrSystem.GLTF).meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
       });
+      this.setData({gateClosed: true});
       this.inRealWorld = false;
     },
     handleShowDoor() {
