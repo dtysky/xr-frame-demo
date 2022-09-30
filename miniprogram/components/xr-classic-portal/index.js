@@ -37,23 +37,27 @@ Component({
       const mainTrs = mainCamEl.getComponent(xrSystem.Transform);
       const door = this.scene.getElementById('door').getComponent(xrSystem.Transform);
 
-      const diff = mainTrs.worldPosition.sub(door.worldPosition);
+      let forward = door.worldForward;
+      forward = xrSystem.Vector2.createFromNumber(forward.x, forward.z);
+      let diff = mainTrs.worldPosition.sub(door.worldPosition);
+      diff = xrSystem.Vector2.createFromNumber(diff.x, diff.z);
       const preDiff = this.diff || diff;
       this.diff = diff;
 
-      const dis = Math.abs(diff.z);
-      const preDis = Math.abs(preDiff.z);
+      const dis = diff.length();
+      const preDis = preDiff.length();
+      const dir = forward.dot(diff);
 
       //@todo: 等待物理加上碰撞检测，替换
       if (preDis <= 0.2 || dis > 0.2) {
         return;
       }
 
-      if (this.inRealWorld && diff.z < 0) {
+      if (this.inRealWorld && dir >= 0) {
         return;
       }
 
-      if (!this.inRealWorld && diff.z > 0) {
+      if (!this.inRealWorld && dir <= 0) {
         return;
       }
 
