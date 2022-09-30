@@ -19,7 +19,7 @@ Component({
       this.texts = {};
       this.textsIndex = {};
       this.bgm = wx.createInnerAudioContext({obeyMuteSwitch: false});
-      this.bgm.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/cannon.mp3';
+      this.bgm.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/bgm.mp3';
       this.bgm.loop = true;
     },
     handleAssetsProgress: function ({detail}) {
