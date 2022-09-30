@@ -5,10 +5,12 @@ Page({
     list,
   },
   clickHandle(e) {
+    let root = e.detail.root;
     let { name, path } = e.detail.item;
+
     if (path) {
       wx.navigateTo({
-        url: path,
+        url: root + path,
         fail: () => {
         },
     });

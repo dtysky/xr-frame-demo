@@ -1,4 +1,4 @@
-<xr-scene id="xr-scene" bind:ready="handleReady" bind:tick="handleRaf" bind:destory="handleDestory">
+<xr-scene id="xr-scene" bind:ready="handleReady" bind:tick="handleRaf">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load type="gltf" asset-id="hikari" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/hikari.gltf" />
     <xr-asset-load type="gltf" asset-id="roam" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/roam.gltf" />

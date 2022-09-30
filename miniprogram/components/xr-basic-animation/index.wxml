@@ -1,6 +1,7 @@
 <xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load asset-id="basic-anim" type="keyframe" src="/assets/animation/basic-animation.json"/>
+    <xr-asset-load type="texture" asset-id="waifu" src="/assets/waifu.png" />
     <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>
   <xr-node>
@@ -25,7 +26,7 @@
       anim-keyframe="basic-anim" anim-autoplay="clip:cylinder, speed:2"
       cast-shadow
     ></xr-mesh>
-    <xr-mesh node-id="mesh-light-cube" position="-5 1 0" scale="0.5 2 10" rotation="0 0 0" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.3 0.3 0.3 1"></xr-mesh>
+    <xr-mesh node-id="mesh-light-cube" position="-5 1 0" scale="0.5 10 10" rotation="0 0 0" geometry="cube" material="standard-mat" uniforms="u_baseColorFactor:0.3 0.3 0.3 1, u_baseColorMap: waifu"></xr-mesh>
     <xr-camera
       id="camera" node-id="camera" position="5 3 0" clear-color="0.925 0.925 0.925 1"
       target="camera-target"

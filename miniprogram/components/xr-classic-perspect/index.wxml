@@ -7,8 +7,8 @@
   <xr-env env-data="env1"/>
   <xr-node wx:if="{{loaded}}">
 
-    <xr-ar-tracker mode="Marker" src="{{markerImg}}">
-      <xr-node scale="1.1 0.9 1">
+    <xr-ar-tracker mode="Marker" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/portalImage.jpg">
+      <xr-node scale="1 1 1">
         <xr-gltf node-id="mesh-gltf-fiesta_tea" position="0 -1.6 1" rotation="-90 0 0" scale="0.6 0.6 0.6" model="gltf-fiesta_tea"
           states="stencilTestOn: true, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
         ></xr-gltf>
@@ -17,7 +17,7 @@
           states="renderQueue: 2, depthTestOn: false"
         ></xr-mesh> -->
 
-        <xr-mesh node-id="plane-cull" position="0 0 0" rotation="0 0 0" scale="1 0.1 1" geometry="plane"
+        <xr-mesh node-id="plane-cull" position="0 0 0" rotation="0 0 0" scale="1 0.1 0.9" geometry="plane"
           states="renderQueue: 1, stencilTestOn: true, stencilComp: 7, stencilRef: 1, stencilReadMask: 1, stencilWriteMask: 1, stencilPass: 1, stencilFail: 2, stencilZFail: 2"
         ></xr-mesh>
       </xr-node>

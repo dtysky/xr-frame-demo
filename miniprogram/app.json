@@ -4,6 +4,7 @@
     "pages/scene-basic/index",
     "pages/scene-basic-light/index",
     "pages/scene-basic-animation/index",
+    "pages/scene-basic-particle/index",
     "pages/scene-basic-touch/index",
     "pages/scene-basic-visible-layer/index",
     "pages/scene-basic-shadow/index",
@@ -26,7 +27,8 @@
     "pages/scene-classic-video/index",
     "pages/scene-classic-perspect/index",
     "pages/scene-classic-portal/index",
-    "pages/scene-classic-osd/index"
+    "pages/scene-classic-osd/index",
+    "pages/scene-last-record/index"
   ],
   "usingComponents": {
     "pull-down-list": "./components/pull-down-list/index",
@@ -36,6 +38,7 @@
     "t-collapse": "tdesign-miniprogram/collapse/collapse",
     "t-collapse-panel": "tdesign-miniprogram/collapse/collapse-panel",
     "xr-basic": "./components/xr-basic/index",
+    "xr-basic-particle": "./components/xr-basic-particle/index",
     "xr-basic-light": "./components/xr-basic-light/index",
     "xr-basic-animation": "./components/xr-basic-animation/index",
     "xr-basic-touch": "./components/xr-basic-touch/index",

@@ -12,7 +12,22 @@
 
 .intro {
   display: block;
-  margin: 10px 0;
+  margin: 20rpx 0;
+  background: #fff;
+}
+
+.intro .title {
+  font-size: 36rpx;
+  padding-bottom: 20rpx;
+}
+
+.intro .description {
+  color: #8f8f8f;
+  font-size: 28rpx;
+}
+
+.intro-detail {
+  padding: 30rpx;
 }
 
 .code-inner {

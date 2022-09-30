@@ -1,0 +1,40 @@
+<xr-scene id="xr-scene" bind:ready="handleReady">
+  <xr-assets>
+    <xr-asset-material asset-id="standard-mat" effect="standard" />
+    <xr-asset-material asset-id="particle-mat" effect="particle" />
+    <xr-asset-load type="texture" asset-id="flarePicture" src="/assets/textures/index/flare.png" />
+    <xr-asset-load type="texture" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/dark-cosmos.jpg" />
+    <xr-asset-load type="texture" asset-id="blue-texture" src="/assets/textures/index/plane.png" />
+    <xr-asset-material asset-id="blue-mat" effect="standard" uniforms="u_baseColorMap: blue-texture" />
+  </xr-assets>
+  <xr-node>
+    <xr-mesh node-id="mesh-plane" position="0 -1 0" rotation="0 0 0" scale="5 0.2 5"
+      geometry="cube" material="blue-mat" uniforms="u_baseColorFactor:0.48 0.78 0.64 1"
+    ></xr-mesh>
+    <xr-env sky-map="sky" is-sky2d/>
+
+    <!-- case billboard stretched test-->
+    <!-- <xr-particle material="particle-mat" states="capacity:20, emitRate:5, minLifeTime:3, maxLifeTime:3, particleEmitterType:PointShape" uniforms="u_baseColorMap:flarePicture"></xr-particle> -->
+
+    <!-- case colorRampGradient test-->
+    <xr-particle id="colorRemapParticle" material="particle-mat" position="-2 0 0" states="capacity:100, emitRate:20,  minSize:0.2, maxSize:0.2, minLifeTime:3, maxLifeTime:3, particleEmitterType:BoxShape" uniforms="u_baseColorMap:flarePicture"></xr-particle>
+
+    <!-- case sphereEmitter test-->
+    <xr-particle id="sphereParticle" material="particle-mat" position="1 1 0" states="capacity:2000, emitRate:1000, minSize:0.1, maxSize:0.1, minLifeTime:1, maxLifeTime:1, particleEmitterType:SphereShape, particleEmitterStates:radius=1 radiusRange=0" uniforms="u_baseColorMap:flarePicture"></xr-particle>
+
+    <!-- case human face test -->
+    <!-- <xr-particle material="particle-mat" states="emitter:-2 0 0, capacity:3000, emitRate:2000, minSize:0.025, maxSize:0.025, startColor:1 1 1 0, startColor2:1 0 0 0, endColor:1 1 0 0, particleEmitterType:DrawShape" uniforms="u_baseColorMap:flarePicture"></xr-particle> -->
+   
+    <xr-camera
+      id="camera" node-id="camera" position="0 6 -6" clear-color="0.1 0.1 0.1 1"
+      target="mesh-plane" background="skybox"
+      camera-orbit-control=""
+    ></xr-camera>
+    
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
+    <xr-light type="directional" rotation="90 0 0" color="1 1 1" intensity="2.5"  />
+  </xr-node>
+
+</xr-scene>

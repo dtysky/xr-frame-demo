@@ -4,7 +4,6 @@ Component({
   },
   data: {
     loaded: false,
-    scene: null,
     touchingMoon: false,
     touchingEarth: false,
     θ: Math.PI,
@@ -25,11 +24,6 @@ Component({
     handleAssetsLoaded: function({detail}) {
       console.log('assets loaded', detail.value);
       this.setData({loaded: true});
-    },
-    handleReady: function({detail}) {
-        this.setData({
-            scene: detail.value
-        });
     },
     handleTouchEarth: function() {
       this.setData({
@@ -63,7 +57,7 @@ Component({
         this.setData({touchingMoon: true});
     },
     handleUntouchMoon: function() {
-        const moon = this.data.scene.getNodeById("mesh-moon");
+        const moon = this.scene.getNodeById("mesh-moon");
         const transform = moon.el._components.transform;
         const x = transform.position.x;
         const z = transform.position.z;
@@ -76,9 +70,9 @@ Component({
         this.setData({touchingMoon: false});
     },
     handleTick: function({detail}) {
-        if (this.data.touchingMoon || !this.data.scene) return;
+        if (this.data.touchingMoon || !this.scene) return;
         const deltaTime = detail.value;
-        const moon = this.data.scene.getNodeById("mesh-moon");
+        const moon = this.scene.getNodeById("mesh-moon");
         const transform = moon.el._components.transform;
         const x = Math.cos(this.data.θ) * this.data.r;
         const z = Math.sin(this.data.θ) * this.data.r;

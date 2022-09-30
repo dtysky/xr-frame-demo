@@ -13,15 +13,20 @@ Component({
       }
     }
   },
-  lifetimes: {},
+  lifetimes: {
+    detached: function() {
+      this.voice.stop();
+      this.bgm.stop();
+    },
+  },
   methods: {
     handleReady({detail}) {
       const xrScene = this.scene = detail.value;
       console.log('xr-scene', xrScene);
-      this.bgm = wx.createInnerAudioContext();
+      this.bgm = wx.createInnerAudioContext({obeyMuteSwitch: false});
       this.bgm.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/kaqituolitai.mp3';
       this.bgm.volume = 0.5;
-      this.voice = wx.createInnerAudioContext({useWebAudioImplement: true});
+      this.voice = wx.createInnerAudioContext({useWebAudioImplement: true, obeyMuteSwitch: false});
       this.voice.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/homo.m4a';
       this.voiceFrag = {
         xinyi: [4, 2],
@@ -33,10 +38,6 @@ Component({
     },
     handleAssetsLoaded: function({detail}) {
       this.triggerEvent('assetsLoaded', detail.value);
-    },
-    handleDestory: function() {
-      this.voice.stop();
-      this.bgm.stop();
     },
     handleRaf: function({detail}) {
       if (!this.init()) {

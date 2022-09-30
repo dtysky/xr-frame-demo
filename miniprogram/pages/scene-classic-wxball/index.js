@@ -4,8 +4,7 @@ var xmlCode = ``;
 Page({
   behaviors:[sceneReadyBehavior],
   data: {
-    xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
-    markerImg: '/assets/wxballHands.jpg'
+    xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>'
   }
 });
 

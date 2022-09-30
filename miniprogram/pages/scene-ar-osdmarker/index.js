@@ -29,16 +29,17 @@ Page({
     markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/osdmarker-test.jpg'
   },
   handleChangeMarkerImg: function() {
-    wx.chooseImage({
+    wx.chooseMedia({
       count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['album', 'camera'],
+      sizeType: ['compressed'],
+      mediaType: ['image'],
+      sourceType: ['album'],
       success: res => {
-        const fp = res.tempFiles[0].path;
+        const fp = res.tempFiles[0].tempFilePath;
         this.setData({markerImg: fp});
       },
       fail: err => {
-        console.error(err);
+        console.error('[xr-demo]chooseImage failed', err);
       }
     });
   }

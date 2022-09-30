@@ -19,7 +19,7 @@ const classic = {
     },
     {
       name: 'OSD',
-      label: '扫描人物查看信息',
+      label: '扫描物体查看信息',
       path: '/pages/scene-classic-osd/index',
     },
     {
@@ -84,6 +84,11 @@ const base = {
     //   label: '物理',
     //   path: '/pages/scene-basic-physic/index',
     // },
+    {
+      name: 'ParticleSystem',
+      label: '粒子系统',
+      path: '/pages/scene-basic-particle/index',
+    },
   ],
 };
 const gltf = {
@@ -165,6 +170,7 @@ const scan = {
     }
   ],
 };
+
 const custom = {
   name: '高级定制',
   icon: 'tools',
@@ -181,4 +187,13 @@ const custom = {
     }
   ]
 };
+
+if (Math.random() < 0.25) {
+  custom.childArr.push({
+    name: '    ',
+    label: '    ',
+    path: '/pages/scene-last-record/index',
+  });
+}
+
 export default [classic, base, gltf, ar, scan, custom];

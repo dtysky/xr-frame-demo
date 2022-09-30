@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "xr-demo-viewer": "../../components/xr-demo-viewer/index",
     "xr-gltf-unlit": "../../components/xr-gltf-unlit/index"
   },
   "disableScroll": true

@@ -1,34 +1,40 @@
 <scroll-view class="demo-viewer" scroll-y="{{true}}">
   <slot></slot>
   <view class="intro">
-    <t-cell title="{{title}}" description="{{intro}}" />
+    <view class="intro-detail">
+      <view class="title" >{{title}}</view>
+      <view class="description" >{{intro}}</view>
+    </view>
   </view>
   <view wx:if="{{code.length > 0}}">
-    <t-collapse value="{{activeValues}}" bind:change="handleChange">
-      <t-collapse-panel header="代码演示" value="{{0}}">
+    <view class="intro">
+      <view class="intro-detail">
+        <view class="title">代码演示</view>
         <view class="code-inner">
           <rich-text nodes="{{code}}"></rich-text>
         </view>
-      </t-collapse-panel>
-    </t-collapse>
+      </view>
+    </view>
   </view>
   <view wx:if="{{js.length > 0}}">
-    <t-collapse value="{{activeValuesJs}}" bind:change="handleChangeJs">
-      <t-collapse-panel header="脚本演示" value="{{0}}">
+    <view class="intro">
+      <view class="intro-detail">
+        <view class="title">脚本演示</view>
         <view class="code-inner">
           <rich-text nodes="{{js}}"></rich-text>
         </view>
-      </t-collapse-panel>
-    </t-collapse>
+      </view>
+    </view>
   </view>
   <view wx:if="{{json.length > 0}}">
-    <t-collapse value="{{activeValuesJson}}" bind:change="handleChangeJson">
-      <t-collapse-panel header="动画数据结构" value="{{0}}">
+    <view class="intro">
+      <view class="intro-detail">
+        <view class="title">动画数据结构</view>
         <view class="code-inner">
           <rich-text nodes="{{json}}"></rich-text>
         </view>
-      </t-collapse-panel>
-    </t-collapse>
+      </view>
+    </view>
   </view>
   <view class="holder"></view>
 </scroll-view>

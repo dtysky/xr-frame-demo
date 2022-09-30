@@ -1,9 +1,5 @@
 Component({
   scene: null,
-  wxball: null,
-  wxballTransform: null,
-  wxballAnimator: null,
-  animationRuning: false,
   properties: {
     markerImg: {
       type: String
@@ -12,6 +8,9 @@ Component({
   data: {
     loaded: false,
     arReady: false,
+    toyReady: false,
+    gzDayReady: false,
+    gzNightReady: false,
   },
   lifetimes: {
     async attached() {
@@ -38,6 +37,30 @@ Component({
       this.setData({
         loaded: true
       });
+    },
+    handleToySwitch: function ({detail}) {
+      const active = detail.value;
+      if (active) {
+        this.setData({toyReady: true});
+      } else {
+        this.setData({toyReady: false});
+      }
+    },
+    handleDaySwitch: function ({detail}) {
+      const active = detail.value;
+      if (active) {
+        this.setData({gzDayReady: true});
+      } else {
+        this.setData({gzDayReady: false});
+      }
+    },
+    handleNightSwitch: function ({detail}) {
+      const active = detail.value;
+      if (active) {
+        this.setData({gzNightReady: true});
+      } else {
+        this.setData({gzNightReady: false});
+      }
     }
   }
 })

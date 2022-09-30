@@ -2,7 +2,6 @@ import XrFrame from 'XrFrame';
 const xrFrameSystem = wx.getXrFrameSystem();
 
 xrFrameSystem.registerEffect('shining', scene => scene.createEffect({
-  version: 2,
   name: "shining",
   properties: [
     {
