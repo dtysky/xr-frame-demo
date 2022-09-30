@@ -25,16 +25,16 @@
         />
       </xr-node>
     </xr-node>
-
-    <xr-camera
-      id="main-camera" near="0.1" far="2000"
-      background="ar" is-ar-camera clear-color="1 0 0 1"
-    />
-    <xr-camera
-      id="magic-camera" background="default" cull-mask="0"
-      is-clear-color="false" is-clear-stencil="false" is-clear-depth="false"
-    />
   </xr-node>
+
+  <xr-camera
+    id="main-camera" near="0.1" far="2000"
+    background="ar" is-ar-camera clear-color="1 0 0 1"
+  />
+  <xr-camera
+    id="magic-camera" background="default" cull-mask="0"
+    is-clear-color="false" is-clear-stencil="false" is-clear-depth="false"
+  />
 
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="0.6" />
