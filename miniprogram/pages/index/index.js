@@ -1,6 +1,7 @@
 import list from './data/index';
 
 let lastOpened = false;
+let lastCount = 0;
 
 Page({
   data: {
@@ -14,6 +15,11 @@ Page({
     if (path) {
       wx.navigateTo({
         url: root + path,
+        success: () => {
+          wx.reportEvent("xr_frame", {
+            "xr_page_path": path
+          });
+        },
         fail: () => {
         },
       });
@@ -24,6 +30,7 @@ Page({
       return;
     }
 
+    lastCount += 1;
     if (Math.random() >= 0.3) {
       return;
     }
@@ -46,6 +53,12 @@ Page({
 
             wx.navigateTo({
               url: root + '/pages/scene-last-record/index',
+              success: () => {
+                wx.reportEvent("xr_frame", {
+                  "xr_page_path": path,
+                  "xr_last_record_click": lastCount
+                });
+              },
               fail: () => {
                 lastOpened = false;
               },

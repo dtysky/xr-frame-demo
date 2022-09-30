@@ -10,6 +10,8 @@
     <xr-asset-load type="gltf" asset-id="hikari" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/hikari.gltf" />
     <xr-asset-load type="gltf" asset-id="roam" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/roam.gltf" />
     <xr-asset-load type="gltf" asset-id="xinyi" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/xinyi.gltf" />
+    <xr-asset-load type="texture" asset-id="particle-point" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/flare.png" />
+    <xr-asset-material asset-id="particle-mat" effect="particle" />
   </xr-assets>
   <xr-node>
     <xr-ar-tracker mode="Plane">
@@ -54,76 +56,68 @@
         bind:touch-shape="handleTouchObj"
       />
 
+      <!-- <xr-particle
+        wx:if="{{placed}}" material="particle-mat" position="1 1 0"
+        states="capacity:2000, emitRate:1000, minSize:0.1, maxSize:0.1, minLifeTime:1, maxLifeTime:1, particleEmitterType:SphereShape, particleEmitterStates:radius=1 radiusRange=0"
+        uniforms="u_baseColorMap:flarePicture"
+      /> -->
+
       <xr-node
         id="hikari-keyboard" position="-0.865 0.782 -5.251" rotation="0 9 0"
         cube-shape="size:0.15 0.03 0.3" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="hikari-telephone" position="-1.103 0.809 -4.786" rotation="0 0 0"
         cube-shape="size:0.07 0.16 0.2" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="hikari-qq" position="-1.14 1.344 -5.195" rotation="0 0 0"
         cube-shape="size:0.1 0.2 0.2" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="hikari-cap" position="-0.493 0.786 -4.598" rotation="0 56 0"
         cube-shape="size:0.3 0.05 0.15" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="chair" position="-0.413 0.638 -4.054" rotation="0 3 0"
         cube-shape="size:0.4 0.5 0.3" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="hikari-earphone" position="-0.892 0.752 -4.934" rotation="0 10 0"
         cube-shape="size:0.1 0.03 0.1" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="roam-pc" position="-1.69 0.805 -5.272" rotation="0 6 0"
         cube-shape="size:0.2 0.05 0.3" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="xinyi-desktop" position="-0.181 0.787 -7.306" rotation="0 10 0"
         cube-shape="size:0.33 0.06 0.67" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="xinyi-plant" position="0.164 0.896 -7.923" rotation="0 10 0"
         cube-shape="size:0.33 0.3 0.3" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="oscilloscope" position="-1.729 0.875 -4.084" rotation="0 25 0"
         cube-shape="size:0.3 0.3 0.2" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="vege-dog" position="-1.872 0.833 -4.227" rotation="0 26 0"
         cube-shape="size:0.4 0.2 0.2" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="trash" position="-3.164 0.405 -3.856" rotation="0 0 0"
         cube-shape="size:0.3 0.63 0.55" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="light-monitor" position="-2.682 0.984 -7.266" rotation="0 0 0"
         cube-shape="size:0.1 0.28 0.55" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="charge-pal" position="-2.438 0.181 -7.887" rotation="0 0 0"
         cube-shape="size:0.2 0.28 0.3" bind:touch-shape="handleTouchObj"
       />
-
       <xr-node
         id="note" position="-0.721 0.747 -5.007" rotation="0 16 0"
         cube-shape="size:0.2 0.02 0.1" bind:touch-shape="handleTouchNote"
