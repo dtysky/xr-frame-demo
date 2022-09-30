@@ -84,6 +84,11 @@ const base = {
     //   label: '物理',
     //   path: '/pages/scene-basic-physic/index',
     // },
+    {
+      name: 'ParticleSystem',
+      label: '粒子系统',
+      path: '/pages/scene-basic-particle/index',
+    },
   ],
 };
 const gltf = {
@@ -165,6 +170,7 @@ const scan = {
     }
   ],
 };
+
 const custom = {
   name: '高级定制',
   icon: 'tools',
