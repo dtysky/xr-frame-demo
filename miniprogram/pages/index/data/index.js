@@ -182,14 +182,4 @@ const custom = {
   ]
 };
 
-
-
-if (Math.random() < 0.9) {
-  custom.childArr.push({
-    name: '    ',
-    label: '    ',
-    path: '/pages/scene-last-record/index',
-  });
-}
-
 export default [classic, base, gltf, ar, scan, custom];

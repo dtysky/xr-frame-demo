@@ -24,6 +24,6 @@ Page({
       content: detail,
       showCancel: false,
       confirmText: '放下记录'
-    })    
+    });
   }
 })
