@@ -62,16 +62,15 @@ Component({
         return;
       }
 
-      const sceneMesh = this.scene.getElementById('scene-mesh').getComponent(xrSystem.GLTF);
-
       // 虚拟世界
       // mainCam: scene -> stencil
       // magicCam: ar
       door.setData({visible: false});
-      sceneMesh._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
-      this.scene.getElementById('hikari').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
-      this.scene.getElementById('roam').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
-      this.scene.getElementById('xinyi').getComponent(xrSystem.GLTF)._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
+      ['scene-mesh', 'hikari', 'roam', 'xinyi'].forEach(id => {
+        this.scene
+          .getElementById(id)
+          .getComponent(xrSystem.GLTF).meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
+      });
       this.inRealWorld = false;
     },
     handleShowDoor() {
@@ -88,28 +87,30 @@ Component({
       this.triggerEvent('showNote', this.note);
     },
     handleTouchObj({detail}) {
+      const xrSystem = wx.getXrFrameSystem();
       const {el, value} = detail;
       const {camera, target} = value;
-      const xrSystem = wx.getXrFrameSystem();
+      const id = target.id;
+      let text = this.texts[id];
       const camTrs = camera.el.getComponent(xrSystem.Transform);
       const targetTrs = target.getComponent(xrSystem.Transform);
       const diff = camTrs.worldPosition.sub(targetTrs.worldPosition);
       const distance = Math.sqrt(diff.x * diff.x + diff.z * diff.z);
-      if (distance > 2) {
-        return;
-      }
-
-      const id = target.id;
-      let text = this.texts[id];
-      if (text) {
-        clearTimeout(text.timerId);
-      }
 
       if (!this.records[id]) {
         return;
       }
 
-      const {y, texts: records} = this.records[id];
+      const {y, d, texts: records} = this.records[id];
+
+      if (distance > (d || 2)) {
+        return;
+      }
+
+      if (text) {
+        clearTimeout(text.timerId);
+      }
+
       let index = this.textsIndex[id] === undefined ? -1 : this.textsIndex[id];
       if (index >= records.length - 1) {
         index = 0;

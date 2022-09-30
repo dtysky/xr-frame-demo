@@ -72,11 +72,12 @@ Component({
         // magicCam: nothing
         this.inRealWorld = true;
         mainCam.setData({background: 'ar'});
-        magicCam.setData({isClearDepth: false});
         magicCam.setData({background: 'default'});
+        magicCam.setData({isClearDepth: false});
+        magicCam.clearBackgroundRenderStates();
         doorMesh.material.renderQueue = 1;
         doorMesh.material.setRenderState('cullFace', 2);
-        sceneMesh._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 3));
+        sceneMesh.meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 3));
       } else {
         // 虚拟世界
         // mainCam: scene -> stencil
@@ -84,25 +85,15 @@ Component({
         this.inRealWorld = false;
         mainCam.setData({background: 'default'});
         magicCam.setData({background: 'ar'});
+        magicCam.setData({isClearDepth: true});
+        magicCam.setBackgroundRenderStates({
+          stencilComp: 3,
+          stencilRef: 1,
+          stencilReadMask: 1
+        });
         doorMesh.material.renderQueue = 9999;
         doorMesh.material.setRenderState('cullFace', 1);
-        sceneMesh._meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
-        // super hack start
-        // will be fixed in next version
-        const check = () => {
-          const skyMat = this.scene.ar._camerasMeshes[magicCam.id]?.mesh?.material;
-          if (!skyMat){
-            return;
-          }
-
-          magicCam.setData({isClearDepth: true});
-          skyMat.setRenderState('stencilComp', 3);
-          skyMat.setRenderState('stencilRef', 1);
-          skyMat.setRenderState('stencilReadMask', 1);
-          this.scene.event.remove('tick', check);
-        };
-        this.scene.event.add('tick', check);
-        // super hack end
+        sceneMesh.meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
       }
     },
     placeNode(event) {
