@@ -31,7 +31,7 @@ Page({
     }
 
     lastCount += 1;
-    if (Math.random() >= (0.3 + lastCount * 0.1)) {
+    if (Math.random() >= (0.34 + lastCount * 0.1)) {
       return;
     }
 
@@ -44,7 +44,7 @@ Page({
         wx.showModal({
           title: '一把钥匙',
           content: res.data,
-          confirmText: '寻找真相',
+          confirmText: '探寻真实',
           cancelText: '放下钥匙',
           success: function(res) {
             if (res.cancel) {

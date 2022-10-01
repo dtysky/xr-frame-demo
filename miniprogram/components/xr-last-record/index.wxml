@@ -43,7 +43,7 @@
 
       <xr-gltf id="hikari"
         position="-0.192 0.073 -5.403" rotation="0 106 0" model="hikari"
-        anim-autoplay="clip:Sitting" cube-shape="height:1;raduis:0.2;center:0 0.7 0"
+        anim-autoplay="clip:Sitting" capsule-shape="height:1;raduis:0.2;center:0 0.7 0"
         states="stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
         bind:touch-shape="handleTouchObj"
       />
@@ -63,8 +63,8 @@
       />
 
       <xr-node
-        id="hikari-keyboard" position="-0.865 0.782 -5.251" rotation="0 9 0"
-        cube-shape="size:0.15 0.03 0.3" bind:touch-shape="handleTouchObj"
+        id="hikari-keyboard" position="-0.865 0.775 -5.276" rotation="0 9 0"
+        cube-shape="size:0.3 0.05 0.4" bind:touch-shape="handleTouchObj"
       />
       <xr-node
         id="hikari-telephone" position="-1.103 0.809 -4.786" rotation="0 0 0"
@@ -151,8 +151,8 @@
         cube-shape="size:0.2 0.28 0.3" bind:touch-shape="handleTouchObj"
       />
       <xr-node
-        id="note" position="-0.721 0.747 -5.007" rotation="0 16 0"
-        cube-shape="size:0.2 0.02 0.1" bind:touch-shape="handleTouchNote"
+        id="note" position="-0.719 0.747 -5.008" rotation="0 16 0"
+        cube-shape="size:0.22 0.04 0.15" bind:touch-shape="handleTouchNote"
       />
 
       <xr-node wx:if="{{gateClosed}}">
@@ -167,7 +167,7 @@
         />
         <xr-node
           id="oberon" position="0 1.2 1" rotation="0 0 0"
-          cube-shape="size:0.5 0.5 0.5" bind:touch-shape="handleTouchObj"
+          sphere-shape="radius:0.3" bind:touch-shape="handleTouchObj"
         >
           <xr-particle
             material="particle-mat"
@@ -181,7 +181,7 @@
         </xr-node>
         <xr-node
           id="noname" position="-1 1.2 1" rotation="0 0 0"
-          cube-shape="size:0.5 0.5 0.5" bind:touch-shape="handleTouchObj"
+          sphere-shape="radius:0.3" bind:touch-shape="handleTouchObj"
         >
           <xr-particle
             material="particle-mat"
