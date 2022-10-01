@@ -9,7 +9,7 @@
     bind:showNote="handleShowNote"
   />
 
-  <block wx:for="{{texts}}" wx:for-item="text" wx:key="*this">
+  <block wx:for="{{texts}}" wx:for-item="text" wx:key="id">
     <view style="display: block; width: 218px; position: absolute;left: {{text.x}}px;top: {{text.y}}px;transform: translate(-50%, -50%);">
       <view style="display: inlin-block;background: rgba(44, 44, 44, 0.5);text-align: center;color: white;font-size: 16px;padding: 8px;word-break: break-all;">{{text.content}}</view>
     </view>

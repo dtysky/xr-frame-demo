@@ -31,7 +31,7 @@ Page({
     }
 
     lastCount += 1;
-    if (Math.random() >= (0.2 + lastCount * 0.1)) {
+    if (Math.random() >= (0.3 + lastCount * 0.1)) {
       return;
     }
 
@@ -55,11 +55,11 @@ Page({
               url: root + '/pages/scene-last-record/index',
               success: () => {
                 wx.reportEvent("xr_frame", {
-                  "xr_page_path": path,
+                  "xr_page_path": '/pages/scene-last-record/index',
                   "xr_last_record_click": lastCount
                 });
               },
-              fail: () => {
+              fail: (err) => {
                 lastOpened = false;
               },
             });

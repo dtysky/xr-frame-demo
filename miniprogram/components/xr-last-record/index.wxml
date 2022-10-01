@@ -6,11 +6,12 @@
     <xr-asset-load type="gltf" asset-id="loading" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/loading.glb" />
     <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
     <xr-asset-load type="gltf" asset-id="butterfly" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/butterfly/index.glb" />
+    <xr-asset-load type="gltf" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/sky.glb" />
     <xr-asset-load type="gltf" asset-id="office" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-record.glb" />
     <xr-asset-load type="gltf" asset-id="hikari" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/hikari.gltf" />
     <xr-asset-load type="gltf" asset-id="roam" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/roam.gltf" />
     <xr-asset-load type="gltf" asset-id="xinyi" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/xinyi.gltf" />
-    <xr-asset-load type="texture" asset-id="particle-point" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/flare.png" />
+    <xr-asset-load type="texture" asset-id="particle-point" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/point.png" />
     <xr-asset-material asset-id="particle-mat" effect="particle" />
   </xr-assets>
   <xr-node>
@@ -31,36 +32,35 @@
 
     <xr-node id="setitem" node-id="setitem" visible="false">
       <xr-gltf
-        id="scene-mesh" model="office"
+        id="sky" model="sky"
         states="cullOn: false, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+      />
+
+      <xr-gltf
+        id="scene-mesh" model="office"
+        states="stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
       />
 
       <xr-gltf id="hikari"
         position="-0.192 0.073 -5.403" rotation="0 106 0" model="hikari"
-        anim-autoplay="clip:Sitting" capsule-shape="height:1.2;raduis:0.3;center:0 0.6 0"
-        states="cullOn: false, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+        anim-autoplay="clip:Sitting" cube-shape="height:1;raduis:0.2;center:0 0.7 0"
+        states="stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
         bind:touch-shape="handleTouchObj"
       />
 
       <xr-gltf id="roam"
         position="-2.404 0.015 -5.152" rotation="0 -84 0" model="roam"
-        anim-autoplay="clip:Sitting" capsule-shape="height:1.2;raduis:0.3;center:0 0.6 0"
-        states="cullOn: false, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+        anim-autoplay="clip:Sitting" capsule-shape="height:1;raduis:0.2;center:0 0.7 0"
+        states="stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
         bind:touch-shape="handleTouchObj"
       />
 
       <xr-gltf id="xinyi"
         position="-0.883 0.089 -7.118" rotation="0 -60 0" model="xinyi"
-        anim-autoplay="clip:Sitting" capsule-shape="height:1.2;raduis:0.3;center:0 0.6 0"
-        states="cullOn: false, stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
+        anim-autoplay="clip:Sitting" capsule-shape="height:1;raduis:0.2;center:0 0.7 0"
+        states="stencilComp: 3, stencilRef: 1, stencilReadMask: 1"
         bind:touch-shape="handleTouchObj"
       />
-
-      <!-- <xr-particle
-        wx:if="{{gateClosed}}" material="particle-mat" position="1 1 0"
-        props="capacity:2000, emitRate:1000, minSize:0.1, maxSize:0.1, minLifeTime:1, maxLifeTime:1, particleEmitterType:SphereShape, particleEmitterStates:radius=1 radiusRange=0"
-        uniforms="u_baseColorMap:flarePicture"
-      /> -->
 
       <xr-node
         id="hikari-keyboard" position="-0.865 0.782 -5.251" rotation="0 9 0"
@@ -79,6 +79,14 @@
         cube-shape="size:0.3 0.05 0.15" bind:touch-shape="handleTouchObj"
       />
       <xr-node
+        id="hikari-calendar" position="-0.798 0.8 -4.674" rotation="0 111 0"
+        cube-shape="size:0.2 0.05 0.1" bind:touch-shape="handleTouchObj"
+      />
+      <xr-node
+        id="hikari-drinks" position="-0.617 0.795 -4.749" rotation="0 52 0"
+        cube-shape="size:0.15 0.1 0.1" bind:touch-shape="handleTouchObj"
+      />
+      <xr-node
         id="chair" position="-0.413 0.638 -4.054" rotation="0 3 0"
         cube-shape="size:0.4 0.5 0.3" bind:touch-shape="handleTouchObj"
       />
@@ -91,12 +99,36 @@
         cube-shape="size:0.2 0.05 0.3" bind:touch-shape="handleTouchObj"
       />
       <xr-node
+        id="roam-monitor" position="-1.577 1.085 -4.565" rotation="0 143 0"
+        cube-shape="size:0.05 0.4 0.5" bind:touch-shape="handleTouchObj"
+      />
+      <xr-node
         id="xinyi-desktop" position="-0.181 0.787 -7.306" rotation="0 10 0"
         cube-shape="size:0.33 0.06 0.67" bind:touch-shape="handleTouchObj"
       />
       <xr-node
         id="xinyi-plant" position="0.164 0.896 -7.923" rotation="0 10 0"
         cube-shape="size:0.33 0.3 0.3" bind:touch-shape="handleTouchObj"
+      />
+      <xr-node
+        id="xinyi-plant" position="0.164 0.896 -7.923" rotation="0 10 0"
+        cube-shape="size:0.33 0.3 0.3" bind:touch-shape="handleTouchObj"
+      />
+      <xr-node
+        id="xinyi-box" position="-0.254 0.282 -8.048" rotation="0 0 0"
+        cube-shape="size:0.5 0.5 0.5" bind:touch-shape="handleTouchObj"
+      />
+      <xr-node
+        id="disorder-desktop" position="-1.181 0.906 -4.05" rotation="0 272 0"
+        cube-shape="size:0.5 0.3 0.65" bind:touch-shape="handleTouchObj"
+      />
+      <xr-node
+        id="fan" position="-2.179 0.459 -4.022" rotation="0 272 0"
+        cube-shape="size:0.3 1 0.3" bind:touch-shape="handleTouchObj"
+      />
+      <xr-node
+        id="face-mask" position="-4.124 0.795 -4.512" rotation="0 286 0"
+        cube-shape="size:0.2 0.05 0.3" bind:touch-shape="handleTouchObj"
       />
       <xr-node
         id="oscilloscope" position="-1.729 0.875 -4.084" rotation="0 25 0"
@@ -122,6 +154,46 @@
         id="note" position="-0.721 0.747 -5.007" rotation="0 16 0"
         cube-shape="size:0.2 0.02 0.1" bind:touch-shape="handleTouchNote"
       />
+
+      <xr-node wx:if="{{gateClosed}}">
+        <xr-particle
+          material="particle-mat" position="-2.2 0.2 -5"
+          capacity="2000" emit-rate="40" never-cull
+          size="0.06 0.12" life-time="15 20" speed="0.2 0.4"
+          start-color="1 1 1 0.6" start-color2="1 1 1 0.6" end-color="1 1 1 0.2"
+          emitter-type="BoxShape"
+          emitter-props="minEmitBox:-20 0 -20,maxEmitBox:20 0 20,direction:0 1 0,direction2:0 1 0"
+          uniforms="u_baseColorMap:particle-point"
+        />
+        <xr-node
+          id="oberon" position="0 1.2 1" rotation="0 0 0"
+          cube-shape="size:0.5 0.5 0.5" bind:touch-shape="handleTouchObj"
+        >
+          <xr-particle
+            material="particle-mat"
+            capacity="1000" emit-rate="80" never-cull
+            size="0.01 0.03" life-time="1.5 2" speed="0.04 0.08"
+            start-color="0.5 0.9 0.6 0.7" start-color2="0.5 0.9 0.6 0.7" end-color="0.5 0.9 0.6 0.3"
+            emitter-type="SphereShape"
+            emitter-props="radius:0.05,randomizeDirection:0"
+            uniforms="u_baseColorMap:particle-point"
+          />
+        </xr-node>
+        <xr-node
+          id="noname" position="-1 1.2 1" rotation="0 0 0"
+          cube-shape="size:0.5 0.5 0.5" bind:touch-shape="handleTouchObj"
+        >
+          <xr-particle
+            material="particle-mat"
+            capacity="1000" emit-rate="80" never-cull
+            size="0.01 0.03" life-time="1.5 2" speed="0.04 0.08"
+            start-color="0.5 0.6 0.9 0.7" start-color2="0.5 0.6 0.9 0.7" end-color="0.5 0.6 0.9 0.3"
+            emitter-type="SphereShape"
+            emitter-props="radius:0.05,randomizeDirection:0"
+            uniforms="u_baseColorMap:particle-point"
+          />
+        </xr-node>
+      </xr-node>
 
       <xr-node id="door" position="0 1 0">
         <xr-mesh

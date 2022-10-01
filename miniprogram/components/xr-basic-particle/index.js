@@ -21,23 +21,23 @@ Component({
   lifetimes: {},
   methods: {
     handleReady({detail}) {
-      const xrScene = this.scene = detail.value;
-      console.log('xr-scene', xrScene);
-      const xrFrameSystem = wx.getXrFrameSystem()
+      // const xrScene = this.scene = detail.value;
+      // console.log('xr-scene', xrScene);
+      // const xrFrameSystem = wx.getXrFrameSystem()
 
-      const colorRemap = xrScene.getElementById("colorRemapParticle");
-      const sphere = xrScene.getElementById("sphereParticle");
+      // const colorRemap = xrScene.getElementById("colorRemapParticle");
+      // const sphere = xrScene.getElementById("sphereParticle");
 
       
-      colorRemap.getComponent(xrFrameSystem.Particle).useRampGradients = true;
-      colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.0, xrFrameSystem.Vector3.createFromNumber(1.0, 1.0, 1.0));
-      colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.2, xrFrameSystem.Vector3.createFromNumber(0.8, 0.8, 0.05));
-      colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.4, xrFrameSystem.Vector3.createFromNumber(0.86, 0.5, 0.05));
-      colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.6, xrFrameSystem.Vector3.createFromNumber(0.75, 0.18, 0.07));
-      colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.8, xrFrameSystem.Vector3.createFromNumber(0.45, 0.08, 0.06));
-      colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(1.0, xrFrameSystem.Vector3.createFromNumber(0.05, 0.05, 0.05));
+      // colorRemap.getComponent(xrFrameSystem.Particle).useRampGradients = true;
+      // colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.0, xrFrameSystem.Vector3.createFromNumber(1.0, 1.0, 1.0));
+      // colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.2, xrFrameSystem.Vector3.createFromNumber(0.8, 0.8, 0.05));
+      // colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.4, xrFrameSystem.Vector3.createFromNumber(0.86, 0.5, 0.05));
+      // colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.6, xrFrameSystem.Vector3.createFromNumber(0.75, 0.18, 0.07));
+      // colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(0.8, xrFrameSystem.Vector3.createFromNumber(0.45, 0.08, 0.06));
+      // colorRemap.getComponent(xrFrameSystem.Particle).addRampGradient(1.0, xrFrameSystem.Vector3.createFromNumber(0.05, 0.05, 0.05));
 
-      sphere.getComponent(xrFrameSystem.Particle).createSphereEmitter(1, 0, 360, 0)
+      // sphere.getComponent(xrFrameSystem.Particle).createSphereEmitter(1, 0, 360, 0)
 
 
       // particle.getComponent(xrFrameSystem.Particle).subEmitters = [particle.getComponent(xrFrameSystem.Particle).createSubEmitter(

@@ -7,8 +7,8 @@ Component({
     arReady: false,
   },
   lifetimes: {
-    async attached() {
-      console.log('data', this.data);
+    detached() {
+      wx.setKeepScreenOn({keepScreenOn: false});
     }
   },
   methods: {
@@ -108,6 +108,7 @@ Component({
         this.scene.ar.placeHere('setitem', true);
         this.scene.getElementById('anchor').getComponent(wx.getXrFrameSystem().Transform).setData({visible: false});
         this.placed = true;
+        wx.setKeepScreenOn({keepScreenOn: true});
       }
     },
   }

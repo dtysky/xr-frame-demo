@@ -9,8 +9,9 @@ Component({
     gateClosed: false
   },
   lifetimes: {
-    async attached() {
-      console.log('data', this.data);
+    detached() {
+      this.bgm.stop();
+      wx.setKeepScreenOn({keepScreenOn: false});
     }
   },
   methods: {
@@ -67,7 +68,7 @@ Component({
       // mainCam: scene -> stencil
       // magicCam: ar
       door.setData({visible: false});
-      ['scene-mesh', 'hikari', 'roam', 'xinyi'].forEach(id => {
+      ['sky', 'scene-mesh', 'hikari', 'roam', 'xinyi'].forEach(id => {
         this.scene
           .getElementById(id)
           .getComponent(xrSystem.GLTF).meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
@@ -76,6 +77,7 @@ Component({
       this.inRealWorld = false;
     },
     handleShowDoor() {
+      wx.setKeepScreenOn({keepScreenOn: true});
       this.scene.ar.placeHere('setitem', true);
       this.bgm.play();
       this.setData({placed: true});
@@ -105,7 +107,7 @@ Component({
 
       const {y, d, texts: records} = this.records[id];
 
-      if (distance > (d || 2)) {
+      if (distance > (d || 1.5)) {
         return;
       }
 
@@ -140,7 +142,7 @@ Component({
         const {frameWidth, frameHeight} = this.scene;
   
         return {
-          content,
+          content, id,
           x: ((clipPos.x + 1) / 2) * frameWidth,
           y: (1 - (clipPos.y + 1) / 2) * frameHeight
         };
