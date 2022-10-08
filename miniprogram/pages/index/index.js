@@ -31,9 +31,9 @@ Page({
     }
 
     lastCount += 1;
-    if (Math.random() >= (0.34 + lastCount * 0.1)) {
-      return;
-    }
+    // if (Math.random() >= (0.34 + lastCount * 0.1)) {
+    //   return;
+    // }
 
     let root = this.data.root;
     lastOpened = true;
