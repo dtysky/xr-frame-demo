@@ -1,12 +1,21 @@
+<!--
+ * @Description: 
+ * @version: 
+ * @Author: lucaschu(lucaschu@tencent.com)
+ * @Date: 2022-10-09 15:47:31
+ * @LastEditors: lucaschu
+ * @LastEditTime: 2022-10-09 15:53:46
+-->
 <xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets>
     <xr-asset-material asset-id="standard-mat" effect="standard" />
     <xr-asset-material asset-id="particle-mat" effect="particle" />
-    <xr-asset-load type="texture" asset-id="flarePicture" src="/assets/textures/index/flare.png" />
+    <xr-asset-load type="texture" asset-id="flarePicture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/flare.png" />
     <xr-asset-load type="texture" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/dark-cosmos.jpg" />
-    <xr-asset-load type="texture" asset-id="blue-texture" src="/assets/textures/index/plane.png" />
-    <xr-asset-load type="texture" asset-id="particle-point" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/point.png" />
-    <xr-asset-material asset-id="blue-mat" effect="standard" uniforms="u_baseColorMap: particle-point" />
+    <xr-asset-load type="texture" asset-id="blue-texture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/plane.png" />
+    <xr-asset-load type="texture" asset-id="particle-texture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/point.png" />
+    <xr-asset-load type="texture" asset-id="lightray" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/lightray.png" />
+    <xr-asset-material asset-id="blue-mat" effect="standard" uniforms="u_baseColorMap: blue-texture" />
   </xr-assets>
   <xr-node>
     <xr-mesh node-id="mesh-plane" position="0 -1 0" rotation="0 0 0" scale="5 0.2 5"
@@ -14,29 +23,22 @@
     ></xr-mesh>
     <xr-env sky-map="sky" is-sky2d/>
 
-    <!-- case billboard stretched test-->
-    <!-- <xr-particle material="particle-mat" properties="capacity:20, emitRate:5, minLifeTime:3, maxLifeTime:3, particleEmitterType:PointShape" uniforms="u_baseColorMap:flarePicture"></xr-particle> -->
+    <xr-particle id="sphere-emitter" position="2 1 2" material="particle-mat" capacity="20" emit-rate="10" life-time="1.5 2" start-color="0 1 0 1" start-color2="0 1 0 1" end-color="1 1 0 1" speed="0.3 0.5" size="0.3 0.5" emitter-type="SphereShape" emitter-props="radius:1,radiusRange:0" uniforms="u_baseColorMap:particle-texture"></xr-particle>
 
-    <!-- case colorRampGradient test-->
-    <xr-particle
-      never-cull
-      material="particle-mat" position="0 -1 0"
-      capacity="1000" emit-rate="40"
-      size="0.04 0.1" life-time="10 15" speed="0.2 0.4"
-      start-color="1 1 1 0.6" start-color2="1 1 1 0.6" end-color="1 1 1 0.2"
-      emitter-type="BoxShape"
-      emitter-props="minEmitBox:-5 0 -5,maxEmitBox:5 0 5,direction:0 1 0,direction2:0 1 0"
-      uniforms="u_baseColorMap:particle-point"
-    />
+    <xr-particle id="size-change" position="-2 0 2" material="particle-mat" capacity="20" emit-rate="5" life-time="3 3" start-color="0 1 1 1" start-color2="0 1 1 1" end-color="0 1 1 1" size="0.1 0.1" emitter-type="BoxShape" uniforms="u_baseColorMap:particle-texture"></xr-particle>
 
-    <!-- case sphereEmitter test-->
-    <!-- <xr-particle id="sphereParticle" material="particle-mat" position="1 1 0" properties="capacity:2000, emitRate:1000, minSize:0.1, maxSize:0.1, minLifeTime:1, maxLifeTime:1, particleEmitterType:SphereShape, particleEmitterStates:radius=1 radiusRange=0" uniforms="u_baseColorMap:flarePicture"></xr-particle> -->
+    <xr-particle id="lightray" position="0 0 0" material="particle-mat" capacity="50" emit-rate="20" billboard="stretched" life-time="1 1" start-color="1 1 0 1" start-color2="1 1 0 1" speed="0.1 0.1" end-color="1 1 0 1" size="0.5 0.5" emitter-type="SphereShape" emitter-props="radius:1,radiusRange:0" uniforms="u_baseColorMap:lightray"></xr-particle>
 
-    <!-- case human face test -->
-    <!-- <xr-particle material="particle-mat" properties="emitter:-2 0 0, capacity:3000, emitRate:2000, minSize:0.025, maxSize:0.025, startColor:1 1 1 0, startColor2:1 0 0 0, endColor:1 1 0 0, particleEmitterType:DrawShape" uniforms="u_baseColorMap:flarePicture"></xr-particle> -->
+    <!-- <xr-particle id="standard" position="2 0 -2" material="particle-mat" capacity="{{capacity}}" emit-rate="{{emitRate}}" life-time="{{lifeTime}} {{lifeTime}}" start-color="1 0 0 1" start-color2="1 0 0 1" end-color="1 0 0 1" emitter-type="BoxShape" uniforms="u_baseColorMap:particle-texture"></xr-particle> -->
+
+    <xr-particle id="billboard-off" position="2 0 -2" material="particle-mat" billboard="off" capacity="20" emit-rate="5" life-time="3 3" start-color="1 0 0 1" start-color2="1 0 0 1" end-color="1 0 0 1" emitter-type="BoxShape" uniforms="u_baseColorMap:particle-texture"></xr-particle>
+
+    <xr-particle id="human-face" position="-3 0 -2" material="particle-mat" capacity="3000" emit-rate="2000" size="0.1 0.1" start-color="1 1 1 0" start-color2="1 1 1 0" emitter-type="BoxShape" 
+    emitter-props="" uniforms="u_baseColorMap:particle-texture"></xr-particle>
+
    
     <xr-camera
-      id="camera" node-id="camera" position="0 4 -4" clear-color="0.1 0.1 0.1 1"
+      id="camera" node-id="camera" position="0 6 -6" clear-color="0.1 0.1 0.1 1"
       target="mesh-plane" background="skybox"
       camera-orbit-control=""
     ></xr-camera>
