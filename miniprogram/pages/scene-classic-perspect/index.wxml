@@ -1,6 +1,7 @@
 <xr-demo-viewer
   title="扫描图片模型透视案例"
   intro="基于 Stencil裁剪 实现的基本模型透视效果案例. Model from SketchFab By @Omar Faruq Tawsif"
+  hint="默认扫描图片见官网开发文档\n组件 -> xr-frame -> 示例"
 >
   <xr-classic-perspect
     disable-scroll
@@ -10,8 +11,4 @@
     style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
   />
 
-  <text style="display:block;width:100%;color:red;text-align:center;">
-    默认扫描图片见官网开发文档
-    组件->xr-frame->示例
-  </text>
 </xr-demo-viewer>
