@@ -48,6 +48,9 @@ Page({
           cancelText: '放下钥匙',
           success: function(res) {
             if (res.cancel) {
+              wx.onAppShow((result) => {
+                lastOpened = false;
+              });
               return;
             }
 
@@ -58,10 +61,11 @@ Page({
                   "xr_page_path": '/pages/scene-last-record/index',
                   "xr_last_record_click": lastCount
                 });
-              },
-              fail: (err) => {
-                lastOpened = false;
-              },
+
+                wx.onAppShow((result) => {
+                  lastOpened = false;
+                });
+              }
             });
           }
         });
