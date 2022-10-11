@@ -4,7 +4,7 @@ var xmlCode = ``;
 Page({
   behaviors:[sceneReadyBehavior],
   data: {
-    xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
+    xmlCode: '',
     loaded: false,
     run: false,
     positions: [[0, 0, '瞬光'], [0, 0, 'roam'], [0, 0, 'xinyi']],

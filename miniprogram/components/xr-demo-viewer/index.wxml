@@ -6,6 +6,11 @@
       <view class="description" >{{intro}}</view>
     </view>
   </view>
+  <view wx:if="{{hint.length > 0}}">
+    <view class="hint-wrap">
+      <text class="hint-words" >{{hint}}</text>
+    </view>
+  </view>
   <view wx:if="{{code.length > 0}}">
     <view class="intro">
       <view class="intro-detail">
@@ -36,5 +41,6 @@
       </view>
     </view>
   </view>
+  
   <view class="holder"></view>
 </scroll-view>

@@ -10,6 +10,19 @@
   height: 60rpx;
 }
 
+.hint-wrap {
+  text-align: center;  
+}
+
+.hint-words {
+  display: inline-block;
+  color: red;
+  text-align:center;
+  font-weight:bold;
+  padding: 10px 40px;
+  border: 1px dashed #000;
+}
+
 .intro {
   display: block;
   margin: 20rpx 0;
@@ -29,6 +42,7 @@
 .intro-detail {
   padding: 30rpx;
 }
+
 
 .code-inner {
   margin: 0rpx;

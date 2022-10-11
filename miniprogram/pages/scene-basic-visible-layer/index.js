@@ -6,7 +6,7 @@ var xmlCode = ``;
 Page({
   behaviors:[sceneReadyBehavior],
   data: {
-    xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
+    xmlCode: '',
     visibleIndex: 1,
     cullMask: 0b011
   },

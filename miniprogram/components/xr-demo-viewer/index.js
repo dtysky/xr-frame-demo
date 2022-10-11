@@ -8,6 +8,10 @@ Component({
       type: String,
       value: '',
     },
+    hint: {
+      type: String,
+      value: '',
+    },
     code: {
       type: String,
       value: '',

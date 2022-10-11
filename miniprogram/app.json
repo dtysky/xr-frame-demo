@@ -28,7 +28,8 @@
     "pages/scene-classic-perspect/index",
     "pages/scene-classic-portal/index",
     "pages/scene-classic-osd/index",
-    "pages/scene-last-record/index"
+    "pages/scene-last-record/index",
+    "pages/scene-roam-portal/index"
   ],
   "usingComponents": {
   },
