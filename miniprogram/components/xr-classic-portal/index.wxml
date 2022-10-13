@@ -4,7 +4,6 @@
     <xr-asset-load type="gltf" asset-id="gltf-model" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ship_in_clouds/scene.gltf" />
     <xr-asset-material asset-id="mat" effect="simple" />
   </xr-assets>
-  <xr-env env-data="xr-frame-team-workspace-day" />
   <xr-node wx:if="{{loaded}}">
     <xr-ar-tracker mode="Plane">
       <xr-gltf id="anchor" model="anchor" />
