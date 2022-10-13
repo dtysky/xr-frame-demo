@@ -195,10 +195,13 @@
         </xr-node>
       </xr-node>
 
-      <xr-node id="door" position="0 1 0">
+      <xr-node
+        wx:if="{{placed && !gateClosed}}" id="door" position="0 1 0" scale="0 0 0"
+        anim-keyframe="anchor" anim-autoplay="clip:door,delay:0.6"
+      >
         <xr-mesh
           id="door-mesh" rotation="90 0 0" scale="0.8 1 1.6"
-          geometry="plane" material="mat"
+          geometry="plane"
           states="renderQueue: 1, stencilComp: 7, stencilRef: 1, stencilReadMask: 1, stencilWriteMask: 1, stencilPass: 1, stencilFail: 2, stencilZFail: 2"
         />
       </xr-node>

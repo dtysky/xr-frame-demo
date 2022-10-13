@@ -67,7 +67,6 @@ Component({
       // 虚拟世界
       // mainCam: scene -> stencil
       // magicCam: ar
-      door.setData({visible: false});
       ['sky', 'scene-mesh', 'hikari', 'roam', 'xinyi'].forEach(id => {
         this.scene
           .getElementById(id)

@@ -12,6 +12,7 @@ Component({
   },
   methods: {
     handleReady: function({detail}) {
+      this.scene = detail.value;
       console.log('scene', detail.value);
     },
     handleAssetsProgress: function({detail}) {

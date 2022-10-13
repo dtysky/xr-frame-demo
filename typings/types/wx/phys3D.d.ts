@@ -30,9 +30,9 @@ declare namespace phys3D {
     SetCollisionMask: (mask: ArrayBuffer) => void;
     Raycast: (origin: RawVec3f, unitDir: RawVec3f, distance: number, hit: RaycastHit, layerMask?: number, queryTriggerInteraction?: QueryTriggerInteraction) => boolean;
     RaycastAll: (origin: RawVec3f, unitDir: RawVec3f, distance: number, layerMask?: number, queryTriggerInteraction?: QueryTriggerInteraction) => RaycastHit[];
-    CapsuleCast(p1: RawVec3f, p2: RawVec3f, radius: number, direction: RawVec3f, hit: RaycastHit, maxDistance: number, layerMask?: number, queryTriggerInteraction?: QueryTriggerInteraction);
+    CapsuleCast(p1: RawVec3f, p2: RawVec3f, radius: number, direction: RawVec3f, hit: RaycastHit, maxDistance: number, layerMask?: number, queryTriggerInteraction?: QueryTriggerInteraction): void;
     CapsuleCastAll: (p1: RawVec3f, p2: RawVec3f, radius: number, direction: RawVec3f, maxDistance: number, layerMask?: number, queryTriggerInteraction?: QueryTriggerInteraction) => RaycastHit[];
-    BoxCast(center: RawVec3f, halfExt: RawVec3f, direction: RawVec3f, hit: RaycastHit, orientation: RawQuaternion, maxDistance: number, layerMask?: number, queryTriggerInteraction?: QueryTriggerInteraction);
+    BoxCast(center: RawVec3f, halfExt: RawVec3f, direction: RawVec3f, hit: RaycastHit, orientation: RawQuaternion, maxDistance: number, layerMask?: number, queryTriggerInteraction?: QueryTriggerInteraction): void;
     BoxCastAll: (center: RawVec3f, halfExt: RawVec3f, direction: RawVec3f, orientation: RawQuaternion, maxDistance: number, layerMask?: number, queryTriggerInteraction?: QueryTriggerInteraction) => RaycastHit[];
     OverlapBox: (center: RawVec3f, halfExt: RawVec3f, orientation: RawQuaternion, layermask?: number, queryTriggerInteraction?: QueryTriggerInteraction) => Collider[];
     OverlapCapsule: (p1: RawVec3f, p2: RawVec3f, radius: number, layermask?: number, queryTriggerInteraction?: QueryTriggerInteraction) => Collider[];
@@ -44,8 +44,8 @@ declare namespace phys3D {
     position: RawVec3f;
     rotation: RawQuaternion;
     AttachToEntity: (pollObj: any, id: number) => void;
-    Remove();
-    Detach();
+    Remove(): void;
+    Detach(): void;
     IsAttached(): boolean;
   }
 
@@ -124,8 +124,8 @@ declare namespace phys3D {
     scale    : RawVec3f;
     material?: Material;
     sharedMateiral?: Material;
-    ClosestPoint: (RawVec3f) => RawVec3f;
-    ClosestPointOnBounds: (RawVec3f) => RawVec3f;
+    ClosestPoint: (raw: RawVec3f) => RawVec3f;
+    ClosestPointOnBounds: (raw: RawVec3f) => RawVec3f;
 
     onCollisionEnter?: (collision: Collision) => void;
     onCollisionExit?: (collision: Collision) => void;
@@ -157,6 +157,7 @@ declare namespace phys3D {
     center: RawVec3f;
     height: number;
     radius: number;
+    direction: number;
   }
 
   export class MeshCollider extends Collider {

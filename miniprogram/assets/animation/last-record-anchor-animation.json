@@ -18,6 +18,14 @@
       "100": {
         "position.y": 0.8
       }
+    },
+    "door": {
+      "0": {
+        "scale": [0, 1, 1]
+      },
+      "100": {
+        "scale": [1, 1, 1]
+      }
     }
   },
   "animation": {
@@ -33,6 +41,11 @@
       "ease": "linear",
       "direction": "both",
       "loop": -1
+    },
+    "door": {
+      "keyframe": "door",
+      "duration": 1.5,
+      "ease": "linear"
     }
   }
 }
