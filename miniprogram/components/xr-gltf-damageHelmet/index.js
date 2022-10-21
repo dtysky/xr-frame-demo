@@ -21,13 +21,6 @@ Component({
     handleAssetsLoaded: function({detail}) {
       console.log('assets loaded', detail.value);
       this.setData({loaded: true});
-      // setTimeout(() => {
-      //   const uri = this.scene.share.captureToDataURL();
-      //   console.log('wwwwwwwwwwww')
-      //   const t = Date.now();
-      //   this.scene.share.captureToArrayBuffer();
-      //   console.log('xxxxxxxxx', Date.now() - t, this.scene.width, this.scene.height, uri.length, uri.split(',', 2)[0]);
-      // }, 2000);
     },
     handleRaf: function({detail}) {
       console.log('raf', detail.value);

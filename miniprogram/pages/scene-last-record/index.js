@@ -4,6 +4,12 @@ Page({
     renderWidth: 300, renderHeight: 300,
     texts: []
   },
+  onShow() {
+    wx.hideHomeButton();
+  },
+  onHide() {
+    wx.showHomeButton();
+  },
   onLoad() {
     const info = wx.getSystemInfoSync();
     const width = info.windowWidth;

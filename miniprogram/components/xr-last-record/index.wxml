@@ -1,4 +1,4 @@
-<xr-scene ar-system="modes:Plane" id="xr-scene" bind:ready="handleReady" bind:tick="handleTick" bind:ar-ready="handleARReady" bind:pause="handlePause" bind:resume="handleResume">
+<xr-scene ar-system="modes:Plane" id="xr-scene" bind:ready="handleReady" bind:ar-ready="handleARReady" bind:pause="handlePause" bind:resume="handleResume">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load type="raw" asset-id="records" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-record.json" options="encoding:utf-8" />
     <xr-asset-load type="raw" asset-id="note" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-note.txt" options="encoding:utf-8" />
@@ -6,27 +6,27 @@
     <xr-asset-load type="gltf" asset-id="loading" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/loading.glb" />
     <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
     <xr-asset-load type="gltf" asset-id="butterfly" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/butterfly/index.glb" />
-    <xr-asset-load type="gltf" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/sky.glb" />
-    <xr-asset-load type="gltf" asset-id="office" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-record.glb" />
-    <xr-asset-load type="gltf" asset-id="hikari" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/hikari.gltf" />
-    <xr-asset-load type="gltf" asset-id="roam" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/roam.gltf" />
-    <xr-asset-load type="gltf" asset-id="xinyi" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/xinyi.gltf" />
+    <xr-asset-load type="gltf" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/sky-unlit.glb" />
+    <xr-asset-load type="gltf" asset-id="office" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-record-unlit.glb" />
+    <xr-asset-load type="gltf" asset-id="hikari" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/hikari-unlit.glb" />
+    <xr-asset-load type="gltf" asset-id="roam" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/roam-unlit.glb" />
+    <xr-asset-load type="gltf" asset-id="xinyi" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/xinyi-unlit.glb" />
     <xr-asset-load type="texture" asset-id="particle-point" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/point.png" />
-    <xr-asset-material asset-id="particle-mat" effect="particle" />
   </xr-assets>
   <xr-node>
-    <xr-ar-tracker mode="Plane">
-      <xr-node wx:if="{{loaded && !placed}}" node-id="anchor" anim-keyframe="anchor" anim-autoplay="clip:parent">
-        <xr-gltf model="anchor" bind:touch-shape="handleShowDoor" cube-shape="autoFit:true" />
-        <xr-node
-          position="0 0 0.3" rotation="0 180 0" scale="0.3 0.3 0.3"
-          anim-keyframe="anchor" anim-autoplay="clip:child"
-        >
-          <xr-gltf
-            model="butterfly" anim-autoplay
-            bind:touch-shape="handleShowDoor" cube-shape="autoFit:true"
-          />
-        </xr-node>
+    <xr-ar-tracker wx:if="{{loaded && !placed}}" mode="Plane" visible="false">
+      <xr-node node-id="anchor" anim-keyframe="anchor" anim-autoplay="clip:parent">
+        <xr-gltf model="anchor" />
+        <xr-particle
+          position="0 0.8 0"
+          cube-shape="size:0.8 1.6 0.8" bind:touch-shape="handleShowDoor"
+          capacity="4000" emit-rate="20" never-cull
+          size="0.01 0.03" life-time="2.5 5" speed="0.2 0.4"
+          start-color="1 1 1 0.8" end-color="1 1 1 0.2"
+          emitter-type="BoxShape"
+          emitter-props="minEmitBox:-0.15 -0.8 -0.15,maxEmitBox:0.15 -0.6 0.15,direction:0 1 0,direction2:0 1 0"
+          atlas="numbers" atlas-frames="0 1" atlas-speed="4" atlas-random
+        />
       </xr-node>
     </xr-ar-tracker>
 
@@ -163,7 +163,7 @@
           start-color="1 1 1 0.6" start-color2="1 1 1 0.6" end-color="1 1 1 0.2"
           emitter-type="BoxShape"
           emitter-props="minEmitBox:-20 0 -20,maxEmitBox:20 0 20,direction:0 1 0,direction2:0 1 0"
-          uniforms="u_baseColorMap:particle-point"
+          texture="particle-point"
         />
         <xr-node
           id="oberon" position="0 1.2 1" rotation="0 0 0"
@@ -176,7 +176,7 @@
             start-color="0.5 0.9 0.6 0.7" start-color2="0.5 0.9 0.6 0.7" end-color="0.5 0.9 0.6 0.3"
             emitter-type="SphereShape"
             emitter-props="radius:0.05,randomizeDirection:0"
-            uniforms="u_baseColorMap:particle-point"
+            texture="particle-point"
           />
         </xr-node>
         <xr-node
@@ -190,14 +190,13 @@
             start-color="0.5 0.6 0.9 0.7" start-color2="0.5 0.6 0.9 0.7" end-color="0.5 0.6 0.9 0.3"
             emitter-type="SphereShape"
             emitter-props="radius:0.05,randomizeDirection:0"
-            uniforms="u_baseColorMap:particle-point"
+            texture="particle-point"
           />
         </xr-node>
       </xr-node>
 
       <xr-node
         wx:if="{{placed && !gateClosed}}" id="door" position="0 1 0" scale="0 0 0"
-        anim-keyframe="anchor" anim-autoplay="clip:door,delay:0.6"
       >
         <xr-mesh
           id="door-mesh" rotation="90 0 0" scale="0.8 1 1.6"
@@ -207,9 +206,21 @@
       </xr-node>
     </xr-node>
 
+    <xr-element>
+      <xr-asset-post-process asset-id="blur" type="blur" data="radius:0" />
+      <xr-asset-post-process
+        asset-id="vignette" type="vignette"
+        data="intensity:0,smoothness:2,color:0.1 0.1 0.1 1"
+      />
+      <xr-camera
+        id="ar-bg-camera" cull-mask="0"
+        background="ar" post-process="blur vignette"
+      />
+    </xr-element>
+
     <xr-camera
       id="main-camera" near="0.1" far="2000"
-      background="ar" is-ar-camera
+      is-ar-camera is-clear-color="false"
     >
       <xr-gltf wx:if="{{arReady && !loaded}}" position="0 0 10" model="loading" anim-autoplay />
     </xr-camera>

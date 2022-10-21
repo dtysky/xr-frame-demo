@@ -1,7 +1,6 @@
 Component({
   scene: null,
-  properties: {
-  },
+  properties: {},
   data: {
     loaded: false,
     arReady: false,
@@ -17,6 +16,7 @@ Component({
   methods: {
     handleReady({detail}) {
       this.scene = detail.value;
+      this.scene.event.add('tick', this.handleTick.bind(this));
       this.inRealWorld = true;
       this.texts = {};
       this.textsIndex = {};
@@ -36,7 +36,7 @@ Component({
       this.note = this.scene.assets.getAsset('raw', 'note');
       this.setData({loaded: true});
     },
-    handleTick() {
+    handleTick(dt) {
       this.syncTexts();
 
       if (!this.data.placed || !this.inRealWorld) {
@@ -58,15 +58,47 @@ Component({
       const dis = diff.length();
       const preDis = preDiff.length();
       const dir = forward.dot(diff);
+      this.startDis = this.startDis || dis;
+
+      const blurAsset = this.scene.assets.getAsset('post-process', 'blur');
+      const vignetteAsset = this.scene.assets.getAsset('post-process', 'vignette');
+      const edgeEnv1 = 0.5;
+      const edgeEnv2 = 0.8;
+      const edgeDoor1 = 0.3;
+      const edgeDoor2 = 0.7;
+
+      if (this.blurDuration) {
+        this.blurDuration = Math.max(0, this.blurDuration - dt);
+        const p = 1 - this.blurDuration / this.blurTotal;
+
+        if (p <= edgeEnv1) {
+          const progress = xrSystem.noneParamsEaseFuncs['ease-in-out'](p / edgeEnv1);
+          vignetteAsset.data.intensity = progress * 1.5;
+          blurAsset.data.radius = progress * 86 + 10;
+        } else if (p > edgeEnv2) {
+          const progress = xrSystem.noneParamsEaseFuncs['ease-in-out']((1 - p) / (1 - edgeEnv2));
+          vignetteAsset.data.intensity = progress * 1.5;
+          blurAsset.data.radius = progress * 96;
+        }
+        
+        if (p >= edgeDoor1 && p < edgeDoor2) {
+          const progress = xrSystem.noneParamsEaseFuncs['ease-in-out']((p - edgeDoor1) / (edgeDoor2 - edgeDoor1));
+          door.scale.setValue(progress, 1, 1);
+        }
+      } else if (this.blurTotal) {
+        let progress = (1 - Math.max(0, Math.min(dis / this.startDis, 0.8)));
+        if (progress >= 0.2) {
+          progress = (progress - 0.2) / 0.6;
+          blurAsset.data.radius = progress * 96;
+          vignetteAsset.data.intensity = progress * 1.5;
+        }
+      }
 
       //@todo: 等待物理加上碰撞检测，替换
       if (dir >= 0 || preDis <= 0.2 || dis > 0.2) {
         return;
       }
 
-      // 虚拟世界
-      // mainCam: scene -> stencil
-      // magicCam: ar
       ['sky', 'scene-mesh', 'hikari', 'roam', 'xinyi'].forEach(id => {
         this.scene
           .getElementById(id)
@@ -75,9 +107,20 @@ Component({
       this.setData({gateClosed: true});
       this.inRealWorld = false;
     },
-    handleShowDoor() {
+    handleShowDoor({detail}) {
+      if (detail.value.camera.el.id !== 'main-camera') {
+        return;
+      }
+
+      const success = this.scene.ar.placeHere('setitem', true);
+      if (!success) {
+        return;
+      }
+
+      setTimeout(() => {
+        this.blurTotal = this.blurDuration = 1700;
+      }, 300);
       wx.setKeepScreenOn({keepScreenOn: true});
-      this.scene.ar.placeHere('setitem', true);
       this.bgm.play();
       this.setData({placed: true});
     },
@@ -87,9 +130,17 @@ Component({
       }
     },
     handleTouchNote() {
+      if (detail.value.camera.el.id !== 'main-camera') {
+        return;
+      }
+
       this.triggerEvent('showNote', this.note);
     },
     handleTouchObj({detail}) {
+      if (detail.value.camera.el.id !== 'main-camera') {
+        return;
+      }
+
       const xrSystem = wx.getXrFrameSystem();
       const {el, value} = detail;
       const {camera, target} = value;
