@@ -7,8 +7,8 @@ Page({
     xmlCode: '',
     type: 0,
     
-    blurRadius: 0,
-    bloomRadius: 0,
+    blurRadius: 16,
+    bloomRadius: 16,
     bloomIntensity: 2,
     bloomThreshold: 0.5,
     fxaaEnabled: false
