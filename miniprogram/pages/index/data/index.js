@@ -89,6 +89,11 @@ const base = {
       label: '粒子系统',
       path: '/pages/scene-basic-particle/index',
     },
+    {
+      name: 'PostProcessing',
+      label: '后处理效果',
+      path: '/pages/scene-basic-postprocessing/index'
+    }
   ],
 };
 const gltf = {

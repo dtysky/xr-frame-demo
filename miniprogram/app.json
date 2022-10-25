@@ -10,6 +10,7 @@
     "pages/scene-basic-shadow/index",
     "pages/scene-basic-video/index",
     "pages/scene-basic-render-texture/index",
+    "pages/scene-basic-postprocessing/index",
     "pages/scene-gltf-damageHelmet/index",
     "pages/scene-gltf-unlit/index",
     "pages/scene-gltf-animation/index",
