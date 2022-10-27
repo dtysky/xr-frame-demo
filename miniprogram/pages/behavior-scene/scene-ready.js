@@ -15,12 +15,10 @@ module.exports = Behavior({
   attached: function(){},
   ready() {
     const info = wx.getSystemInfoSync();
-    console.log(info)
     const width = info.windowWidth;
     const windowHeight = info.windowHeight;
     const height = windowHeight  * 0.6;
     const dpi = info.pixelRatio;
-    console.log(width, height)
     this.setData({
       width,
       height,

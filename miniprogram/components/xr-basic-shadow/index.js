@@ -1,5 +1,5 @@
 Component({
-  scene: null,
+  behaviors: [require('../common/share-behavior').default],
   shadowRoot: null,
   gltfModle: null,
   properties: {

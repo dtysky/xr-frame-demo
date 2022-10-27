@@ -1,5 +1,5 @@
 Component({
-  scene: null,
+  behaviors: [require('../common/share-behavior').default],
   properties: {
     a: Number,
   },
@@ -33,7 +33,7 @@ Component({
       const {clientX, clientY} = event.touches[0];
       const {frameWidth: width, frameHeight: height} = this.scene;
 
-      if (clientY / height > 0.8 && clientX / width > 0.8) {
+      if (clientY / height < 0.2 && clientX / width < 0.2) {
         this.scene.getNodeById('setitem').visible = false;
         this.scene.ar.resetPlane();
       } else {

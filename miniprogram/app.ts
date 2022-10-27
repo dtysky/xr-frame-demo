@@ -4,6 +4,7 @@ import './xr-custom/elements/xr-auto-rotate-touchable-gltf';
 import './xr-custom/assets/geometry-star';
 import './xr-custom/assets/effect-shining';
 import './xr-custom/elements/xr-shining-star';
+import './xr-custom/assets/effect-last-record-final';
 
 App<IAppOption>({
   globalData: {},

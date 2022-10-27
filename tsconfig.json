@@ -23,7 +23,7 @@
   },
   "include": [
     "./**/*.ts"
-  ],
+, "miniprogram/components/common/share-behavior.js"  ],
   "exclude": [
     "node_modules"
   ]

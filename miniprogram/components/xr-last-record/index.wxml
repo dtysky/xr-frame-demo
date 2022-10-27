@@ -13,7 +13,7 @@
     <xr-asset-load type="gltf" asset-id="xinyi" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/xinyi-unlit.glb" />
     <xr-asset-load type="texture" asset-id="particle-point" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/point.png" />
   </xr-assets>
-  <xr-node>
+  <xr-node layer="1">
     <xr-ar-tracker wx:if="{{loaded && !placed}}" mode="Plane" visible="false">
       <xr-node node-id="anchor" anim-keyframe="anchor" anim-autoplay="clip:parent">
         <xr-gltf model="anchor" />
@@ -206,21 +206,38 @@
       </xr-node>
     </xr-node>
 
-    <xr-element>
+    <xr-element wx:if="{{!gateClosed}}">
+      <xr-asset-render-texture asset-id="ar-camera" width="{{width}}" height="{{height}}" />
+      <xr-asset-render-texture asset-id="main-camera" width="{{width}}" height="{{height}}" />
+
       <xr-asset-post-process asset-id="blur" type="blur" data="radius:0" />
       <xr-asset-post-process
         asset-id="vignette" type="vignette"
         data="intensity:0,smoothness:2,color:0.1 0.1 0.1 1"
       />
       <xr-camera
-        id="ar-bg-camera" cull-mask="0"
+        id="ar-bg-camera" cull-mask="0" depth="0"
         background="ar" post-process="blur vignette"
+        render-target="ar-camera"
+      />
+
+      <xr-asset-material asset-id="final" effect="last-record-final" uniforms="u_arBg:render-ar-camera,u_main:render-main-camera" />
+      <xr-mesh node-id="final" layer="2" geometry="ar-camera-plane" material="final" position="0 0 2" />
+      <xr-camera
+        id="final-camera" cull-mask="0b101" depth="2"
+        target="final" is-clear-color="false"
       />
     </xr-element>
 
-    <xr-camera
+    <xr-asset-post-process asset-id="bloom" type="bloom" data="radius:64" />
+    <!-- <xr-camera
       id="main-camera" near="0.1" far="2000"
       is-ar-camera is-clear-color="false"
+    > -->
+    <xr-camera
+      id="main-camera" near="0.1" far="2000" cull-mask="0b11" depth="1"
+      is-ar-camera clear-color="1 1 1 0" post-process="bloom"
+      render-target="main-camera"
     >
       <xr-gltf wx:if="{{arReady && !loaded}}" position="0 0 10" model="loading" anim-autoplay />
     </xr-camera>

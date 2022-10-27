@@ -1,4 +1,5 @@
 Component({
+  behaviors: [require('../common/share-behavior').default],
   properties: {
     visibleIndex: {
       type: Number,

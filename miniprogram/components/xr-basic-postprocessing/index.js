@@ -39,6 +39,7 @@ const fxaaData = {
 };
 
 Component({
+  behaviors: [require('../common/share-behavior').default],
   properties: {
     type: {
       type: Number,

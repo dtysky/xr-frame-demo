@@ -1,7 +1,14 @@
+const info = wx.getSystemInfoSync();
+const dpi = info.pixelRatio;
+const width = info.windowWidth * dpi;
+const height = info.windowHeight * dpi;
+
 Component({
   scene: null,
   properties: {},
   data: {
+    width: width,
+    height: height,
     loaded: false,
     arReady: false,
     placed: false,
@@ -104,6 +111,7 @@ Component({
           .getElementById(id)
           .getComponent(xrSystem.GLTF).meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
       });
+      mainCamEl.getComponent(xrSystem.Camera).setData({renderTarget: null});
       this.setData({gateClosed: true});
       this.inRealWorld = false;
     },

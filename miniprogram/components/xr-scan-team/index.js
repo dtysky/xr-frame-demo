@@ -1,6 +1,7 @@
 import XrTeamCameraAnimation from '../../xr-custom/animations/XrTeamCameraAnimation';
 
 Component({
+  behaviors: [require('../common/share-behavior').default],
   properties: {
     loaded: false,
     run: {

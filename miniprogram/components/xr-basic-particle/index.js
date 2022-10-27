@@ -9,6 +9,7 @@
 import cont from './earring'
 
 Component({
+  behaviors: [require('../common/share-behavior').default],
   properties: {
     capacity: {
       type: Number,

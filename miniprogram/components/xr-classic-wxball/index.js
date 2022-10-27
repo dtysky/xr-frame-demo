@@ -1,5 +1,5 @@
 Component({
-  scene: null,
+  behaviors: [require('../common/share-behavior').default],
   wxball: null,
   wxballTransform: null,
   wxballAnimator: null,

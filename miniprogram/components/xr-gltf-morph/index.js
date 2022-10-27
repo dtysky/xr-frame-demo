@@ -1,5 +1,6 @@
 Component({
   properties: {
+    behaviors: [require('../common/share-behavior').default],
     a: Number,
   },
   data: {

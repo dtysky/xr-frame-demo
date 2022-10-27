@@ -70,3 +70,8 @@
 .ml20 {
   margin-left: 20rpx;
 }
+
+.share {
+  font-size: 28rpx;
+  color: #ff4d00;
+}

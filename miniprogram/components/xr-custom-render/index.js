@@ -1,4 +1,5 @@
 Component({
+  behaviors: [require('../common/share-behavior').default],
   properties: {},
   data: {
     stars: []
@@ -6,7 +7,7 @@ Component({
   lifetimes: {},
   methods: {
     handleReady: function({detail}) {
-      const scene = detail.value;
+      this.scene = detail.value;
       const stars = new Array(44).fill(0).map(() => {
         return {
           pos: [

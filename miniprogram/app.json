@@ -32,8 +32,7 @@
     "pages/scene-last-record/index",
     "pages/scene-roam-portal/index"
   ],
-  "usingComponents": {
-  },
+  "usingComponents": {},
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f6f6f6",
