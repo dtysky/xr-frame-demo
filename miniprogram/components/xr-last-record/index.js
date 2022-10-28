@@ -69,6 +69,7 @@ Component({
 
       const blurAsset = this.scene.assets.getAsset('post-process', 'blur');
       const vignetteAsset = this.scene.assets.getAsset('post-process', 'vignette');
+      const bloomAsset = this.scene.assets.getAsset('post-process', 'bloom');
       const edgeEnv1 = 0.5;
       const edgeEnv2 = 0.8;
       const edgeDoor1 = 0.3;
@@ -98,6 +99,7 @@ Component({
           progress = (progress - 0.2) / 0.6;
           blurAsset.data.radius = progress * 96;
           vignetteAsset.data.intensity = progress * 1.5;
+          bloomAsset.data.threshold = 0.5 + progress * 2;
         }
       }
 
@@ -111,7 +113,10 @@ Component({
           .getElementById(id)
           .getComponent(xrSystem.GLTF).meshes.forEach(mesh => mesh.material.setRenderState('stencilComp', 0));
       });
-      mainCamEl.getComponent(xrSystem.Camera).setData({renderTarget: null});
+      mainCamEl.getComponent(xrSystem.Camera).setData({
+        renderTarget: null,
+        postProcess: []
+      });
       this.setData({gateClosed: true});
       this.inRealWorld = false;
     },

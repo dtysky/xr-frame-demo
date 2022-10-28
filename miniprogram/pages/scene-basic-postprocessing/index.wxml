@@ -58,7 +58,7 @@
     <view class="form-entry-title">泛光阈值</view>
     <slider bindchange="changeBloomThreshold" max="2" value="0.5" step="0.1" value="{{bloomThreshold}}"></slider>
   </view>
-  <view wx:if="{{type == 2}}" class="form-entry">
+  <view wx:if="{{type == 3}}" class="form-entry">
     <view class="form-entry-title">开启FXAA</view>
     <switch checked="{{fxaaEnabled}}" bindchange="switchFXAA"/>
   </view>

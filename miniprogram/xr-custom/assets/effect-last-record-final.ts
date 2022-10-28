@@ -50,6 +50,8 @@ void main()
   vec4 bgColor = texture2D(u_arBg, uv);
   vec4 mainColor = texture2D(u_main, uv);
   gl_FragData[0] = vec4(bgColor.rgb * (1. - mainColor.a) + mainColor.rgb * mainColor.a, 1.);
+  // gl_FragData[0] = vec4(pow(mainColor.a, 1. / 2.2), 0., 0., 1.);
+  // gl_FragData[0] = mainColor;
 } 
     `],
 }));
