@@ -115,7 +115,7 @@ Component({
       });
       mainCamEl.getComponent(xrSystem.Camera).setData({
         renderTarget: null,
-        postProcess: []
+        postProcess: ['tone']
       });
       this.setData({gateClosed: true});
       this.inRealWorld = false;

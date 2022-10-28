@@ -160,7 +160,7 @@
           material="particle-mat" position="-2.2 0.2 -5"
           capacity="2000" emit-rate="40" never-cull
           size="0.06 0.12" life-time="15 20" speed="0.2 0.4"
-          start-color="1 1 1 0.6" end-color="1 1 1 0.2"
+          start-color="1 1 1 1" end-color="1 1 1 0.4"
           emitter-type="BoxShape"
           emitter-props="minEmitBox:-20 0 -20,maxEmitBox:20 0 20,direction:0 1 0,direction2:0 1 0"
           texture="particle-point"
@@ -172,7 +172,7 @@
           <xr-particle
             capacity="1000" emit-rate="80" never-cull
             size="0.02 0.03" life-time="1.5 2" speed="0.04 0.08"
-            start-color="0.5 0.9 0.7 0.7" end-color="0.5 0.9 0.7 0.3"
+            start-color="0.5 0.9 0.7 1" end-color="0.5 0.9 0.7 0.4"
             emitter-type="SphereShape"
             emitter-props="radius:0.05,randomizeDirection:0"
             texture="particle-point"
@@ -185,7 +185,7 @@
           <xr-particle
             capacity="1000" emit-rate="80" never-cull
             size="0.02 0.03" life-time="1.5 2" speed="0.04 0.08"
-            start-color="0.5 0.7 0.9 0.7" end-color="0.5 0.9 0.7 0.3"
+            start-color="0.5 0.7 0.9 1" end-color="0.5 0.7 0.9 0.4"
             emitter-type="SphereShape"
             emitter-props="radius:0.05,randomizeDirection:0"
             texture="particle-point"
@@ -227,7 +227,7 @@
       />
     </xr-element>
 
-    <xr-asset-post-process asset-id="bloom" type="bloom" is-hdr data="radius:32,intensity:2,threshold:0.7,softThreshold:0.8" />
+    <xr-asset-post-process asset-id="bloom" type="bloom" is-hdr data="radius:32,intensity:2,threshold:0.7" />
     <xr-asset-post-process asset-id="tone" type="tone" />
     <xr-camera
       id="main-camera" near="0.1" far="2000" cull-mask="0b11" depth="1"
