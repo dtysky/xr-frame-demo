@@ -4,7 +4,7 @@
     <xr-asset-load type="raw" asset-id="note" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-note.txt" options="encoding:utf-8" />
     <xr-asset-load asset-id="anchor" type="keyframe" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-record-anchor-animation.json"/>
     <xr-asset-load type="gltf" asset-id="loading" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/loading.glb" />
-    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
+    <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/magic_ring_-_yingyangblue/index.glb" />
     <xr-asset-load type="gltf" asset-id="butterfly" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/butterfly/index.glb" />
     <xr-asset-load type="gltf" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/sky-unlit.glb" />
     <xr-asset-load type="gltf" asset-id="office" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/last-record-unlit.glb" />
@@ -15,17 +15,18 @@
   </xr-assets>
   <xr-node layer="1">
     <xr-ar-tracker wx:if="{{loaded && !placed}}" mode="Plane" visible="false">
-      <xr-node node-id="anchor" anim-keyframe="anchor" anim-autoplay="clip:parent">
-        <xr-gltf model="anchor" />
+      <xr-node node-id="anchor">
+        <xr-gltf model="anchor" scale="0.8 0.8 0.8" anim-autoplay />
         <xr-particle
           position="0 0.8 0"
           cube-shape="size:0.8 1.6 0.8" bind:touch-shape="handleShowDoor"
           capacity="4000" emit-rate="20" never-cull
           size="0.01 0.03" life-time="2.5 5" speed="0.2 0.4"
-          start-color="1 1 1 0.8" end-color="1 1 1 0.2"
+          start-color="1 1 1 1" end-color="1 1 1 0.5"
           emitter-type="BoxShape"
           emitter-props="minEmitBox:-0.15 -0.8 -0.15,maxEmitBox:0.15 -0.6 0.15,direction:0 1 0,direction2:0 1 0"
           atlas="numbers" atlas-frames="0 1" atlas-speed="4" atlas-random
+          anim-keyframe="anchor" anim-autoplay="clip:parent"
         />
       </xr-node>
     </xr-ar-tracker>
@@ -173,7 +174,7 @@
             material="particle-mat"
             capacity="1000" emit-rate="80" never-cull
             size="0.01 0.03" life-time="1.5 2" speed="0.04 0.08"
-            start-color="0.5 0.9 0.6 0.7" start-color2="0.5 0.9 0.6 0.7" end-color="0.5 0.9 0.6 0.3"
+            start-color="0.5 0.9 0.7 0.7" start-color2="0.5 0.9 0.7 0.7" end-color="0.5 0.9 0.7 0.3"
             emitter-type="SphereShape"
             emitter-props="radius:0.05,randomizeDirection:0"
             texture="particle-point"
@@ -187,7 +188,7 @@
             material="particle-mat"
             capacity="1000" emit-rate="80" never-cull
             size="0.01 0.03" life-time="1.5 2" speed="0.04 0.08"
-            start-color="0.5 0.6 0.9 0.7" start-color2="0.5 0.6 0.9 0.7" end-color="0.5 0.6 0.9 0.3"
+            start-color="0.5 0.7 0.9 0.7" start-color2="0.5 0.7 0.9 0.7" end-color="0.5 0.7 0.9 0.3"
             emitter-type="SphereShape"
             emitter-props="radius:0.05,randomizeDirection:0"
             texture="particle-point"
@@ -229,7 +230,7 @@
       />
     </xr-element>
 
-    <xr-asset-post-process asset-id="bloom" type="bloom" data="radius:64" />
+    <xr-asset-post-process asset-id="bloom" type="bloom" data="radius:64,intensity:4" />
     <!-- <xr-camera
       id="main-camera" near="0.1" far="2000"
       is-ar-camera is-clear-color="false"

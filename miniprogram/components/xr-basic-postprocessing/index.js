@@ -38,6 +38,18 @@ const fxaaData = {
   cameraTarget: "mesh-sphere"
 };
 
+const vignetteData = {
+  cullMask: 0b101,
+  aIntensity: 1,
+  dIntensity: 2,
+  env: "",
+  background: "default",
+  cameraPosition: 1.3,
+  clearColor: "0 0 0 1",
+  cameraTarget: "camera-target",
+  pp: "vignette",
+};
+
 Component({
   behaviors: [require('../common/share-behavior').default],
   properties: {
@@ -51,6 +63,8 @@ Component({
           } else if (newVal === 1) {
             this.activeBloom();
           } else if (newVal === 2) {
+            this.activeVignette();
+          } else if (newVal === 3) {
             this.activeFXAA();
           }
         }
@@ -77,6 +91,18 @@ Component({
     bloomThreshold: {
       type: Number,
       value: 0.5,
+    },
+    vignetteIntensity: {
+      type: Number,
+      value: 1,
+    },
+    vignetteSmoothness: {
+      type: Number,
+      value: 2,
+    },
+    vignetteRoundness: {
+      type: Number,
+      value: 1,
     },
     fxaaEnabled: {
       type: Boolean,
@@ -141,6 +167,9 @@ Component({
     },
     activeBloom() {
       this.setData(bloomData);
+    },
+    activeVignette() {
+      this.setData(vignetteData);
     },
     activeFXAA() {
       this.setData(fxaaData);

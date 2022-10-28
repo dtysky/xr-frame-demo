@@ -3,7 +3,7 @@
 }
 
 .radio-item {
-  margin-right: 13%;
+  margin-right: 3%;
 }
 
 .form-entry-title {

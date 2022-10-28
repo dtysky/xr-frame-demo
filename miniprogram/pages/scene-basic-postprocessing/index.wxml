@@ -15,12 +15,16 @@
     bloomRadius="{{bloomRadius}}"
     bloomIntensity="{{bloomIntensity}}"
     bloomThreshold="{{bloomThreshold}}"
+    vignetteIntensity="{{vignetteIntensity}}"
+    vignetteSmoothness="{{vignetteSmoothness}}"
+    vignetteRoundness="{{vignetteRoundness}}"
     fxaaEnabled="{{fxaaEnabled}}"
   />
   <view class="form-entry">
     <view class="form-entry-title">后处理类型</view>
     <radio-group name="pp-type" bindchange="changeType">
       <label class="radio-item"><radio value="blur" checked/>模糊</label>
+      <label class="radio-item"><radio value="vignette"/>渐晕</label>
       <label class="radio-item"><radio value="bloom"/>泛光</label>
       <label class="radio-item"><radio value="fxaa"/>抗锯齿</label>
     </radio-group>
@@ -29,6 +33,18 @@
   <view wx:if="{{type == 0}}" class="form-entry">
     <view class="form-entry-title">模糊半径</view>
     <slider bindchange="changeBlurRadius" value="{{blurRadius}}"></slider>
+  </view>
+  <view wx:if="{{type == 2}}" class="form-entry">
+    <view class="form-entry-title">渐晕强度</view>
+    <slider bindchange="changeVignetteIntensity" value="{{vignetteIntensity}}" min="{{0}}" max="{{8}}" step="{{0.1}}"></slider>
+  </view>
+  <view wx:if="{{type == 2}}" class="form-entry">
+    <view class="form-entry-title">渐晕平滑</view>
+    <slider bindchange="changeVignetteSmoothness" value="{{vignetteSmoothness}}" min="{{0}}" max="{{8}}" step="{{0.1}}"></slider>
+  </view>
+  <view wx:if="{{type == 2}}" class="form-entry">
+    <view class="form-entry-title">渐晕圆度</view>
+    <slider bindchange="changeVignetteRoundness" value="{{vignetteRoundness}}"  min="{{0}}" max="{{1}}" step="{{0.1}}"></slider>
   </view>
   <view wx:if="{{type == 1}}" class="form-entry">
     <view class="form-entry-title">泛光半径</view>

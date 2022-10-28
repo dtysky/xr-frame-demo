@@ -11,6 +11,9 @@ Page({
     bloomRadius: 16,
     bloomIntensity: 2,
     bloomThreshold: 0.5,
+    vignetteIntensity: 1,
+    vignetteSmoothness: 2,
+    vignetteRoundness: 1,
     fxaaEnabled: false
   },
   changeType(e) {
@@ -23,9 +26,13 @@ Page({
       this.setData({
         type: 1
       });
-    } else if (type === "fxaa") {
+    } else if (type === "vignette") {
       this.setData({
         type: 2
+      });
+    } else if (type === "fxaa") {
+      this.setData({
+        type: 3
       });
     }
   },
@@ -47,6 +54,21 @@ Page({
   changeBloomThreshold(e) {
     this.setData({
       bloomThreshold: e.detail.value
+    });
+  },
+  changeVignetteIntensity(e) {
+    this.setData({
+      vignetteIntensity: e.detail.value
+    });
+  },
+  changeVignetteSmoothness(e) {
+    this.setData({
+      vignetteSmoothness: e.detail.value
+    });
+  },
+  changeVignetteRoundness(e) {
+    this.setData({
+      vignetteRoundness: e.detail.value
     });
   },
   switchFXAA(e) {

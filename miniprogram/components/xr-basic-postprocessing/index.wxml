@@ -16,6 +16,7 @@
     </xr-node>
     <xr-node layer="2">
       <xr-asset-post-process asset-id="blur" type="blur" data="radius: {{blurRadius}}"/>
+      <xr-asset-post-process asset-id="vignette" type="vignette" data="color:1 0 0 1,intensity:{{vignetteIntensity}},smoothness:{{vignetteSmoothness}},roundness:{{vignetteRoundness}}"/>
       <xr-gltf node-id="gltf_2" position="0.5 -1 -2" rotation="0 0 0" scale="1 1 1" model="bedroom"></xr-gltf>
     </xr-node>
     <xr-node layer="3">
