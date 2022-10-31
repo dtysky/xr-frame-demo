@@ -27,7 +27,7 @@ export default Behavior({
           return;
         }
 
-        if (touch.x / this.scene.frameWidth > 0.8 && touch.y / this.scene.frameHeight > 0.8) {
+        if (touch.x / this.scene.frameWidth > 0.9 && touch.y / this.scene.frameHeight > 0.9) {
           this.sharing = true;
           this.scene.share.captureToFriends().then(() => {
             this.sharing = false;

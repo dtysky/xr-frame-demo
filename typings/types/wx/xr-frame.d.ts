@@ -1,4 +1,8 @@
 /// <reference path="./phys3D.d.ts" />
+declare type HTMLCanvasElement = any;
+declare type ImageData = any;
+declare type HTMLImageElement = any;
+
 declare module 'XrFrame' {
     
     import * as xrFrameSystem from 'XrFrame/xrFrameSystem';
@@ -18,6 +22,8 @@ declare module 'XrFrame' {
         IKeyframeAnimationData,
         IKeyframeAnimationInfo,
         IKeyframeAnimationOptions,
+        IAtlasOptions,
+        IAtlasCreationOptions,
         IDataValueHandler,
         ITextureWrapper,
         ITextureOptions,
@@ -43,7 +49,7 @@ declare module 'XrFrame' {
         ITransformData,
         IAssetsData,
         ICameraData,
-        IGLTFComponentData,
+        IGLTFData,
         ILightData,
         IAssetMaterialData,
         IMeshData,
@@ -61,6 +67,7 @@ declare module 'XrFrame' {
         ICapsuleShapeData,
         ICubeShapeData,
         IShapeGizmosData,
+        IAssetPostProcessData,
         IParticleData,
         IAssetsSystemData,
         INodeSystemData,
@@ -84,6 +91,7 @@ declare module 'XrFrame' {
         IGLTFLoaderOptions,
         IKeyframeLoaderOptions,
         IRawLoaderOptions,
+        IAtlasLoaderOptions,
         TEventCallback,
         TDirection,
         Texture,
@@ -137,6 +145,7 @@ declare module 'XrFrame' {
     export type EnvData = xrFrameSystem.EnvData;
     export type Animation = xrFrameSystem.Animation;
     export type KeyframeAnimation = xrFrameSystem.KeyframeAnimation;
+    export type Atlas = xrFrameSystem.Atlas;
     export type Vector2 = xrFrameSystem.Vector2;
     export type Vector3 = xrFrameSystem.Vector3;
     export type Vector4 = xrFrameSystem.Vector4;
@@ -169,6 +178,7 @@ declare module 'XrFrame' {
     export type CapsuleShape = xrFrameSystem.CapsuleShape;
     export type CubeShape = xrFrameSystem.CubeShape;
     export type ShapeGizmos = xrFrameSystem.ShapeGizmos;
+    export type AssetPostProcess = xrFrameSystem.AssetPostProcess;
     export type Scene = xrFrameSystem.Scene;
     export type XRNode = xrFrameSystem.XRNode;
     export type XRShadow = xrFrameSystem.XRShadow;
@@ -184,6 +194,7 @@ declare module 'XrFrame' {
     export type XRARTracker = xrFrameSystem.XRARTracker;
     export type XRText = xrFrameSystem.XRText;
     export type XRParticle = xrFrameSystem.XRParticle;
+    export type XRAssetPostProcess = xrFrameSystem.XRAssetPostProcess;
     export type AssetsSystem = xrFrameSystem.AssetsSystem;
     export type NodeSystem = xrFrameSystem.NodeSystem;
     export type TickSystem = xrFrameSystem.TickSystem;
@@ -201,7 +212,8 @@ declare module 'XrFrame' {
     export type EnvDataLoader = xrFrameSystem.EnvDataLoader;
     export type GlTFLoader = xrFrameSystem.GlTFLoader;
     export type KeyframeLoader = xrFrameSystem.KeyframeLoader;
-    export type RawLoader = xrFrameSystem.RawLoader
+    export type RawLoader = xrFrameSystem.RawLoader;
+    export type AtlasLoader = xrFrameSystem.AtlasLoader
     
     export interface IXrFrameSystem {
         registerComponent: typeof xrFrameSystem.registerComponent;
@@ -227,6 +239,7 @@ declare module 'XrFrame' {
         EnvData: typeof xrFrameSystem.EnvData;
         Animation: typeof xrFrameSystem.Animation;
         KeyframeAnimation: typeof xrFrameSystem.KeyframeAnimation;
+        Atlas: typeof xrFrameSystem.Atlas;
         Vector2: typeof xrFrameSystem.Vector2;
         Vector3: typeof xrFrameSystem.Vector3;
         Vector4: typeof xrFrameSystem.Vector4;
@@ -259,6 +272,7 @@ declare module 'XrFrame' {
         CapsuleShape: typeof xrFrameSystem.CapsuleShape;
         CubeShape: typeof xrFrameSystem.CubeShape;
         ShapeGizmos: typeof xrFrameSystem.ShapeGizmos;
+        AssetPostProcess: typeof xrFrameSystem.AssetPostProcess;
         Scene: typeof xrFrameSystem.Scene;
         XRNode: typeof xrFrameSystem.XRNode;
         XRShadow: typeof xrFrameSystem.XRShadow;
@@ -274,6 +288,7 @@ declare module 'XrFrame' {
         XRARTracker: typeof xrFrameSystem.XRARTracker;
         XRText: typeof xrFrameSystem.XRText;
         XRParticle: typeof xrFrameSystem.XRParticle;
+        XRAssetPostProcess: typeof xrFrameSystem.XRAssetPostProcess;
         AssetsSystem: typeof xrFrameSystem.AssetsSystem;
         NodeSystem: typeof xrFrameSystem.NodeSystem;
         TickSystem: typeof xrFrameSystem.TickSystem;
@@ -292,6 +307,7 @@ declare module 'XrFrame' {
         GlTFLoader: typeof xrFrameSystem.GlTFLoader;
         KeyframeLoader: typeof xrFrameSystem.KeyframeLoader;
         RawLoader: typeof xrFrameSystem.RawLoader;
+        AtlasLoader: typeof xrFrameSystem.AtlasLoader;
         EVertexFormat: typeof xrFrameSystem.EVertexFormat;
         EVertexStep: typeof xrFrameSystem.EVertexStep;
         EIndexType: typeof xrFrameSystem.EIndexType;
@@ -329,7 +345,7 @@ declare module 'XrFrame' {
         AssetLoadSchema: IComponentSchema;
         AssetsSchema: IComponentSchema;
         CameraSchema: IComponentSchema;
-        GLTFComponentSchema: IComponentSchema;
+        GLTFSchema: IComponentSchema;
         LightSchema: IComponentSchema;
         AssetMaterialSchema: IComponentSchema;
         MeshSchema: IComponentSchema;
@@ -360,7 +376,8 @@ declare module 'XrFrame' {
         EnvDefaultComponents: IEntityComponents;
         ARTrackerDefaultComponents: IEntityComponents;
         TextDefaultComponents: IEntityComponents;
-        ParticleDefaultComponents: IEntityComponents
+        ParticleDefaultComponents: IEntityComponents;
+        AssetPostProcessDefaultComponents: IEntityComponents
         BasicDataMapping: {[key: string]: string[]};
         SceneDataMapping: {[key: string]: string[]};
         NodeDataMapping: {[key: string]: string[]};
@@ -375,7 +392,8 @@ declare module 'XrFrame' {
         EnvDataMapping: {[key: string]: string[]};
         ARTrackerDataMapping: {[key: string]: string[]};
         TextDataMapping: {[key: string]: string[]};
-        ParticleDataMapping: {[key: string]: string[]}
+        ParticleDataMapping: {[key: string]: string[]};
+        AssetPostProcessDataMapping: {[key: string]: string[]}
     }
 }
 
@@ -403,6 +421,7 @@ declare module 'XrFrame/xrFrameSystem' {
     export { default as EnvData, IEnvDataOptions } from 'XrFrame/assets/EnvData';
     export { default as Animation, TDirection } from 'XrFrame/animation/Animation';
     export { default as KeyframeAnimation, IKeyframeAnimationData, IKeyframeAnimationInfo, IKeyframeAnimationOptions } from 'XrFrame/animation/KeyframeAnimation';
+    export { default as Atlas, IAtlasOptions, IAtlasCreationOptions } from 'XrFrame/assets/Atlas';
     export { registerEffect, registerGeometry, registerTexture, registerMaterial, registerUniformDesc, registerVertexDataDesc, registerVertexLayout } from 'XrFrame/assets/factories';
     export { useParamsEaseFuncs, noneParamsEaseFuncs } from 'XrFrame/assets/easeFunctions';
     export { default as Vector2 } from 'XrFrame/math/vector2';
@@ -437,7 +456,8 @@ declare module 'XrFrame/ext' {
     function addKanata(scene: Scene, kanata: Kanata.IKanataInstance): void;
     function removeKanata(scene: Scene): void;
     function getKanata(scene: Scene): Kanata.IKanataInstance;
-    export { Kanata, exparser, Phys3D, _wx, addKanata, removeKanata, getKanata };
+    function __getKanataSuperHackDontUseIt(): Kanata.IKanataInstance;
+    export { Kanata, exparser, Phys3D, _wx, addKanata, removeKanata, getKanata, __getKanataSuperHackDontUseIt };
 }
 
 declare module 'XrFrame/core/Component' {
@@ -630,6 +650,11 @@ declare module 'XrFrame/core/Element' {
                 */
             readonly neverTick: boolean;
             /**
+                * 名字，写在`xml`上的那个`name`，不唯一。
+                */
+            get name(): string;
+            set name(value: string);
+            /**
                 * @internal
                 */
             /**
@@ -652,11 +677,11 @@ declare module 'XrFrame/core/Element' {
             /**
                 * 获取第`index`个子元素。
                 */
-            getChildAtIndex<T extends Element>(index: number): T;
+            getChildAtIndex<T extends Element = Element>(index: number): T;
             /**
                 * 通过`filter`获取子元素。
                 */
-            getChildByFilter<T extends Element>(filter: (child: Element) => boolean): T;
+            getChildByFilter<T extends Element = Element>(filter: (child: Element) => boolean): T;
             /**
                 * 通过`filter`获取子元素列表。
                 */
@@ -664,7 +689,15 @@ declare module 'XrFrame/core/Element' {
             /**
                 * 通过元素的类获取子元素。
                 */
-            getChildByClass<T extends Element>(clz: new (...args: any[]) => T): T;
+            getChildByClass<T extends Element = Element>(clz: new (...args: any[]) => T): T;
+            /**
+                * 通过元素的名字`name`获取子元素。
+                */
+            getChildByName<T extends Element = Element>(name: string): T;
+            /**
+                * 通过元素的名字`name`获取子元素们。
+                */
+            getChildrenByName(name: string): Element[];
             /**
                 * 递归遍历元素的所有子孙节点。
                 */
@@ -905,7 +938,7 @@ declare module 'XrFrame/components' {
     export { default as AssetLoad, AssetLoadSchema } from 'XrFrame/components/AssetLoad';
     export { default as Assets, IAssetsData, AssetsSchema } from 'XrFrame/components/Assets';
     export { default as Camera, ICameraData, CameraSchema, TCameraBackground } from 'XrFrame/components/Camera';
-    export { default as GLTF, IGLTFComponentData, GLTFComponentSchema } from 'XrFrame/components/GLTF';
+    export { default as GLTF, IGLTFData, GLTFSchema } from 'XrFrame/components/GLTF';
     export { default as Light, ILightData, LightSchema } from 'XrFrame/components/Light';
     export { default as AssetMaterial, IAssetMaterialData, AssetMaterialSchema } from 'XrFrame/components/AssetMaterial';
     export { default as Mesh, IMeshData, MeshSchema } from 'XrFrame/components/Mesh';
@@ -923,6 +956,7 @@ declare module 'XrFrame/components' {
     export { default as CapsuleShape, ICapsuleShapeData, CapsuleShapeSchema, ECapsuleShapeDirection } from 'XrFrame/components/physics/CapsuleShape';
     export { default as CubeShape, ICubeShapeData, CubeShapeSchema } from 'XrFrame/components/physics/CubeShape';
     export { default as ShapeGizmos, IShapeGizmosData } from 'XrFrame/components/gizmo/ShapeGizmos';
+    export { default as AssetPostProcess, IAssetPostProcessData } from 'XrFrame/components/AssetPostProcess';
 }
 
 declare module 'XrFrame/elements' {
@@ -941,6 +975,7 @@ declare module 'XrFrame/elements' {
     export { default as XRARTracker, ARTrackerDataMapping, ARTrackerDefaultComponents } from 'XrFrame/elements/xr-ar-tracker';
     export { default as XRText, TextDataMapping, TextDefaultComponents } from 'XrFrame/elements/xr-text';
     export { default as XRParticle, ParticleDataMapping, ParticleDefaultComponents } from 'XrFrame/elements/xr-particle';
+    export { default as XRAssetPostProcess, AssetPostProcessDataMapping, AssetPostProcessDefaultComponents } from 'XrFrame/elements/xr-asset-post-process';
 }
 
 declare module 'XrFrame/systems' {
@@ -965,6 +1000,7 @@ declare module 'XrFrame/loader' {
     export { default as GlTFLoader, IGLTFLoaderOptions } from 'XrFrame/loader/GlTFLoader';
     export { default as KeyframeLoader, IKeyframeLoaderOptions } from 'XrFrame/loader/KeyframeLoader';
     export { default as RawLoader, IRawLoaderOptions } from 'XrFrame/loader/RawLoader';
+    export { default as AtlasLoader, IAtlasLoaderOptions } from 'XrFrame/loader/AtlasLoader';
 }
 
 declare module 'XrFrame/assets/Effect' {
@@ -1089,7 +1125,7 @@ declare module 'XrFrame/assets/Effect' {
                     /**
                         * 渲染的光照模式。
                         */
-                    lightMode: 'ForwardBase' | 'ForwardAdd' | 'ShadowCaster' | 'PostProcess' | 'Skybox';
+                    lightMode: 'ForwardBase' | 'ForwardAdd' | 'ShadowCaster' | 'PostProcess' | 'Skybox' | string;
                     /**
                         * 这个pass的渲染状态是否可以被`Material`覆盖。
                         */
@@ -1381,13 +1417,13 @@ declare module 'XrFrame/assets/Material' {
                 */
             setFloat(key: string, value: number): boolean;
             /**
-                * 设置一个Vector
+                * 设置一个Vector。
                 *
-                * @returns 是否设置成功
+                * @returns 是否设置成功。
                 */
             setVector(key: string, value: Vector2 | Vector3 | Vector4): boolean;
             /**
-                * 获取一个Vector值的拷贝
+                * 获取一个Vector值的拷贝。
                 */
             getVector(key: string): Vector2 | Vector3 | Vector4;
             /**
@@ -1397,19 +1433,19 @@ declare module 'XrFrame/assets/Material' {
                 */
             setMatrix(key: string, value: Matrix3 | Matrix4): boolean;
             /**
-                * 获取一个Vector值的拷贝
+                * 获取一个Vector值的拷贝。
                 */
             getMatrix(key: string): Matrix3 | Matrix4;
             /**
-                * 设置一张贴图
+                * 设置一张贴图。
                 *
-                * @returns 是否设置成功
+                * @returns 是否设置成功。
                 */
             setTexture(key: string, value: Kanata.Texture): boolean;
             /**
-             * 设置一张贴图
+             * 设置一张贴图。
              *
-             * @returns 是否设置成功
+             * @returns 是否设置成功。
              */
             setTextureAsset(key: string, assetId: string): boolean;
             resetTexture(key: string): import('XrFrame/kanata/lib/index').Texture;
@@ -1417,31 +1453,48 @@ declare module 'XrFrame/assets/Material' {
                 * 直接通过Backend纹理ID设置纹理，注意需要自己持有纹理引用。
                 * @internal
                 *
-                * @returns 是否设置成功
+                * @returns 是否设置成功。
                 */
             setFontTexture(key: string, id: number): boolean;
             /**
-                * 获取材质中已设置的贴图
+                * 获取材质中已设置的贴图。
                 */
             getTexture(key: string): Kanata.Texture;
             /**
-                * 设置渲染状态
-                * 只有标记了 useMaterialRenderStates 的Pass会受到影响
+                * 设置渲染状态。
+                * 只有标记了`useMaterialRenderStates`的Pass会受到影响
                 */
             setRenderState(key: string, value: number | boolean): boolean;
             /**
-                * 清除渲染状态
-                * 清除材质的渲染状态，转而从effect中使用默认值
+                * 批量设置渲染状态。
+                * 只有标记了`useMaterialRenderStates`的Pass会受到影响。
+                */
+            setRenderStates(states: {
+                    [key: string]: number | boolean;
+            }): boolean;
+            /**
+                * 清除渲染状态。
+                * 清除材质的渲染状态，转而从effect中使用默认值。
                 */
             clearRenderState(key: string): boolean;
             /**
-                * 获取渲染状态
+                * 批量清除渲染状态。
+                * 清除材质的渲染状态，转而从effect中使用默认值。
+                */
+            clearRenderStates(states: {
+                    [key: string]: any;
+            }): boolean;
+            /**
+                * 获取渲染状态。
                 */
             getRenderState(key: string): number | boolean;
             /**
                 * 设置宏。
                 */
-            setMacro(key: string, value: boolean): void;
+            setMacro(key: string, value: boolean | number): void;
+            /**
+                * 批量设置宏。
+                */
             setMacros(marcos: {
                     [key: string]: number | boolean;
             }): void;
@@ -1450,7 +1503,7 @@ declare module 'XrFrame/assets/Material' {
                 */
             getMacro(key: string): boolean;
             /**
-                * 拷贝自身，生成一份新的材质数据
+                * 拷贝自身，生成一份新的材质数据。
                 */
             clone(): Material;
             /**
@@ -1588,6 +1641,7 @@ declare module 'XrFrame/assets/RenderTexture' {
                 * 贴图宽。
                 */
             get width(): number;
+            get id(): number;
             constructor(_scene: Scene, options: IRenderTextureOptions);
     }
     export {};
@@ -1926,16 +1980,239 @@ declare module 'XrFrame/animation/KeyframeAnimation' {
     export {};
 }
 
+declare module 'XrFrame/assets/Atlas' {
+    /**
+        * Atlas.ts
+        *
+        *         * @Date    : 10/12/2022, 5:23:59 PM
+        */
+    import { Kanata } from 'XrFrame/ext';
+    import Matrix3 from 'XrFrame/math/matrix3';
+    import Vector4 from 'XrFrame/math/vector4';
+    type Scene = import('XrFrame/core/Scene').default;
+    /**
+        * `Atlas`的初始化参数类型。
+        */
+    export interface IAtlasOptions {
+            /**
+                * 图片。
+                */
+            image?: Kanata.IImage;
+            /**
+                * 也可以直接传入一张纹理。
+                */
+            texture?: Kanata.Texture;
+            /**
+                * 帧定义，若不指定`uv`则会自动按比例计算。
+                */
+            frames: {
+                    [key: string]: {
+                            /**
+                                * 帧的区块信息。
+                                */
+                            frame: {
+                                    x: number;
+                                    y: number;
+                                    w: number;
+                                    h: number;
+                            };
+                            /**
+                                * 会自动生成，开发者无需关心。
+                                *
+                                * @hidden
+                                */
+                            uvMatrix?: Matrix3;
+                            /**
+                                * 会自动生成，开发者无需关心。
+                                *
+                                * @hidden
+                                */
+                            uvST?: Vector4;
+                    };
+            };
+            /**
+                * 原信息，主要定义图片尺寸。
+                */
+            meta: {
+                    size: {
+                            w: number;
+                            h: number;
+                    };
+            };
+    }
+    /**
+        * 图集资源创建参数。
+        */
+    export interface IAtlasCreationOptions {
+            /**
+                * 单元宽度。
+                */
+            cellWidth?: number;
+            /**
+                * 单元高度。
+                */
+            cellHeight?: number;
+            /**
+                * 单元间的间隙。
+                */
+            space?: number;
+            /**
+                * 每行有多少帧（单元）。
+                */
+            framesPerLine: number;
+            /**
+                * 需要从哪一帧开始。
+                */
+            frameStart?: number;
+            /**
+                * 需要几帧。
+                */
+            frameCount?: number;
+    }
+    /**
+        * 图集资源。
+        * @version 2.27.1
+        *
+        * 一般通过{@link AtlasLoader}加载自动生成。
+        * 推荐使用[Shoebox](https://www.renderhjs.net/shoebox/)等工具生成。
+        */
+    export default class Atlas {
+            isAtlas: boolean;
+            protected _AUTO_ID: number;
+            protected _image: Kanata.IImage;
+            protected _texture: Kanata.Texture;
+            protected _frames: IAtlasOptions['frames'];
+            protected _meta: IAtlasOptions['meta'];
+            protected _updatable: boolean;
+            protected _root: string;
+            protected _area: number;
+            protected _needReBuild: boolean;
+            /**
+                * 根据宽高和行数、列数来创建一个空的图集。
+                * 这个图集将被行列分成若干个格子帧，开发者可以根据实际状况去使用`updateFrame`更新这些格子。
+                * 自动生成的帧的名字为`${row}${col}`，比如第一行第一列为`'11'`。
+                *
+                * @param onUpdate 初始化时的回调，可以用于一开始绘制图像
+                */
+            static CREATE_FROM_GRIDS(scene: Scene, options: {
+                    width: number;
+                    height: number;
+                    rows: number;
+                    cols: number;
+                    space?: number;
+            }, onUpdate?: (texture: Kanata.Texture, region: {
+                    col: number;
+                    row: number;
+                    x: number;
+                    y: number;
+                    w: number;
+                    h: number;
+            }, frameName: string) => void): Atlas;
+            /**
+                * 根据纹理和配置，来通过纹理创建一个不可修改的图集。通常用于精灵动画。
+                * 这个图集将被行列分成若干个格子帧，每一帧的名字为`0`、`1`、`2`......
+                */
+            static CREATE_FROM_TEXTURE(scene: Scene, texture: Kanata.Texture, options: IAtlasCreationOptions): Atlas;
+            /**
+                * 获取元信息。
+                */
+            get meta(): {
+                    size: {
+                            w: number;
+                            h: number;
+                    };
+            };
+            /**
+                * 获取帧集合。
+                */
+            get frames(): {
+                    [key: string]: {
+                            /**
+                                * 帧的区块信息。
+                                */
+                            frame: {
+                                    x: number;
+                                    y: number;
+                                    w: number;
+                                    h: number;
+                            };
+                            /**
+                                * 会自动生成，开发者无需关心。
+                                *
+                                * @hidden
+                                */
+                            uvMatrix?: Matrix3;
+                            /**
+                                * 会自动生成，开发者无需关心。
+                                *
+                                * @hidden
+                                */
+                            uvST?: Vector4;
+                    };
+            };
+            /**
+                * 获取整体的纹理。
+                */
+            get texture(): import('XrFrame/kanata/lib/index').Texture;
+            /**
+                * 构建一个图集。
+                *
+                * @param options 初始化参数。
+                */
+            constructor(_scene: Scene, options: IAtlasOptions);
+            /**
+                * 获取某一帧的数据。
+                */
+            getFrame(frameName: string): {
+                    x: number;
+                    y: number;
+                    w: number;
+                    h: number;
+            };
+            /**
+                * 获取某一帧的uv变换矩阵。
+                */
+            getUVMatrix(frameName: string): Matrix3;
+            protected _buildUVMatrix(frame: {
+                    x: number;
+                    y: number;
+                    w: number;
+                    h: number;
+            }): Matrix3;
+            /**
+                * 获取某一帧的uvST。
+                * [sx, sy, tx, ty]。
+                */
+            getUVST(frameName: string): Vector4;
+            protected _buildUVST(frame: {
+                    x: number;
+                    y: number;
+                    w: number;
+                    h: number;
+            }): Vector4;
+            /**
+                * 更新某一frame，通过`onUpdate`方法参数中的`texture`和`region`来更新上此帧所占据区域内的图像。
+                */
+            updateFrame(frameName: string, onUpdate: (texture: Kanata.Texture, region: {
+                    x: number;
+                    y: number;
+                    w: number;
+                    h: number;
+            }, frameName: string) => void): void;
+    }
+    export {};
+}
+
 declare module 'XrFrame/assets/factories' {
     /**
         * factories.ts
         *
         *         * @Date    : 2022/3/23下午4:04:18
         */
-    import Scene from "XrFrame/core/Scene";
-    import Effect from "XrFrame/assets/Effect";
-    import Geometry from "XrFrame/assets/Geometry";
-    import Material from "XrFrame/assets/Material";
+    import Scene from 'XrFrame/core/Scene';
+    import Effect from 'XrFrame/assets/Effect';
+    import Geometry from 'XrFrame/assets/Geometry';
+    import Material from 'XrFrame/assets/Material';
     /**
         * @internal
         */
@@ -3743,6 +4020,7 @@ declare module 'XrFrame/kanata/lib/kanata' {
         bindCCTToNode: typeof IKanata.bindCCTToNode;
         unbindRigidBody: typeof IKanata.unbindRigidBody;
         unbindCCT: typeof IKanata.unbindCCT;
+        decodeBase64: typeof IKanata.decodeBase64;
         setNodeName: typeof IKanata.setNodeName;
         setRenderComponentName: typeof IKanata.setRenderComponentName;
         debugPrint: typeof IKanata.debugPrint;
@@ -3777,6 +4055,7 @@ declare module 'XrFrame/core/Scene' {
     import { XRShadow } from 'XrFrame/elements';
     import { GizmoSystem, ShareSystem, VideoSystem } from 'XrFrame/systems';
     import VideoTexture, { IVideoTextureOptions } from 'XrFrame/assets/VideoTexture';
+    import PostProcess, { IPostProcessOptions } from 'XrFrame/assets/PostProcess';
     /**
         * 场景的默认组件，均为系统。
         */
@@ -3863,6 +4142,10 @@ declare module 'XrFrame/core/Scene' {
                 * 当前时间戳(ms)。
                 */
             get timestamp(): number;
+            /**
+                * @internal
+                */
+            get renderPass(): Kanata.RenderPass;
             /**
                 * @internal
              */
@@ -3974,6 +4257,10 @@ declare module 'XrFrame/core/Scene' {
                 * 手动创建一个`VideoTexture`资源。
                 */
             createVideoTexture(options?: IVideoTextureOptions): Promise<VideoTexture>;
+            /**
+                * 手动创建一个`PostProcess`资源。
+                */
+            createPostProcess(options: IPostProcessOptions): PostProcess;
     }
 }
 
@@ -4191,6 +4478,7 @@ declare module 'XrFrame/components/Camera' {
     import RenderTexture, { IRenderTarget } from 'XrFrame/assets/RenderTexture';
     import Transform from 'XrFrame/components/Transform';
     import Light from 'XrFrame/components/Light';
+    import PostProcess from 'XrFrame/assets/PostProcess';
     /**
         * 相机背景渲染模式。
         *
@@ -4289,6 +4577,11 @@ declare module 'XrFrame/components/Camera' {
                 * `xml`中的数据类型为`color`，默认为`0 0 0 1`。
                 */
             clearColor: number[];
+            /**
+                * 后处理，一个后处理资源id的数组。
+                * `xml`中的数据类型为`array`，默认为空。
+                */
+            postProcess: string[];
     }
     /**
         * {@link Camera}的`schema`，详见{@link ICameraData}。
@@ -4303,6 +4596,9 @@ declare module 'XrFrame/components/Camera' {
                 */
             readonly schema: IComponentSchema;
             readonly priority: number;
+            /**
+                * 相机深度。
+                */
             get depth(): number;
             /**
                 * @internal
@@ -4316,11 +4612,23 @@ declare module 'XrFrame/components/Camera' {
                 * @internal
                 */
             get id(): number;
+            /**
+                * @internal。
+                */
+            get bgStates(): {
+                    [key: string]: any;
+            };
+            /**
+                * @internal。
+                */
+            get bgStatesClear(): boolean;
             get background(): TCameraBackground;
             get target(): Transform;
             get near(): number;
             get far(): number;
             get cullMask(): number;
+            get postProcess(): PostProcess[];
+            get hdr(): boolean;
             /**
                 * @internal
                 */
@@ -4359,6 +4667,15 @@ declare module 'XrFrame/components/Camera' {
                 * @param mat4 手动模式下，要设置的值。
                 */
             changeProjectMatrix(manual: boolean, mat4?: Matrix4 | Float32Array): void;
+            /**
+                * 修改相机背景的渲染状态。
+                *
+                * @param states 同{@link Material.setRenderStates}
+                */
+            setBackgroundRenderStates(states: {
+                    [key: string]: any;
+            }): void;
+            clearBackgroundRenderStates(): void;
             onAdd(parent: Element, data: ICameraData): void;
             onUpdate(data: ICameraData, preData: ICameraData): void;
             onRemove(parent: Element, data: ICameraData): void;
@@ -4376,7 +4693,7 @@ declare module 'XrFrame/components/GLTF' {
     /**
         * @see {@link GLTF}
         */
-    export interface IGLTFComponentData {
+    export interface IGLTFData {
             /**
                 * 已加载完毕的GLTF模型。
                 */
@@ -4394,7 +4711,7 @@ declare module 'XrFrame/components/GLTF' {
                 */
             states?: [string, string][];
     }
-    export const GLTFComponentSchema: IComponentSchema;
+    export const GLTFSchema: IComponentSchema;
     /**
         * 将一个{@link GLTFModel | GLTF模型}实例化并渲染出来。
         * {@link XRGLTF | xr-gltf}标签会自动生成该组件。
@@ -4402,15 +4719,15 @@ declare module 'XrFrame/components/GLTF' {
         * > 会在当前元素下新建一系列子元素，作为GLTF模型的每个场景的根节点。
         * > 会在当前元素上新建{@link Animator}组件，并向其添加实例化生成的动画片段。
         *
-        * @see {@link IGLTFComponentData}
+        * @see {@link IGLTFData}
         */
-    export default class GLTFComponent extends Component<IGLTFComponentData> {
+    export default class GLTFComponent extends Component<IGLTFData> {
             readonly schema: IComponentSchema;
             readonly priority: number;
             _subRoots: Array<Element>;
-            onUpdate(data: IGLTFComponentData, preData: IGLTFComponentData): void;
-            onRemove(parent: Element, data: IGLTFComponentData): void;
-            onRelease(data: IGLTFComponentData): void;
+            onUpdate(data: IGLTFData, preData: IGLTFData): void;
+            onRemove(parent: Element, data: IGLTFData): void;
+            onRelease(data: IGLTFData): void;
             /**
                 * 根据GLTF模型中节点的`name`字段来获取内部元素。
                 */
@@ -4779,49 +5096,182 @@ declare module 'XrFrame/components/Text' {
 declare module 'XrFrame/components/particle/Particle' {
     import Element from 'XrFrame/core/Element';
     import Material from 'XrFrame/assets/Material';
+    import Vector4 from 'XrFrame/math/vector4';
     import BasicParticle, { IParticleData } from 'XrFrame/components/particle/BasicParticle';
     import ParticleInstance from 'XrFrame/components/particle/ParticleInstance';
+    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
     export default class Particle extends BasicParticle {
-        readonly priority: number;
-        subEmitters: any;
-        get material(): Material;
-        set material(value: Material);
-        get id(): number;
-        get data(): IParticleData;
-        get particleEmitter(): import("../emitter/BasicShapeEmitter").BasicShapeEmitter;
-        set data(value: IParticleData);
-        start(delay: any): void;
-        stop(): void;
-        constructor();
-        onAdd(parent: Element, data: IParticleData): void;
-        initParticle(data: IParticleData): void;
-        protected _prepareSubEmitterArray(): void;
-        protected stopSubEmitters(): void;
-        protected removeFromRoot(): void;
-        onTick(deltaTime: number, data: IParticleData): void;
-        onUpdate(data: IParticleData, preData: IParticleData): void;
-        onRemove(parent: Element, data: IParticleData): void;
-        onRelease(data: IParticleData): void;
-        protected _updateRenderData(deltaTime: number, data: IParticleData, isPreWarm?: boolean): void;
-        protected createParticle(): ParticleInstance;
-        protected particleSubEmitter(instance: any): void;
-        protected recycleParticle(particle: any): void;
-        protected update(instancesSum: any, data: IParticleData): void;
-        protected initInstanceProperty(instance: any): void;
-        protected updateInstanceProperty(instances: any): void;
-        protected processInstance(instance: ParticleInstance): void;
-        /**
-          * @param {number} gradient 输入范围在0~1之间
-          * @param {number} size
-          * @param {number} size2
-          * @return {}
-          */
-        protected addSizeGradient(gradient: any, size: any, size2: any): void;
-        protected addColorRemapGradient(gradient: any, min: any, max: any): void;
-        protected addFactorGradient(factorGradients: any, gradient: any, factor: any, factor2: any): void;
-        addRampGradient(gradient: any, color: any): void;
-        protected createRampGradientTexture(): void;
-        protected lerpNumberArrayToVector(vector: any, numberArray1: any, numberArray2: any, step: any, length?: number): void;
+            readonly priority: number;
+            subEmitters: any;
+            get material(): Material;
+            set material(value: Material);
+            get id(): number;
+            get data(): IParticleData;
+            get particleEmitter(): BasicShapeEmitter;
+            set data(value: IParticleData);
+            /**
+                * 粒子系统开始播放。
+                *
+                * @param delay 设定粒子延时几秒后再播放。
+                */
+            start(delay: any): void;
+            /**
+                * 停止粒子系统与其子发射器的播放。
+                */
+            stop(): void;
+            /**
+                * @internal
+                */
+            onAdd(parent: Element, data: IParticleData): void;
+            /**
+                * 设置粒子系统的内置粒子effect。
+                */
+            protected createMaterial(): Material;
+            /**
+                * 初始化粒子系统的状态。
+                */
+            initParticle(data: IParticleData): void;
+            /**
+                * 重置粒子系统的状态。
+                */
+            resetParticle(): void;
+            /**
+                * @internal
+                */
+            protected _prepareSubEmitterArray(): void;
+            /**
+                * 停止所有粒子子系统的发射状态。
+                */
+            protected stopSubEmitters(): void;
+            /**
+                * 粒子子发射系统从依附的粒子系统中剥离。
+                */
+            protected removeFromRoot(): void;
+            /**
+                * @internal
+                */
+            onTick(deltaTime: number, data: IParticleData): void;
+            /**
+                * @internal
+                */
+            onUpdate(data: IParticleData, preData: IParticleData): void;
+            /**
+                * @internal
+                */
+            onRemove(parent: Element, data: IParticleData): void;
+            /**
+                * @internal
+                */
+            onRelease(data: IParticleData): void;
+            /**
+                * @internal
+                */
+            protected _updateRenderData(deltaTime: number, isPreWarm?: boolean): void;
+            /**
+                * 创建一个粒子实例。
+                */
+            protected createParticle(): ParticleInstance;
+            /**
+                * 启动处于END状态的粒子子发射器。
+                * @param {ParticleInstance} instance 粒子实例
+                */
+            protected particleSubEmitter(instance: ParticleInstance): void;
+            /**
+                * 回收当前粒子实例，并放入储备粒子队列。
+                * @param {ParticleInstance} particle 粒子实例
+                */
+            protected recycleParticle(particle: ParticleInstance): void;
+            /**
+                * 更新每一个粒子的状态。
+                * @param {number} instancesSum 新生成的粒子数
+                */
+            protected update(instancesSum: number): void;
+            /**
+                * 初始化粒子实例。
+                * @param {ParticleInstance} instance 需要初始化的粒子实例
+                */
+            protected initInstanceProperty(instance: ParticleInstance): void;
+            /**
+             * 更新运动过程中粒子实例的各项属性以及子发射器状态。
+             * @param {Array} instances 粒子实例数组
+             */
+            protected updateInstanceProperty(instances: any): void;
+            /**
+                * 更新粒子实例的各项属性。
+                * @param {ParticleInstance} instance 待更新的粒子实例
+                */
+            protected processInstance(instance: ParticleInstance): void;
+            /**
+                * 添加粒子运动过程中的颜色变化规则。
+                * @param {number} gradient 指定所处粒子生命周期的阶段
+                * @param {Vector4} color1 指定粒子颜色的左区间
+                * @param {Vector4} color2 指定粒子颜色的右区间
+                */
+            addColorGradient(gradient: number, color1: Vector4, color2?: Vector4): void;
+            /**
+             * 添加粒子运动过程中的速度变化规则。
+             * @param {number} gradient 指定所处粒子生命周期的阶段
+             * @param {Vector4} speed 指定粒子速度的左区间
+             * @param {Vector4} speed2 指定粒子速度的右区间
+             */
+            addSpeedScaleGradient(gradient: number, speed: number, speed2?: number): void;
+            /**
+             * 添加粒子运动过程中的速度限制规则。
+             * @param {number} gradient 指定所处粒子生命周期的阶段
+             * @param {number} limitSpeed 指定粒子限制速度的左区间
+             * @param {number} limitSpeed2 指定粒子限制速度的右区间
+             */
+            addLimitSpeedGradient(gradient: number, limitSpeed: number, limitSpeed2?: number): void;
+            /**
+             * 添加粒子运动过程中的阻力规则。
+             * @param {number} gradient 指定所处粒子生命周期的阶段
+             * @param {number} speed 指定粒子受到的阻力大小的左区间[0-1]
+             * @param {number} speed2 指定粒子受到的阻力大小的右区间[0-1]
+             */
+            addDragGradient(gradient: number, drag: number, drag2?: number): void;
+            /**
+                * 添加粒子运动过程中的透明度变化规则。
+                * @param {number} gradient 指定所处粒子生命周期的阶段
+                * @param {number} alpha 指定粒子颜色透明度的左区间[0-1]
+                * @param {number} alpha2 指定粒子颜色透明度的右区间[0-1]
+                */
+            addAlphaGradient(gradient: number, alpha: number, alpha2?: number): void;
+            /**
+                * 添加粒子运动过程中的尺寸变化规则。
+                * @param {number} gradient 指定所处粒子生命周期的阶段
+                * @param {number} size 指定粒子尺寸的左区间
+                * @param {number} size2 指定粒子尺寸的右区间
+                */
+            addSizeGradient(gradient: number, size: number, size2?: number): void;
+            /**
+             * 添加粒子运动过程中的透明度变化范围。
+             * @param {number} gradient 指定所处粒子生命周期的阶段
+             * @param {number} min 指定粒子透明度值的左区间
+             * @param {number} max 指定粒子透明度值的右区间
+             */
+            addColorRemapGradient(gradient: number, min: number, max?: number): void;
+            /**
+                * 将存储不同时间段相关属性系数的数组按时间点从小到大进行排序。
+                * @param {Array} factorGradients 存储不同时间段相关属性系数的数组
+                * @param {number} gradient 一般代表粒子所处生命周期的阶段
+                * @param {number} factor 左区间值
+                * @param {number} factor2 右区间值
+                */
+            protected addFactorGradient(factorGradients: any, gradient: any, factor: any, factor2: any): void;
+            /**
+                * 添加粒子运动过程中的根据透明度影响的颜色变化规则，将通过颜色变化图纹理进行采样。
+                * @param {number} gradient 指定粒子颜色变化图的具体位置，对应具体值应为(1-alpha)
+                * @param {number} color 指定该位置的颜色
+                */
+            addRampGradient(gradient: any, color: any): void;
+            /**
+                * 根据颜色变化数组，生成对应的颜色变化纹理
+                */
+            protected createRampGradientTexture(): void;
+            /**
+                * @internal
+                */
+            protected lerpNumberArrayToVector(vector: any, numberArray1: any, numberArray2: any, step: any, length?: number): void;
     }
 }
 
@@ -4829,7 +5279,6 @@ declare module 'XrFrame/components/particle/BasicParticle' {
     import Material from 'XrFrame/assets/Material';
     import Component from 'XrFrame/core/Component';
     import { IComponentSchema } from 'XrFrame/core/Component';
-    import { BoxShapeEmitter, PointShapeEmitter, SphereShapeEmitter } from 'XrFrame/components/emitter';
     import { Kanata } from 'XrFrame/ext';
     import Transform from 'XrFrame/components/Transform';
     import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
@@ -4838,99 +5287,264 @@ declare module 'XrFrame/components/particle/BasicParticle' {
     import { Scene } from 'XrFrame/elements';
     import { SubEmitter } from 'XrFrame/components/emitter/SubEmitter';
     import ParticleInstance from 'XrFrame/components/particle/ParticleInstance';
+    import Atlas from 'XrFrame/assets/Atlas';
+    import Vector4 from 'XrFrame/math/vector4';
+    import Geometry from 'XrFrame/assets/Geometry';
+    /**
+        * {@link Particle}组件数据接口。
+        */
     export interface IParticleData {
-        neverCull?: boolean;
-        material?: Material;
-        uniforms?: [string, string][];
-        states?: [string, string][];
+            neverCull?: boolean;
+            /**
+                * 渲染模式。
+                */
+            renderMode?: string;
+            uniforms?: [string, string][];
+            /**
+                * 纹理信息。
+                */
+            texture?: Kanata.Texture;
+            /**
+                * 最大粒子数目。
+                */
+            capacity?: number;
+            /**
+                * 每秒粒子发射数。
+                */
+            emitRate?: number;
+            /**
+                * 初始角度。
+                */
+            angle?: number[];
+            /**
+                * 粒子系统启动延时秒数。
+                */
+            delay?: number;
+            /**
+                * y轴方向上的每秒位移。
+                */
+            gravity?: number;
+            /**
+                * 初始大小。
+                */
+            size?: number[];
+            /**
+                * 粒子在x轴方向上的大小尺度。
+                */
+            scaleX?: number[];
+            /**
+                * 粒子在y轴方向上的大小尺度。
+                */
+            scaleY?: number[];
+            /**
+                * 速度。
+                */
+            speed?: number[];
+            /**
+                * 生命周期时长。
+                */
+            lifeTime?: number[];
+            /**
+                * 粒子初始颜色左区间。
+                */
+            startColor?: number[];
+            /**
+                * 粒子初始颜色右区间。
+                */
+            startColor2?: number[];
+            /**
+                * 粒子结束时颜色。
+                */
+            endColor?: number[];
+            /**
+                * 角速度。
+                */
+            angularSpeed?: number[];
+            /**
+                * 发射器类型。
+                */
+            emitterType?: string;
+            /**
+                * 发射器属性配置。
+                */
+            emitterProps?: [string, string][];
+            /**
+                * 粒子系统生命周期时长。
+                */
+            stopDuration?: number;
+            /**
+                * 粒子预渲染周期数。
+                */
+            prewarmCycles?: number;
+            /**
+                * 速度阻尼系数。
+                */
+            speedDampen?: number;
+            /**
+                * 动画图集信息。
+                */
+            atlas?: Atlas;
+            /**
+                * 图集切换速度。
+                */
+            atlasSpeed?: number;
+            /**
+                * 是否随机播放图集。
+                */
+            atlasRandom?: boolean;
+            /**
+                * 是否循环播放图集。
+                */
+            atlasLoop?: boolean;
+            /**
+                * 指定图集帧名。
+                */
+            atlasFrames?: string[];
+            /**
+                * 网格信息。
+                */
+            mesh?: Geometry;
     }
+    /**
+        * {@link Particle}的`schema`定义。
+        * @see 解析后的接口详见 {@link IParticleData}
+        */
     export const ParticleSchema: IComponentSchema;
+    /**
+        * BillBoard渲染模式。
+        */
     export const enum BillBoardMode {
-        BILLBOARDMODE_DEFAULT = 0,
-        BILLBOARDMODE_Y = 1,
-        BILLBOARDMODE_STRETCHED = 2
+            BILLBOARDMODE_DEFAULT = 0,
+            BILLBOARDMODE_Y = 1,
+            BILLBOARDMODE_STRETCHED = 2
     }
     export default class BasicParticle extends Component<IParticleData> {
-        readonly schema: IComponentSchema;
-        protected static count: number;
-        protected _systemId: number;
-        protected _data: IParticleData;
-        protected particleScene: Scene;
-        protected particleEl: any;
-        protected _instances: ParticleInstance[];
-        protected _stockInstances: ParticleInstance[];
-        protected _capacity: number;
-        protected _delay: number;
-        protected _updateSpeed: number;
-        protected _stopDuration: number;
-        protected _emitRate: number;
-        protected _gravity: number;
-        protected _preWarmCycles: number;
-        protected _preWarmStepOffset: number;
-        protected _particleEmitterType: string;
-        protected _particleEmitter: BasicShapeEmitter;
-        protected _particleEmitterStates: [string, string][];
-        protected particleStride: number;
-        protected particleVertexSize: number;
-        protected byteStride: number;
-        protected ParticleAttributes: any;
-        protected _minLifeTime: number;
-        protected _maxLifeTime: number;
-        protected _minScaleX: number;
-        protected _maxScaleX: number;
-        protected _minScaleY: number;
-        protected _maxScaleY: number;
-        protected _minSize: number;
-        protected _maxSize: number;
-        protected _minSpeed: number;
-        protected _maxSpeed: number;
-        protected _particleLengthScale: number;
-        protected _startColor: number[];
-        protected _startColor2: number[];
-        protected _endColor: number[];
-        protected _sizeGradients: any;
-        protected _rampGradients: any;
-        protected _rampGradientsTexture: any;
-        protected _useRampGradients: boolean;
-        protected _colorRemapGradients: any;
-        protected _cull: Kanata.CullingComponent;
-        protected _mesh: Kanata.MeshRendererComponent;
-        protected _sourceMaterial: Material;
-        protected _material: Material;
-        protected _trs: Transform;
-        protected _vertexBuffer: Kanata.VertexBuffer;
-        protected _indexBuffer: Kanata.IndexBuffer;
-        protected _vertexData: Float32Array;
-        protected _indexSize: number;
-        protected _vertexSize: number;
-        protected _useBillboard: boolean;
-        protected _billboardMode: number;
-        protected _isSubEmitter: boolean;
-        protected _minRotation: number;
-        protected _maxRotation: number;
-        protected _minAngularSpeed: number;
-        protected _maxAngularSpeed: number;
-        protected _subEmitters: any[];
-        emitterPosition: Vector3;
-        get useBillboard(): boolean;
-        set useBillboard(value: boolean);
-        get useRampGradients(): boolean;
-        set useRampGradients(value: boolean);
-        get billboardMode(): number;
-        set billboardMode(value: number);
-        protected _parseAttribute(): void;
-        clone(): Particle;
-        createSubEmitter(states?: [string, string][]): SubEmitter;
-        protected _parseStates(states: [string, string][]): void;
-        protected _chooseEmitterProcess(): void;
-        protected _rebuildMesh(neverCull: boolean): void;
-        protected _getUniformDesc(): Kanata.UniformDescriptor;
-        protected _getMeshType(): Kanata.EMeshRenderType;
-        protected _getVertexLayout(attributes: any, stride: any): Kanata.VertexLayout;
-        protected _setMeshData(material: Material, uniforms?: [string, string][], states?: [string, string][]): void;
-        createPointEmitter(direction1: Vector3, direction2: Vector3): PointShapeEmitter;
-        createBoxEmitter(direction1: Vector3, direction2: Vector3, minEmitBox: Vector3, maxEmitBox: Vector3): BoxShapeEmitter;
-        createSphereEmitter(radius: number, radiusRange: number, arc: number, randomizeDirection: number): SphereShapeEmitter;
+            /**
+                * 详见{@link ParticleSchema}。
+                */
+            readonly schema: IComponentSchema;
+            protected static count: number;
+            protected _systemId: number;
+            protected _data: IParticleData;
+            protected particleScene: Scene;
+            protected particleEl: any;
+            protected _instances: ParticleInstance[];
+            protected _stockInstances: ParticleInstance[];
+            protected _capacity: number;
+            protected _delay: number;
+            protected _updateSpeed: number;
+            protected _stopDuration: number;
+            protected _emitRate: number;
+            protected _gravity: number;
+            protected _preWarmCycles: number;
+            protected _preWarmStepOffset: number;
+            protected _particleEmitterType: string;
+            protected _particleEmitter: BasicShapeEmitter;
+            protected _particleEmitterProperties: any;
+            protected particleStride: number;
+            protected particleVertexSize: number;
+            protected byteStride: number;
+            protected ParticleAttributes: any;
+            protected _burstCount: number;
+            protected _minLifeTime: number;
+            protected _maxLifeTime: number;
+            protected _minScaleX: number;
+            protected _maxScaleX: number;
+            protected _minScaleY: number;
+            protected _maxScaleY: number;
+            protected _minSize: number;
+            protected _maxSize: number;
+            protected _minSpeed: number;
+            protected _maxSpeed: number;
+            protected _particleLengthScale: number;
+            protected _startColor: number[];
+            protected _startColor2: number[];
+            protected _endColor: number[];
+            protected _sizeGradients: any;
+            protected _alphaGradients: any;
+            protected _colorRemapGradients: any;
+            protected _speedScaleGradients: any;
+            protected _limitSpeedGradients: any;
+            protected _speedDampenFactor: number;
+            protected _dragGradients: any;
+            protected _useSpriteSheet: boolean;
+            protected _startSpriteCellIndex: number;
+            protected _endSpriteCellIndex: number;
+            protected _useRandomSpriteCellIndex: boolean;
+            protected _useSpriteCellLoop: boolean;
+            protected _spriteChangeSpeed: number;
+            protected _spriteFrameInfo: Vector4[];
+            protected _spriteNameToCellIndex: Map<string, number>;
+            protected _textureData: Kanata.Texture;
+            protected _atlasObj: Atlas;
+            protected _atlasTexture: Kanata.Texture;
+            protected _cull: Kanata.CullingComponent;
+            protected _mesh: Kanata.MeshRendererComponent;
+            protected _sourceMaterial: Material;
+            protected _material: Material;
+            protected _trs: Transform;
+            protected _vertexBuffer: Kanata.VertexBuffer;
+            protected _indexBuffer: Kanata.IndexBuffer;
+            protected _renderMesh: Geometry;
+            protected _vertexCount: number;
+            protected _vertexData: Float32Array;
+            protected _eachIndexSize: number;
+            protected _indexSize: number;
+            protected _vertexSize: number;
+            protected _useBillboard: boolean;
+            protected _useRenderMesh: boolean;
+            protected _billboardMode: number;
+            protected _useRampGradients: boolean;
+            protected _rampGradients: any;
+            protected _rampGradientsTexture: Kanata.Texture;
+            protected _colorGradients: any;
+            protected _vertexLayoutDirty: boolean;
+            protected _startAngle: number;
+            protected _startAngle2: number;
+            protected _minAngularSpeed: number;
+            protected _maxAngularSpeed: number;
+            protected _subEmitters: any[];
+            protected _emitterPosition: Vector3;
+            get material(): Material;
+            /**
+                * @internal
+                */
+            get useBillboard(): boolean;
+            set useBillboard(value: boolean);
+            get useRampGradients(): boolean;
+            set useRampGradients(value: boolean);
+            get billboardMode(): number;
+            set billboardMode(value: number);
+            get useSpriteSheet(): boolean;
+            set useSpriteSheet(value: boolean);
+            get useRandomSpriteCellIndex(): boolean;
+            get useSpriteCellLoop(): boolean;
+            get spriteChangeSpeed(): number;
+            get emitterPosition(): Vector3;
+            set emitterPosition(value: Vector3);
+            /**
+                * @internal
+                */
+            protected _parseAttribute(): void;
+            /**
+                * 获取一个拷贝的粒子系统。
+                */
+            clone(): Particle;
+            /**
+             * 获取一个粒子子发射器。
+             */
+            createSubEmitter(data: IParticleData): SubEmitter;
+            protected _parseProperties(data: IParticleData): void;
+            protected _chooseEmitterProcess(): void;
+            protected _createVertexBuffers(): void;
+            protected _createIndexBuffer(): void;
+            protected _appendParticleVertices(offset: any, instance?: ParticleInstance): void;
+            protected _appendParticleVertex(index: any, instance: ParticleInstance, offsetX: any, offsetY: any, offsetZ: any, u: any, v: any): void;
+            protected _rebuildMesh(neverCull: boolean): void;
+            protected _getUniformDesc(): Kanata.UniformDescriptor;
+            protected _getMeshType(): Kanata.EMeshRenderType;
+            protected _getVertexLayout(attributes: any, stride: any): Kanata.VertexLayout;
+            protected _setMeshData(material: Material, uniforms?: [string, string][], states?: [string, string][]): void;
     }
 }
 
@@ -5032,6 +5646,7 @@ declare module 'XrFrame/components/Env' {
             get useHalfSkyMap(): boolean;
             get skyMap(): import('XrFrame/kanata/lib/index').Texture;
             get isSky2D(): boolean;
+            get isSkyRT(): boolean;
             get rotation(): number;
             get hasDiffuse(): boolean;
             get diffuseSH(): Float32Array;
@@ -5856,6 +6471,64 @@ declare module 'XrFrame/components/gizmo/ShapeGizmos' {
     export {};
 }
 
+declare module 'XrFrame/components/AssetPostProcess' {
+    /**
+        * AssetPostProcess.ts
+        *
+        *         * @Date    : 10/14/2022, 4:35:12 PM
+        */
+    import Component, { IComponentSchema } from 'XrFrame/core/Component';
+    import Element from 'XrFrame/core/Element';
+    /**
+        * `AssetPostProcess`资源数据接口。
+        */
+    export interface IAssetPostProcessData {
+            /**
+                * 资源`id`。
+                */
+            assetId: string;
+            /**
+                * 同{@link IPostProcessOptions.type}。
+                */
+            type: string;
+            /**
+                * 同{@link IPostProcessOptions.isHDR}。
+                */
+            isHDR?: boolean;
+            /**
+                * 同{@link IPostProcessOptions.data}。
+                */
+            data?: {
+                    [key: string]: string;
+            };
+    }
+    /**
+        * {@link AssetPostProcess}的`schema`，详见{@link IAssetPostProcessData}。
+        */
+    export const AssetPostProcessSchema: IComponentSchema;
+    /**
+        * 渲染纹理创建组件，用于在`xml`中创建{@link PostProcess}资源，一般被代理到{@link XRAssetPostProcess}元素。
+        */
+    export default class AssetPostProcess extends Component<IAssetPostProcessData> {
+            /**
+                * 详见{@link AssetPostProcessSchema}。
+                */
+            readonly schema: IComponentSchema;
+            /**
+                * 对应后处理资源的数据，可用于修改。
+                */
+            get assetData(): {
+                    [key: string]: any;
+            };
+            onAdd(parent: Element, data: IAssetPostProcessData): void;
+            onUpdate(data: IAssetPostProcessData, preData: IAssetPostProcessData): void;
+            /**
+                * 移除AssetPostProcess。
+                */
+            onRemove(parent: Element, data: IAssetPostProcessData): void;
+    }
+}
+
 declare module 'XrFrame/elements/xr-node' {
     /**
         * xr-node.ts
@@ -5877,9 +6550,6 @@ declare module 'XrFrame/elements/xr-node' {
             position: string[];
             rotation: string[];
             scale: string[];
-            'anim-keyframe': string[];
-            'anim-clipmap': string[];
-            'anim-autoplay': string[];
     } & {
             [key: string]: string[];
     };
@@ -5919,9 +6589,6 @@ declare module 'XrFrame/elements/xr-shadow' {
             position: string[];
             rotation: string[];
             scale: string[];
-            'anim-keyframe': string[];
-            'anim-clipmap': string[];
-            'anim-autoplay': string[];
     } & {
             [key: string]: string[];
     };
@@ -5965,6 +6632,7 @@ declare module 'XrFrame/elements/xr-camera' {
             'render-target': string[];
             'is-perspective': string[];
             'cull-mask': string[];
+            depth: string[];
             fov: string[];
             near: string[];
             far: string[];
@@ -5977,6 +6645,7 @@ declare module 'XrFrame/elements/xr-camera' {
             'clear-depth': string[];
             'clear-stencil': string[];
             'clear-color': string[];
+            'post-process': string[];
     } & {
             'node-id': string[];
             visible: string[];
@@ -5984,9 +6653,6 @@ declare module 'XrFrame/elements/xr-camera' {
             position: string[];
             rotation: string[];
             scale: string[];
-            'anim-keyframe': string[];
-            'anim-clipmap': string[];
-            'anim-autoplay': string[];
     } & {
             [key: string]: string[];
     };
@@ -6032,9 +6698,6 @@ declare module 'XrFrame/elements/xr-mesh' {
             position: string[];
             rotation: string[];
             scale: string[];
-            'anim-keyframe': string[];
-            'anim-clipmap': string[];
-            'anim-autoplay': string[];
     } & {
             [key: string]: string[];
     };
@@ -6083,9 +6746,6 @@ declare module 'XrFrame/elements/xr-light' {
             position: string[];
             rotation: string[];
             scale: string[];
-            'anim-keyframe': string[];
-            'anim-clipmap': string[];
-            'anim-autoplay': string[];
     } & {
             [key: string]: string[];
     };
@@ -6129,9 +6789,6 @@ declare module 'XrFrame/elements/xr-gltf' {
             position: string[];
             rotation: string[];
             scale: string[];
-            'anim-keyframe': string[];
-            'anim-clipmap': string[];
-            'anim-autoplay': string[];
     } & {
             [key: string]: string[];
     };
@@ -6332,9 +6989,6 @@ declare module 'XrFrame/elements/xr-ar-tracker' {
             position: string[];
             rotation: string[];
             scale: string[];
-            'anim-keyframe': string[];
-            'anim-clipmap': string[];
-            'anim-autoplay': string[];
     } & {
             [key: string]: string[];
     };
@@ -6376,6 +7030,38 @@ declare module 'XrFrame/elements/xr-particle' {
         readonly dataMapping: {
             [key: string]: string[];
         };
+    }
+}
+
+declare module 'XrFrame/elements/xr-asset-post-process' {
+    /**
+        * xr-asset-post-process.ts
+        *
+        *         * @Date    : 10/14/2022, 5:18:21 PM
+        */
+    import Element, { IEntityComponents } from 'XrFrame/core/Element';
+    export const AssetPostProcessDefaultComponents: IEntityComponents;
+    /**
+        * 将{@link AssetPostProcess}的属性进行映射。
+        */
+    export const AssetPostProcessDataMapping: {
+            'asset-id': string[];
+            type: string[];
+            'is-hdr': string[];
+            data: string[];
+    } & {
+            [key: string]: string[];
+    };
+    /**
+        * 标签为`xr-asset-render-texture`。
+        *
+        * 默认组件见{@link AssetPostProcessDefaultComponents}，属性映射见{@link AssetPostProcessDataMapping}。
+        */
+    export default class XRAssetPostProcess extends Element {
+            readonly defaultComponents: IEntityComponents;
+            readonly dataMapping: {
+                    [key: string]: string[];
+            };
     }
 }
 
@@ -6781,9 +7467,9 @@ declare module 'XrFrame/systems/ARSystem' {
                 *
                 * @param nodeIdOrElement 节点的`nodeId`或是`element`引用。
                 * @param switchVisible 是否要自动切换显示或隐藏。
-                * @returns
+                * @returns 是否放置成功
                 */
-            placeHere(nodeIdOrElement: string | Element, switchVisible?: boolean): void;
+            placeHere(nodeIdOrElement: string | Element, switchVisible?: boolean): boolean;
             /**
                 * 在`Plane`模式下，重置平面。
                 */
@@ -6819,6 +7505,11 @@ declare module 'XrFrame/systems/ARSystem' {
 }
 
 declare module 'XrFrame/systems/ShareSystem' {
+    /**
+        * ShareSystem.ts
+        *
+        *         * @Date    : 9/19/2022, 5:04:24 PM
+        */
     import Component from 'XrFrame/core/Component';
     export interface IShareSystemData {
     }
@@ -6827,43 +7518,13 @@ declare module 'XrFrame/systems/ShareSystem' {
         */
     export interface IShareCaptureOptions {
             /**
-                * 截屏左上角横坐标。
-                * @default 0
-                */
-            x?: number;
-            /**
-                * 截屏左上角纵坐标。
-                * @default 0
-                */
-            y?: number;
-            /**
-                * 截屏宽度。
-                * @default 画布宽 - x
-                */
-            width?: number;
-            /**
-                * 截屏高度。
-                * @default 画布高 - y
-                */
-            height?: number;
-            /**
-                * 输出图片宽度。
-                * @default scene.width
-                */
-            destWidth?: number;
-            /**
-                * 输出图片高度。
-                * @default scene.height
-                */
-            destHeight?: number;
-            /**
                 * 输出图片编码。
-                * @default 'png'
+                * @default 'jpg'
                 */
             fileType?: 'jpg' | 'png';
             /**
                 * 输出图片jpg时的品质，0~1。
-                * @default 1
+                * @default 0.8
                 */
             quality?: number;
     }
@@ -6873,15 +7534,30 @@ declare module 'XrFrame/systems/ShareSystem' {
     export default class ShareSystem extends Component<IShareSystemData> {
             readonly priority: number;
             /**
+                * 当前是否支持分享系统。
+                */
+            get supported(): boolean;
+            /**
                 * 截屏输出为`base64`。
                 */
             captureToDataURL(options?: IShareCaptureOptions): string;
+            /**
+                * 截屏输出为`ArrayBuffer`。
+                */
+            captureToArrayBuffer(options?: IShareCaptureOptions): ArrayBuffer;
+            /**
+                * 截屏输出为本地路径，回调完成后会自动释放。
+                *
+                * @params callback 接受结果的回调，处理完后会释放文件。
+                * @params process 如果提供这个方法，会传入base64，返回转换后的ArrayBuffer。
+                */
+            captureToLocalPath(options: IShareCaptureOptions, callback: (fp: string) => Promise<void>, process?: (buffer: ArrayBuffer) => Promise<ArrayBuffer>): Promise<void>;
             /**
                 * 直接截屏分享给好友。
                 *
                 * @params process 如果提供这个方法，会传入base64，返回转换后的ArrayBuffer。
                 */
-            captureToFriends(options?: IShareCaptureOptions, process?: (fp: ArrayBuffer) => Promise<ArrayBuffer>): Promise<void>;
+            captureToFriends(options?: IShareCaptureOptions, process?: (buffer: ArrayBuffer) => Promise<ArrayBuffer>): Promise<void>;
     }
 }
 
@@ -7212,6 +7888,69 @@ declare module 'XrFrame/loader/RawLoader' {
     export {};
 }
 
+declare module 'XrFrame/loader/AtlasLoader' {
+    /**
+        * AtlasLoader.ts
+        *
+        *         * @Date    : 10/13/2022, 5:35:00 PM
+        */
+    import Atlas from 'XrFrame/assets/Atlas';
+    import AssetLoader, { ILoaderOptionsSchema } from 'XrFrame/loader/AssetLoader';
+    import { IAssetLoadData } from 'XrFrame/loader/types';
+    export interface IAtlasSource {
+            meta: {
+                    image: string;
+                    size: {
+                            w: number;
+                            h: number;
+                    };
+            };
+            frames: {
+                    [key: string]: {
+                            frame: {
+                                    x: number;
+                                    y: number;
+                                    w: number;
+                                    h: number;
+                            };
+                            spriteSourceSize: {
+                                    x: number;
+                                    y: number;
+                                    w: number;
+                                    h: number;
+                            };
+                            sourceSize: {
+                                    w: number;
+                                    h: number;
+                            };
+                    };
+            };
+    }
+    export interface IAtlasLoaderOptions {
+    }
+    type IAtlasLoadData = IAssetLoadData<IAtlasLoaderOptions>;
+    /**
+        * 图集资源{@link Atlas}的加载器。
+        * @version 2.27.1
+        *
+        * 推荐使用[Shoebox](https://www.renderhjs.net/shoebox/)生成。
+        */
+    export default class AtlasLoader extends AssetLoader<Atlas, IAtlasLoaderOptions> {
+            readonly schema: ILoaderOptionsSchema;
+            load(params: IAtlasLoadData, callbacks: {
+                    onLoading(progress: number): void;
+                    onLoaded(value: Atlas): void;
+                    onError(error: Error): void;
+            }): Promise<void>;
+            getBuiltin(): {
+                    assetId: string;
+                    src: string;
+                    options: IAtlasLoaderOptions;
+            }[];
+    }
+    export {};
+}
+
 declare module 'XrFrame/loader/types' {
     /**
         * types.ts
@@ -7478,6 +8217,7 @@ declare module 'XrFrame/kanata/lib/frontend' {
     export const bindCCTToNode: (cc: any, nodeId: number) => void;
     export const unbindRigidBody: (rigidBody: any) => void;
     export const unbindCCT: (cc: any) => void;
+    export const decodeBase64: (base64: string) => ArrayBuffer;
     export function destroy(): void;
     export function update(delta: number): void;
     export const setNodeName: (id: number, name: string) => void;
@@ -8166,7 +8906,7 @@ declare module 'XrFrame/kanata/lib/backend/interface' {
             /**
                 * @internal
                 */
-            buffer?: Buffer;
+            buffer?: ArrayBuffer;
             /**
                 * 对于`ArrayBuffer`创建的图片，第一次使用后是否要自动释放内存，在`xr-frame`中，默认自动释放。
                 */
@@ -8457,6 +9197,57 @@ declare module 'XrFrame/kanata/lib/index' {
     export function composeRawBufferEntity3DWhole(useEuler: boolean, rotation: ArrayLike<number>, position: ArrayLike<number>, scale: ArrayLike<number>): Float32Array;
 }
 
+declare module 'XrFrame/assets/PostProcess' {
+    /**
+        * PostProcess.ts
+        *
+        *         * @Date    : 10/14/2022, 4:34:55 PM
+        */
+    type Scene = import('XrFrame/core/Scene').default;
+    /**
+        * 后处理资源初始化参数。
+        */
+    export interface IPostProcessOptions {
+            /**
+                * 类型，目前支持的类型请见[内置后处理资源](https://developers.weixin.qq.com/miniprogram/dev/component/xr-frame/builtin/post-process)。
+                */
+            type: string;
+            /**
+                * 是否开启HDR。
+                */
+            isHDR?: boolean;
+            /**
+                * 对应类型的数据。
+                */
+            data?: {
+                    [key: string]: any;
+            };
+    }
+    /**
+        * 后处理资源。
+        *
+        * 一般由{@link AssetPostProcess}加载。
+        */
+    export default class PostProcess {
+            /**
+                * 类型。
+                */
+            get type(): string;
+            /**
+                * 是否开启了HDR。
+                */
+            get isHDR(): boolean;
+            /**
+                * 数据，可以修改。
+                */
+            get data(): {
+                    [key: string]: any;
+            };
+            constructor(_scene: Scene, options: IPostProcessOptions);
+    }
+    export {};
+}
+
 declare module 'XrFrame/glyph' {
     export interface IGlyph {
         character?: string;
@@ -8473,42 +9264,69 @@ declare module 'XrFrame/glyph' {
 }
 
 declare module 'XrFrame/components/particle/ParticleInstance' {
-    import { FactorGradient } from "XrFrame/components/particle/gradient";
+    import { FactorGradient, ColorGradient } from "XrFrame/components/particle/gradient";
     import Particle from "XrFrame/components/particle/Particle";
     import Vector2 from 'XrFrame/math/vector2';
     import Vector3 from 'XrFrame/math/vector3';
     import Vector4 from 'XrFrame/math/vector4';
     export default class ParticleInstance {
-        static count: number;
-        id: number;
-        position: Vector3;
-        direction: Vector3;
-        color: Vector4;
-        colorStep: Vector4;
-        rampPos: Vector4;
-        lifeTime: number;
-        age: number;
-        size: number;
-        scale: Vector2;
-        angle: number;
-        angularSpeed: number;
-        particleSystem: Particle;
-        currentSize: number;
-        currentSize2: number;
-        currentSizeGradient: FactorGradient;
-        subEmitterMuster: any;
-        constructor(particle: Particle);
-        reset(): void;
-        copyTo(other: ParticleInstance): void;
+            static count: number;
+            id: number;
+            position: Vector3;
+            direction: Vector3;
+            speed: number;
+            color: Vector4;
+            colorStep: Vector4;
+            rampPos: Vector4;
+            lifeTime: number;
+            age: number;
+            drag: number;
+            size: number;
+            startSize: number;
+            sizeGradientFactor: number;
+            scale: Vector2;
+            angle: number;
+            angularSpeed: number;
+            particleSystem: Particle;
+            currentSize: number;
+            currentSize2: number;
+            currentSizeGradient: FactorGradient;
+            currentColor: Vector4;
+            currentColor2: Vector4;
+            currentColorGradient: ColorGradient;
+            currentAlpha: number;
+            currentAlpha2: number;
+            currentAlphaGradient: FactorGradient;
+            currentSpeedScale: number;
+            currentSpeedScale2: number;
+            currentSpeedScaleGradient: FactorGradient;
+            currentLimitSpeed: number;
+            currentLimitSpeed2: number;
+            currentLimitSpeedGradient: FactorGradient;
+            currentDrag: number;
+            currentDrag2: number;
+            currentDragGradient: FactorGradient;
+            subEmitterMuster: any;
+            startSpriteCellIndex: number;
+            endSpriteCellIndex: number;
+            cellIndex: number;
+            randomCellOffset: any;
+            constructor(particle: Particle);
+            /**
+             * 重置粒子实例的状态。
+             */
+            reset(): void;
+            /**
+                * 将当前粒子实例的状态拷贝到目标实例。
+                * @param {ParticleInstance} other 目标粒子实例
+                */
+            copyTo(other: ParticleInstance): void;
+            /**
+                * 更新从动画图集采样的帧序号
+                */
+            updateCellIndex(): void;
+            clamp(num: any, left?: number, right?: number): any;
     }
-}
-
-declare module 'XrFrame/components/emitter' {
-    import BoxShapeEmitter from 'XrFrame/components/emitter/BoxShapeEmitter';
-    import PointShapeEmitter from 'XrFrame/components/emitter/PointShapeEmitter';
-    import DrawShapeEmitter from 'XrFrame/components/emitter/DrawShapeEmitter';
-    import SphereShapeEmitter from 'XrFrame/components/emitter/SphereShapeEmitter';
-    export { BoxShapeEmitter, PointShapeEmitter, DrawShapeEmitter, SphereShapeEmitter };
 }
 
 declare module 'XrFrame/components/emitter/BasicShapeEmitter' {
@@ -8533,15 +9351,28 @@ declare module 'XrFrame/components/emitter/BasicShapeEmitter' {
 
 declare module 'XrFrame/components/emitter/SubEmitter' {
     import Particle from "XrFrame/components/particle/Particle";
+    /**
+        * 粒子子发射器的依附状态。
+        */
     export const enum SubEmitterState {
-        ATTATHCED = 0,
-        END = 1
+            /**
+                * 依附于粒子整个生命周期
+                */
+            ATTACH = 0,
+            /**
+             * 在粒子生命周期末出现
+             */
+            END = 1
     }
     export class SubEmitter {
-        particleSystem: Particle;
-        state: SubEmitterState;
-        constructor(particleSystem: any);
-        clone(): SubEmitter;
+            particleSystem: Particle;
+            state: SubEmitterState;
+            constructor(particleSystem: any);
+            /**
+                * 通过克隆，获取指定的粒子子发射器实例
+                * @return {SubEmitter} 克隆后的子发射器实例
+                */
+            clone(): SubEmitter;
     }
 }
 
@@ -8755,13 +9586,20 @@ declare module 'XrFrame/loader/AssetLoader' {
         * />
         * ```
         *
-        * 对应的`schema`为：
+        * 对应的`schema`接口为：
         * ```ts
         * export interface ICubeTextureLoaderOptions {
         *   // left right top bottom front back
         *   faces: string[];
         * }
         * ```ts
+        *
+        * 对应的`schema`为：
+        * ```ts
+        * schema = {
+        *   faces: {type: 'array'}
+        * };
+        * ```
         */
     export interface ILoaderOptionsSchema {
             [key: string]: {
@@ -8776,6 +9614,9 @@ declare module 'XrFrame/loader/AssetLoader' {
         * @template ILoadOptions 可接受额外配置的类型。
         */
     export default class AssetLoader<T, ILoadOptions> {
+            /**
+                * 和{@link Component.schema}类似，指定解析Options的实际`schema`，对应于`ILoadOptions`。
+                */
             readonly schema: ILoaderOptionsSchema;
             /**
                 * 当前资源所属场景的实例。
@@ -10456,86 +11297,42 @@ declare module 'XrFrame/kanata/lib/frontend/shared/crossContext' {
 
 declare module 'XrFrame/components/particle/gradient' {
     import Vector3 from "XrFrame/math/vector3";
+    import Vector4 from "XrFrame/math/vector4";
+    export class ColorGradient {
+            gradient: number;
+            color: Vector4;
+            color2: Vector4;
+            constructor(gradient: any, color: any, color2: any);
+            /**
+             * 获取具体颜色属性值
+             * @param {Vector4} 用于存储结果的临时变量
+             */
+            getColor(colorTemp: Vector4): void;
+    }
     export class Color3Gradient {
-        gradient: number;
-        color: Vector3;
-        constructor(gradient: any, color: any);
+            gradient: number;
+            color: Vector3;
+            constructor(gradient: any, color: any);
     }
     export class FactorGradient {
-        gradient: number;
-        factor: number;
-        factor2: number;
-        constructor(gradient: any, factor: any, factor2: any);
-        getFactor(): number;
+            gradient: number;
+            factor: number;
+            factor2: number;
+            constructor(gradient: any, factor: any, factor2: any);
+            /**
+                * 获取具体属性值
+                * @return {number} 插值后的属性大小
+                */
+            getFactor(): number;
     }
     export class BasicGradientMethod {
-        static GetCurrentGradient(ratio: any, gradients: any, updateFunc: any): void;
-    }
-}
-
-declare module 'XrFrame/components/emitter/BoxShapeEmitter' {
-    import Vector3 from 'XrFrame/math/vector3';
-    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
-    export default class BoxShapeEmitter extends BasicShapeEmitter {
-        direction: Vector3;
-        direction2: Vector3;
-        minEmitBox: Vector3;
-        maxEmitBox: Vector3;
-        constructor();
-        startDirection(worldMatrix: any, direction: any): void;
-        startPosition(worldMatrix: any, position: Vector3): void;
-    }
-}
-
-declare module 'XrFrame/components/emitter/PointShapeEmitter' {
-    import Vector3 from 'XrFrame/math/vector3';
-    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
-    export default class PointShapeEmitter extends BasicShapeEmitter {
-        direction: Vector3;
-        direction2: Vector3;
-        constructor();
-        startDirection(worldMatrix: any, direction: any): void;
-        startPosition(worldMatrix: any, position: Vector3): void;
-    }
-}
-
-declare module 'XrFrame/components/emitter/DrawShapeEmitter' {
-    import Vector3 from "XrFrame/math/vector3";
-    import ParticleInstance from "XrFrame/components/particle/ParticleInstance";
-    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
-    export default class DrawShapeEmitter extends BasicShapeEmitter {
-        direction: Vector3;
-        constructor();
-        setContent(content: any, step?: number): void;
-        translateBase64ToArrayBuffer(base64: any): ArrayBufferLike;
-        startDirection(worldMatrix: any, direction: any): void;
-        startPosition(worldMatrix: any, position: Vector3): void;
-        processInstance(instance: ParticleInstance, deltaTime: number): void;
-        lerpNumberArrayToVector(vector: any, numberArray1: any, numberArray2: any, step: any, length?: number): void;
-    }
-}
-
-declare module 'XrFrame/components/emitter/SphereShapeEmitter' {
-    import Vector3 from 'XrFrame/math/vector3';
-    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
-    import Matrix4 from 'XrFrame/math/matrix4';
-    export default class SphereShapeEmitter extends BasicShapeEmitter {
-            radius: number;
             /**
-                * [0-1]
+                * 从获取具体时刻的属性大小
+                * @param {number} ratio 粒子所处生命周期的阶段
+                * @param {Array} gradients 存储不同时刻指定属性变化的数组
+                * @param {Callback} updateFunc 回调函数
                 */
-            radiusRange: number;
-            /**
-                * [0-360]
-                */
-            arc: number;
-            /**
-                * randomize the particle direction [0-1]
-                */
-            randomizeDirection: number;
-            constructor();
-            startDirection(worldMatrix: Matrix4, direction: Vector3, position: Vector3): void;
-            startPosition(worldMatrix: Matrix4, position: Vector3): void;
+            static GetCurrentGradient(ratio: any, gradients: any, updateFunc: any): void;
     }
 }
 
@@ -11321,6 +12118,7 @@ declare module 'XrFrame/kanata/lib/backend/native/worker' {
         drawCamera(camera: number, renderList: number, lightMode: string): void;
         drawLight(light: number, camera: number, renderList: number, lightMode: string): void;
         submit(): void;
+        destroy(): void;
         createWeakRef<T>(wrapper: T): {
             deref: () => T;
         };
@@ -11328,6 +12126,7 @@ declare module 'XrFrame/kanata/lib/backend/native/worker' {
         createNativeUUMap(): INativeMap<number>;
         createNativeSUMap(): INativeMap<string>;
         createNativeULUMap(): ILongIntNativeMap;
+        decodeBase64(base64: string): ArrayBuffer;
         setNodeName(id: number, name: string): void;
         setRenderComponentName(id: number, name: string): void;
         debugPrint(msg: string): void;
@@ -11656,6 +12455,7 @@ declare module 'XrFrame/kanata/lib/backend/interface/IWorker' {
         createNativeUUMap(): INativeMap<number>;
         createNativeSUMap(): INativeMap<string>;
         createNativeULUMap(): ILongIntNativeMap;
+        decodeBase64(base64: string): ArrayBuffer;
         setNodeName(id: number, name: string): void;
         setRenderComponentName(handle: IHandle, name: string): void;
         debugPrint(msg: string): void;
