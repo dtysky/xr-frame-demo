@@ -111,7 +111,7 @@ Component({
         this.setData({
           fxaaEnabled: newVal
         });
-        if (this.data.type === 2) {
+        if (this.data.type === 3) {
           this.activeFXAA();
         }
       }
@@ -156,10 +156,10 @@ Component({
       // }
     },
     handleAssetsProgress: function({detail}) {
-      console.log('assets progress', detail.value);
+      this.triggerEvent('assetsProgress', detail.value);
     },
     handleAssetsLoaded: function({detail}) {
-      console.log('assets loaded', detail.value);
+      this.triggerEvent('assetsLoaded', detail.value);
       this.setData({loaded: true});
     },
     activeBlur() {

@@ -16,6 +16,12 @@ Page({
     vignetteRoundness: 1,
     fxaaEnabled: false
   },
+  handleProgress: function({detail}) {
+    this.setData({progressInfo: `${~~(detail.progress * 100)} %\n\n${detail.asset.assetId}(${detail.asset.type}): ${detail.asset.src}`});
+  },
+  handleLoaded: function({detail}) {
+    this.setData({loaded: true});
+  },
   changeType(e) {
     const type = e.detail.value;
     if (type === "blur") {

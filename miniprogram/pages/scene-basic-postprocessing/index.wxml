@@ -19,7 +19,13 @@
     vignetteSmoothness="{{vignetteSmoothness}}"
     vignetteRoundness="{{vignetteRoundness}}"
     fxaaEnabled="{{fxaaEnabled}}"
+    bind:assetsProgress="handleProgress"
+    bind:assetsLoaded="handleLoaded"
+    loaded="{{loaded}}"
   />
+  <view wx:if="{{!loaded}}" style="position: absolute;display: flex; justify-content: center; align-items: center; left: 0;top: 0;width: {{width}}px;height: {{height}}px;background-color: #6aa; text-align: center;line-height: 24px;">
+    <text style="color: white;font-size: 18px;">{{progressInfo}}</text>
+  </view>
   <view class="form-entry">
     <view class="form-entry-title">后处理类型</view>
     <radio-group name="pp-type" bindchange="changeType">
