@@ -9,6 +9,7 @@ import list from './data/index';
 
 let lastOpened = false;
 let lastCount = 0;
+let first = false;
 
 Page({
   data: {
@@ -16,9 +17,13 @@ Page({
     root: ''
   },
   onLoad() {
-    wx.reportEvent("xr_frame", {
-      "xr_page_path": '/pages/index/index'
-    });
+    if (!first) {
+      console.log('Entry xr-frame index page');
+      wx.reportEvent("xr_frame", {
+        "xr_page_path": '/pages/index/index'
+      });
+      first = false;
+    }
   },
   clickHandle(e) {
     let root = this.data.root;
