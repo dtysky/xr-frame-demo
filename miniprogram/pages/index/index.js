@@ -9,7 +9,7 @@ import list from './data/index';
 
 let lastOpened = false;
 let lastCount = 0;
-let first = false;
+let first = true;
 
 Page({
   data: {
@@ -17,7 +17,7 @@ Page({
     root: ''
   },
   onLoad() {
-    if (!first) {
+    if (first) {
       console.log('Entry xr-frame index page');
       wx.reportEvent("xr_frame", {
         "xr_page_path": '/pages/index/index'
