@@ -15,6 +15,11 @@ Page({
     list,
     root: ''
   },
+  onLoad() {
+    wx.reportEvent("xr_frame", {
+      "xr_page_path": '/pages/index/index'
+    });
+  },
   clickHandle(e) {
     let root = this.data.root;
     let { name, path } = e.detail.item;
