@@ -10,7 +10,8 @@
 
 二维码以及部分样例的扫描图片详见：[官方文档-示例](https://developers.weixin.qq.com/miniprogram/dev/component/xr-frame/overview/index.md#示例)。
 
-https://user-images.githubusercontent.com/7337763/185078091-ccc892b3-5c50-4865-aa2c-cdbb9c840275.mp4
+https://user-images.githubusercontent.com/7337763/199401152-d3e14ca2-bcde-41aa-902c-dc0fbd6b6358.mp4
+
 
 ## 版权
 
