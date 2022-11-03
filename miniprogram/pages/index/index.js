@@ -41,11 +41,8 @@ Page({
 
     if (path) {
       wx.navigateTo({
-        url: root + path,
+        url: root + path + `?path=${path}`,
         success: () => {
-          wx.reportEvent("xr_frame", {
-            "xr_page_path": path
-          });
         },
         fail: () => {
         },
@@ -84,11 +81,6 @@ Page({
             wx.navigateTo({
               url: root + '/pages/scene-last-record/index',
               success: () => {
-                wx.reportEvent("xr_frame", {
-                  "xr_page_path": '/pages/scene-last-record/index',
-                  "xr_last_record_click": lastCount
-                });
-
                 wx.onAppShow((result) => {
                   lastOpened = false;
                 });

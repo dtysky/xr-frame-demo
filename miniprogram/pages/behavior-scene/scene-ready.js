@@ -28,6 +28,11 @@ module.exports = Behavior({
     });
   },
   methods: {
+    onLoad(options) {
+      wx.reportEvent("xr_frame", {
+        "xr_page_path": options.path
+      });
+    },
     onShareAppMessage() {
       try {
         if (wx.xrScene) {

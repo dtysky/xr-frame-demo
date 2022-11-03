@@ -15,6 +15,12 @@ Component({
     gateClosed: false
   },
   lifetimes: {
+    attached() {
+      wx.reportEvent("xr_frame", {
+        "xr_page_path": '/pages/scene-last-record/index',
+        "xr_last_record_click": 1
+      });
+    },
     detached() {
       this.bgm.stop();
       wx.setKeepScreenOn({keepScreenOn: false});
@@ -81,11 +87,11 @@ Component({
 
         if (p <= edgeEnv1) {
           const progress = xrSystem.noneParamsEaseFuncs['ease-in-out'](p / edgeEnv1);
-          vignetteAsset.data.intensity = progress * 1.5;
+          vignetteAsset.data.intensity = progress * 2;
           blurAsset.data.radius = progress * 86 + 10;
         } else if (p > edgeEnv2) {
           const progress = xrSystem.noneParamsEaseFuncs['ease-in-out']((1 - p) / (1 - edgeEnv2));
-          vignetteAsset.data.intensity = progress * 1.5;
+          vignetteAsset.data.intensity = progress * 2;
           blurAsset.data.radius = progress * 96;
         }
         
@@ -98,7 +104,7 @@ Component({
         if (progress >= 0.2) {
           progress = (progress - 0.2) / 0.6;
           blurAsset.data.radius = progress * 96;
-          vignetteAsset.data.intensity = progress * 1.5;
+          vignetteAsset.data.intensity = progress * 2;
           bloomAsset.data.threshold = 0.5 + progress * 2;
         }
       }
