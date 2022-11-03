@@ -3,11 +3,6 @@ const classic = {
   icon: 'photo',
   childArr: [
     {
-      name: 'Video',
-      label: '扫描图片视频',
-      path: '/pages/scene-classic-video/index',
-    },
-    {
       name: 'Perspect',
       label: '扫描透视模型',
       path: '/pages/scene-classic-perspect/index',
@@ -16,6 +11,11 @@ const classic = {
       name: 'Portal',
       label: '平面传送门',
       path: '/pages/scene-classic-portal/index',
+    },
+    {
+      name: 'Video',
+      label: '扫描图片视频',
+      path: '/pages/scene-classic-video/index',
     },
     {
       name: 'OSD',
@@ -193,4 +193,4 @@ const custom = {
   ]
 };
 
-export default [classic, base, gltf, ar, scan, custom];
+export default [base, gltf, ar, classic, scan, custom];
