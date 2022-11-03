@@ -25,6 +25,16 @@ Page({
       first = false;
     }
   },
+  onShareAppMessage() {
+    return {
+      title: 'XR-FRAME官方示例'
+    }
+  },
+  onShareTimeline() {
+    return {
+      title: 'XR-FRAME官方示例'
+    }
+  },
   clickHandle(e) {
     let root = this.data.root;
     let { name, path } = e.detail.item;

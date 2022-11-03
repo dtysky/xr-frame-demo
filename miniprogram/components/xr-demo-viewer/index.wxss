@@ -71,7 +71,21 @@
   margin-left: 20rpx;
 }
 
+.intro-title {
+  font-size: 36rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 24rpx;
+}
+
 .share {
+  margin: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0;
+  width: 160rpx !important;
+  background: none;
   font-size: 28rpx;
   color: #ff4d00;
 }

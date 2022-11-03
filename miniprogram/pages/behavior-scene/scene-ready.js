@@ -17,7 +17,7 @@ module.exports = Behavior({
     const info = wx.getSystemInfoSync();
     const width = info.windowWidth;
     const windowHeight = info.windowHeight;
-    const height = windowHeight  * 0.6;
+    const height = windowHeight * 0.6;
     const dpi = info.pixelRatio;
     this.setData({
       width,
@@ -28,6 +28,43 @@ module.exports = Behavior({
     });
   },
   methods: {
+    onShareAppMessage() {
+      try {
+        if (wx.xrScene) {
+          const buffer = wx.xrScene.share.captureToArrayBuffer({quality: 0.5});
+          const fp = `${wx.env.USER_DATA_PATH}/xr-frame-share.jpg`;
+          wx.getFileSystemManager().writeFileSync(fp, buffer, 'binary');
+          return {
+            title: this.getTitle(),
+            imageUrl: fp
+          };
+        }
+      } catch (e) {
+        return {
+          title: this.getTitle()
+        };
+      }
+    },
+    onShareTimeline() {
+      try {
+        if (wx.xrScene) {
+          const buffer = wx.xrScene.share.captureToArrayBuffer({quality: 0.5});
+          const fp = `${wx.env.USER_DATA_PATH}/xr-frame-share.jpg`;
+          wx.getFileSystemManager().writeFileSync(fp, buffer, 'binary');
+          return {
+            title: this.getTitle(),
+            imageUrl: fp
+          };
+        }
+      } catch (e) {
+        return {
+          title: this.getTitle()
+        }
+      }
+    },
+    getTitle() {
+      return wx.xrTitle ? `XR - ${wx.xrTitle}` : 'XR-FRAME官方示例';
+    },
     handleChange(e) {
       this.setData({
         activeValues: e.detail.value,

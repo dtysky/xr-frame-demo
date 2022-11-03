@@ -27,5 +27,10 @@ Component({
   },
   data: {
   },
+  lifetimes: {
+    attached() {
+      wx.xrTitle = this.data.title;
+    }
+  },
   methods: {}
 })

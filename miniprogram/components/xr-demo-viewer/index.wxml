@@ -4,7 +4,7 @@
   </block>
   <view class="intro">
     <view class="intro-detail">
-      <view class="title" >{{title}} <text class="share">(点击画布右下角分享，iOS需8.0.30)</text></view>
+      <view class="intro-title" ><text>{{title}}</text> <button class="share" open-type="share">分享给好友</button></view>
       <view class="description" >{{intro}}</view>
     </view>
   </view>
