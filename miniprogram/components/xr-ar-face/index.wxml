@@ -1,0 +1,29 @@
+<xr-scene ar-system="modes:Face" bind:ready="handleReady" bind:ar-ready="handleARReady">
+  <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
+  </xr-assets>
+  <xr-node wx:if="{{arReady}}">
+    <xr-ar-tracker id='tracker' mode="Face" auto-sync="-1 105 104 45 98">
+      <xr-mesh name="face" geometry="cube" uniforms="u_baseColorFactor:1 1 1 0.5" states="alphaMode:BLEND" />
+      <xr-node name="eyeL">
+        <xr-mesh geometry="cube" scale="0.1 0.1 0.1" uniforms="u_baseColorFactor:0 1 0 1" never-cull />
+      </xr-node>
+      <xr-node name="eyeR">
+        <xr-mesh geometry="cube" scale="0.1 0.1 0.1" uniforms="u_baseColorFactor:0 1 0 1" never-cull />
+      </xr-node>
+      <xr-node name="nose">
+        <xr-mesh geometry="cube" scale="0.1 0.1 0.1" uniforms="u_baseColorFactor:0 0 1 1" never-cull />
+      </xr-node>
+      <xr-node name="mouth">
+        <xr-mesh geometry="cube" scale="0.1 0.1 0.1" uniforms="u_baseColorFactor:1 0 0 1" never-cull />
+      </xr-node>
+    </xr-ar-tracker>
+    <xr-camera
+      id="camera" node-id="camera" position="0.8 2.2 -5" clear-color="0.925 0.925 0.925 1"
+      background="ar" is-ar-camera
+    ></xr-camera>
+  </xr-node>
+  <xr-node node-id="lights">
+    <xr-light type="ambient" color="1 1 1" intensity="1" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+  </xr-node>
+</xr-scene>

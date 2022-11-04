@@ -141,14 +141,19 @@ const ar = {
       path: '/pages/scene-ar-basic/index',
     },
     {
-      name: 'Marker-1',
+      name: '2DMarker',
       label: 'AR 2DMarker',
       path: '/pages/scene-ar-2dmarker/index',
     },
     {
-      name: 'Marker-2',
+      name: 'OSDMarker',
       label: 'AR OSDMarker',
       path: '/pages/scene-ar-osdmarker/index',
+    },
+    {
+      name: 'Face',
+      label: 'AR Face',
+      path: '/pages/scene-ar-face/index',
     }
 
     // {
