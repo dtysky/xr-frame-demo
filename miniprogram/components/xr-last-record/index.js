@@ -148,7 +148,7 @@ Component({
         this.bgm.play();
       }
     },
-    handleTouchNote() {
+    handleTouchNote({detail}) {
       if (detail.value.camera.el.id !== 'main-camera') {
         return;
       }
