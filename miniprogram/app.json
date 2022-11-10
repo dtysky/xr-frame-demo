@@ -20,6 +20,8 @@
     "pages/scene-ar-2dmarker/index",
     "pages/scene-ar-osdmarker/index",
     "pages/scene-ar-face/index",
+    "pages/scene-ar-hand/index",
+    "pages/scene-ar-body/index",
     "pages/scene-ar-camera/index",
     "pages/scene-custom-logic/index",
     "pages/scene-custom-render/index",

@@ -152,15 +152,19 @@ const ar = {
     },
     {
       name: 'Face',
-      label: 'AR Face',
+      label: 'AR 人脸',
       path: '/pages/scene-ar-face/index',
+    },
+    {
+      name: 'Hand',
+      label: 'AR 人手',
+      path: '/pages/scene-ar-hand/index',
+    },
+    {
+      name: 'Body',
+      label: 'AR 人体',
+      path: '/pages/scene-ar-body/index',
     }
-
-    // {
-    //     name: 'Scene',
-    //     label: '多个Scene',
-    //     path: '/pages/scene7/index',
-    // },
   ],
 };
 
