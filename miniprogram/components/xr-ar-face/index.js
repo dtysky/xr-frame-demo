@@ -35,10 +35,11 @@ Component({
 
       // 这里只是例子，实际上用的是`ARTracker`的`autoSync`属性。
       // 但也是一个更高自由度的选项。
-      // 需要自己同步每个scale到特定节点。
+      // 视情况需要自己同步每个scale到特定节点。
       const scale = tracker.scale;
-      // 第一个参数是特征点编号，第二个是可选的复用结果，第三个是可选的是否相对于`ARTracker`（已经做好了脸整体的变换）。
-      const position = tracker.getPosition(98, new xrSystem.Vector3(), true);
+      // 第一个参数是特征点编好，第二个是可选的复用结果，第三个是可选的是否相对于`ARTracker`。
+      // 为`false`为世界空间的位置，需要配合`scale`自己使用
+      const position = tracker.getPosition(98, new xrSystem.Vector3(), false);
     }
   }
 })

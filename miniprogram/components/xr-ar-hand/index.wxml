@@ -3,30 +3,14 @@
   </xr-assets>
   <xr-node wx:if="{{arReady}}">
     <xr-ar-tracker id='tracker' mode="Hand" auto-sync="-1 0 9 4 8 12 16 20">
-      <xr-node name="hand">
-        <xr-mesh geometry="cube" scale="0.7 0.8 0.1" uniforms="u_baseColorFactor:1 1 1 0.5" states="renderQueue:2500,alphaMode:BLEND"/>
-      </xr-node>
-      <xr-node name="wrist">
-        <xr-mesh geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:1 0 0 1" />
-      </xr-node>
-      <xr-node name="joint">
-        <xr-mesh geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 1 0 1" />
-      </xr-node>
-      <xr-node name="thumb">
-        <xr-mesh geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
-      </xr-node>
-      <xr-node name="index">
-        <xr-mesh geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
-      </xr-node>
-      <xr-node name="middle">
-        <xr-mesh geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
-      </xr-node>
-      <xr-node name="ring">
-        <xr-mesh geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
-      </xr-node>
-      <xr-node name="little">
-        <xr-mesh geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
-      </xr-node>
+      <xr-mesh name="hand" geometry="cube" scale="0.7 0.8 0.1" uniforms="u_baseColorFactor:1 1 1 0.5" states="renderQueue:2500,alphaMode:BLEND"/>
+      <xr-mesh name="wrist" geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:1 0 0 1" />
+      <xr-mesh name="joint" geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 1 0 1" />
+      <xr-mesh name="thumb" geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
+      <xr-mesh name="index" geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
+      <xr-mesh name="middle" geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
+      <xr-mesh name="ring" geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
+      <xr-mesh name="little" geometry="sphere" scale="0.05 0.05 0.05" uniforms="u_baseColorFactor:0 0 1 1" />
     </xr-ar-tracker>
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
