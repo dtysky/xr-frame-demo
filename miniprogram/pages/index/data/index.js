@@ -23,6 +23,11 @@ const classic = {
       path: '/pages/scene-classic-osd/index',
     },
     {
+      name: 'Face',
+      label: '人脸穿戴案例',
+      path: '/pages/scene-classic-face/index',
+    },
+    {
       name: 'Ball',
       label: '扫描微信球',
       path: '/pages/scene-classic-wxball/index',
