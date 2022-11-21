@@ -6,7 +6,7 @@
   <xr-node wx:if="{{arReady}}">
     <xr-ar-tracker id='tracker' mode="Face" auto-sync="43">
       <xr-node name="nose" >
-        <xr-gltf node-id="gltf-glass" position="0 0 0" rotation="0 180 0" scale="0.9 0.9 0.9" model="gltf-glass"></xr-gltf>
+        <xr-gltf node-id="gltf-glass" position="0 0.02 -0.05" rotation="0 180 0" scale="0.9 0.9 0.9" model="gltf-glass"></xr-gltf>
       </xr-node>
     </xr-ar-tracker>
     <xr-camera
@@ -15,7 +15,7 @@
     ></xr-camera>
   </xr-node>
   <xr-node node-id="lights">
-    <xr-light type="ambient" color="1 1 1" intensity="1" />
-    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="3" />
+    <xr-light type="ambient" color="1 1 1" intensity="0.2" />
+    <xr-light type="directional" rotation="180 0 0" color="1 1 1" intensity="1" />
   </xr-node>
 </xr-scene>
