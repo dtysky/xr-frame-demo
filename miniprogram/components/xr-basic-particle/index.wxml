@@ -14,7 +14,8 @@
     <xr-asset-load type="texture" asset-id="particle-texture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/point.png" />
     <xr-asset-load type="texture" asset-id="lightray" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/lightray.png" />
     <xr-asset-material asset-id="blue-mat" effect="standard" uniforms="u_baseColorMap: blue-texture" />
-    <!-- <xr-asset-load type="atlas" asset-id="portal-atlas" src="./portal.json" /> -->
+    <xr-asset-load type="texture" asset-id="glow_circle" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/glow_circle.png" />
+    <xr-asset-load type="atlas" asset-id="portal-atlas" src="./portal.json" />
   </xr-assets>
 
   <xr-node>
@@ -38,7 +39,11 @@
     <!-- <xr-particle position="-3 0 -2" atlas="portal-atlas" capacity="1000" speed="0" size="0.5" emit-rate="12" life-time="4" angle="0 360" cell-speed="0" cell-random="true" angular-speed="-300">
     </xr-particle> -->
 
-    <xr-particle id="human-face" position="-3 0 -2" capacity="3000" emit-rate="2000" size="0.5" start-color="1 1 1 0" start-color2="1 1 1 0" texture="particle-texture"></xr-particle>
+    <xr-particle id="human-face" position="-3 0 -2" capacity="3000" emit-rate="2000" size="0.1" start-color="1 1 1 0" start-color2="1 1 1 0" texture="particle-texture"></xr-particle>
+
+    <!-- <xr-particle  position="-3 0 -2" rotation="0 0 180" capacity="20" speed="0" size="1" emit-rate="5" angle="0 90" life-time="20" render-mode="mesh" mesh="specialCylinder" start-color="0.5 0.5 0 0.5" texture="glow_circle">
+    </xr-particle> -->
+
 
     <xr-camera
       id="camera" node-id="camera" position="0 6 -6" clear-color="0.1 0.1 0.1 1"
