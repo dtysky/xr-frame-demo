@@ -24,6 +24,7 @@ declare module 'XrFrame' {
         IKeyframeAnimationOptions,
         IAtlasOptions,
         IAtlasCreationOptions,
+        IPostProcessOptions,
         IDataValueHandler,
         ITextureWrapper,
         ITextureOptions,
@@ -61,6 +62,7 @@ declare module 'XrFrame' {
         IAnimatorAutoPlay,
         ICameraOrbitControlData,
         IARTrackerData,
+        IARTrackerRawData,
         IShapeData,
         ISphereShapeData,
         IMeshShapeData,
@@ -146,6 +148,7 @@ declare module 'XrFrame' {
     export type Animation = xrFrameSystem.Animation;
     export type KeyframeAnimation = xrFrameSystem.KeyframeAnimation;
     export type Atlas = xrFrameSystem.Atlas;
+    export type PostProcess = xrFrameSystem.PostProcess;
     export type Vector2 = xrFrameSystem.Vector2;
     export type Vector3 = xrFrameSystem.Vector3;
     export type Vector4 = xrFrameSystem.Vector4;
@@ -240,6 +243,7 @@ declare module 'XrFrame' {
         Animation: typeof xrFrameSystem.Animation;
         KeyframeAnimation: typeof xrFrameSystem.KeyframeAnimation;
         Atlas: typeof xrFrameSystem.Atlas;
+        PostProcess: typeof xrFrameSystem.PostProcess;
         Vector2: typeof xrFrameSystem.Vector2;
         Vector3: typeof xrFrameSystem.Vector3;
         Vector4: typeof xrFrameSystem.Vector4;
@@ -422,6 +426,7 @@ declare module 'XrFrame/xrFrameSystem' {
     export { default as Animation, TDirection } from 'XrFrame/animation/Animation';
     export { default as KeyframeAnimation, IKeyframeAnimationData, IKeyframeAnimationInfo, IKeyframeAnimationOptions } from 'XrFrame/animation/KeyframeAnimation';
     export { default as Atlas, IAtlasOptions, IAtlasCreationOptions } from 'XrFrame/assets/Atlas';
+    export { default as PostProcess, IPostProcessOptions } from 'XrFrame/assets/PostProcess';
     export { registerEffect, registerGeometry, registerTexture, registerMaterial, registerUniformDesc, registerVertexDataDesc, registerVertexLayout } from 'XrFrame/assets/factories';
     export { useParamsEaseFuncs, noneParamsEaseFuncs } from 'XrFrame/assets/easeFunctions';
     export { default as Vector2 } from 'XrFrame/math/vector2';
@@ -949,7 +954,7 @@ declare module 'XrFrame/components' {
     export { default as Env, IEnvData, EnvSchema } from 'XrFrame/components/Env';
     export { default as Animator, IAnimatorData, AnimatorSchema, IAnimationPlayOptions, IAnimatorAutoPlay } from 'XrFrame/components/Animator';
     export { default as CameraOrbitControl, ICameraOrbitControlData, CameraOrbitControlSchema } from 'XrFrame/components/CameraOrbitControl';
-    export { default as ARTracker, IARTrackerData, ARTrackSchema, TTrackMode } from 'XrFrame/components/ARTracker';
+    export { default as ARTracker, IARTrackerData, ARTrackSchema, TTrackMode, IARTrackerRawData } from 'XrFrame/components/ARTracker';
     export { default as Shape, IShapeData, EShapeType } from 'XrFrame/components/physics/Shape';
     export { default as SphereShape, ISphereShapeData, SphereShapeSchema } from 'XrFrame/components/physics/SphereShape';
     export { default as MeshShape, IMeshShapeData, MeshShapeSchema } from 'XrFrame/components/physics/MeshShape';
@@ -2203,6 +2208,57 @@ declare module 'XrFrame/assets/Atlas' {
     export {};
 }
 
+declare module 'XrFrame/assets/PostProcess' {
+    /**
+        * PostProcess.ts
+        *
+        *         * @Date    : 10/14/2022, 4:34:55 PM
+        */
+    type Scene = import('XrFrame/core/Scene').default;
+    /**
+        * 后处理资源初始化参数。
+        */
+    export interface IPostProcessOptions {
+            /**
+                * 类型，目前支持的类型请见[内置后处理资源](https://developers.weixin.qq.com/miniprogram/dev/component/xr-frame/builtin/post-process)。
+                */
+            type: string;
+            /**
+                * 是否开启HDR。
+                */
+            isHDR?: boolean;
+            /**
+                * 对应类型的数据。
+                */
+            data?: {
+                    [key: string]: any;
+            };
+    }
+    /**
+        * 后处理资源。
+        *
+        * 一般由{@link AssetPostProcess}加载。
+        */
+    export default class PostProcess {
+            /**
+                * 类型。
+                */
+            get type(): string;
+            /**
+                * 是否开启了HDR。
+                */
+            get isHDR(): boolean;
+            /**
+                * 数据，可以修改。
+                */
+            get data(): {
+                    [key: string]: any;
+            };
+            constructor(_scene: Scene, options: IPostProcessOptions);
+    }
+    export {};
+}
+
 declare module 'XrFrame/assets/factories' {
     /**
         * factories.ts
@@ -3167,6 +3223,8 @@ declare module 'XrFrame/math/quaternion' {
             length(): number;
             normalize(): this;
             setFromUnitVectors(vFrom: any, vTo: any): this;
+            setFromYawRollPitch(yaw: number, roll: number, pitch: number): void;
+            setFromEulerAngles(euler: Vector3): void;
             /**
                 * 相对角度
                 * @param q
@@ -5096,10 +5154,9 @@ declare module 'XrFrame/components/Text' {
 declare module 'XrFrame/components/particle/Particle' {
     import Element from 'XrFrame/core/Element';
     import Material from 'XrFrame/assets/Material';
-    import Vector4 from 'XrFrame/math/vector4';
     import BasicParticle, { IParticleData } from 'XrFrame/components/particle/BasicParticle';
     import ParticleInstance from 'XrFrame/components/particle/ParticleInstance';
-    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
+    import {BasicShapeEmitter} from 'XrFrame/components/emitter/BasicShapeEmitter';
     export default class Particle extends BasicParticle {
             readonly priority: number;
             subEmitters: any;
@@ -5201,77 +5258,6 @@ declare module 'XrFrame/components/particle/Particle' {
                 * @param {ParticleInstance} instance 待更新的粒子实例
                 */
             protected processInstance(instance: ParticleInstance): void;
-            /**
-                * 添加粒子运动过程中的颜色变化规则。
-                * @param {number} gradient 指定所处粒子生命周期的阶段
-                * @param {Vector4} color1 指定粒子颜色的左区间
-                * @param {Vector4} color2 指定粒子颜色的右区间
-                */
-            addColorGradient(gradient: number, color1: Vector4, color2?: Vector4): void;
-            /**
-             * 添加粒子运动过程中的速度变化规则。
-             * @param {number} gradient 指定所处粒子生命周期的阶段
-             * @param {Vector4} speed 指定粒子速度的左区间
-             * @param {Vector4} speed2 指定粒子速度的右区间
-             */
-            addSpeedScaleGradient(gradient: number, speed: number, speed2?: number): void;
-            /**
-             * 添加粒子运动过程中的速度限制规则。
-             * @param {number} gradient 指定所处粒子生命周期的阶段
-             * @param {number} limitSpeed 指定粒子限制速度的左区间
-             * @param {number} limitSpeed2 指定粒子限制速度的右区间
-             */
-            addLimitSpeedGradient(gradient: number, limitSpeed: number, limitSpeed2?: number): void;
-            /**
-             * 添加粒子运动过程中的阻力规则。
-             * @param {number} gradient 指定所处粒子生命周期的阶段
-             * @param {number} speed 指定粒子受到的阻力大小的左区间[0-1]
-             * @param {number} speed2 指定粒子受到的阻力大小的右区间[0-1]
-             */
-            addDragGradient(gradient: number, drag: number, drag2?: number): void;
-            /**
-                * 添加粒子运动过程中的透明度变化规则。
-                * @param {number} gradient 指定所处粒子生命周期的阶段
-                * @param {number} alpha 指定粒子颜色透明度的左区间[0-1]
-                * @param {number} alpha2 指定粒子颜色透明度的右区间[0-1]
-                */
-            addAlphaGradient(gradient: number, alpha: number, alpha2?: number): void;
-            /**
-                * 添加粒子运动过程中的尺寸变化规则。
-                * @param {number} gradient 指定所处粒子生命周期的阶段
-                * @param {number} size 指定粒子尺寸的左区间
-                * @param {number} size2 指定粒子尺寸的右区间
-                */
-            addSizeGradient(gradient: number, size: number, size2?: number): void;
-            /**
-             * 添加粒子运动过程中的透明度变化范围。
-             * @param {number} gradient 指定所处粒子生命周期的阶段
-             * @param {number} min 指定粒子透明度值的左区间
-             * @param {number} max 指定粒子透明度值的右区间
-             */
-            addColorRemapGradient(gradient: number, min: number, max?: number): void;
-            /**
-                * 将存储不同时间段相关属性系数的数组按时间点从小到大进行排序。
-                * @param {Array} factorGradients 存储不同时间段相关属性系数的数组
-                * @param {number} gradient 一般代表粒子所处生命周期的阶段
-                * @param {number} factor 左区间值
-                * @param {number} factor2 右区间值
-                */
-            protected addFactorGradient(factorGradients: any, gradient: any, factor: any, factor2: any): void;
-            /**
-                * 添加粒子运动过程中的根据透明度影响的颜色变化规则，将通过颜色变化图纹理进行采样。
-                * @param {number} gradient 指定粒子颜色变化图的具体位置，对应具体值应为(1-alpha)
-                * @param {number} color 指定该位置的颜色
-                */
-            addRampGradient(gradient: any, color: any): void;
-            /**
-                * 根据颜色变化数组，生成对应的颜色变化纹理
-                */
-            protected createRampGradientTexture(): void;
-            /**
-                * @internal
-                */
-            protected lerpNumberArrayToVector(vector: any, numberArray1: any, numberArray2: any, step: any, length?: number): void;
     }
 }
 
@@ -5279,6 +5265,7 @@ declare module 'XrFrame/components/particle/BasicParticle' {
     import Material from 'XrFrame/assets/Material';
     import Component from 'XrFrame/core/Component';
     import { IComponentSchema } from 'XrFrame/core/Component';
+    import { BoxShapeEmitter, PointShapeEmitter, SphereShapeEmitter } from 'XrFrame/components/emitter';
     import { Kanata } from 'XrFrame/ext';
     import Transform from 'XrFrame/components/Transform';
     import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
@@ -5404,6 +5391,9 @@ declare module 'XrFrame/components/particle/BasicParticle' {
                 * 网格信息。
                 */
             mesh?: Geometry;
+            sizeChange?: [string, string][];
+            colorChange?: [string, string][];
+            speedChange?: [string, string][];
     }
     /**
         * {@link Particle}的`schema`定义。
@@ -5534,6 +5524,31 @@ declare module 'XrFrame/components/particle/BasicParticle' {
              * 获取一个粒子子发射器。
              */
             createSubEmitter(data: IParticleData): SubEmitter;
+            /**
+             * 创建一个点发射器。
+             * @param {Vector3} direction1 粒子运动方向左区间
+             * @param {Vector3} direction2 粒子运动方向右区间
+             * @return {PointShapeEmitter} 点发射器
+             */
+            createPointEmitter(direction1: Vector3, direction2: Vector3): PointShapeEmitter;
+            /**
+                * 创建一个箱形发射器。
+                * @param {Vector3} direction1 粒子运动方向左区间
+                * @param {Vector3} direction2 粒子运动方向右区间
+                * @param {Vector3} minEmitBox 粒子生成位置最小允许坐标
+                * @param {Vector3} maxEmitBox 粒子生成位置最大允许坐标
+                * @return {BoxShapeEmitter} 箱形发射器
+                */
+            createBoxEmitter(direction1: Vector3, direction2: Vector3, minEmitBox: Vector3, maxEmitBox: Vector3): BoxShapeEmitter;
+            /**
+            * 创建一个球形发射器。
+            * @param {number} radius 球形半径
+            * @param {number} radiusRange 球形区域内的覆盖范围[0-1]
+            * @param {number} arc 粒子在球形内生成的角度区间[0-360]
+            * @param {number} randomizeDirection 粒子运动方向偏离程度[0-1]
+            * @return {SphereShapeEmitter} 球形发射器
+            */
+            createSphereEmitter(radius: number, radiusRange: number, arc: number, randomizeDirection: number): SphereShapeEmitter;
             protected _parseProperties(data: IParticleData): void;
             protected _chooseEmitterProcess(): void;
             protected _createVertexBuffers(): void;
@@ -5545,6 +5560,77 @@ declare module 'XrFrame/components/particle/BasicParticle' {
             protected _getMeshType(): Kanata.EMeshRenderType;
             protected _getVertexLayout(attributes: any, stride: any): Kanata.VertexLayout;
             protected _setMeshData(material: Material, uniforms?: [string, string][], states?: [string, string][]): void;
+            /**
+                * 添加粒子运动过程中的颜色变化规则。
+                * @param {number} gradient 指定所处粒子生命周期的阶段
+                * @param {Vector4} color1 指定粒子颜色的左区间
+                * @param {Vector4} color2 指定粒子颜色的右区间
+                */
+            addColorGradient(gradient: number, color1: Vector4, color2?: Vector4): void;
+            /**
+             * 添加粒子运动过程中的速度变化规则。
+             * @param {number} gradient 指定所处粒子生命周期的阶段
+             * @param {Vector4} speed 指定粒子速度的左区间
+             * @param {Vector4} speed2 指定粒子速度的右区间
+             */
+            addSpeedScaleGradient(gradient: number, speed: number, speed2?: number): void;
+            /**
+             * 添加粒子运动过程中的速度限制规则。
+             * @param {number} gradient 指定所处粒子生命周期的阶段
+             * @param {number} limitSpeed 指定粒子限制速度的左区间
+             * @param {number} limitSpeed2 指定粒子限制速度的右区间
+             */
+            addLimitSpeedGradient(gradient: number, limitSpeed: number, limitSpeed2?: number): void;
+            /**
+             * 添加粒子运动过程中的阻力规则。
+             * @param {number} gradient 指定所处粒子生命周期的阶段
+             * @param {number} speed 指定粒子受到的阻力大小的左区间[0-1]
+             * @param {number} speed2 指定粒子受到的阻力大小的右区间[0-1]
+             */
+            addDragGradient(gradient: number, drag: number, drag2?: number): void;
+            /**
+                * 添加粒子运动过程中的透明度变化规则。
+                * @param {number} gradient 指定所处粒子生命周期的阶段
+                * @param {number} alpha 指定粒子颜色透明度的左区间[0-1]
+                * @param {number} alpha2 指定粒子颜色透明度的右区间[0-1]
+                */
+            addAlphaGradient(gradient: number, alpha: number, alpha2?: number): void;
+            /**
+                * 添加粒子运动过程中的尺寸变化规则。
+                * @param {number} gradient 指定所处粒子生命周期的阶段
+                * @param {number} size 指定粒子尺寸的左区间
+                * @param {number} size2 指定粒子尺寸的右区间
+                */
+            addSizeGradient(gradient: number, size: number, size2?: number): void;
+            /**
+             * 添加粒子运动过程中的透明度变化范围。
+             * @param {number} gradient 指定所处粒子生命周期的阶段
+             * @param {number} min 指定粒子透明度值的左区间
+             * @param {number} max 指定粒子透明度值的右区间
+             */
+            addColorRemapGradient(gradient: number, min: number, max?: number): void;
+            /**
+                * 将存储不同时间段相关属性系数的数组按时间点从小到大进行排序。
+                * @param {Array} factorGradients 存储不同时间段相关属性系数的数组
+                * @param {number} gradient 一般代表粒子所处生命周期的阶段
+                * @param {number} factor 左区间值
+                * @param {number} factor2 右区间值
+                */
+            protected addFactorGradient(factorGradients: any, gradient: any, factor: any, factor2: any): void;
+            /**
+                * 添加粒子运动过程中的根据透明度影响的颜色变化规则，将通过颜色变化图纹理进行采样。
+                * @param {number} gradient 指定粒子颜色变化图的具体位置，对应具体值应为(1-alpha)
+                * @param {number} color 指定该位置的颜色
+                */
+            addRampGradient(gradient: any, color: any): void;
+            /**
+                * 根据颜色变化数组，生成对应的颜色变化纹理
+                */
+            protected createRampGradientTexture(): void;
+            /**
+                * @internal
+                */
+            protected lerpNumberArrayToVector(vector: any, numberArray1: any, numberArray2: any, step: any, length?: number): void;
     }
 }
 
@@ -6006,10 +6092,58 @@ declare module 'XrFrame/components/ARTracker' {
     import { Kanata } from 'XrFrame/ext';
     import Component, { IComponentSchema } from 'XrFrame/core/Component';
     import Element from 'XrFrame/core/Element';
+    import Vector3 from 'XrFrame/math/vector3';
     /**
         * Tracker的跟踪模式。
         */
-    export type TTrackMode = 'Plane' | 'Marker' | 'OSD';
+    export type TTrackMode = 'Plane' | 'Marker' | 'OSD' | 'Face' | 'Hand' | 'Body';
+    /**
+        * `Face`/`Body`/`Hand`模式下，`ARTracker`存储的原始数据类型。
+        */
+    export interface IARTrackerRawData {
+            /**
+                * 原点，屏幕空间。
+                */
+            origin: {
+                    x: number;
+                    y: number;
+            };
+            /**
+                * 尺寸，屏幕空间。
+                */
+            size: {
+                    width: number;
+                    height: number;
+            };
+            /**
+                * 置信度。
+                */
+            score: number;
+            /**
+                * 在`Hand`模式下，手势分类，正常`0~18`，无效为`-1`。
+                */
+            gesture?: number;
+            /**
+                * 在`Face`模式下，人脸旋转角度。
+                */
+            angle?: {
+                    pitch: number;
+                    roll: number;
+                    yaw: number;
+                    z_score: number;
+            };
+            /**
+                * 关键点置信度。
+                */
+            confidence: number[];
+            /**
+                * 106个关键点，屏幕空间。
+                */
+            points: {
+                    x: number;
+                    y: number;
+            }[];
+    }
     /**
         * {@link ARTracker}组件数据接口。
         */
@@ -6029,6 +6163,12 @@ declare module 'XrFrame/components/ARTracker' {
                 * `xml`中数据为`string`类型。
                 */
             src?: string;
+            /**
+                * 在`Face`模式下，给定一个**特征点索引**列表，详见官网对应文档。
+                * 系统会自动同步位置和缩放到`ARTracker`下对应的顺序的子节点。
+                * `-1`代表不同步位置，只同步缩放。
+                */
+            autoSync?: number[];
     }
     /**
         * {@link ARTracker}的`schema`，详见{@link IARTrackerData}。
@@ -6041,6 +6181,9 @@ declare module 'XrFrame/components/ARTracker' {
                     type: string;
             };
             src: {
+                    type: string;
+            };
+            autoSync: {
                     type: string;
             };
     };
@@ -6060,6 +6203,19 @@ declare module 'XrFrame/components/ARTracker' {
                 */
             get mode(): TTrackMode;
             /**
+                * 是否出于启动状态。
+                */
+            get arActive(): boolean;
+            /**
+                * `Body`/`Hand`模式下，获取当前的置信度。
+                * 一般为`0~1`。
+                */
+            get score(): number;
+            /**
+                * 在`Hand`模式下，手势分类，正常`0~18`，无效为`-1`。
+                */
+            get gesture(): number;
+            /**
                 * @internal
                 */
             get filePath(): string;
@@ -6067,13 +6223,23 @@ declare module 'XrFrame/components/ARTracker' {
                 * @internal
                 */
             get trackId(): number;
-            /**
-                * @internal
-                */
-            get hitId(): number;
             onAdd(parent: Element, data: IARTrackerData): void;
             onUpdate(data: IARTrackerData, preData: IARTrackerData): void;
             onRemove(parent: Element, data: IARTrackerData): void;
+            /**
+                * 在`Face`/`Body`/`Hand`模式下，获取某个特征点的位置。
+                *
+                * @param point 特征点索引，需要在`0~105`，否则返回`undefined`。
+                * @param relativeToTracker 是否相对于`ARTracker`本身，默认为`true`，否则返回世界空间坐标。
+                * @returns 只有在`arActive`时才有值，否则返回`undefined`。
+                */
+            getPosition(point: number, output?: Vector3, relativeToTracker?: boolean): Vector3;
+            /**
+                * @internal
+                */
+            /**
+                * @internal
+                */
     }
 }
 
@@ -6982,6 +7148,7 @@ declare module 'XrFrame/elements/xr-ar-tracker' {
             'hit-id': string[];
             image: string[];
             src: string[];
+            'auto-sync': string[];
     } & {
             'node-id': string[];
             visible: string[];
@@ -7395,6 +7562,7 @@ declare module 'XrFrame/systems/ARSystem' {
     import ARTracker, { TTrackMode } from 'XrFrame/components/ARTracker';
     import Component, { IComponentSchema } from 'XrFrame/core/Component';
     import Matrix4 from 'XrFrame/math/matrix4';
+    import Vector3 from 'XrFrame/math/vector3';
     type Element = import('XrFrame/core/Element').default;
     /**
         * AR追踪原始数据。
@@ -7434,6 +7602,10 @@ declare module 'XrFrame/systems/ARSystem' {
                 * `xml`中数据类型为`array`，默认值为`Plane`。
                 */
             modes: TTrackMode[];
+            /**
+                * 使用前置还是后置相机，默认后置`Back`。
+                */
+            camera?: 'Front' | 'Back';
     }
     /**
         * {@link ARSystem}的`schema`，详见{@link IARSystemData}。
@@ -7451,6 +7623,10 @@ declare module 'XrFrame/systems/ARSystem' {
             readonly schema: IComponentSchema;
             readonly priority: number;
             /**
+                * 当前设备是否启动成功。
+                */
+            get supported(): boolean;
+            /**
                 * 当前启动的追踪模式。
                 */
             get arModes(): TTrackMode[];
@@ -7458,6 +7634,14 @@ declare module 'XrFrame/systems/ARSystem' {
                 * 当前启动的AR系统版本。
                 */
             get arVersion(): number;
+            /**
+                * 当前是否已经可用。
+                */
+            get ready(): boolean;
+            /**
+                * 在`Face`/`Body`/`Hand`模式下，当前识别到的姿态数量。
+                */
+            get posCount(): number;
             onAdd(parent: Element, data: IARSystemData): void;
             onTick(deltaTime: number, data: IARSystemData): void;
             onRemove(parent: Element, data: IARSystemData): void;
@@ -7482,6 +7666,9 @@ declare module 'XrFrame/systems/ARSystem' {
                 * 提供一个修改某个设置为`isARCamera`的相机的试图矩阵的手段。
                 */
             forceSetViewMatrix(camera: Camera, mat: Matrix4 | null): void;
+            /**
+                * @internal
+                */
             /**
                 * @internal
                 */
@@ -7548,16 +7735,13 @@ declare module 'XrFrame/systems/ShareSystem' {
             /**
                 * 截屏输出为本地路径，回调完成后会自动释放。
                 *
-                * @params callback 接受结果的回调，处理完后会释放文件。
-                * @params process 如果提供这个方法，会传入base64，返回转换后的ArrayBuffer。
+                * @params callback 接受结果的回调，处理完后会释放文件。在v2.27.1前是异步，之后兼容同步和异步。
                 */
-            captureToLocalPath(options: IShareCaptureOptions, callback: (fp: string) => Promise<void>, process?: (buffer: ArrayBuffer) => Promise<ArrayBuffer>): Promise<void>;
+            captureToLocalPath(options: IShareCaptureOptions, callback: (fp: string) => Promise<void> | void): void;
             /**
                 * 直接截屏分享给好友。
-                *
-                * @params process 如果提供这个方法，会传入base64，返回转换后的ArrayBuffer。
                 */
-            captureToFriends(options?: IShareCaptureOptions, process?: (buffer: ArrayBuffer) => Promise<ArrayBuffer>): Promise<void>;
+            captureToFriends(options?: IShareCaptureOptions): void;
     }
 }
 
@@ -7602,11 +7786,41 @@ declare module 'XrFrame/loader/TextureLoader' {
     import { Kanata } from 'XrFrame/ext';
     import AssetLoader, { ILoaderOptionsSchema } from 'XrFrame/loader/AssetLoader';
     import { IAssetLoadData } from 'XrFrame/loader/types';
+    export function isPOT(img: Kanata.IImage): boolean;
     /**
         * {@link TextureLoader}可接受的自定义参数`schema`。
         */
     export interface ITextureLoaderOptions {
+            /**
+                * 各向异性系数。
+                * @default 1
+                */
             anisoLevel?: number;
+            /**
+                * wrapU，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * @default 2
+                */
+            wrapU?: number;
+            /**
+                * wrapV，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * @default 2
+                */
+            wrapV?: number;
+            /**
+                * magFilter，值为数字，见[EFilterMode](/miniprogram/dev/api/xr-frame/enums/EFilterMode.html)。
+                * 默认值依据纹理是否POT而定。
+                */
+            magFilter?: number;
+            /**
+                * minFilter，值为数字，见[EFilterMode](/miniprogram/dev/api/xr-frame/enums/EFilterMode.html)。
+                * 默认值依据纹理是否POT而定。
+                */
+            minFilter?: number;
+            /**
+                * 是否要生成mipmaps。
+                * @default false
+                */
+            generateMipmaps?: boolean;
     }
     type ITextureLoadData = IAssetLoadData<ITextureLoaderOptions>;
     /**
@@ -7673,11 +7887,45 @@ declare module 'XrFrame/loader/CubeTextureLoader' {
         * {@link CubeTextureLoader}可接受的自定义参数`schema`。
         */
     export interface ICubeTextureLoaderOptions {
-            anisoLevel: number;
             /**
                 * 顺序为 left right top bottom front back。
                 */
             faces: string[];
+            /**
+                * 各向异性系数。
+                * @default 1
+                */
+            anisoLevel: number;
+            /**
+                * wrapU，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * @default 2
+                */
+            wrapU?: number;
+            /**
+                * wrapV，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * @default 2
+                */
+            wrapV?: number;
+            /**
+                * wrapW，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * @default 2
+                */
+            wrapW?: number;
+            /**
+                * magFilter，值为数字，见[EFilterMode](/miniprogram/dev/api/xr-frame/enums/EFilterMode.html)。
+                * 默认值依据纹理是否POT而定。
+                */
+            magFilter?: number;
+            /**
+                * minFilter，值为数字，见[EFilterMode](/miniprogram/dev/api/xr-frame/enums/EFilterMode.html)。
+                * 默认值依据纹理是否POT而定。
+                */
+            minFilter?: number;
+            /**
+                * 是否要生成mipmaps。
+                * @default false
+                */
+            generateMipmaps?: boolean;
     }
     type ICubeTextureLoadData = IAssetLoadData<ICubeTextureLoaderOptions>;
     /**
@@ -9197,57 +9445,6 @@ declare module 'XrFrame/kanata/lib/index' {
     export function composeRawBufferEntity3DWhole(useEuler: boolean, rotation: ArrayLike<number>, position: ArrayLike<number>, scale: ArrayLike<number>): Float32Array;
 }
 
-declare module 'XrFrame/assets/PostProcess' {
-    /**
-        * PostProcess.ts
-        *
-        *         * @Date    : 10/14/2022, 4:34:55 PM
-        */
-    type Scene = import('XrFrame/core/Scene').default;
-    /**
-        * 后处理资源初始化参数。
-        */
-    export interface IPostProcessOptions {
-            /**
-                * 类型，目前支持的类型请见[内置后处理资源](https://developers.weixin.qq.com/miniprogram/dev/component/xr-frame/builtin/post-process)。
-                */
-            type: string;
-            /**
-                * 是否开启HDR。
-                */
-            isHDR?: boolean;
-            /**
-                * 对应类型的数据。
-                */
-            data?: {
-                    [key: string]: any;
-            };
-    }
-    /**
-        * 后处理资源。
-        *
-        * 一般由{@link AssetPostProcess}加载。
-        */
-    export default class PostProcess {
-            /**
-                * 类型。
-                */
-            get type(): string;
-            /**
-                * 是否开启了HDR。
-                */
-            get isHDR(): boolean;
-            /**
-                * 数据，可以修改。
-                */
-            get data(): {
-                    [key: string]: any;
-            };
-            constructor(_scene: Scene, options: IPostProcessOptions);
-    }
-    export {};
-}
-
 declare module 'XrFrame/glyph' {
     export interface IGlyph {
         character?: string;
@@ -9327,6 +9524,16 @@ declare module 'XrFrame/components/particle/ParticleInstance' {
             updateCellIndex(): void;
             clamp(num: any, left?: number, right?: number): any;
     }
+}
+
+declare module 'XrFrame/components/emitter' {
+    import BoxShapeEmitter from 'XrFrame/components/emitter/BoxShapeEmitter';
+    import PointShapeEmitter from 'XrFrame/components/emitter/PointShapeEmitter';
+    import DrawShapeEmitter from 'XrFrame/components/emitter/DrawShapeEmitter';
+    import SphereShapeEmitter from 'XrFrame/components/emitter/SphereShapeEmitter';
+    import ConeShapeEmitter from 'XrFrame/components/emitter/ConeShapeEmitter';
+    import CircleShapeEmitter from 'XrFrame/components/emitter/CircleShapeEmitter';
+    export { BoxShapeEmitter, PointShapeEmitter, DrawShapeEmitter, SphereShapeEmitter, ConeShapeEmitter, CircleShapeEmitter };
 }
 
 declare module 'XrFrame/components/emitter/BasicShapeEmitter' {
@@ -11333,6 +11540,124 @@ declare module 'XrFrame/components/particle/gradient' {
                 * @param {Callback} updateFunc 回调函数
                 */
             static GetCurrentGradient(ratio: any, gradients: any, updateFunc: any): void;
+    }
+}
+
+declare module 'XrFrame/components/emitter/BoxShapeEmitter' {
+    import Vector3 from 'XrFrame/math/vector3';
+    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
+    export default class BoxShapeEmitter extends BasicShapeEmitter {
+        direction: Vector3;
+        direction2: Vector3;
+        minEmitBox: Vector3;
+        maxEmitBox: Vector3;
+        constructor();
+        startDirection(worldMatrix: any, direction: any): void;
+        startPosition(worldMatrix: any, position: Vector3): void;
+    }
+}
+
+declare module 'XrFrame/components/emitter/PointShapeEmitter' {
+    import Vector3 from 'XrFrame/math/vector3';
+    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
+    export default class PointShapeEmitter extends BasicShapeEmitter {
+        /**
+          * 粒子运动方向左区间。
+          */
+        direction: Vector3;
+        /**
+        * 粒子运动方向右区间。
+        */
+        direction2: Vector3;
+        constructor();
+        startDirection(worldMatrix: any, direction: any): void;
+        startPosition(worldMatrix: any, position: Vector3): void;
+    }
+}
+
+declare module 'XrFrame/components/emitter/DrawShapeEmitter' {
+    import Vector3 from "XrFrame/math/vector3";
+    import ParticleInstance from "XrFrame/components/particle/ParticleInstance";
+    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
+    export default class DrawShapeEmitter extends BasicShapeEmitter {
+        direction: Vector3;
+        constructor();
+        setContent(content: any, step?: number): void;
+        translateBase64ToArrayBuffer(base64: any): ArrayBufferLike;
+        startDirection(worldMatrix: any, direction: any): void;
+        startPosition(worldMatrix: any, position: Vector3): void;
+        processInstance(instance: ParticleInstance, deltaTime: number): void;
+        lerpNumberArrayToVector(vector: any, numberArray1: any, numberArray2: any, step: any, length?: number): void;
+    }
+}
+
+declare module 'XrFrame/components/emitter/SphereShapeEmitter' {
+    import Vector3 from 'XrFrame/math/vector3';
+    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
+    import Matrix4 from 'XrFrame/math/matrix4';
+    export default class SphereShapeEmitter extends BasicShapeEmitter {
+            /**
+             * 球形半径
+             */
+            radius: number;
+            /**
+                * 球形区域覆盖范围[0-1]
+                */
+            radiusRange: number;
+            /**
+                * 粒子在球形内生成的角度区间[0-360]
+                */
+            arc: number;
+            /**
+                * 粒子运动方向偏离程度[0-1]
+                */
+            randomizeDirection: number;
+            constructor();
+            startDirection(worldMatrix: Matrix4, direction: Vector3, position: Vector3): void;
+            startPosition(worldMatrix: Matrix4, position: Vector3): void;
+    }
+}
+
+declare module 'XrFrame/components/emitter/ConeShapeEmitter' {
+    import Vector3 from 'XrFrame/math/vector3';
+    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
+    export default class ConeShapeEmitter extends BasicShapeEmitter {
+            /**
+                * [0-1]
+                */
+            radiusRange: number;
+            heightRange: number;
+            /**
+                * [0-360]
+                */
+            arc: number;
+            /**
+                * randomize the particle direction [0-1]
+                */
+            randomizeDirection: number;
+            get radius(): number;
+            set radius(value: number);
+            get angle(): number;
+            set angle(value: number);
+            updateHeight(): void;
+            constructor();
+            startDirection(worldMatrix: any, direction: any, position: Vector3): void;
+            startPosition(worldMatrix: any, position: Vector3): void;
+    }
+}
+
+declare module 'XrFrame/components/emitter/CircleShapeEmitter' {
+    import Vector3 from 'XrFrame/math/vector3';
+    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
+    export default class CircleShapeEmitter extends BasicShapeEmitter {
+        radius: number;
+        radiusRange: number;
+        direction: Vector3;
+        direction2: Vector3;
+        arc: number;
+        constructor();
+        startDirection(worldMatrix: any, direction: any): void;
+        startPosition(worldMatrix: any, position: Vector3): void;
     }
 }
 
