@@ -13,4 +13,8 @@
   />
 
   <view wx:if="{{score !== undefined}}" style="text-align: center;padding: 12px;">置信度：{{score}}</view>
+
+  <text style="display:block;width:100%;color:red;text-align:center;">
+    要求基础库 v2.28.1 及以上
+  </text>
 </xr-demo-viewer>

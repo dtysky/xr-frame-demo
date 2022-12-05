@@ -1029,45 +1029,25 @@ declare module 'XrFrame/assets/Effect' {
                 */
             renderQueue?: number;
             blendOn?: boolean;
-            blendOnMask?: boolean;
             blendSrc?: Kanata.EBlendFactor;
-            blendSrcMask?: boolean;
             blendSrcAlpha?: Kanata.EBlendFactor;
-            blendSrcAlphaMask?: boolean;
             blendDst?: Kanata.EBlendFactor;
-            blendDstMask?: boolean;
             blendDstAlpha?: Kanata.EBlendFactor;
-            blendDstAlphaMask?: boolean;
             blendFunc?: Kanata.EBlendEquation;
-            blendFuncMask?: boolean;
             cullOn?: boolean;
-            cullOnMask?: boolean;
             cullFace?: Kanata.ECullMode;
-            cullFaceMask?: boolean;
             depthWrite?: boolean;
-            depthWriteMask?: boolean;
             depthTestOn?: boolean;
-            depthTestOnMask?: boolean;
             depthTestComp?: Kanata.ECompareFunc;
-            depthTestCompMask?: boolean;
             stencilWriteMask?: number;
-            stencilWriteMaskMask?: boolean;
             stencilTestOn?: boolean;
-            stencilTestOnMask?: boolean;
             stencilRef?: number;
-            stencilRefMask?: boolean;
             stencilReadMask?: number;
-            stencilReadMaskMask?: boolean;
             stencilComp?: Kanata.ECompareFunc;
-            stencilCompMask?: boolean;
             stencilPass?: Kanata.EStencilOp;
-            stencilPassMask?: boolean;
             stencilFail?: Kanata.EStencilOp;
-            stencilFailMask?: boolean;
             stencilZFail?: Kanata.EStencilOp;
-            stencilZFailMask?: boolean;
             primitiveType?: Kanata.EPrimitiveType;
-            primitiveTypeMask?: boolean;
     }
     /**
         * `Effect`资源的参数接口。
@@ -1121,6 +1101,7 @@ declare module 'XrFrame/assets/Effect' {
             }>;
             /**
                 * 使用该`Effect`的`Material`的默认渲染队列。
+                * 透明物体需要大于`2500`！
                 */
             defaultRenderQueue: number;
             /**
@@ -1402,6 +1383,9 @@ declare module 'XrFrame/assets/Material' {
             get uniforms(): import('XrFrame/kanata/lib/index').UniformBlock;
             set alphaMode(value: 'OPAQUE' | 'BLEND' | 'MASK');
             set alphaCutOff(value: number);
+            /**
+                * 透明物体需要大于`2500`！
+                */
             get renderQueue(): number;
             set renderQueue(value: number);
             constructor(_scene: Scene);
@@ -1678,13 +1662,17 @@ declare module 'XrFrame/assets/GLTFModel' {
         */
     export interface IGLTFModelOptions {
             /**
-                * 是否投射阴影，默认false。
+                * 是否投射阴影。
                 */
             castShadow: boolean;
             /**
-                * 是否接受阴影，默认false。
+                * 是否接受阴影。
                 */
             receiveShadow: boolean;
+            /**
+                * 是否**不**参与剔除。
+                */
+            neverCull: boolean;
     }
     /**
         * 加载完毕的GLTF模型，可以在节点下创建{@link GLTF | GLTF组件}来将其实例化。
@@ -4765,11 +4753,21 @@ declare module 'XrFrame/components/GLTF' {
                 */
             receiveShadow?: boolean;
             /**
+                * 是否不参与剔除，默认false(即参与剔除)。
+                */
+            neverCull?: boolean;
+            /**
                 * 修改GLTF的默认renderStates。
                 */
             states?: [string, string][];
     }
     export const GLTFSchema: IComponentSchema;
+    interface ElementGLTFInfo {
+            el: Element;
+            hasMesh: boolean;
+            meshName?: string;
+            meshes?: Array<Mesh>;
+    }
     /**
         * 将一个{@link GLTFModel | GLTF模型}实例化并渲染出来。
         * {@link XRGLTF | xr-gltf}标签会自动生成该组件。
@@ -4802,7 +4800,26 @@ declare module 'XrFrame/components/GLTF' {
                 * 每次调用都会重新计算。
                 */
             calcTotalBoundBox(): BoundBox;
+            /**
+                * 根据GLTF模型中**引用**了Mesh的**Node节点**的`name`字段，来获取对应Mesh下的所有Primitive。
+                * 一个GLTF模型中的Primitive节点对应返回中的一个`xr-frame Mesh组件`实例。
+                * **如果没有该名字的节点，或者节点未引用Mesh，会返回空数组。*
+                * @param name Node节点的`name`（而非Mesh节点）
+                */
+            getPrimitivesByNodeName(name: string): Array<Mesh>;
+            /**
+                * 根据GLTF模型中Mesh节点的`name`字段，来获取引用了该Mesh的**所有**Node节点下的所有Primitive。
+                * 在xr-frame实现中，每个引用了该Mesh的GLTFNode节点拥有**独立**的一份Primitives副本，**每个**Node节点下的**每个**Primitive对应一个`xr-frame Mesh组件`。
+                * **如果没有引用了该Mesh的Node节点，会返回空数组。*
+                * @param name Mesh节点的`name`
+                * @returns 一个数组，数组中的一个元素对应一个引用了该Mesh的GLTFNode节点，元素中nodeName为GLTFNode节点的`name`字段。
+                */
+            getPrimitivesByMeshName(name: string): Array<{
+                    nodeName: string;
+                    primitives: Array<Mesh>;
+            }>;
     }
+    export {};
 }
 
 declare module 'XrFrame/components/Light' {
@@ -5156,7 +5173,7 @@ declare module 'XrFrame/components/particle/Particle' {
     import Material from 'XrFrame/assets/Material';
     import BasicParticle, { IParticleData } from 'XrFrame/components/particle/BasicParticle';
     import ParticleInstance from 'XrFrame/components/particle/ParticleInstance';
-    import {BasicShapeEmitter} from 'XrFrame/components/emitter/BasicShapeEmitter';
+    import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
     export default class Particle extends BasicParticle {
             readonly priority: number;
             subEmitters: any;
@@ -5287,6 +5304,7 @@ declare module 'XrFrame/components/particle/BasicParticle' {
                 */
             renderMode?: string;
             uniforms?: [string, string][];
+            states?: [string, string][];
             /**
                 * 纹理信息。
                 */
@@ -5394,6 +5412,10 @@ declare module 'XrFrame/components/particle/BasicParticle' {
             sizeChange?: [string, string][];
             colorChange?: [string, string][];
             speedChange?: [string, string][];
+            burstCount?: number;
+            burstTime?: number;
+            burstCycle?: number;
+            burstInterval?: number;
     }
     /**
         * {@link Particle}的`schema`定义。
@@ -5436,6 +5458,12 @@ declare module 'XrFrame/components/particle/BasicParticle' {
             protected byteStride: number;
             protected ParticleAttributes: any;
             protected _burstCount: number;
+            protected _burstTime: number;
+            protected _burstCycle: number;
+            protected _burstInterval: number;
+            protected _burstCountTime: number;
+            protected _burstCountCycle: number;
+            protected _burstCountInterval: number;
             protected _minLifeTime: number;
             protected _maxLifeTime: number;
             protected _minScaleX: number;
@@ -6947,6 +6975,7 @@ declare module 'XrFrame/elements/xr-gltf' {
             model: string[];
             "cast-shadow": string[];
             "receive-shadow": string[];
+            "never-cull": string[];
             states: string[];
     } & {
             'node-id': string[];
@@ -7271,6 +7300,9 @@ declare module 'XrFrame/systems/AssetsSystem' {
                 * 取消加载一个资源。
                 */
             cancelAsset(type: string, id: string): void;
+            /**
+                * @internal
+                */
             /**
                 * @internal
                 */
@@ -7797,22 +7829,22 @@ declare module 'XrFrame/loader/TextureLoader' {
                 */
             anisoLevel?: number;
             /**
-                * wrapU，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * wrapU，值为数字，见{@link EWrapMode}。
                 * @default 2
                 */
             wrapU?: number;
             /**
-                * wrapV，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * wrapV，值为数字，见{@link EWrapMode}。
                 * @default 2
                 */
             wrapV?: number;
             /**
-                * magFilter，值为数字，见[EFilterMode](/miniprogram/dev/api/xr-frame/enums/EFilterMode.html)。
+                * magFilter，值为数字，见{@link EFilterMode}。
                 * 默认值依据纹理是否POT而定。
                 */
             magFilter?: number;
             /**
-                * minFilter，值为数字，见[EFilterMode](/miniprogram/dev/api/xr-frame/enums/EFilterMode.html)。
+                * minFilter，值为数字，见{@link EFilterMode}。
                 * 默认值依据纹理是否POT而定。
                 */
             minFilter?: number;
@@ -7897,27 +7929,27 @@ declare module 'XrFrame/loader/CubeTextureLoader' {
                 */
             anisoLevel: number;
             /**
-                * wrapU，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * wrapU，值为数字，见{@link EWrapMode}。
                 * @default 2
                 */
             wrapU?: number;
             /**
-                * wrapV，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * wrapV，值为数字，见{@link EWrapMode}。
                 * @default 2
                 */
             wrapV?: number;
             /**
-                * wrapW，值为数字，见[EWrapMode](/miniprogram/dev/api/xr-frame/enums/EWrapMode.html)。
+                * wrapW，值为数字，见{@link EWrapMode}。
                 * @default 2
                 */
             wrapW?: number;
             /**
-                * magFilter，值为数字，见[EFilterMode](/miniprogram/dev/api/xr-frame/enums/EFilterMode.html)。
+                * magFilter，值为数字，见{@link EFilterMode}。
                 * 默认值依据纹理是否POT而定。
                 */
             magFilter?: number;
             /**
-                * minFilter，值为数字，见[EFilterMode](/miniprogram/dev/api/xr-frame/enums/EFilterMode.html)。
+                * minFilter，值为数字，见{@link EFilterMode}。
                 * 默认值依据纹理是否POT而定。
                 */
             minFilter?: number;
@@ -9526,16 +9558,6 @@ declare module 'XrFrame/components/particle/ParticleInstance' {
     }
 }
 
-declare module 'XrFrame/components/emitter' {
-    import BoxShapeEmitter from 'XrFrame/components/emitter/BoxShapeEmitter';
-    import PointShapeEmitter from 'XrFrame/components/emitter/PointShapeEmitter';
-    import DrawShapeEmitter from 'XrFrame/components/emitter/DrawShapeEmitter';
-    import SphereShapeEmitter from 'XrFrame/components/emitter/SphereShapeEmitter';
-    import ConeShapeEmitter from 'XrFrame/components/emitter/ConeShapeEmitter';
-    import CircleShapeEmitter from 'XrFrame/components/emitter/CircleShapeEmitter';
-    export { BoxShapeEmitter, PointShapeEmitter, DrawShapeEmitter, SphereShapeEmitter, ConeShapeEmitter, CircleShapeEmitter };
-}
-
 declare module 'XrFrame/components/emitter/BasicShapeEmitter' {
     import Vector3 from 'XrFrame/math/vector3';
     import ParticleInstance from "XrFrame/components/particle/ParticleInstance";
@@ -9554,6 +9576,16 @@ declare module 'XrFrame/components/emitter/BasicShapeEmitter' {
             processInstance?(instance: ParticleInstance, deltaTime: number): void;
             setProperty(properties: any): void;
     }
+}
+
+declare module 'XrFrame/components/emitter' {
+    import BoxShapeEmitter from 'XrFrame/components/emitter/BoxShapeEmitter';
+    import PointShapeEmitter from 'XrFrame/components/emitter/PointShapeEmitter';
+    import DrawShapeEmitter from 'XrFrame/components/emitter/DrawShapeEmitter';
+    import SphereShapeEmitter from 'XrFrame/components/emitter/SphereShapeEmitter';
+    import ConeShapeEmitter from 'XrFrame/components/emitter/ConeShapeEmitter';
+    import CircleShapeEmitter from 'XrFrame/components/emitter/CircleShapeEmitter';
+    export { BoxShapeEmitter, PointShapeEmitter, DrawShapeEmitter, SphereShapeEmitter, ConeShapeEmitter, CircleShapeEmitter };
 }
 
 declare module 'XrFrame/components/emitter/SubEmitter' {
@@ -11649,14 +11681,16 @@ declare module 'XrFrame/components/emitter/ConeShapeEmitter' {
 declare module 'XrFrame/components/emitter/CircleShapeEmitter' {
     import Vector3 from 'XrFrame/math/vector3';
     import { BasicShapeEmitter } from 'XrFrame/components/emitter/BasicShapeEmitter';
+    import Matrix4 from 'XrFrame/math/matrix4';
     export default class CircleShapeEmitter extends BasicShapeEmitter {
         radius: number;
         radiusRange: number;
         direction: Vector3;
         direction2: Vector3;
         arc: number;
+        angle: number;
         constructor();
-        startDirection(worldMatrix: any, direction: any): void;
+        startDirection(worldMatrix: Matrix4, direction: Vector3, position: Vector3): void;
         startPosition(worldMatrix: any, position: Vector3): void;
     }
 }
@@ -12012,6 +12046,7 @@ declare module 'XrFrame/loader/glTF/geometry/GLTFMeshNode' {
     export interface GLTFMeshLoaded {
         subMeshes: GLTFPrimitivesLoaded;
         weights: Array<number>;
+        name?: string;
     }
     export default class GLTFMeshNode extends GLTFBaseNode {
         get nodeName(): string;
