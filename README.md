@@ -31,4 +31,5 @@ https://sketchfab.com/3d-models/camera-limits-demo-van-gogh-bedroom-in-arles-dae
 https://sketchfab.com/3d-models/night-car-landscape-be4011aeb09740948bf30d33936c875b  
 https://sketchfab.com/models/b81008d513954189a063ff901f7abfe4  
 http://www.alexandre-pestana.com/pbr-textures-sponza/  
+https://sketchfab.com/3d-models/jokers-mask-persona-5-81669910c0b74f41a3a58febfd514794
 

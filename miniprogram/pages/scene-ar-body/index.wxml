@@ -1,7 +1,7 @@
 <xr-demo-viewer
   title="AR 人体识别案例"
   intro="人体识别案例。识别成功后，会在典型位置展示几何体。"
-  code="{{xmlCode}}"
+  hint="要求基础库 v2.28.1 及以上"
 >
   <xr-ar-body
     disable-scroll
@@ -13,8 +13,4 @@
   />
 
   <view wx:if="{{score !== undefined}}" style="text-align: center;padding: 12px;">置信度：{{score}}</view>
-
-  <text style="display:block;width:100%;color:red;text-align:center;">
-    要求基础库 v2.28.1 及以上
-  </text>
 </xr-demo-viewer>
