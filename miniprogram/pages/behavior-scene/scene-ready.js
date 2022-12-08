@@ -17,8 +17,7 @@ module.exports = Behavior({
     const info = wx.getSystemInfoSync();
     const width = info.windowWidth;
     const windowHeight = info.windowHeight;
-    // const height = windowHeight * 0.6;
-    const height = width / 9 * 16.2;
+    const height = windowHeight * 0.6;
     const dpi = info.pixelRatio;
     this.setData({
       width,

@@ -1,7 +1,7 @@
 <xr-demo-viewer
   title="AR 人脸识别案例"
   intro="人脸识别案例。识别成功后，会在五官典型位置展示几何体。"
-  hint="要求基础库 v2.28.1 及以上"
+  hint="要求基础库 v2.28.1 及以上，前置相机需要客户端 8.0.31 及以上"
 >
   <xr-ar-face
     disable-scroll
