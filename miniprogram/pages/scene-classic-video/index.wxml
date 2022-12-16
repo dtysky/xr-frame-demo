@@ -10,5 +10,11 @@
     height="{{renderHeight}}"
     style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
     markerImg="{{markerImg}}"
+    bind:arTrackerState="handleARTrackerState"
   />
+
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+  </view>
 </xr-demo-viewer>

@@ -11,6 +11,9 @@ module.exports = Behavior({
     renderHeight: 300,
     windowHeight: 1000,
     activeValues: [1],
+    arTrackerShow: false,
+    arTrackerState: 'Init',
+    arTrackerError: ''
   },
   attached: function(){},
   ready() {
@@ -70,10 +73,13 @@ module.exports = Behavior({
     getTitle() {
       return wx.xrTitle ? `XR - ${wx.xrTitle}` : 'XR-FRAME官方示例';
     },
-    handleChange(e) {
+    handleARTrackerState({detail}) {
+      const {state, error} = detail;
       this.setData({
-        activeValues: e.detail.value,
+        arTrackerShow: true,
+        arTrackerState: wx.getXrFrameSystem().EARTrackerState[state],
+        arTrackerError: error
       });
-    },
+    }
   }
 })

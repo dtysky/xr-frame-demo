@@ -10,10 +10,13 @@
     height="{{renderHeight}}"
     style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
     bind:info="handleInfo"
+    bind:arTrackerState="handleARTrackerState"
   />
 
-  <view style="display: flex;justify-content: space-between;padding: 12px;">
-    <view wx:if="{{score !== undefined}}" style="text-align: center;">置信度：{{score}}</view>
-    <view wx:if="{{gesture !== undefined}}" style="text-align: center;">手势：{{gesture}}</view>
+  <view wx:if="{{arTrackerShow}}" style="text-align: center;padding: 12px;">
+    <view>Tracker识别状态：{{arTrackerState}}</view>
+    <view>错误信息：{{arTrackerError}}</view>
+    <view wx:if="{{score !== undefined}}">置信度：{{score}}</view>
+    <view wx:if="{{gesture !== undefined}}">手势：{{gesture}}</view>
   </view>
 </xr-demo-viewer>
