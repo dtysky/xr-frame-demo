@@ -34,6 +34,7 @@
     "pages/scene-classic-osd/index",
     "pages/scene-classic-face/index",
     "pages/scene-last-record/index",
+    "pages/scene-beside-edge/index",
     "pages/scene-roam-portal/index"
   ],
   "usingComponents": {},
