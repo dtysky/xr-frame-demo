@@ -81,22 +81,18 @@
     </xr-node>
 
     <xr-asset-post-process asset-id="blur" type="blur" data="radius:0" />
-    <xr-asset-post-process
-      asset-id="vignette" type="vignette"
-      data="intensity:1,smoothness:2,color:0.1 0.1 0.1 1"
-    />
     <xr-camera
       id="main-camera" node-id="main-camera"
       background="ar" is-ar-camera
       near="0.1" far="2000"
-      is-ar-camera clear-color="0 0 0 1" post-process="blur vignette"
+      is-ar-camera clear-color="0 0 0 1" post-process="blur"
     >
       <xr-gltf wx:if="{{arReady && !loaded}}" position="0 0 10" model="loading" anim-autoplay />
-      <xr-light type="spot" color="1 1 1" wx:if="{{step >= 0}}" intensity="2" />
     </xr-camera>
   </xr-node>
 
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="{{ambient}}" />
+    <xr-light node-id="light" type="spot" color="1 1 1" intensity="1" inner-cone-angle="5" outer-cone-angle="25" range="4" wx:if="{{step < 3}}" />
   </xr-node>
 </xr-scene>

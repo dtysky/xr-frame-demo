@@ -3,7 +3,7 @@ Page({
     width: 300, height: 300,
     renderWidth: 300, renderHeight: 300,
     showDialog: false, name: '', text: '', bg: 'rgba(0, 0, 0, 0)',
-    showLightButton: false, lightButtonDisable: true,
+    showLightButton: false, lightButtonDisable: true, lightProgress: 1,
     nextAction: ''
   },
   onShow() {
@@ -34,8 +34,8 @@ Page({
     this.setData({
       showLightButton: true,
       lightButtonDisable: state === 'cd',
-      nextAction: ''
-      // 处理cd进度
+      nextAction: '',
+      lightProgress: state === 'cd' ? 1 - wait : 1
     });
   },
   handleRequireDialog: function({detail}) {

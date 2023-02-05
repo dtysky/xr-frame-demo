@@ -6,13 +6,19 @@ const height = info.windowHeight * dpi;
 import CONFIG from './config.js';
 
 const ROOT_DURATIONS = [
-  3000, 6000, 10000, Infinity
+  2000, 4000, 6000, Infinity
 ];
 const ROOT_DELAYS = [
-  1000, 3000, 1000, 0
+  2000, 1500, 1000, 0
 ];
 const ROOT_AMBIENTS = [
-  0.1, 0.3, 0.6, 1
+  0.1, 0.1, 0.4, 1
+];
+const ROOT_BLURS = [
+  32, 16, 8, 0
+];
+const REAL_BLURS = [
+  0, 32, 48, 96
 ];
 
 function showFinalChoose(content, callback) {
@@ -30,7 +36,7 @@ function showFinalChoose(content, callback) {
         setTimeout(() => {
           wx.showToast({
             title: '勇敢一些\n不要怯懦',
-            duration: 2000,
+            duration: 5000,
             icon: 'none'
           })
         }, 500);
@@ -74,7 +80,7 @@ Component({
               showCancel: false,
               confirmText: '做出选择',
               complete: () => {
-                showFinalChoose('', () => this.switchSide(false));
+                showFinalChoose('', () => this.switchSide(false, 0));
               }
             });
             return;
@@ -131,10 +137,19 @@ Component({
     handleAssetsLoaded: function ({detail}) {
       console.log('assets loaded', detail.value);
       this.config = CONFIG;
-      this.note = this.scene.assets.getAsset('raw', 'note');
       this.setData({loaded: true});
     },
     handleTick(dt) {
+      const mainCamera = this.scene.getNodeById('main-camera');
+      const light = this.scene.getNodeById('light');
+
+      if (mainCamera && light) {
+        light.position.set(mainCamera.position);
+        light.rotation.set(mainCamera.rotation);
+        light.rotation.x = Math.PI - light.rotation.x;
+        light.rotation.y += Math.PI;
+      }
+
       if (this.inited) {
         const nextDuration = Math.max(this.lightDuration - dt, 0);
         if (this.lightDuration > 0 && nextDuration === 0) {
@@ -159,25 +174,28 @@ Component({
         return;
       }
 
-      const mainCamera = this.scene.getNodeById('main-camera');
       const setItem = this.scene.getNodeById('setitem');
       setItem.position.set(mainCamera.position);
       setItem.position.y = 1.5;
       this.inited = true;
 
       setTimeout(() => {
-        this.switchSide(true);
-        setTimeout(() => {
-          const {texts} = this.config.intro;
-          this.requireDialog({texts, from: 'intro'});
-          this.bgm.play();
-        }, 500);
+        this.switchSide(true, ROOT_BLURS[0]);
+        const {texts} = this.config.intro;
+        this.requireDialog({texts, from: 'intro'});
+        this.bgm.play();
       }, 1000);
     },
-    switchSide(virtual) {
+    switchSide(virtual, blur) {
       const setItem = this.scene.getNodeById('setitem');
       setItem.visible = virtual;
-      virtual && this.triggerEvent('requireLight', {state: 'hide'});
+      const blurAsset = this.scene.assets.getAsset('post-process', 'blur');
+      if (virtual) {
+        blurAsset.data.radius = blur || ROOT_BLURS[this.data.step];
+        this.triggerEvent('requireLight', {state: 'hide'});
+      } else {
+        blurAsset.data.radius = blur || REAL_BLURS[this.data.step];
+      }
     },
     handleResume() {
       if (this.data.placed) {
@@ -207,6 +225,7 @@ Component({
       this.disable3DTouch = true;
       this.lightDuration = Infinity;
       this.triggerEvent('requireLight', {state: 'hide'});
+      info.name = info.name || '某个声音';
       this.triggerEvent('requireDialog', info);
     },
     inDistance(detail) {
@@ -217,6 +236,8 @@ Component({
       if (this.disable3DTouch) {
         return false;
       }
+
+      return true;
 
       const xrSystem = wx.getXrFrameSystem();
       const {camera, target} = detail.value;
