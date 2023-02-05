@@ -6,16 +6,16 @@ const height = info.windowHeight * dpi;
 import CONFIG from './config.js';
 
 const ROOT_DURATIONS = [
-  2000, 4000, 6000, Infinity
+  3000, 4500, 6000, Infinity
 ];
 const ROOT_DELAYS = [
   2000, 1500, 1000, 0
 ];
 const ROOT_AMBIENTS = [
-  0.1, 0.1, 0.4, 1
+  0.05, 0.15, 0.4, 1
 ];
 const ROOT_BLURS = [
-  32, 16, 8, 0
+  32, 32, 16, 0
 ];
 const REAL_BLURS = [
   0, 32, 48, 96
@@ -86,6 +86,11 @@ Component({
             return;
           }
 
+          if (step === 3) {
+            this.bgm.stop();
+            this.bgm2.play();
+          }
+
           this.remainItems = this.config.steps[step].itemCount;
           this.setData({step, subStep: false, ambient: ROOT_AMBIENTS[step]});
           this.switchSide(false);
@@ -114,6 +119,7 @@ Component({
   lifetimes: {
     detached() {
       this.bgm.stop();
+      this.bgm2.stop();
       wx.setKeepScreenOn({keepScreenOn: false});
     }
   },
@@ -127,8 +133,11 @@ Component({
       this.lightDuration = 0;
       this.lightDelay = 0;
       this.bgm = wx.createInnerAudioContext({});
-      this.bgm.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/xr-frame-team/bgm.mp3';
+      this.bgm.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/beside-edge/bgm1.mp3';
       this.bgm.loop = true;
+      this.bgm2 = wx.createInnerAudioContext({});
+      this.bgm2.src = 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/beside-edge/bgm2.mp3';
+      this.bgm2.loop = true;
     },
     handleARReady() {
       wx.setKeepScreenOn({keepScreenOn: true});
@@ -176,7 +185,7 @@ Component({
 
       const setItem = this.scene.getNodeById('setitem');
       setItem.position.set(mainCamera.position);
-      setItem.position.y = 1.5;
+      setItem.position.y = 1;
       this.inited = true;
 
       setTimeout(() => {
@@ -191,15 +200,15 @@ Component({
       setItem.visible = virtual;
       const blurAsset = this.scene.assets.getAsset('post-process', 'blur');
       if (virtual) {
-        blurAsset.data.radius = blur || ROOT_BLURS[this.data.step];
+        blurAsset.data.radius = blur === undefined ? ROOT_BLURS[this.data.step] : blur;
         this.triggerEvent('requireLight', {state: 'hide'});
       } else {
-        blurAsset.data.radius = blur || REAL_BLURS[this.data.step];
+        blurAsset.data.radius = blur === undefined ? REAL_BLURS[this.data.step] : blur;
       }
     },
     handleResume() {
-      if (this.data.placed) {
-        this.bgm.play();
+      if (this.inited) {
+        this.data.step === 3 ? this.bgm2.play() : this.bgm2.play();
       }
     },
     handleTouchObj({detail}) {
@@ -237,7 +246,7 @@ Component({
         return false;
       }
 
-      return true;
+      // return true;
 
       const xrSystem = wx.getXrFrameSystem();
       const {camera, target} = detail.value;
@@ -245,7 +254,7 @@ Component({
       const targetTrs = target.getComponent(xrSystem.Transform);
       const diff = camTrs.worldPosition.sub(targetTrs.worldPosition);
 
-      return Math.sqrt(diff.x * diff.x + diff.z * diff.z) < 1.5;
+      return Math.sqrt(diff.x * diff.x + diff.z * diff.z) < 3;
     }
   }
 })

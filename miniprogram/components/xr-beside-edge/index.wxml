@@ -87,12 +87,12 @@
       near="0.1" far="2000"
       is-ar-camera clear-color="0 0 0 1" post-process="blur"
     >
-      <xr-gltf wx:if="{{arReady && !loaded}}" position="0 0 10" model="loading" anim-autoplay />
+      <!-- <xr-gltf wx:if="{{arReady && !loaded}}" position="0 0 10" model="loading" anim-autoplay /> -->
     </xr-camera>
   </xr-node>
 
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="{{ambient}}" />
-    <xr-light node-id="light" type="spot" color="1 1 1" intensity="1" inner-cone-angle="5" outer-cone-angle="25" range="4" wx:if="{{step < 3}}" />
+    <xr-light node-id="light" type="spot" color="1 1 1" intensity="4" inner-cone-angle="5" outer-cone-angle="25" range="4" wx:if="{{step < 3}}" />
   </xr-node>
 </xr-scene>
