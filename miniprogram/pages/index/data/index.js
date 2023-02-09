@@ -215,6 +215,11 @@ const production = {
       name: 'Beside Edge',
       label: '边缘迷走',
       path: '/pages/scene-beside-edge/index'
+    },
+    {
+      name: '',
+      label: '■■■■',
+      path: '/pages/scene-last-record/index'
     }
   ]
 };

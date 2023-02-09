@@ -3,6 +3,7 @@ Page({
     width: 300, height: 300,
     renderWidth: 300, renderHeight: 300,
     showDialog: false, name: '', text: '', bg: 'rgba(0, 0, 0, 0)',
+    start: '', hint: '', end: '',
     showLightButton: false, lightButtonDisable: true, lightProgress: 1,
     nextAction: ''
   },
@@ -63,7 +64,16 @@ Page({
       return;
     }
 
-    this.setData({text: this.texts[this.textIndex]});
+    const text = this.texts[this.textIndex];
+    const tmp = /[\s\S]+?\{\{([\s\S]+?)\}\}[\s\S]+?/.exec(text);
+    if (tmp) {
+      const hint = tmp[1];
+      const [start, end] = text.split("{{" + hint + "}}");
+      console.log({start, hint, end})
+      this.setData({start, hint, end});
+    } else {
+      this.setData({text: this.texts[this.textIndex], hint: ''});
+    }
   },
   handleTriggerLight: function() {
     if (this.data.lightButtonDisable) {

@@ -87,7 +87,7 @@
       near="0.1" far="2000"
       is-ar-camera clear-color="0 0 0 1" post-process="blur"
     >
-      <!-- <xr-gltf wx:if="{{arReady && !loaded}}" position="0 0 10" model="loading" anim-autoplay /> -->
+      <xr-gltf wx:if="{{arReady && !loaded}}" position="0 0 10" model="loading" anim-autoplay />
     </xr-camera>
   </xr-node>
 

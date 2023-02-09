@@ -29,7 +29,10 @@
       style="position: absolute; left: 5%; bottom: 5%;background:rgba(44, 44, 44, 0.5);width: 90%;height: 25vh;word-break: break-all;color:white;border-radius: 1rem;"
     >
       <view style="position: absolute;left: 1rem;top: 1rem;font-size: 1.4rem;text-align: center;">{{name}}</view>
-      <text style="position: absolute;left: 5%;top: 4rem;font-size: 1.2rem;width: 90%;height: 100%;">{{text}}</text>
+      <view style="position: absolute;left: 5%;top: 4rem;font-size: 1.2rem;width: 90%;height: 100%;">
+        <text wx:if="{{hint == ''}}">{{text}}</text>
+        <view wx:if="{{hint != ''}}">{{start}}<span style="color:red">{{hint}}</span>{{end}}</view>
+      </view>
     </view>
   </view>
 </view>

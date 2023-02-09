@@ -246,8 +246,6 @@ Component({
         return false;
       }
 
-      // return true;
-
       const xrSystem = wx.getXrFrameSystem();
       const {camera, target} = detail.value;
       const camTrs = camera.el.getComponent(xrSystem.Transform);
