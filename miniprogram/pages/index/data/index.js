@@ -1,5 +1,5 @@
 const classic = {
-  name: '典型案例',
+  name: 'AR典型案例',
   icon: 'photo',
   childArr: [
     {
@@ -36,7 +36,7 @@ const classic = {
 };
 
 const base = {
-  name: '基础案例',
+  name: '基础能力',
   icon: 'app',
   childArr: [
     // {
@@ -102,7 +102,7 @@ const base = {
   ],
 };
 const gltf = {
-  name: 'glTF案例',
+  name: 'glTF能力',
   icon: 'image',
   childArr: [{
       name: 'Standard',
@@ -133,7 +133,7 @@ const gltf = {
 };
 
 const ar = {
-  name: 'AR案例',
+  name: 'AR能力',
   icon: 'scan',
   childArr: [{
       name: 'Camera',
@@ -173,23 +173,6 @@ const ar = {
   ],
 };
 
-const scan = {
-  name: '扫描还原案例',
-  icon: 'photo',
-  childArr: [
-    {
-      name: 'Render',
-      label: '扫描渲染案例(全景、模型)',
-      path: '/pages/scene-scan-render/index',
-    },
-    {
-      name: 'XRFrameTeam',
-      label: '卡其脱离太',
-      path: '/pages/scene-scan-team/index',
-    }
-  ],
-};
-
 const custom = {
   name: '高级定制',
   icon: 'tools',
@@ -205,6 +188,50 @@ const custom = {
       path: '/pages/scene-custom-render/index',
     }
   ]
+};
+
+const template = {
+  name: '通用功能模版',
+  icon: 'tools',
+  childArr: [
+    {
+      name: 'Message',
+      label: '小程序混合通信',
+      path: '/pages/template-logic/index',
+    },
+    {
+      name: 'Controller',
+      label: '第一人称漫游',
+      path: '/pages/scene-custom-render/index',
+    },
+    {
+      name: 'Loading',
+      label: '动态资源加载',
+      path: '/pages/scene-custom-render/index',
+    },
+    {
+      name: 'Tracker',
+      label: '动态Tracker切换',
+      path: '/pages/scene-custom-render/index',
+    }
+  ]
+};
+
+const scan = {
+  name: '扫描还原案例',
+  icon: 'photo',
+  childArr: [
+    {
+      name: 'Render',
+      label: '扫描渲染案例(全景、模型)',
+      path: '/pages/scene-scan-render/index',
+    },
+    {
+      name: 'XRFrameTeam',
+      label: '卡其脱离太',
+      path: '/pages/scene-scan-team/index',
+    }
+  ],
 };
 
 const production = {
@@ -224,4 +251,4 @@ const production = {
   ]
 };
 
-export default [base, gltf, ar, classic, scan, custom, production];
+export default [base, ar, gltf, custom, template, classic, scan, production];

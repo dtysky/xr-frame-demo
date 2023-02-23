@@ -5,7 +5,7 @@
     "useIsolateContext": true
   },
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "libVersion": "2.27.3",
+  "libVersion": "2.30.1",
   "condition": {
     "miniprogram": {
       "list": [
@@ -20,6 +20,27 @@
           "name": "classic-face",
           "pathName": "pages/scene-classic-face/index",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "basic",
+          "pathName": "pages/scene-basic/index",
+          "query": "path=%2Fpages%2Fscene-basic%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "damageHelmet",
+          "pathName": "pages/scene-gltf-damageHelmet/index",
+          "query": "path=%2Fpages%2Fscene-gltf-damageHelmet%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "2dmarker",
+          "pathName": "pages/scene-ar-2dmarker/index",
+          "query": "path=%2Fpages%2Fscene-ar-2dmarker%2Findex",
           "launchMode": "default",
           "scene": null
         }
