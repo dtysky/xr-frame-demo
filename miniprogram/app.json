@@ -35,7 +35,8 @@
     "pages/scene-classic-face/index",
     "pages/scene-last-record/index",
     "pages/scene-beside-edge/index",
-    "pages/scene-roam-portal/index"
+    "pages/scene-roam-portal/index",
+    "pages/template/template-firstControl/index"
   ],
   "usingComponents": {},
   "window": {

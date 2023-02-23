@@ -202,11 +202,11 @@ const template = {
     {
       name: 'Controller',
       label: '第一人称漫游',
-      path: '/pages/scene-custom-render/index',
+      path: '/pages/template/template-firstControl/index',
     },
     {
       name: 'Loading',
-      label: '动态资源加载',
+      label: '动态资源加载与使用',
       path: '/pages/scene-custom-render/index',
     },
     {
