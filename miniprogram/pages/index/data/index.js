@@ -1,6 +1,6 @@
 const classic = {
   name: 'AR典型案例',
-  icon: 'photo',
+  tag: 'case',
   childArr: [
     {
       name: 'Perspect',
@@ -37,7 +37,7 @@ const classic = {
 
 const base = {
   name: '基础能力',
-  icon: 'app',
+  tag: 'func',
   childArr: [
     // {
     //   name: 'test',
@@ -103,7 +103,7 @@ const base = {
 };
 const gltf = {
   name: 'glTF能力',
-  icon: 'image',
+  tag: 'func',
   childArr: [{
       name: 'Standard',
       label: '标准金属头盔',
@@ -134,7 +134,7 @@ const gltf = {
 
 const ar = {
   name: 'AR能力',
-  icon: 'scan',
+  tag: 'func',
   childArr: [{
       name: 'Camera',
       label: 'AR 相机渲染',
@@ -175,7 +175,7 @@ const ar = {
 
 const custom = {
   name: '高级定制',
-  icon: 'tools',
+  tag: 'func',
   childArr: [
     {
       name: 'Logic',
@@ -192,7 +192,7 @@ const custom = {
 
 const template = {
   name: '通用功能模版',
-  icon: 'tools',
+  tag: 'template',
   childArr: [
     {
       name: 'Message',
@@ -219,7 +219,7 @@ const template = {
 
 const scan = {
   name: '扫描还原案例',
-  icon: 'photo',
+  tag: 'case',
   childArr: [
     {
       name: 'Render',
@@ -236,7 +236,7 @@ const scan = {
 
 const production = {
   name: '产品级案例',
-  icon: 'tools',
+  tag: 'case',
   childArr: [
     {
       name: 'Beside Edge',
