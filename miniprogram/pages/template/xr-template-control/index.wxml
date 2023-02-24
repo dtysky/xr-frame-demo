@@ -3,7 +3,7 @@
   intro="使用默认的PBR(基于物理渲染)材质下使用特定颜色的内置图形，场景包含基本的环境光与平行光。"
   code="{{xmlCode}}"
 >
-  <xr-firstControl
+  <xr-template-control
     disable-scroll
     id="main-frame"
     width="{{renderWidth}}"

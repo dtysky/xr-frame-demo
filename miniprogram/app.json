@@ -33,7 +33,7 @@
     "pages/ar-classic/scene-classic-portal/index",
     "pages/ar-classic/scene-classic-osd/index",
     "pages/ar-classic/scene-classic-face/index",
-    "pages/template/template-firstControl/index",
+    "pages/template/xr-template-control/index",
     "pages/scene-last-record/index",
     "pages/scene-beside-edge/index"
   ],

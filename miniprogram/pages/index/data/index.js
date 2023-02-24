@@ -165,7 +165,7 @@ const template = {
     {
       name: 'Controller',
       label: '第一人称漫游',
-      path: '/pages/template/template-firstControl/index',
+      path: '/pages/template/xr-template-control/index',
     },
     {
       name: 'Loading',
