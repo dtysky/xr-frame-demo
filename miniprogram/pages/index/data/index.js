@@ -1,40 +1,3 @@
-const classic = {
-  name: 'AR典型案例',
-  tag: 'case',
-  childArr: [
-    {
-      name: 'Perspect',
-      label: '扫描透视模型',
-      path: '/pages/ar-classic/scene-classic-perspect/index',
-    },
-    {
-      name: 'Portal',
-      label: '平面传送门',
-      path: '/pages/ar-classic/scene-classic-portal/index',
-    },
-    {
-      name: 'Video',
-      label: '扫描图片视频',
-      path: '/pages/ar-classic/scene-classic-video/index',
-    },
-    {
-      name: 'OSD',
-      label: '扫描物体查看信息',
-      path: '/pages/ar-classic/scene-classic-osd/index',
-    },
-    {
-      name: 'Face',
-      label: '人脸穿戴案例',
-      path: '/pages/ar-classic/scene-classic-face/index',
-    },
-    {
-      name: 'Ball',
-      label: '扫描微信球',
-      path: '/pages/ar-classic/scene-classic-wxball/index',
-    }
-  ],
-};
-
 const base = {
   name: '基础能力',
   tag: 'func',
@@ -213,9 +176,62 @@ const template = {
       name: 'Tracker',
       label: '动态Tracker切换',
       path: '/pages/scene-custom-render/index',
+    },
+    {
+      name: 'Touch',
+      label: '物体点选控制',
+      path: '/pages/scene-custom-render/index',
+    },
+    {
+      name: 'LookAt',
+      label: '物体朝向控制',
+      path: '/pages/scene-custom-render/index',
+    },
+    {
+      name: 'Share',
+      label: '截图与分享',
+      path: '/pages/scene-custom-render/index',
     }
   ]
 };
+
+const classic = {
+  name: 'AR典型案例',
+  tag: 'case',
+  childArr: [
+    {
+      name: 'Perspect',
+      label: '扫描透视模型',
+      path: '/pages/ar-classic/scene-classic-perspect/index',
+    },
+    {
+      name: 'Portal',
+      label: '平面传送门',
+      path: '/pages/ar-classic/scene-classic-portal/index',
+    },
+    {
+      name: 'Video',
+      label: '扫描图片视频',
+      path: '/pages/ar-classic/scene-classic-video/index',
+    },
+    {
+      name: 'OSD',
+      label: '扫描物体查看信息',
+      path: '/pages/ar-classic/scene-classic-osd/index',
+    },
+    {
+      name: 'Face',
+      label: '人脸穿戴案例',
+      path: '/pages/ar-classic/scene-classic-face/index',
+    },
+    {
+      name: 'Ball',
+      label: '扫描微信球',
+      path: '/pages/ar-classic/scene-classic-wxball/index',
+    }
+  ],
+};
+
 
 const scan = {
   name: '扫描还原案例',
