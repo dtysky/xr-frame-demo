@@ -1,23 +1,23 @@
 {
   "projectname": "xr-frame-demo",
   "setting": {
-    "compileHotReLoad": true,
+    "compileHotReLoad": false,
     "useIsolateContext": true
   },
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "libVersion": "2.30.1",
+  "libVersion": "2.30.2",
   "condition": {
     "miniprogram": {
       "list": [
         {
-          "name": "scene-classic-portal",
+          "name": "ar-classic-portal",
           "pathName": "pages/scene-classic-portal/index",
           "query": "",
           "launchMode": "default",
           "scene": null
         },
         {
-          "name": "classic-face",
+          "name": "ar-classic-face",
           "pathName": "pages/scene-classic-face/index",
           "query": "",
           "launchMode": "default",
@@ -31,16 +31,23 @@
           "scene": null
         },
         {
-          "name": "damageHelmet",
+          "name": "gltf-damageHelmet",
           "pathName": "pages/scene-gltf-damageHelmet/index",
           "query": "path=%2Fpages%2Fscene-gltf-damageHelmet%2Findex",
           "launchMode": "default",
           "scene": null
         },
         {
-          "name": "2dmarker",
+          "name": "ar-2dmarker",
           "pathName": "pages/scene-ar-2dmarker/index",
           "query": "path=%2Fpages%2Fscene-ar-2dmarker%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-message",
+          "pathName": "pages/template/xr-template-message/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-message%2Findex",
           "launchMode": "default",
           "scene": null
         }

@@ -160,7 +160,7 @@ const template = {
     {
       name: 'Message',
       label: '小程序混合通信',
-      path: '/pages/template-logic/index',
+      path: '/pages/template/xr-template-message/index',
     },
     {
       name: 'Controller',
@@ -170,17 +170,17 @@ const template = {
     {
       name: 'Loading',
       label: '动态资源加载与使用',
-      path: '/pages/scene-custom-render/index',
+      path: '/pages/template/xr-template-loading/index',
     },
     {
       name: 'Tracker',
       label: '动态Tracker切换',
-      path: '/pages/scene-custom-render/index',
+      path: '/pages/template/xr-template-tracker/index',
     },
     {
       name: 'Touch',
-      label: '物体点选控制',
-      path: '/pages/scene-custom-render/index',
+      label: '点选物体与小程序面板控制',
+      path: '/pages/template/xr-template-select/index',
     },
     {
       name: 'LookAt',

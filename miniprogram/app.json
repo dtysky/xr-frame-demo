@@ -33,7 +33,11 @@
     "pages/ar-classic/scene-classic-portal/index",
     "pages/ar-classic/scene-classic-osd/index",
     "pages/ar-classic/scene-classic-face/index",
+    "pages/template/xr-template-message/index",
     "pages/template/xr-template-control/index",
+    "pages/template/xr-template-loading/index",
+    "pages/template/xr-template-tracker/index",
+    "pages/template/xr-template-select/index",
     "pages/scene-last-record/index",
     "pages/scene-beside-edge/index"
   ],

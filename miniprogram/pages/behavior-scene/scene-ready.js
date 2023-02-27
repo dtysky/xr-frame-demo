@@ -4,7 +4,7 @@ module.exports = Behavior({
   },
   data: {
     left: 0,
-    right: 0,
+    top: 0,
     width: 0,
     height: 0,
     renderWidth: 0,
@@ -20,7 +20,7 @@ module.exports = Behavior({
     const info = wx.getSystemInfoSync();
     const width = info.windowWidth;
     const windowHeight = info.windowHeight;
-    const height = windowHeight * 0.6;
+    const height = windowHeight * 0.75;
     const dpi = info.pixelRatio;
     this.setData({
       width,

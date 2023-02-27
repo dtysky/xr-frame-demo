@@ -1,5 +1,5 @@
 <xr-demo-viewer
-  title="基础案例"
+  title="显示和图层"
   intro="使用`xr-node`以及派生节点上的`visible`和`layer`，配合`camera`的`cull-mask`，控制节点树的显示。"
   code="{{xmlCode}}"
 >
