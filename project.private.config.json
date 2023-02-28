@@ -50,6 +50,13 @@
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-message%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "template-loading",
+          "pathName": "pages/template/xr-template-loading/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-loading%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
