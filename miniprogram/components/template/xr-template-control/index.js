@@ -41,8 +41,8 @@ Component({
       type: Number,
       observer(newVal) {
         position.set(xrFrameSystem.Vector3.createFromNumber(0, 1.6, 1));
-        quaternionC.setFromYawRollPitch(-Math.PI, 0, 0);
-        quaternionP.setFromYawRollPitch(0, 0, 0);
+        quaternionC.setFromYawRollPitch(0, 0, 0);
+        quaternionP.setFromYawRollPitch(Math.PI, 0, 0);
       }
     }
   },
