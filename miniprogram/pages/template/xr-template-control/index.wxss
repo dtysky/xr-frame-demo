@@ -1,0 +1,21 @@
+.icon {
+  width: 100%;
+  position: absolute;
+}
+.background {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.handle {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+.resetButton {
+  position: absolute;
+  left: 50%;
+  width: 30rpx;
+  height: 80rpx;
+  margin-top: -100rpx;
+}
