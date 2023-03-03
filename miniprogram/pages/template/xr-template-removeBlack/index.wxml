@@ -1,0 +1,13 @@
+<xr-demo-viewer
+  title="过滤黑色视频"
+  intro=""
+  code="{{xmlCode}}"
+>
+  <xr-template-removeBlack
+    disable-scroll
+    id="main-frame"
+    width="{{renderWidth}}"
+    height="{{renderHeight}}"
+    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+  />
+</xr-demo-viewer>

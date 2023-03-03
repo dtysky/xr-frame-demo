@@ -191,6 +191,16 @@ const template = {
       name: 'Share',
       label: '截图与分享',
       path: '/pages/scene-custom-render/index',
+    },
+    {
+      name: 'RemoveBlack',
+      label: '过滤黑色背景视频',
+      path: '/pages/template/xr-template-removeBlack/index',
+    },
+    {
+      name: 'Pipline',
+      label: '定制化渲染流程(滤色视频)',
+      path: '/pages/scene-custom-render/index',
     }
   ]
 };

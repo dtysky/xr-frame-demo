@@ -38,6 +38,7 @@
     "pages/template/xr-template-loading/index",
     "pages/template/xr-template-tracker/index",
     "pages/template/xr-template-select/index",
+    "pages/template/xr-template-removeBlack/index",
     "pages/scene-last-record/index",
     "pages/scene-beside-edge/index"
   ],

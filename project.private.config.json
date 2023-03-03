@@ -31,13 +31,6 @@
           "scene": null
         },
         {
-          "name": "gltf-damageHelmet",
-          "pathName": "pages/scene-gltf-damageHelmet/index",
-          "query": "path=%2Fpages%2Fscene-gltf-damageHelmet%2Findex",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "ar-2dmarker",
           "pathName": "pages/scene-ar-2dmarker/index",
           "query": "path=%2Fpages%2Fscene-ar-2dmarker%2Findex",
@@ -55,6 +48,20 @@
           "name": "template-loading",
           "pathName": "pages/template/xr-template-loading/index",
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-loading%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "gltf-damageHelmet",
+          "pathName": "pages/gltf/scene-gltf-damageHelmet/index",
+          "query": "path=%2Fpages%2Fgltf%2Fscene-gltf-damageHelmet%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-removeBlack",
+          "pathName": "pages/template/xr-template-removeBlack/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-removeBlack%2Findex",
           "launchMode": "default",
           "scene": null
         }
