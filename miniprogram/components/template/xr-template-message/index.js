@@ -1,4 +1,3 @@
-const xrSystem = wx.getXrFrameSystem();
 
 Component({
   behaviors: [require('../../common/share-behavior').default],
@@ -24,6 +23,8 @@ Component({
     handleReady({detail}) {
       const xrScene = this.scene = detail.value;
       console.log('xr-scene', xrScene);
+      const xrSystem = wx.getXrFrameSystem();
+
       // 绑定运动目标
       this.moveSphereTRS = this.scene.getElementById('move-sphere').getComponent(xrSystem.Transform);
       // 绑定内置变量
