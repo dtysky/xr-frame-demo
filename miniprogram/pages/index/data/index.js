@@ -178,28 +178,23 @@ const template = {
       path: '/pages/template/xr-template-tracker/index',
     },
     {
-      name: 'Touch',
-      label: '点选物体与小程序面板控制',
-      path: '/pages/template/xr-template-select/index',
-    },
-    {
-      name: 'LookAt',
-      label: '物体朝向控制',
-      path: '/pages/scene-custom-render/index',
-    },
-    {
       name: 'Share',
       label: '截图与分享',
       path: '/pages/scene-custom-render/index',
     },
     {
-      name: 'RemoveBlack',
+      name: 'Touch',
+      label: '点选物体与小程序面板控制',
+      path: '/pages/template/xr-template-select/index',
+    },
+    {
+      name: 'Video',
       label: '过滤黑色背景视频',
       path: '/pages/template/xr-template-removeBlack/index',
     },
     {
-      name: 'Pipline',
-      label: '定制化渲染流程(滤色视频)',
+      name: 'Video',
+      label: '滤色视频（定制化渲染流程）',
       path: '/pages/scene-custom-render/index',
     }
   ]
