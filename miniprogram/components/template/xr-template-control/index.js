@@ -144,8 +144,8 @@ Component({
         ratio = ratio > 1 ? 1 : ratio < 0 ? 0 : ratio;
         var temp = xrFrameSystem.Vector3.createFromNumber(-x / z, 0, -y / z);
         temp = temp.scale(ratio * speed * deltaTime);
-        //位移需要根据旋转角度做转化
-        temp.applyQuaternion(quaternionP);
+        //位移需要根据旋转角度做转化, 这里需要取得camera的世界旋转矩阵
+        temp.applyQuaternion(camera._components.transform.worldQuaternion);
         position.set(position.add(temp));
       }
     },
