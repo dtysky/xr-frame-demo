@@ -24,13 +24,6 @@
           "scene": null
         },
         {
-          "name": "basic",
-          "pathName": "pages/scene-basic/index",
-          "query": "path=%2Fpages%2Fscene-basic%2Findex",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "ar-2dmarker",
           "pathName": "pages/scene-ar-2dmarker/index",
           "query": "path=%2Fpages%2Fscene-ar-2dmarker%2Findex",
@@ -62,6 +55,13 @@
           "name": "template-removeBlack",
           "pathName": "pages/template/xr-template-removeBlack/index",
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-removeBlack%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-tracker",
+          "pathName": "pages/template/xr-template-tracker/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-tracker%2Findex",
           "launchMode": "default",
           "scene": null
         }

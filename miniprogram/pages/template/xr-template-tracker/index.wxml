@@ -1,13 +1,48 @@
 <xr-demo-viewer
-  title="基础案例"
-  intro="使用默认的PBR(基于物理渲染)材质下使用特定颜色的内置图形，场景包含基本的环境光与平行光。"
-  code="{{xmlCode}}"
+  title="Tracker案例"
+  intro=""
+  code=""
+  showBackBtn="{{showBackBtn}}"
 >
-  <xr-template-tracker
-    disable-scroll
-    id="main-frame"
-    width="{{renderWidth}}"
-    height="{{renderHeight}}"
-    style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
-  />
+  <view wx:if="{{dataReady}}">
+    <xr-template-tracker
+      disable-scroll
+      id="main-frame"
+      width="{{renderWidth}}"
+      height="{{renderHeight}}"
+      style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
+      markerListRaw="{{markerList}}"
+      bindtrackerchange="handleTrackerChange"
+    />
+  </view>
+
+  <view class="xr-control" style="top: {{height}}px;">
+    <view class="control-item {{useScan? 'active' : ''}}" bind:tap="tapScan">
+      <view class="item-title">扫描显示识别框</view>
+      <view class="img-wrap">
+        <image class="hint-img lh" src="https://res.wx.qq.com/op_res/TsyodflJo3ArEej_XMmheOg6Z1QAXoTos-O22dBTqSjclfJ_RetCfM9W_XoLwOa5PGtct6RARwmSwE_CkjSGbQ" />
+      </view>
+      <view class="img-wrap">
+        <image class="hint-img lw" src="https://res.wx.qq.com/op_res/TsyodflJo3ArEej_XMmheK_pZTKhtOYoan4Ej7Yszi9R1VWjlr1TzQiKGROTjT1j-SR80ULDGIW6znxM5edIww" />
+      </view>
+    </view>
+    <view class="control-item {{useGLTF? 'active' : ''}}" bind:tap="tapGLTF">
+      <view class="item-title">扫描显示glTF</view>
+      <view class="img-wrap">
+        <image class="hint-img" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/portalImage.jpg" />
+      </view>
+      <view class="img-wrap">
+        <image class="hint-img" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg" />
+      </view>
+    </view>
+    <view class="control-item {{useVideo? 'active' : ''}}" bind:tap="tapVideo">
+      <view class="item-title">扫描显示视频</view>
+      <view class="img-wrap">
+        <image class="hint-img lh" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/osdmarker-test.jpg" />
+      </view>
+    </view>
+  </view>
 </xr-demo-viewer>
+<view class="debug-wrap">
+  <view class="debug-words">{{debugMsg}}</view>
+</view>

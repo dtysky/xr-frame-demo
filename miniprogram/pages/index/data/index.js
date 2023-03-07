@@ -173,8 +173,8 @@ const template = {
       path: '/pages/template/xr-template-loading/index',
     },
     {
-      name: 'Tracker',
-      label: '动态Tracker切换',
+      name: 'Shot',
+      label: '镜头应用（动态Tracker切换）',
       path: '/pages/template/xr-template-tracker/index',
     },
     {

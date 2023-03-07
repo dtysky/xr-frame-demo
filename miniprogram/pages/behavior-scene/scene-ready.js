@@ -10,6 +10,8 @@ module.exports = Behavior({
     renderWidth: 0,
     renderHeight: 0,
     windowHeight: 1000,
+    heightScale: 0.75,
+    showBackBtn: false,
     activeValues: [1],
     arTrackerShow: false,
     arTrackerState: 'Init',
@@ -20,7 +22,7 @@ module.exports = Behavior({
     const info = wx.getSystemInfoSync();
     const width = info.windowWidth;
     const windowHeight = info.windowHeight;
-    const height = windowHeight * 0.75;
+    const height = windowHeight * this.data.heightScale;
     const dpi = info.pixelRatio;
     this.setData({
       width,
