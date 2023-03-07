@@ -2,6 +2,7 @@ var sceneReadyBehavior = require('../../behavior-scene/scene-ready');
 
 Page({
   behaviors:[sceneReadyBehavior],
+  moveTimes: 0,
   data: {
     // 内置
     height: 600,
@@ -9,43 +10,46 @@ Page({
     showBackBtn: true,
     // 页面
     useScan: true,
-    useVideo: false,
     useGLTF: false,
+    useVideo1: false,
+    useVideo2: false,
     markerList: [],
-    debugMsg: 'Defalut Words',
+    // scan 相关
+    showMarkerWrap: false,
+    markerLeft: -50,
+    markerTop: 50,
+    markerWidth: 0,
+    markerHeight: 0,
     // 全局状态
     dataReady: false,
+    // Debug
+    debugMsg: 'Defalut Words',
   },
   onLoad( ) {
     this.refreshData();
   },
+  resetData() {
+    this.setData({
+      dataReady: false,
+      showMarkerWrap: false,
+      markerLeft: -50,
+      markerTop: 50,
+      markerWidth: 0,
+      markerHeight: 0,
+    })
+  },
   refreshData() {
+    this.resetData();
     // 模拟用的数据集合，可以跟进需要切换为后端接口
     const mockDataList = [];
 
     // 识别框
     if (this.data.useScan) {
       mockDataList.push({
-        name: 'QQ企鹅',
-        markerImg: 'https://res.wx.qq.com/op_res/TsyodflJo3ArEej_XMmheOg6Z1QAXoTos-O22dBTqSjclfJ_RetCfM9W_XoLwOa5PGtct6RARwmSwE_CkjSGbQ',
+        name: '微信球',
+        markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/wxball.jpg',
         type: 'scan',
         src: '',
-      });
-      mockDataList.push({
-        name: '气泡狗',
-        markerImg: 'https://res.wx.qq.com/op_res/TsyodflJo3ArEej_XMmheK_pZTKhtOYoan4Ej7Yszi9R1VWjlr1TzQiKGROTjT1j-SR80ULDGIW6znxM5edIww',
-        type: 'scan',
-        src: '',
-      });
-    }
-
-    // 视频
-    if (this.data.useVideo) {
-      mockDataList.push({
-        name: 'OSD图片',
-        markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/osdmarker-test.jpg',
-        type: 'video',
-        src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/paris.mp4',
       });
     }
 
@@ -57,11 +61,24 @@ Page({
         type: 'gltf',
         src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/fiesta_tea/scene.gltf',
       });
+    }
+
+    // 视频
+    if (this.data.useVideo1) {
       mockDataList.push({
-        name: '2DMarker',
+        name: '2Dmarker',
         markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg',
-        type: 'gltf',
-        src: '/assets/gltf/Fox.glb',
+        type: 'video',
+        src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/cat.mp4',
+      });
+    }
+
+    if (this.data.useVideo2) {
+      mockDataList.push({
+        name: '虎年企鹅',
+        markerImg: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/osdmarker-test.jpg',
+        type: 'video',
+        src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/videos/paris.mp4',
       });
     }
 
@@ -125,7 +142,6 @@ Page({
   },
   tapScan() {
     this.setData({
-      dataReady: false,
       useScan: !this.data.useScan
     });
 
@@ -133,16 +149,21 @@ Page({
   },
   tapGLTF() {
     this.setData({
-      dataReady: false,
       useGLTF: !this.data.useGLTF
     });
 
     this.refreshData();
   },
-  tapVideo() {
+  tapVideo1() {
     this.setData({
-      dataReady: false,
-      useVideo: !this.data.useVideo
+      useVideo1: !this.data.useVideo1
+    });
+
+    this.refreshData();
+  },
+  tapVideo2() {
+    this.setData({
+      useVideo2: !this.data.useVideo2
     });
 
     this.refreshData();
@@ -152,5 +173,28 @@ Page({
     this.setData({
       debugMsg: 'handleTrackerChange:' + item.name
     })
-  }
+  },
+  handleTrackerMove(cur) {
+    const detail = cur.detail
+    const trackerInfo = detail.trackerInfo
+    
+    this.moveTimes++
+
+    if (detail.type === 'scan') {
+      if (detail.active) {
+        this.setData({
+          showMarkerWrap: true,
+          markerLeft: Math.floor((trackerInfo.x) * 100),
+          markerTop: Math.floor((trackerInfo.y) * 100) * this.data.heightScale,
+          markerWidth: Math.floor(trackerInfo.halfWidth * 2 * this.data.width),
+          markerHeight: Math.floor(trackerInfo.halfWidth * 2 * this.data.width / trackerInfo.widthDivideHeight),
+          // debugMsg: 'pos:' + trackerInfo.x + '\n' + trackerInfo.y + '\n halfWidth:' + trackerInfo.halfWidth + '\nmoveTimes:' + this.moveTimes
+        })
+      } else {
+        this.setData({
+          showMarkerWrap: false,
+        })
+      }
+    }
+  },
 });

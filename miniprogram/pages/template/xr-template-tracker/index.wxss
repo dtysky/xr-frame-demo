@@ -12,7 +12,7 @@
 .control-item {
   display: inline-block;
   vertical-align: middle;
-  width: 210rpx;
+  width: 160rpx;
   margin: 0 10rpx;
   height: 100%;
   border-radius: 10rpx;
@@ -27,7 +27,7 @@
 
 
 .item-title {
-  font-size: 22rpx;
+  font-size: 18rpx;
   line-height: 60rpx;
   border-radius: 10rpx;
   border: 4rpx solid #000;
@@ -59,6 +59,71 @@
   width: 130%;
   margin-left: -15%;
 }
+
+.marker-wrap {
+  position: absolute;
+  left: -50%;
+  top: 50%;
+  transition: left 0.1s, top 0.1s, width 0.1s, height 0.1s;
+}
+
+.marker-img-lt {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+}
+.marker-img-rt {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  transform: scaleX(-1);
+}
+.marker-img-lb {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 34px;
+  height: 34px;
+  transform: scaleY(-1);
+}
+.marker-img-rb {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 34px;
+  height: 34px;
+  transform: scale(-1, -1);
+}
+
+
+.border-lt {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.border-rt {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: rotate(90deg);
+}
+.border-lb {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: rotate(270deg);
+}
+.border-rb {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
 
 .debug-wrap {
   position: absolute;

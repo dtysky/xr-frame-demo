@@ -13,17 +13,16 @@
       style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px;display:block;"
       markerListRaw="{{markerList}}"
       bindtrackerchange="handleTrackerChange"
+      bindtrackermove="handleTrackerMove"
     />
   </view>
 
+  <!-- Marker控制 -->
   <view class="xr-control" style="top: {{height}}px;">
     <view class="control-item {{useScan? 'active' : ''}}" bind:tap="tapScan">
       <view class="item-title">扫描显示识别框</view>
       <view class="img-wrap">
-        <image class="hint-img lh" src="https://res.wx.qq.com/op_res/TsyodflJo3ArEej_XMmheOg6Z1QAXoTos-O22dBTqSjclfJ_RetCfM9W_XoLwOa5PGtct6RARwmSwE_CkjSGbQ" />
-      </view>
-      <view class="img-wrap">
-        <image class="hint-img lw" src="https://res.wx.qq.com/op_res/TsyodflJo3ArEej_XMmheK_pZTKhtOYoan4Ej7Yszi9R1VWjlr1TzQiKGROTjT1j-SR80ULDGIW6znxM5edIww" />
+        <image class="hint-img" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/wxball.jpg" />
       </view>
     </view>
     <view class="control-item {{useGLTF? 'active' : ''}}" bind:tap="tapGLTF">
@@ -31,18 +30,31 @@
       <view class="img-wrap">
         <image class="hint-img" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/portalImage.jpg" />
       </view>
+    </view>
+
+    <view class="control-item {{useVideo1? 'active' : ''}}" bind:tap="tapVideo1">
+      <view class="item-title">扫描显示视频1</view>
       <view class="img-wrap">
         <image class="hint-img" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/2dmarker-test.jpg" />
       </view>
     </view>
-    <view class="control-item {{useVideo? 'active' : ''}}" bind:tap="tapVideo">
-      <view class="item-title">扫描显示视频</view>
+    <view class="control-item {{useVideo2? 'active' : ''}}" bind:tap="tapVideo2">
+      <view class="item-title">扫描显示视频2</view>
       <view class="img-wrap">
         <image class="hint-img lh" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/marker/osdmarker-test.jpg" />
       </view>
     </view>
   </view>
+
+  <!-- scan 提示框 -->
+  <view class="marker-wrap" wx:if="{{showMarkerWrap}}" style="left: {{markerLeft}}%; top: {{markerTop}}%; width: {{markerWidth}}px; height: {{markerHeight}}px; margin-left: -{{markerWidth / 2}}px; margin-top: -{{markerHeight / 2}}px;">
+    <image class="marker-img-lt" src="/assets/image/ar-box-border.png"></image>
+    <image class="marker-img-lb" src="/assets/image/ar-box-border.png"></image>
+    <image class="marker-img-rt" src="/assets/image/ar-box-border.png"></image>
+    <image class="marker-img-rb" src="/assets/image/ar-box-border.png"></image>
+  </view>
 </xr-demo-viewer>
+
 <view class="debug-wrap">
   <view class="debug-words">{{debugMsg}}</view>
 </view>
