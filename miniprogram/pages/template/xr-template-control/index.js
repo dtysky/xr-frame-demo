@@ -42,9 +42,7 @@ Page({
   },
   reset: function () {
     this.setData({
-      transferData:{
         reset: this.data.reset + 1
-      }
     })
   },
   touchStart(e) {},
