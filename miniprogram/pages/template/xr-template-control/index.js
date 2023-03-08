@@ -22,7 +22,6 @@ Page({
   data: {
     height: 600,
     heightScale: 0.8,
-
     //重置初始位置的标记
     reset: 0,
     //相对背景偏移，命名 h=handle 摇杆

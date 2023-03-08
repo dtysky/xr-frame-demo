@@ -69,11 +69,10 @@ Component({
     }) {
       const xrScene = this.scene = detail.value;
       console.log('xr-scene', xrScene);
+
       xrFrameSystem = wx.getXrFrameSystem();
       camera = xrScene.getElementById("camera");
       player = xrScene.getElementById("player");
-      xrScene.event.add('touchmove', this.handleTouchMove);
-      xrScene.event.add('touchend', this.handleTouchEnd);
 
       up = xrFrameSystem.Vector3.createFromNumber(0, 1, 0);
       left = xrFrameSystem.Vector3.createFromNumber(1, 0, 0);

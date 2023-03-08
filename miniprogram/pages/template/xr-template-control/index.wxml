@@ -11,13 +11,13 @@
 		height="{{renderHeight}}"
     reset="{{reset}}"
     transferData="{{transferData}}"
-		style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px; display:block;"
+		style="width:{{width}}px; height:{{height}}px; top:{{top}}px; left:{{left}}px; display:block;"
 	  bindinfoListener="handleInfoListener" 
   />
 
 	<!-- 旋转区域 -->
 	<view class="rt-area"
-		style="height:{{height}}px"
+		style="height: {{height}}px"
 		catchtouchstart='touchRotateStart'
 		catchtouchmove='touchRotateMove'
 		bindtouchend='touchRotateEnd'>
