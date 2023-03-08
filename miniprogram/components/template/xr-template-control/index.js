@@ -30,6 +30,8 @@ let initFinish = false;
 Component({
   behaviors: [require('../../common/share-behavior').default],
   properties: {
+    width:Number,
+    height:Number,
     transferData: {
       type:Object,
       observer(newVal, oldVal){
@@ -77,17 +79,9 @@ Component({
       up = xrFrameSystem.Vector3.createFromNumber(0, 1, 0);
       left = xrFrameSystem.Vector3.createFromNumber(1, 0, 0);
 
-      const info = wx.getSystemInfoSync();
-      const width = info.windowWidth;
-      const windowHeight = info.windowHeight;
-      const height = windowHeight * 0.75;
-      const dpi = info.pixelRatio;
-      renderWidth = width * dpi;
-      renderHeight = height * dpi;
-
-      quaternionC = camera._components.transform.quaternion;
-      quaternionP = player._components.transform.quaternion;
-      position = player._components.transform.position;
+      quaternionC = camera.getComponent(xrFrameSystem.Transform).quaternion;
+      quaternionP = player.getComponent(xrFrameSystem.Transform).quaternion;
+      position = player.getComponent(xrFrameSystem.Transform).position;
 
       quaternionPIni = new xrFrameSystem.Quaternion();
       quaternionPIni.set(quaternionP);
@@ -99,8 +93,6 @@ Component({
       quaternionCRes = new xrFrameSystem.Quaternion();
       quaternionCRes.set(quaternionC);
 
-      initFinish = true;
-
       this.biasRotX = 0;
       this.biasRotY = 0;
       this.initRotX = 0;
@@ -108,6 +100,7 @@ Component({
       this.biasX = 0;
       this.biasY = 0;
 
+      initFinish = true;
     },
     handleAssetsProgress: function ({
       detail
@@ -118,6 +111,7 @@ Component({
       detail
     }) {
       console.log('assets loaded', detail.value);
+
       this.setData({
         loaded: true
       });
@@ -131,9 +125,8 @@ Component({
       var deltaTime = dt.detail.value / 1000;
 
       //------摄像头旋转逻辑------//
-      let rotX = (this.biasRotX - this.initRotX) / renderWidth * Math.PI;
-      let rotY = (this.biasRotY - this.initRotY) / renderHeight * Math.PI;
-
+      let rotX = (this.biasRotX - this.initRotX) / this.data.width * Math.PI;
+      let rotY = (this.biasRotY - this.initRotY) / this.data.height * Math.PI;
 
       //水平方向旋转player node
       if (this.biasRotX == 0) {
@@ -165,7 +158,7 @@ Component({
         var temp = xrFrameSystem.Vector3.createFromNumber(-x / z, 0, -y / z);
         temp = temp.scale(ratio * speed * deltaTime);
         //位移需要根据旋转角度做转化, 这里需要取得camera的世界旋转矩阵
-        temp.applyQuaternion(camera._components.transform.worldQuaternion);
+        temp.applyQuaternion(camera.getComponent(xrFrameSystem.Transform).worldQuaternion);
         position.set(position.add(temp));
       }
     },
