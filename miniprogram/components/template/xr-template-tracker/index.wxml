@@ -24,13 +24,13 @@
       <!-- 视频情况 -->
       <xr-node wx:if="{{markerItem.renderType === 'video'}}">
         <xr-node wx:if="{{videoLoaded}}">
-          <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{videoWidth}} 1 {{videoHeight}}" geometry="plane" material="video-bg-mat"
+          <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="video-bg-mat"
             states="cullOn: false"
           />
-          <xr-mesh position="0 0.01 0" scale="{{videoWidth}} 1 {{videoHeight}}" geometry="plane" material="video-mat-{{markerItem.id}}" />
+          <xr-mesh position="0 0.01 0" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="video-mat-{{markerItem.id}}" />
         </xr-node>
         <xr-node wx:else>
-          <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{videoWidth}} 1 {{videoHeight}}" geometry="plane" material="loading-mat"
+          <xr-mesh wx:if="{{videoRatioLoaded}}" scale="{{markerWidth}} 1 {{markerHeight}}" geometry="plane" material="loading-mat"
             states="cullOn: false, alphaMode: BLEND,renderQueue: 2501"
           />
         </xr-node>

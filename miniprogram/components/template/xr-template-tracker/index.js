@@ -14,8 +14,8 @@ Component({
     gltfLoaded: false,
     videoLoaded: false,
     videoRatioLoaded: false,
-    videoWidth: 1,
-    videoHeight: 1,
+    markerWidth: 1,
+    markerHeight: 1,
   },
   observers: {
     markerListRaw(newVal) {
@@ -89,7 +89,9 @@ Component({
       scene.assets.addAsset('material', `video-mat-${videoItem.id}`, videoMat)
 
       console.log('video asset loaded')
-      this.setData({ videoLoaded: true })
+      this.setData({
+        videoLoaded: true,
+      })
     },
     releaseVideo(id) {
       if (id !== -1) {
@@ -239,8 +241,8 @@ Component({
           const widthDivideHeight = width / height;
 
           this.setData({
-            videoWidth: 1,
-            videoHeight: (1 / widthDivideHeight).toFixed(2),
+            markerWidth: 1,
+            markerHeight: (1 / widthDivideHeight).toFixed(2),
             videoRatioLoaded: true,
           });
 

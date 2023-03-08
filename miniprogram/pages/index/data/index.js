@@ -174,7 +174,7 @@ const template = {
     },
     {
       name: 'Shot',
-      label: '镜头应用（动态Tracker切换）',
+      label: 'AR扫描（动态多Tracker切换）',
       path: '/pages/template/xr-template-tracker/index',
     },
     {
