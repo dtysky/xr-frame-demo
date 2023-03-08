@@ -173,8 +173,8 @@ const template = {
       path: '/pages/template/xr-template-loading/index',
     },
     {
-      name: 'Shot',
-      label: 'AR扫描（动态多Tracker切换）',
+      name: 'Tracker',
+      label: '动态多Tracker切换（图片识别）',
       path: '/pages/template/xr-template-tracker/index',
     },
     {
