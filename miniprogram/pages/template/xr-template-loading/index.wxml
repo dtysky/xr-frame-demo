@@ -2,6 +2,7 @@
   title="加载案例"
   intro="点击按钮进行对应资源的加载与使用。（目前视频纹理属于beta状态，真机情况下，多张视频纹理不可以同时加载与渲染，但是可以取消一份后渲染另外一份）"
   code=""
+  showBackBtn="{{showBackBtn}}"
 >
   <xr-template-loading
     disable-scroll

@@ -1,6 +1,6 @@
 <xr-demo-viewer
-  title="Tracker案例"
-  intro=""
+  title="多Tracker案例"
+  intro="点击按钮，对应不同识别效果 Marker 的添加与删除。视频纹理加载过程会有白色透明层，加载完成后直接播放。视频目前属于beta阶段，存在加载失败超时的情况，为了避免目前版本的Crash问题，每次扫描会重新拉取视频。"
   code=""
   showBackBtn="{{showBackBtn}}"
 >
@@ -53,8 +53,5 @@
     <image class="marker-img-rt" src="/assets/image/ar-box-border.png"></image>
     <image class="marker-img-rb" src="/assets/image/ar-box-border.png"></image>
   </view>
-</xr-demo-viewer>
 
-<view class="debug-wrap">
-  <view class="debug-words">{{debugMsg}}</view>
-</view>
+</xr-demo-viewer>

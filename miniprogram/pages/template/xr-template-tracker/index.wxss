@@ -123,28 +123,3 @@
   bottom: 0;
   transform: rotate(180deg);
 }
-
-
-.debug-wrap {
-  position: absolute;
-  left: 0;
-  top: 10%;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 6px;
-  width: 260px;
-  height: 40px;
-  padding: 10px;
-  text-align: center;
-}
-.debug-wrap .debug-words {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  display: block;
-  width: 100%;
-  font-size: 16px;
-  line-height: 24px;
-  height: 24px;
-  color: #2D2D2D;
-  transform: translate(0, -50%);
-}
