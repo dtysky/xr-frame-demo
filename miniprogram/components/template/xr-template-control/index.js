@@ -30,16 +30,29 @@ let initFinish = false;
 Component({
   behaviors: [require('../../common/share-behavior').default],
   properties: {
-    touchX: Number,
-    touchY: Number,
-    radius: Number,
-    rotateX: Number,
-    rotateY: Number,
-    initX: Number,
-    initY: Number,
+    transferData: {
+      type:Object,
+      observer(newVal, oldVal){
+        if(newVal.biasRotX != undefined){
+          this.biasRotX = newVal.biasRotX;
+          this.biasRotY = newVal.biasRotY;
+        }
+
+        if(newVal.initRotX != undefined){
+          this.initRotX = newVal.initRotX;
+          this.initRotY = newVal.initRotY;
+        }
+
+        if(newVal.biasX != undefined){
+          this.biasX = newVal.biasX;
+          this.biasY = newVal.biasY;
+        }
+      },
+    },
     reset: {
       type: Number,
-      observer(newVal) {
+      observer(newVal, oldVal) {
+        //监听发生变化的reset后，执行重置逻辑
         position.set(xrFrameSystem.Vector3.createFromNumber(0, 1.6, 1));
         quaternionC.setFromYawRollPitch(0, 0, 0);
         quaternionP.setFromYawRollPitch(Math.PI, 0, 0);
@@ -89,6 +102,13 @@ Component({
 
       initFinish = true;
 
+      this.biasRotX = 0;
+      this.biasRotY = 0;
+      this.initRotX = 0;
+      this.initRotY = 0;
+      this.biasX = 0;
+      this.biasY = 0;
+
     },
     handleAssetsProgress: function ({
       detail
@@ -112,11 +132,12 @@ Component({
       var deltaTime = dt.detail.value / 1000;
 
       //------摄像头旋转逻辑------//
-      let rotX = (this.data.rotateX - this.data.initX) / renderWidth * Math.PI;
-      let rotY = (this.data.rotateY - this.data.initY) / renderHeight * Math.PI;
+      let rotX = (this.biasRotX - this.initRotX) / renderWidth * Math.PI;
+      let rotY = (this.biasRotY - this.initRotY) / renderHeight * Math.PI;
+
 
       //水平方向旋转player node
-      if (this.data.rotateX == 0) {
+      if (this.biasRotX == 0) {
         quaternionPIni.set(quaternionP);
         quaternionPRes.set(quaternionP);
       } else {
@@ -124,7 +145,7 @@ Component({
       }
 
       //垂直方向旋转camera node
-      if (this.data.rotateY == 0) {
+      if (this.biasRotY == 0) {
         quaternionCIni.set(quaternionC);
         quaternionCRes.set(quaternionC);
       } else {
@@ -135,12 +156,12 @@ Component({
       quaternionC.slerp(quaternionCRes, smoothSpeed * deltaTime, quaternionC);
 
        //------摄像头位移逻辑------//
-      var x = this.data.touchX;
-      var y = this.data.touchY;
+      var x = this.biasX;
+      var y = this.biasY;
 
       if (x || y) {
         var z = Math.sqrt(x * x + y * y);
-        var ratio = z / this.data.radius;
+        var ratio = z / 50; //此处除以50，因为摇杆盘半径为50
         ratio = ratio > 1 ? 1 : ratio < 0 ? 0 : ratio;
         var temp = xrFrameSystem.Vector3.createFromNumber(-x / z, 0, -y / z);
         temp = temp.scale(ratio * speed * deltaTime);

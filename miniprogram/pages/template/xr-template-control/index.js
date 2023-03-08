@@ -30,28 +30,42 @@ let currentTouchY = 0;
 let rotateIdx = -1;
 let moveIdx = -1;
 
+//摇杆所处中心
+let centerX = 50;
+let centerY = 50;
+//摇杆宽高
+let hWidth = 40;
+let hHeight = 40;
+//摇杆盘半径
+let radius = 50;
+
 Page({
   behaviors: [sceneReadyBehavior],
   data: {
     xmlCode: '<div class="codeWrap">' + handleDecodedXML(xmlCode) + '</div>',
-    //摇杆盘半径
-    radius: 50,
-    //-----摇杆对应属性-----//
-    //所处中心
-    centerX: 50,
-    centerY: 50,
+    //重置初始位置的标记
+    reset: 0,
     //相对背景偏移，命名 h=handle 摇杆
     hTop: 30,
     hLeft: 30,
-    //摇杆宽高
-    hWidth: 40,
-    hHeight: 40,
-    //重置初始位置的标记
-    reset: 0,
+    transferData:{
+      //相对摇杆中心的偏移
+      biasX: 0,
+      biasY: 0,
+
+      //开始旋转时的基准点
+      initRotX: 0,
+      initRotY: 0,
+      //旋转时的触摸点位置
+      biasRotX: 0,
+      biasRotY: 0,
+    }
   },
   reset: function () {
     this.setData({
-      reset: this.data.reset + 1
+      transferData:{
+        reset: this.data.reset + 1
+      }
     })
   },
   debugShow: function (functionName, moveIdx, rotateIdx) {
@@ -71,10 +85,12 @@ Page({
     var touchY = e.touches[moveIdx].clientY - (this.data.height - 100);
     var posInfo = this.limitPosition(touchX, touchY);
     this.setData({
-      biasX: posInfo.posX,
-      biasY: posInfo.posY,
-      hLeft: this.data.centerX - this.data.hWidth / 2 + posInfo.posX,
-      hTop: this.data.centerY - this.data.hHeight / 2 + posInfo.posY
+      hLeft: centerX - hWidth / 2 + posInfo.posX,
+      hTop: centerY -  hHeight / 2 + posInfo.posY,
+      transferData:{
+        biasX: posInfo.posX,
+        biasY: posInfo.posY,
+      }
     })
   },
   touchEnd: function (e) {
@@ -83,10 +99,12 @@ Page({
     if (rotateIdx == 1)
       rotateIdx = 0;
     this.setData({
-      biasX: 0,
-      biasY: 0,
-      hLeft: this.data.centerX - this.data.hWidth / 2,
-      hTop: this.data.centerY - this.data.hHeight / 2
+      hLeft: centerX - hWidth / 2,
+      hTop: centerY - hHeight / 2,
+      transferData:{
+        biasX: 0,
+        biasY: 0,
+      }
     });
   },
 
@@ -100,8 +118,10 @@ Page({
     currentTouchX = e.touches[rotateIdx].clientX;
     currentTouchY = e.touches[rotateIdx].clientY;
     this.setData({
-      initX: currentTouchX,
-      initY: currentTouchY,
+      transferData:{
+        initRotX: currentTouchX,
+        initRotY: currentTouchY,
+      }
     })
   },
 
@@ -115,8 +135,10 @@ Page({
     currentTouchX = e.touches[rotateIdx].clientX;
     currentTouchY = e.touches[rotateIdx].clientY;
     this.setData({
-      rotateX: currentTouchX,
-      rotateY: currentTouchY,
+      transferData:{
+        biasRotX: currentTouchX,
+        biasRotY: currentTouchY,
+      }
     })
   },
 
@@ -126,18 +148,20 @@ Page({
     if (moveIdx == 1)
       moveIdx = 0;
     this.setData({
-      rotateX: 0,
-      rotateY: 0,
+      transferData:{
+        biasRotX: 0,
+        biasRotY: 0,
+      }
     })
   },
 
   // 将位移强度限制在摇杆盘的范围中
   limitPosition: function (touchX, touchY) {
-    var x = touchX - this.data.centerX;
-    var y = touchY - this.data.centerY;
+    var x = touchX - centerX;
+    var y = touchY - centerY;
     var z = Math.sqrt(x * x + y * y);
     // 位移未超出摇杆盘范围时
-    if (z <= this.data.radius) {
+    if (z <= radius) {
       x = Math.round(x);
       y = Math.round(y);
       return {
@@ -146,7 +170,7 @@ Page({
       };
     } else {
       // 位移超出摇杆盘范围，需要对应限制位移强度
-      var ratio = this.data.radius / z;
+      var ratio = radius / z;
       x = x * ratio;
       y = y * ratio;
       x = Math.round(x);

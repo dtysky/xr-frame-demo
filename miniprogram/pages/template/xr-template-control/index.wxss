@@ -1,18 +1,32 @@
-.icon {
-  width: 100%;
+.rt-area{
+  left:0; 
+  top:0;
+  position:absolute;
+}
+
+.rt-bg{
+  width: 100px; 
+  height: 100px; 
   position: absolute;
 }
-.background {
-  height: 100%;
-  width: 100%;
+
+.mv-area{
+  left:30px; 
+  position:absolute;
+}
+
+.mv-bg{
+  width: 100px; 
+  height: 100px; 
+}
+
+.mv-handle{
+  width: 40px;
+  height: 40px;
   position: absolute;
 }
-.handle {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-}
-.resetButton {
+
+.reset-btn {
   position: absolute;
   left: 50%;
   width: 30rpx;

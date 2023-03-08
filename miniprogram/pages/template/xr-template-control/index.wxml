@@ -1,47 +1,34 @@
 <xr-demo-viewer title="基础案例"
-				intro="第一人称控制器，在左下角的虚拟摇杆区域进行操纵位移，右下角对摄像头进行位置重置，其它区域为影响旋转视角的区域"
-				code="{{xmlCode}}">
+	intro="第一人称控制器，在左下角的虚拟摇杆区域进行操纵位移，右下角对摄像头进行位置重置，其它区域为影响旋转视角的区域"
+	code="{{xmlCode}}">
 	<xr-template-control disable-scroll
-						 id="main-frame"
-						 touchX="{{biasX}}"
-						 touchY="{{biasY}}"
-						 radius="{{radius}}"
-						 width="{{renderWidth}}"
-						 height="{{renderHeight}}"
-						 rotateX="{{rotateX}}"
-						 rotateY="{{rotateY}}"
-						 initX="{{initX}}"
-						 initY="{{initY}}"
-						 reset="{{reset}}"
-						 style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px; display:block;"
-						 bindinfoListener="handleInfoListener" />
-
-
+		id="main-frame"
+		width="{{renderWidth}}"
+		height="{{renderHeight}}"
+    reset="{{reset}}"
+    transferData="{{transferData}}"
+		style="width:{{width}}px;height:{{height}}px;top:{{top}}px;left:{{left}}px; display:block;"
+	  bindinfoListener="handleInfoListener" 
+  />
 
 	<!-- 旋转区域 -->
-	<view style="left:0; top:0; width:{{width}}px; height:{{height}}px; position:absolute"
-		  catchtouchstart='touchRotateStart'
-		  catchtouchmove='touchRotateMove'
-		  bindtouchend='touchRotateEnd'>
-		<image class="icon"
-			   style="left:{{width / 2 - 50}}px;"
-			   src="./rotate.png"></image>
-		<view class="icon"
-			  style="left:{{30}}px; top: {{height - 100}}px; position:absolute"
-			  catchtouchstart='touchStart'
-			  catchtouchmove='touchMove'
-			  bindtouchend='touchEnd'>
-			<!-- 摇杆区域，为旋转区域的子节点，从而保证touch move事件不会向上冒泡影响到旋转 -->
-			<image class="icon"
-				   src="./background.png"></image>
-			<image style="width: {{hWidth}}px; height: {{hHeight}}px; left:{{hLeft}}px; top:{{hTop}}px;"
-				   class="handle"
-				   src="./handle.png "></image>
-		</view>
+	<view class="rt-area" style="width:{{width}}px; height:{{height}}px"
+		catchtouchstart='touchRotateStart'
+		catchtouchmove='touchRotateMove'
+		bindtouchend='touchRotateEnd'>
+	  <image class="rt-bg" style="left:{{width / 2 - 50}}px;" src="/assets/image/rotate.png" />
   </view>
 
-		<view class="resetButton"
-			  style="top: {{height}}px;">
-			<button bindtap="reset">位置重置</button>
-		</view>
+	<!-- 摇杆区域 -->
+  <view class="mv-area" style="top: {{height - 100}}px;"
+		catchtouchstart='touchStart'
+		catchtouchmove='touchMove'
+		bindtouchend='touchEnd'>
+		<image class="mv-bg" src="/assets/image/background.png" />
+		<image class="mv-handle" style="left:{{hLeft}}px; top:{{hTop}}px;" src="/assets/image/handle.png" />
+  </view>
+
+	<view class="reset-btn" style="top: {{height}}px;">
+		<button bindtap="reset">位置重置</button>
+	</view>
 </xr-demo-viewer>
