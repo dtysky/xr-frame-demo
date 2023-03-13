@@ -168,6 +168,11 @@ const template = {
       path: '/pages/template/xr-template-control/index',
     },
     {
+      name: 'FeatherVideo',
+      label: '视频羽化',
+      path: '/pages/template/xr-template-featherVideo/index',
+    },
+    {
       name: 'Loading',
       label: '动态资源加载与使用',
       path: '/pages/template/xr-template-loading/index',

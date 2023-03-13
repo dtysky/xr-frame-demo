@@ -1,11 +1,3 @@
-/*
- * @Description: 
- * @version: 
- * @Author: lucaschu(lucaschu@tencent.com)
- * @Date: 2022-10-09 15:47:31
- * @LastEditors: lucaschu
- * @LastEditTime: 2022-10-09 15:49:25
- */
 import cont from './earring'
 
 Component({

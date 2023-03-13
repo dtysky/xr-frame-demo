@@ -36,6 +36,7 @@
     "pages/template/xr-template-message/index",
     "pages/template/xr-template-control/index",
     "pages/template/xr-template-loading/index",
+    "pages/template/xr-template-featherVideo/index",
     "pages/template/xr-template-tracker/index",
     "pages/template/xr-template-select/index",
     "pages/template/xr-template-removeBlack/index",

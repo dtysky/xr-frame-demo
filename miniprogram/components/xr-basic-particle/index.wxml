@@ -1,12 +1,4 @@
-<!--
- * @Description: 
- * @version: 
- * @Author: lucaschu(lucaschu@tencent.com)
- * @Date: 2022-10-09 15:47:31
- * @LastEditors: lucaschu
- * @LastEditTime: 2023-02-17 17:31:47
--->
-<xr-scene id="xr-scene" bind:ready="handleReady">
+<xr-scene id="xr-scene" bind:ready="handleReady"   bind:assetsLoaded="handleLoaded">
   <xr-assets>
     <xr-asset-load type="texture" asset-id="flarePicture" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/flare.png" />
     <xr-asset-load type="texture" asset-id="sky" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/dark-cosmos.jpg" />
