@@ -10,14 +10,12 @@ let smoothSpeed = 8;
 let up;
 let left;
 
-let renderWidth = 0;
-let renderHeight = 0;
-
 // player相关
 let position;
 let quaternionP; //player的四元数
 let quaternionPIni; //player每次转动开始时的角度
 let quaternionPRes; //player每次需要转动到的角度
+let quaternionPTemp; //旋转四元数的临时变量
 
 // camera相关
 let quaternionC; //camera的四元数
@@ -87,6 +85,8 @@ Component({
       quaternionPIni.set(quaternionP);
       quaternionPRes = new xrFrameSystem.Quaternion();
       quaternionPRes.set(quaternionP);
+      quaternionPTemp = new xrFrameSystem.Quaternion();
+      quaternionPTemp.setFromYawRollPitch(0, 0, 0);
 
       quaternionCIni = new xrFrameSystem.Quaternion();
       quaternionCIni.set(quaternionC);
@@ -130,22 +130,22 @@ Component({
 
       //水平方向旋转player node
       if (this.biasRotX == 0) {
-        quaternionPIni.set(quaternionP);
-        quaternionPRes.set(quaternionP);
+       quaternionPIni.set(quaternionPTemp);
+       quaternionPRes.set(quaternionPTemp);
       } else {
         quaternionPIni.multiply(xrFrameSystem.Quaternion.createFromAxisAngle(up, -rotX), quaternionPRes);
       }
 
       //垂直方向旋转camera node
       if (this.biasRotY == 0) {
-        quaternionCIni.set(quaternionC);
-        quaternionCRes.set(quaternionC);
+        quaternionCIni.set(quaternionCRes);
+        quaternionCRes.set(quaternionCRes);
       } else {
-        quaternionCIni.multiply(xrFrameSystem.Quaternion.createFromAxisAngle(left, rotY), quaternionCRes);
+        quaternionCIni.multiply(xrFrameSystem.Quaternion.createFromAxisAngle(left, rotY), quaternionCRes);   
       }
 
-      quaternionP.slerp(quaternionPRes, smoothSpeed * deltaTime, quaternionP);
-      quaternionC.slerp(quaternionCRes, smoothSpeed * deltaTime, quaternionC);
+      quaternionPTemp.slerp(quaternionPRes, smoothSpeed * deltaTime, quaternionPTemp);
+      quaternionC.slerp(quaternionPTemp.multiply(quaternionCRes), smoothSpeed * deltaTime, quaternionC);
 
        //------摄像头位移逻辑------//
       var x = this.biasX;
