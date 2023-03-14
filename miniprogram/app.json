@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/basic/scene-basic/index",
+    "pages/basic/scene-basic-alpha/index",
     "pages/basic/scene-basic-light/index",
     "pages/basic/scene-basic-animation/index",
     "pages/basic/scene-basic-particle/index",

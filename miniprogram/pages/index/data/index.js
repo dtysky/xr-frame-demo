@@ -2,15 +2,15 @@ const base = {
   name: '基础能力',
   tag: 'func',
   childArr: [
-    // {
-    //   name: 'test',
-    //   label: '测试',
-    //   path: '/pages/scene-test/index',
-    // },
     {
       name: 'Geometry',
       label: '基础图形',
       path: '/pages/basic/scene-basic/index',
+    },
+    {
+      name: 'Alpha',
+      label: '透明画布',
+      path: '/pages/basic/scene-basic-alpha/index',
     },
     {
       name: 'Light',
