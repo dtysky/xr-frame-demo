@@ -106,7 +106,7 @@ Component({
             type: 'video-texture',
             assetId: `video-${videoItem.id}`,
             src: videoItem.src,
-            options: { autoPlay: true, loop: true },
+            options: { autoPlay: true, loop: true, abortAudio: false },
           })
         }))
         videos.map((videoTexture, index) => {

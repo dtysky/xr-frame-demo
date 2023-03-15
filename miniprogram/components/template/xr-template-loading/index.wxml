@@ -36,21 +36,27 @@
         wx:key="videoId"
       >
       <xr-mesh
-        wx:if="{{videoId === 3}}"
-        node-id="mesh-cube" position="-1 -0.5 1" scale="0.8 1.4 0.8"
+        wx:if="{{videoId === 4}}"
+        node-id="mesh-cube" position="-1.5 -0.6 1" scale="1.2 0.8 0.8"
         geometry="cube" material="video-mat-{{videoId}}"
         cast-shadow
       />
       <xr-mesh
-        wx:if="{{videoId === 4}}"
-        node-id="mesh-cube" position="1 -0.6 1" scale="1.2 0.8 0.8"
+        wx:if="{{videoId === 3}}"
+        node-id="mesh-cube" position="0 -0.5 1" scale="0.8 1.4 0.8"
+        geometry="cube" material="video-mat-{{videoId}}"
+        cast-shadow
+      />
+      <xr-mesh
+        wx:if="{{videoId === 5}}"
+        node-id="mesh-cube" position="1.5 -0.6 1" scale="1.2 0.8 0.8"
         geometry="cube" material="video-mat-{{videoId}}"
         cast-shadow
       />
       </xr-node>
     </xr-node>
     <xr-camera
-      id="camera" node-id="camera" position="0 2 4" clear-color="0.8 0.8 0.8 1"
+      id="camera" node-id="camera" position="0 3 5" clear-color="0.8 0.8 0.8 1"
       target="camera-target"
       camera-orbit-control=""
     ></xr-camera>

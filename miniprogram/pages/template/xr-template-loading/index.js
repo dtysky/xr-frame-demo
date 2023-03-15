@@ -9,7 +9,7 @@ Page({
     onFlags: [
       false, false, // gltf
       false,        // image
-      false, false, // video
+      false, false, false // video
     ],
     gltfList: [],
     imageList: [],
