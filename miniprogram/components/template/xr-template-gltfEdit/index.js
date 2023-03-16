@@ -39,7 +39,6 @@ Component({
         console.log('textureAsset', textureAsset.value);
         mesh.material.setVector('u_specularFactor', xrSystem.Vector3.createFromNumber(0, 0, 0));
         mesh.material.setTexture('u_baseColorMap', textureAsset.value);
-        mesh.material.setMacro('WX_USE_BASECOLORMAP', true);
       }
     }
   }
