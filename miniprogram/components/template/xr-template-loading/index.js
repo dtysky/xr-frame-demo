@@ -52,7 +52,7 @@ Component({
       if (this.data.gltfIdList && this.data.gltfIdList.length > 0) {
         const scene = this.scene
 
-        // 声明使视频 Mesh 移除
+        // 声明使 gltf Mesh 移除
         this.setData({
           gltfLoaded: false
         });
