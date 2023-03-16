@@ -168,11 +168,6 @@ const template = {
       path: '/pages/template/xr-template-control/index',
     },
     {
-      name: 'FeatherVideo',
-      label: '视频羽化',
-      path: '/pages/template/xr-template-featherVideo/index',
-    },
-    {
       name: 'Loading',
       label: '动态资源加载与使用',
       path: '/pages/template/xr-template-loading/index',
@@ -181,6 +176,11 @@ const template = {
       name: 'Tracker',
       label: '动态多Tracker切换（图片识别）',
       path: '/pages/template/xr-template-tracker/index',
+    },
+    {
+      name: 'glTF',
+      label: '模型更换贴图',
+      path: '/pages/template/xr-template-gltfEdit/index',
     },
     {
       name: 'Share',
@@ -201,7 +201,12 @@ const template = {
       name: 'Video',
       label: '滤色视频（定制化渲染流程）',
       path: '/pages/scene-custom-render/index',
-    }
+    },
+    {
+      name: 'Video',
+      label: '视频羽化（自定义材质）',
+      path: '/pages/template/xr-template-featherVideo/index',
+    },
   ]
 };
 

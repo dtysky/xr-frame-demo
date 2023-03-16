@@ -1,6 +1,6 @@
 <xr-demo-viewer
-  title="过滤黑色视频"
-  intro="是"
+  title="glTF更改"
+  intro="加载 glTF 模型，调整 glTF 的材质的贴图"
 >
   <xr-template-gltfEdit
     disable-scroll

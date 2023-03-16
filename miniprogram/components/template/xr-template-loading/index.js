@@ -52,6 +52,11 @@ Component({
       if (this.data.gltfIdList && this.data.gltfIdList.length > 0) {
         const scene = this.scene
 
+        // 声明使视频 Mesh 移除
+        this.setData({
+          gltfLoaded: false
+        });
+
         this.data.gltfIdList.map((id) => {
           // 释放加载过的资源
           scene.assets.releaseAsset('gltf',`gltf-${id}`);
@@ -89,6 +94,11 @@ Component({
       if (this.data.videoIdList && this.data.videoIdList.length > 0) {
         const scene = this.scene
 
+        // 声明使视频 Mesh 移除
+        this.setData({
+          videoLoaded: false
+        });
+
         this.data.videoIdList.map((id) => {
           // 释放加载过的资源
           scene.assets.releaseAsset('video-texture', `video-${id}`);
@@ -111,7 +121,7 @@ Component({
         }))
         videos.map((videoTexture, index) => {
           const videoMat = scene.createMaterial(
-            scene.assets.getAsset('effect', 'standard'),
+            scene.assets.getAsset('effect', 'simple'),
             { u_baseColorMap: videoTexture.value.texture }
           )
           scene.assets.addAsset('material', `video-mat-${videoList[index].id}`, videoMat)

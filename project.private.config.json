@@ -64,6 +64,13 @@
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-tracker%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "template-gltfEdit",
+          "pathName": "pages/template/xr-template-gltfEdit/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-gltfEdit%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
