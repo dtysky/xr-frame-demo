@@ -64,7 +64,7 @@ const base = {
     },
     {
       name: 'EnvData',
-      label: '环境数据使用与Mesh定制环境数据',
+      label: '全局环境数据与局部环境数据',
       path: '/pages/basic/scene-basic-envData/index',
     },
   ],
