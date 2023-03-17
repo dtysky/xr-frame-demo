@@ -12,6 +12,7 @@
     "pages/basic/scene-basic-video/index",
     "pages/basic/scene-basic-render-texture/index",
     "pages/basic/scene-basic-postprocessing/index",
+    "pages/basic/scene-basic-envData/index",
     "pages/gltf/scene-gltf-damageHelmet/index",
     "pages/gltf/scene-gltf-unlit/index",
     "pages/gltf/scene-gltf-animation/index",

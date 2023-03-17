@@ -61,7 +61,12 @@ const base = {
       name: 'PostProcessing',
       label: '后处理效果',
       path: '/pages/basic/scene-basic-postprocessing/index'
-    }
+    },
+    {
+      name: 'EnvData',
+      label: '环境数据使用与Mesh定制环境数据',
+      path: '/pages/basic/scene-basic-envData/index',
+    },
   ],
 };
 const gltf = {
