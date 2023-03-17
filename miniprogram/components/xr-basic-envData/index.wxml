@@ -15,7 +15,7 @@
     <xr-mesh node-id="sunSet-metal" env-data="sunSet" position="1.1 0 1.1" scale="1 1 1" geometry="sphere"  uniforms="u_metallicRoughnessValues: 1 0"></xr-mesh>
 
     <xr-camera
-      id="camera" node-id="camera" position="6 6 6" clear-color="0.1 0.1 0.1 1"
+      id="camera" node-id="camera" position="4 4 4" clear-color="0.1 0.1 0.1 1"
       target="center" near="0.1" far="2000" background="skybox"
       camera-orbit-control=""
     ></xr-camera>
