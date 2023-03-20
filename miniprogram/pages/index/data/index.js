@@ -190,7 +190,7 @@ const template = {
     {
       name: 'Share',
       label: '截图与分享',
-      path: '/pages/scene-custom-render/index',
+      path: '/pages/template/xr-template-share/index',
     },
     {
       name: 'Touch',
