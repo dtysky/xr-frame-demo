@@ -41,6 +41,7 @@
     "pages/template/xr-template-gltfEdit/index",
     "pages/template/xr-template-tracker/index",
     "pages/template/xr-template-select/index",
+    "pages/template/xr-template-share/index",
     "pages/template/xr-template-removeBlack/index",
     "pages/template/xr-template-featherVideo/index",
     "pages/scene-last-record/index",
