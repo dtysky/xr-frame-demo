@@ -1,7 +1,6 @@
 <xr-demo-viewer
   title="分享截屏案例"
   intro="通过分享系统截屏分享，点击画布右下角1/3区域触发。"
-  code="{{xmlCode}}"
 >
   <xr-template-share
     disable-scroll
