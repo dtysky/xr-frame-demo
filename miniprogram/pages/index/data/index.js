@@ -183,6 +183,12 @@ const template = {
       path: '/pages/template/xr-template-tracker/index',
     },
     {
+      name: 'AR',
+      label: '模型摆放与手势控制',
+      path: '/pages/template/xr-template-arPreview/index',
+    },
+    
+    {
       name: 'glTF',
       label: '模型更换贴图',
       path: '/pages/template/xr-template-gltfEdit/index',
