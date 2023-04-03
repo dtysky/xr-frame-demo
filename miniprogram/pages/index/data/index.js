@@ -187,7 +187,11 @@ const template = {
       label: '模型摆放与手势控制',
       path: '/pages/template/xr-template-arPreview/index',
     },
-    
+    {
+      name: 'AR',
+      label: '面向屏幕的面片',
+      path: '/pages/template/xr-template-lookat/index',
+    },
     {
       name: 'glTF',
       label: '模型更换贴图',

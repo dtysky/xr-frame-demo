@@ -92,6 +92,13 @@
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-arPreview%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "template-lookat",
+          "pathName": "pages/template/xr-template-lookat/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-lookat%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
