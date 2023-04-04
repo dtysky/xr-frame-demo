@@ -45,6 +45,8 @@
     "pages/template/xr-template-share/index",
     "pages/template/xr-template-removeBlack/index",
     "pages/template/xr-template-featherVideo/index",
+    "pages/template/xr-template-arPreview/index",
+    "pages/template/xr-template-lookat/index",
     "pages/scene-last-record/index",
     "pages/scene-beside-edge/index"
   ],

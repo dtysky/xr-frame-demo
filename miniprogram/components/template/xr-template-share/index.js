@@ -21,7 +21,6 @@ Component({
         this.scene.share.captureToFriends();
       }
 
-      this.scene.event.handleShare('touchstart', this.placeNode.bind(this));
     }
   }
 })

@@ -78,6 +78,27 @@
           "query": "path=%2Fpages%2Fbasic%2Fscene-basic-envData%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "scene-basic",
+          "pathName": "pages/basic/scene-basic/index",
+          "query": "path=%2Fpages%2Fbasic%2Fscene-basic%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-arPreview",
+          "pathName": "pages/template/xr-template-arPreview/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-arPreview%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-lookat",
+          "pathName": "pages/template/xr-template-lookat/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-lookat%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
