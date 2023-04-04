@@ -114,6 +114,11 @@ const ar = {
       path: '/pages/ar/scene-ar-basic/index',
     },
     {
+      name: 'ThreeDof',
+      label: 'AR 相机旋转',
+      path: '/pages/ar/scene-ar-threeDof/index',
+    },
+    {
       name: '2DMarker',
       label: 'AR 2DMarker',
       path: '/pages/ar/scene-ar-2dmarker/index',

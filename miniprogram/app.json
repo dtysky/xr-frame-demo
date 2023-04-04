@@ -24,6 +24,7 @@
     "pages/ar/scene-ar-face/index",
     "pages/ar/scene-ar-hand/index",
     "pages/ar/scene-ar-body/index",
+    "pages/ar/scene-ar-threeDof/index",
     "pages/ar/scene-ar-camera/index",
     "pages/custom/scene-custom-logic/index",
     "pages/custom/scene-custom-render/index",
