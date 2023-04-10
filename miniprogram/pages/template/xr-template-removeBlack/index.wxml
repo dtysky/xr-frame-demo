@@ -2,7 +2,7 @@
   title="过滤黑色视频"
   intro="是"
 >
-  <xr-template-gltfEdit
+  <xr-template-removeBlack
     disable-scroll
     id="main-frame"
     width="{{renderWidth}}"
