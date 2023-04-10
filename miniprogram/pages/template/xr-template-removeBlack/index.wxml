@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="过滤黑色视频"
-  intro="是"
+  intro=""
 >
   <xr-template-removeBlack
     disable-scroll
