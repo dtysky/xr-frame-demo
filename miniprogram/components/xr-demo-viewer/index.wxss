@@ -79,7 +79,8 @@
 }
 
 .intro-title {
-  font-size: 36rpx;
+  font-size: 30rpx;
+  font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: baseline;

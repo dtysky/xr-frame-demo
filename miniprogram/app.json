@@ -18,6 +18,8 @@
     "pages/gltf/scene-gltf-animation/index",
     "pages/gltf/scene-gltf-morph/index",
     "pages/gltf/scene-gltf-light-loading/index",
+    "pages/gltf/scene-gltf-specularGlossiness/index",
+    "pages/gltf/scene-gltf-textureTransform/index",
     "pages/ar/scene-ar-basic/index",
     "pages/ar/scene-ar-2dmarker/index",
     "pages/ar/scene-ar-osdmarker/index",

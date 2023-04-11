@@ -62,7 +62,7 @@
   align-items: center;
   margin-left: 32rpx;
   margin-right: 32rpx;
-  font-size: 32rpx;
+  font-size: 28rpx;
   opacity: 0.9;
 }
 .pullDownList .childBox .child:last-of-type {

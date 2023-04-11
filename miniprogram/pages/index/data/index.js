@@ -97,6 +97,16 @@ const gltf = {
       label: 'gltf morph',
       path: '/pages/gltf/scene-gltf-morph/index',
     },
+    {
+      name: '扩展',
+      label: 'KHR_texture_transform',
+      path: '/pages/gltf/scene-gltf-textureTransform/index',
+    },
+    {
+      name: '扩展',
+      label: 'KHR_materials_pbrSpecularGlossiness',
+      path: '/pages/gltf/scene-gltf-specularGlossiness/index',
+    },
   ],
 };
 
