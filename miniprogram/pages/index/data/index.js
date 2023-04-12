@@ -217,26 +217,26 @@ const template = {
       label: '截图与分享',
       path: '/pages/template/xr-template-share/index',
     },
-    {
-      name: 'Touch',
-      label: '点选物体与小程序面板控制',
-      path: '/pages/template/xr-template-select/index',
-    },
+    // {
+    //   name: 'Touch',
+    //   label: '点选物体与小程序面板控制',
+    //   path: '/pages/template/xr-template-select/index',
+    // },
     {
       name: 'Video',
       label: '过滤黑色背景视频',
       path: '/pages/template/xr-template-removeBlack/index',
     },
-    {
-      name: 'Video',
-      label: '滤色视频（定制化渲染流程）',
-      path: '/pages/scene-custom-render/index',
-    },
-    {
-      name: 'Video',
-      label: '视频羽化（自定义材质）',
-      path: '/pages/template/xr-template-featherVideo/index',
-    },
+    // {
+    //   name: 'Video',
+    //   label: '滤色视频（定制化渲染流程）',
+    //   path: '/pages/scene-custom-render/index',
+    // },
+    // {
+    //   name: 'Video',
+    //   label: '视频羽化（自定义材质）',
+    //   path: '/pages/template/xr-template-featherVideo/index',
+    // },
   ]
 };
 
