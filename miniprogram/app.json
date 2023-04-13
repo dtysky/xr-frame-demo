@@ -42,6 +42,7 @@
     "pages/template/xr-template-control/index",
     "pages/template/xr-template-loading/index",
     "pages/template/xr-template-gltfEdit/index",
+    "pages/template/xr-template-gltfOcclusion/index",
     "pages/template/xr-template-tracker/index",
     "pages/template/xr-template-select/index",
     "pages/template/xr-template-share/index",

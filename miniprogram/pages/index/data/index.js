@@ -213,6 +213,11 @@ const template = {
       path: '/pages/template/xr-template-gltfEdit/index',
     },
     {
+      name: 'glTF',
+      label: '设置 glTF 为遮挡模型',
+      path: '/pages/template/xr-template-gltfOcclusion/index',
+    },
+    {
       name: 'Share',
       label: '截图与分享',
       path: '/pages/template/xr-template-share/index',

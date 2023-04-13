@@ -99,6 +99,13 @@
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-lookat%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "template-gltfOcclusion",
+          "pathName": "pages/template/xr-template-gltfOcclusion/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-gltfOcclusion%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
