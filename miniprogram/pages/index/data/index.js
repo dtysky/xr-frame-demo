@@ -218,6 +218,11 @@ const template = {
       path: '/pages/template/xr-template-gltfOcclusion/index',
     },
     {
+      name: 'Animation',
+      label: '序列帧动画（雪碧图、GIF）',
+      path: '/pages/template/xr-template-frameEffect/index',
+    },
+    {
       name: 'Share',
       label: '截图与分享',
       path: '/pages/template/xr-template-share/index',

@@ -106,6 +106,13 @@
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-gltfOcclusion%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "template-frameEffect",
+          "pathName": "pages/template/xr-template-frameEffect/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-frameEffect%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
