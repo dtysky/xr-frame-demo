@@ -214,6 +214,11 @@ const template = {
     },
     {
       name: 'glTF',
+      label: '模型动画（脚本、骨骼）',
+      path: '/pages/template/xr-template-gltfAnimation/index',
+    },
+    {
+      name: 'glTF',
       label: '设置 glTF 为遮挡模型',
       path: '/pages/template/xr-template-gltfOcclusion/index',
     },
@@ -223,15 +228,15 @@ const template = {
       path: '/pages/template/xr-template-frameEffect/index',
     },
     {
+      name: 'Touch',
+      label: '点选物体与动画控制',
+      path: '/pages/template/xr-template-select/index',
+    },
+    {
       name: 'Share',
       label: '截图与分享',
       path: '/pages/template/xr-template-share/index',
     },
-    // {
-    //   name: 'Touch',
-    //   label: '点选物体与小程序面板控制',
-    //   path: '/pages/template/xr-template-select/index',
-    // },
     {
       name: 'Video',
       label: '过滤黑色背景视频',

@@ -1,8 +1,8 @@
 <xr-demo-viewer
-  title="点选物体与动画控制"
-  intro=""
+  title="glTF动画案例"
+  intro="（资源较大，请稍候）"
 >
-  <xr-template-select
+  <xr-template-gltfAnimation
     disable-scroll
     id="main-frame"
     width="{{renderWidth}}"

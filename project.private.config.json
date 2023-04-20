@@ -113,6 +113,27 @@
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-frameEffect%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "basic-animation",
+          "pathName": "pages/basic/scene-basic-animation/index",
+          "query": "path=%2Fpages%2Fbasic%2Fscene-basic-animation%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-select",
+          "pathName": "pages/template/xr-template-select/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-select%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-gltfAnimation",
+          "pathName": "pages/template/xr-template-gltfAnimation/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-gltfAnimation%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
