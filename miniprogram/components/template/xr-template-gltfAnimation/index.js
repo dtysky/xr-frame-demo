@@ -54,7 +54,7 @@ Component({
       this.bridTRS.position.x += 1;
       this.bridTRS.position.y += Math.random() * 4 - 2;
 
-      this.turtleTRS.rotation.x += Math.PI * 0.0001;
+      this.turtleTRS.rotation.y += Math.PI * 0.0004;
 
 
     }
