@@ -40,8 +40,12 @@ Component({
       const turtle = this.editGLTF.getInternalNodeByName("TurtleAndCastle");
       this.turtleTRS = turtle.getComponent(xrFrameSystem.Transform);
 
+      // 相当于 nextTick 2次，保证树与数值刷新完毕
+      setTimeout(()=>{
+        this.rotation = this.turtleTRS.rotation.clone();
 
-      this.scene.event.add('tick', this.handleTick.bind(this));
+        this.scene.event.add('tick', this.handleTick.bind(this));
+      }, 100);
     },
 
     handleTick: function (time) {
@@ -54,8 +58,12 @@ Component({
       this.bridTRS.position.x += 1;
       this.bridTRS.position.y += Math.random() * 4 - 2;
 
-      this.turtleTRS.rotation.y += Math.PI * 0.0004;
+      // 欧拉角直接设置有误 v2.31.0
+      // this.turtleTRS.rotation.y += Math.PI * 0.0004;
 
+      // 目前使用四元数兼容
+      this.rotation.y += Math.PI * 0.0004;
+      xrSystem.Quaternion.fromEulerAngles(this.rotation, this.turtleTRS.quaternion);
 
     }
   }

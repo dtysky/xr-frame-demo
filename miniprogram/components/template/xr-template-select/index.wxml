@@ -6,7 +6,7 @@
     <xr-node node-id="camera-target" position="0 0 0"></xr-node>
 
     <xr-gltf id="door" node-id="door" position="0 0 0" rotation="0 0 0" scale="0.01 0.01 0.01" model="gltf-door"
-      cube-shape="autoFit:true" shape-gizmo
+      cube-shape="autoFit:true" shape-gizmo 
     ></xr-gltf>
 
     <xr-camera
