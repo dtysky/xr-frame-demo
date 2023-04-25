@@ -15,8 +15,9 @@ https://user-images.githubusercontent.com/7337763/199401152-d3e14ca2-bcde-41aa-9
 
 ## 快速索引
 
-#### [xr-Frame 常见问题QA](/QA/README.md)
-#### [案例截图](/screenshot/README.md)
+### [常见问题QA](/qa/README.md)
+### [案例截图与描述](/screenshot/README.md)
+
 
 
 ## 版权
