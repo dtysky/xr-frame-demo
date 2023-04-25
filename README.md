@@ -103,7 +103,33 @@ https://user-images.githubusercontent.com/7337763/199401152-d3e14ca2-bcde-41aa-9
 
 [截屏与分享](/miniprogram/components/template/xr-template-share/) 通过分享系统截屏分享
 
-[过滤黑色背景视频](/miniprogram/components/template/xr-template-removeBlack/) 
+[过滤黑色背景视频](/miniprogram/components/template/xr-template-removeBlack/) 通过自定义材质，过滤掉视频黑色部分的案例。
+
+### AR典型案例
+
+[扫描图片模型透视案例](/miniprogram/components/xr-classic-perspect/) 基于 Stencil裁剪 实现的基本模型透视效果案例。
+
+[传送门效果案例](/miniprogram/components/xr-classic-portal/) 基于平面识别与模版剔除实现的基本传送门效果案例。
+
+[平面视频案例](/miniprogram/components/xr-classic-video/) 基于 2DMarker 实现，扫描工卡照片显示对应的生活场景。
+
+[扫描物体查看信息](/miniprogram/components/xr-classic-osd/) 基于 OSD 实现的扫描 广州塔 或 虎年公仔，识别成功后会在物体右上角加上信息提示。
+
+[扫描人脸穿戴](/miniprogram/components/xr-classic-face/) 基于 人脸识别 的穿戴。
+
+[微信球案例](/miniprogram/components/xr-classic-wxball/) 扫描手握着的微信纪念球，会显示三维纪念球，点击三维纪念球会播放动画。
+
+### 扫描还原案例
+
+[扫描渲染案例](/miniprogram/components/xr-scan-render/) 根据三维重建模型与扫描全景图还原的案例，仅使用IBL作为光源，可切换天空盒。
+
+[卡 其 脱 离 太](/miniprogram/components/xr-scan-render/) xr-frame团队的办公区和成员三维重建，以及与小程序音频系统、2dview协作的例子。
+
+### 产品级案例
+
+[边缘迷走](/miniprogram/pages/scene-beside-edge/) AR文字互动游戏。
+
+[■■■■](/miniprogram/pages/scene-last-record/) ■■■■■■■■■■■■■■■■
 
 ## 版权
 
