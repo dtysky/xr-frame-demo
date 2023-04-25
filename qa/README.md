@@ -206,3 +206,6 @@ https://developers.weixin.qq.com/miniprogram/dev/api/xr-frame/classes/Animation.
 `脚本添加` 可以参考事件系统
  https://developers.weixin.qq.com/miniprogram/dev/component/xr-frame/core/event.html
 
+## 效果问题
+
+### Q: 传送门案例是怎么运作的，怎么开发自己的案例？
