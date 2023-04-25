@@ -18,7 +18,29 @@ https://user-images.githubusercontent.com/7337763/199401152-d3e14ca2-bcde-41aa-9
 ### [常见问题QA](/qa/README.md)
 ### [案例截图与描述](/screenshot/README.md)
 
+### 基础能力
+[基础案例](/miniprogram/components/xr-basic/) PBR材质下渲染的内置图形。
+[透明画布](/miniprogram/components/xr-basic-alpha/) 使用透明画布能力，透出背景。
+[灯光案例](/miniprogram/components/xr-basic-light/) 多种灯光作用下的四个白色图形。
+[动画案例](/miniprogram/components/xr-basic-animation/) `keyframe` 动画案例。
+[视频案例](/miniprogram/components/xr-basic-video/) 视频纹理，正式版本预计基础库 v2.32.0 及以上支持。
+[交互案例](/miniprogram/components/xr-basic-touch/) 简单的拖拽图形旋转移动案例。
+[显示与图层案例](/miniprogram/components/xr-basic-visible-layer/) 控制节点树的显示案例。
+[动态节点案例](/miniprogram/components/xr-basic-shadow/) 通过 `xr-shadow` 节点，来动态在其下添加节点，以及用代码加载资源。
+[渲染目标案例](/miniprogram/components/xr-basic-render-texture/) 使用 `xr-asset-render-texture` 生成渲染目标。
+[粒子系统](/miniprogram/components/xr-basic-particle/) 使用`xr-particle`，控制粒子系统的显示。
+[后处理系统](/miniprogram/components/xr-basic-postprocessing/) 展示了内置的几种后处理效果。
+[全局环境数据与局部环境数据](/miniprogram/components/xr-basic-envData/) 动态更改 `xr-mesh` 局部环境数据的案例。
 
+### AR能力
+[相机渲染案例](/miniprogram/components/xr-ar-camera/) AR相机与glTF一同渲染的基础案例。
+[平面识别案例](/miniprogram/components/xr-ar-basic/) 基础的平面识别案例。
+[相机旋转案例](/miniprogram/components/xr-ar-threeDof/) threeDof，用于在不需要SLAM的场景，支持手持相机旋转，兼容性较好。
+[2DMarker案例](/miniprogram/components/xr-ar-2dmarker/) 2DMarker识别案例。
+[OSDMarker案例](/miniprogram/components/xr-ar-osdmarker/) OSDMarker识别案例。
+[人脸案例](/miniprogram/components/xr-ar-face/) 人脸识别案例。
+[人手案例](/miniprogram/components/xr-ar-hand/) 人手识别案例。
+[人体案例](/miniprogram/components/xr-ar-body/) 人体识别案例。
 
 ## 版权
 
