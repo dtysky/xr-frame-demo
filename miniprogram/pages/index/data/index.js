@@ -152,7 +152,12 @@ const ar = {
       name: 'Body',
       label: 'AR 人体',
       path: '/pages/ar/scene-ar-body/index',
-    }
+    },
+    {
+      name: 'Plane+Marker',
+      label: 'AR 平面Marker融合',
+      path: '/pages/ar/scene-ar-vio-marker/index',
+    },
   ],
 };
 
