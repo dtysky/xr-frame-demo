@@ -8,7 +8,10 @@ Android 8.0.35 基本大部分情况已修复，后续版本如果还有花屏�
 ### Q: 闪退问题
 `功能问题型` Android 8.0.35 以及 iOS 8.0.36 后已经修复，后续版本如果情况可以联系官方，带上对应平台的客户端版本与基础库版本。
 
-`OOM(内存溢出)型` 这种
+`OOM(内存溢出)型` 小程序占用内存超过了设备对应的系统限制内存的上限。
+
+1. 如果遇到这个问题，可以优先排查，是否存在同时持有大量模型，导致的大量内存占用。可以采用按需使用与释放。
+2. 内存占用的占比较大一般是贴图，可以尝试等比压缩贴图尺寸进行压缩。
 
 
 ## 配套工具问题
@@ -22,7 +25,8 @@ Android 8.0.35 基本大部分情况已修复，后续版本如果还有花屏�
 ### Q: wechatlib(基础库) 版本的推送规则是什么样子的
 所有用户，会基于自身的客户端版本，更新到当前客户端版本最新的公共库。
 后续如果基础库更新新的版本，只要用户客户端版本允许，就会逐渐灰度更新到所有用户。
-具体关系可以看下这个文档 https://developers.weixin.qq.com/miniprogram/dev/framework/client-lib/version.html
+具体关系可以看下这个文档 
+https://developers.weixin.qq.com/miniprogram/dev/framework/client-lib/version.html
 
 ## wxml问题
 
@@ -84,6 +88,7 @@ xr-shadow 里面的的节点和一般节点一致，可以获取Animator组件�
 
 ### Q: 动态创建的元素 const element = this.scene.createElement(xrFrameSystem.XRNode, { sphere-shape，receive-shadow， cast-shadow } 里面带横杠的属性是怎样设置的。
 `横杠的属性` 是 “字符与值的一个map”，写的时候需要类似 { "receive-shadow": true， "cast-shadow": true} 这样使用。
+
 `事件回调` 不能通过 createElement 传入，需要通过模版绑定，或者通过 element.event 添加
 
 ### Q: glTF 设置 "anim-autoplay": false 后依然有动画播放
@@ -140,6 +145,8 @@ https://github.com/dtysky/xr-frame-demo/blob/master/miniprogram/pages/template/x
 ### Q: 模型表面正常是金属材质(银色) 在xr-frame里渲染成了黑色
 金属的反射需要依赖环境光，配置一下环境数据，没有的话可以使用内置的环境数据。
 
+## 触摸问题
+
 ## glTF问题
 
 ### Q: glTF模型加载失败，不显示
@@ -191,10 +198,11 @@ https://developers.weixin.qq.com/miniprogram/dev/api/xr-frame/classes/Animation.
 如果 .gltf 文件内有多个name相同的动画，也会使用这个规则，在名称后面添加#x作为动画名称，以此来区别。此时如果用不加#x的原始名称来索引动画，会返回#0的动画。
 ```
 
-#### Q: glTF模型如何控制动画播放
+### Q: glTF模型如何控制动画播放
 
-#### Q: glTF模型动画，如何添加事件监听器？
+### Q: glTF模型动画，如何添加事件监听器？
 `WXML` 里面可以用 bind:anim-stop="handleAnimationStop"，具体可以参考案例集里面的，AR典型案例 - 微信球案例
+
 `脚本添加` 可以参考事件系统
  https://developers.weixin.qq.com/miniprogram/dev/component/xr-frame/core/event.html
 
