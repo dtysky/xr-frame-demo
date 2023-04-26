@@ -40,12 +40,9 @@ Component({
       const turtle = this.editGLTF.getInternalNodeByName("TurtleAndCastle");
       this.turtleTRS = turtle.getComponent(xrFrameSystem.Transform);
 
-      // 相当于 nextTick 2次，保证树与数值刷新完毕
-      setTimeout(()=>{
-        this.rotation = this.turtleTRS.rotation.clone();
+      this.rotation = this.turtleTRS.rotation.clone();
 
-        this.scene.event.add('tick', this.handleTick.bind(this));
-      }, 100);
+      this.scene.event.add('tick', this.handleTick.bind(this));
     },
 
     handleTick: function (time) {
