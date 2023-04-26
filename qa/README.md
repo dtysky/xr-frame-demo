@@ -170,13 +170,21 @@ https://github.com/dtysky/xr-frame-demo/blob/master/miniprogram/components/templ
 
 ### Q: 加载完的 glTF模型 进行二次编辑吗
 glTF 里面的节点是 Shadow 元素。在获取 glTF 组件后。
+
 通过 getInternalNodeByName 获取某一个 Element。
+
 获取对应的 Element，然后直接操作这些影子节点即可。
+
 通过 meshes 获取所有 Mesh组件。
+
 通过 getPrimitivesByNodeName 根据 GLTFNode 的 name 字段来获取其下的所有 Mesh组件。
+
 通过 getPrimitivesByMeshName 根据 GLTFMesh 的 name 字段来获取其下的所有 Mesh组件。
+
 获取对应的 Mesh组件。
+
 通过 Mesh 可以获取对应的 材质 组件，然后再动态修改材质。
+
 具体可以参考文档
 https://developers.weixin.qq.com/miniprogram/dev/component/xr-frame/gltf/specification.html
 
