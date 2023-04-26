@@ -51,7 +51,7 @@ Component({
     handleTick: function (time) {
       const xrSystem = wx.getXrFrameSystem();
 
-      this.wrapTRS.position.x -= 0.001;
+      this.wrapTRS.position.x -= 0.002;
       // this.wrapTRS.rotation.y += Math.PI * 0.0001;
 
       // 比例尺不一样，需要放大改变数值
