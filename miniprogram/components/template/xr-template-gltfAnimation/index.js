@@ -40,7 +40,8 @@ Component({
       const turtle = this.editGLTF.getInternalNodeByName("TurtleAndCastle");
       this.turtleTRS = turtle.getComponent(xrFrameSystem.Transform);
 
-      this.rotation = this.turtleTRS.rotation.clone();
+      // 都用四元数
+      this.rotation = this.turtleTRS.quaternion.toEulerAngles();
 
       this.scene.event.add('tick', this.handleTick.bind(this));
     },
