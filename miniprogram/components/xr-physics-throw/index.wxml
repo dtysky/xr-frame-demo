@@ -1,7 +1,7 @@
 <xr-scene id="xr-scene" bind:ready="handleReady" bind:tick="handleTick" ar-system="modes:Plane;camera:Back">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
-    <xr-asset-load type="gltf" asset-id="basket" src="http://10.9.162.93:8080/laundry_basket/scene.gltf" />
+    <xr-asset-load type="gltf" asset-id="basket" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/laundry_basket/scene.gltf" />
     <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>
   <xr-physics></xr-physics>
