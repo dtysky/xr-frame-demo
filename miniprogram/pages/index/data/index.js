@@ -107,6 +107,11 @@ const gltf = {
       label: 'KHR_materials_pbrSpecularGlossiness',
       path: '/pages/gltf/scene-gltf-specularGlossiness/index',
     },
+    {
+      name: '扩展',
+      label: 'KHR_lights_punctual',
+      path: '/pages/gltf/scene-gltf-lightsPunctual/index',
+    },
   ],
 };
 

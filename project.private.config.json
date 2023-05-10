@@ -148,6 +148,13 @@
           "query": "path=%2Fpages%2Far%2Fscene-ar-2dmarker%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "gltf-lightsPunctual",
+          "pathName": "pages/gltf/scene-gltf-lightsPunctual/index",
+          "query": "path=%2Fpages%2Fgltf%2Fscene-gltf-lightsPunctual%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
