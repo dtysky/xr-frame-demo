@@ -14,7 +14,6 @@
     ></xr-camera>
   </xr-node>
   <xr-node node-id="lights">
-    <xr-light type="ambient" color="1 1 1" intensity="0.3" />
-    <xr-light type="directional" rotation="40 180 0" color="1 1 1" intensity="2" />
+    <!-- 场上最多只允许4个光源，所以不需要场景光源，由模型提供实际光源 -->
   </xr-node>
 </xr-scene>
