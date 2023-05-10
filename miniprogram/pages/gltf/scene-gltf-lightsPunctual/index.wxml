@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="KHR_lights_punctual"
-  intro="glTF Punctual Light 支持（需基础库2.31.0）。Copyright 2021 DGG. CC BY 4.0 International https://creativecommons.org/licenses/by/4.0/"
+  intro="glTF Punctual Light 支持。Copyright 2021 DGG. CC BY 4.0 International https://creativecommons.org/licenses/by/4.0/"
 >
   <xr-gltf-lightsPunctual
     disable-scroll
