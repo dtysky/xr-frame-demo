@@ -55,7 +55,9 @@
     "pages/template/xr-template-arPreview/index",
     "pages/template/xr-template-lookat/index",
     "pages/scene-last-record/index",
-    "pages/scene-beside-edge/index"
+    "pages/scene-beside-edge/index",
+    "pages/physics/scene-physics-shoot/index",
+    "pages/physics/scene-physics-throw/index"
   ],
   "usingComponents": {},
   "window": {

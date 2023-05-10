@@ -166,6 +166,23 @@ const ar = {
   ],
 };
 
+const physics = {
+  name: '物理能力',
+  tag: 'func',
+  childArr: [
+    {
+      name: 'Shoot',
+      label: '射击积木',
+      path: '/pages/physics/scene-physics-shoot/index'
+    },
+    {
+      name: 'Throw',
+      label: '投球入筐',
+      path: '/pages/physics/scene-physics-throw/index'
+    }
+  ]
+};
+
 const custom = {
   name: '高级定制',
   tag: 'func',
@@ -337,4 +354,4 @@ const production = {
   ]
 };
 
-export default [base, ar, gltf, custom, template, classic, scan, production];
+export default [base, ar, gltf, physics, custom, template, classic, scan, production];
