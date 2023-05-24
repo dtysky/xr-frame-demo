@@ -109,6 +109,11 @@ const gltf = {
     },
     {
       name: '扩展',
+      label: 'KHR_materials_sheen',
+      path: '/pages/gltf/scene-gltf-sheen/index',
+    },
+    {
+      name: '扩展',
       label: 'KHR_lights_punctual',
       path: '/pages/gltf/scene-gltf-lightsPunctual/index',
     },
