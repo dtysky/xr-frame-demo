@@ -155,6 +155,13 @@
           "query": "path=%2Fpages%2Fgltf%2Fscene-gltf-lightsPunctual%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "scene-gltf-sheen",
+          "pathName": "pages/gltf/scene-gltf-sheen/index",
+          "query": "path=%2Fpages%2Fgltf%2Fscene-gltf-sheen%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
