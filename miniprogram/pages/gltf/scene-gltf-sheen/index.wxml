@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="KHR_materials_sheen"
-  intro="glTF Sheen 扩展，主要用于布料与织物材质的模拟。model Copyright 2020 Wayfair LLC, CC-BY 4.0"
+  intro="glTF Sheen 扩展，主要用于布料与织物材质的模拟。基础库 2.32.1 支持。model Copyright 2020 Wayfair LLC, CC-BY 4.0"
 >
   <xr-gltf-sheen
     disable-scroll
