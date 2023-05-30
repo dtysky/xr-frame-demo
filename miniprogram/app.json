@@ -47,6 +47,7 @@
     "pages/template/xr-template-gltfEdit/index",
     "pages/template/xr-template-gltfAnimation/index",
     "pages/template/xr-template-gltfOcclusion/index",
+    "pages/template/xr-template-gltfUVAnimation/index",
     "pages/template/xr-template-frameEffect/index",
     "pages/template/xr-template-tracker/index",
     "pages/template/xr-template-select/index",

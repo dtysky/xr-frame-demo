@@ -255,6 +255,11 @@ const template = {
       path: '/pages/template/xr-template-gltfOcclusion/index',
     },
     {
+      name: 'glTF',
+      label: '添加模型内UV动画',
+      path: '/pages/template/xr-template-gltfUVAnimation/index',
+    },
+    {
       name: 'Animation',
       label: '序列帧动画（雪碧图、GIF）',
       path: '/pages/template/xr-template-frameEffect/index',

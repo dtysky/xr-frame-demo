@@ -162,6 +162,13 @@
           "query": "path=%2Fpages%2Fgltf%2Fscene-gltf-sheen%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "template-gltfUVAnimation",
+          "pathName": "pages/template/xr-template-gltfUVAnimation/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-gltfUVAnimation%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
