@@ -169,6 +169,13 @@
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-gltfUVAnimation%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "basic-particle",
+          "pathName": "pages/basic/scene-basic-particle/index",
+          "query": "path=%2Fpages%2Fbasic%2Fscene-basic-particle%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
