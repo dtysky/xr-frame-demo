@@ -260,6 +260,11 @@ const template = {
       path: '/pages/template/xr-template-gltfUVAnimation/index',
     },
     {
+      name: 'Blend',
+      label: '双面半透明模型渲染',
+      path: '/pages/template/xr-template-blendDouble/index',
+    },
+    {
       name: 'Animation',
       label: '序列帧动画（雪碧图、GIF）',
       path: '/pages/template/xr-template-frameEffect/index',

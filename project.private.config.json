@@ -176,6 +176,13 @@
           "query": "path=%2Fpages%2Fbasic%2Fscene-basic-particle%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "template-blendDouble",
+          "pathName": "pages/template/xr-template-blendDouble/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-blendDouble%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
