@@ -6,6 +6,6 @@ import '../../../xr-custom/assets/effect-toon';
 Page({
   behaviors:[sceneReadyBehavior],
   data: {
-    dpiScale: 1.5
+    dpiScale: 1
   }
 });
