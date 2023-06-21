@@ -240,6 +240,11 @@ const template = {
       path: '/pages/template/xr-template-lookat/index',
     },
     {
+      name: 'Toon',
+      label: '模型切换为Toon渲染(自定义多pass)',
+      path: '/pages/template/xr-template-toon/index',
+    },
+    {
       name: 'glTF',
       label: '模型更换贴图',
       path: '/pages/template/xr-template-gltfEdit/index',

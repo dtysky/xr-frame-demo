@@ -44,6 +44,7 @@
     "pages/template/xr-template-message/index",
     "pages/template/xr-template-control/index",
     "pages/template/xr-template-loading/index",
+    "pages/template/xr-template-toon/index",
     "pages/template/xr-template-gltfEdit/index",
     "pages/template/xr-template-gltfAnimation/index",
     "pages/template/xr-template-gltfOcclusion/index",
