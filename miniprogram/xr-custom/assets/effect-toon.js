@@ -12,10 +12,11 @@ xrFrameSystem.registerEffect('toon-user', scene => scene.createEffect(
         // Outline
         {
             renderStates: {
-              cullOn: true,
               blendOn: false,
               depthWrite: true,
-              cullFace: xrFrameSystem.ECullMode.FRONT,
+              // Default FrontFace is CW
+              cullOn: true,
+              cullFace: xrFrameSystem.ECullMode.BACK,
             },
             lightMode: "ForwardBase",
             useMaterialRenderStates: false,
@@ -24,10 +25,11 @@ xrFrameSystem.registerEffect('toon-user', scene => scene.createEffect(
         // ForwardBase
         {
             renderStates: {
-              cullOn: false,
               blendOn: false,
               depthWrite: true,
-              cullFace: xrFrameSystem.ECullMode.BACK,
+              // Default FrontFace is CW
+              cullOn: false,
+              cullFace: xrFrameSystem.ECullMode.NONE,
             },
             lightMode: "ForwardBase",
             useMaterialRenderStates: true,

@@ -55,8 +55,8 @@ Component({
 
 
         // 接管渲染状态
-        // toonMaterial.setRenderState('depthWrite', true);
-        // toonMaterial.setRenderState('renderQueue', 2000);
+        // toonMaterial.setRenderState('cullFace', xrFrameSystem.ECullMode.BACK);
+        toonMaterial.setRenderState('cullOn', false);
 
 
         mesh.material = toonMaterial;
