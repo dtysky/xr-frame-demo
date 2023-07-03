@@ -197,6 +197,20 @@
           "query": "path=%2Fpages%2Fcustom%2Fscene-custom-render%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "gltf-transmission",
+          "pathName": "pages/gltf/scene-gltf-transmission/index",
+          "query": "path=%2Fpages%2Fgltf%2Fscene-gltf-transmission%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "basic-render-texture",
+          "pathName": "pages/basic/scene-basic-render-texture/index",
+          "query": "path=%2Fpages%2Fbasic%2Fscene-basic-render-texture%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

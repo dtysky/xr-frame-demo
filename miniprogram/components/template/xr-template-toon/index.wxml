@@ -4,10 +4,10 @@
   <xr-node>
     <xr-node node-id="camera-target" position="0 0 0"></xr-node>
 
-    <xr-gltf id="gltf" position="0 -3.4 0" scale="3.4 3.4 3.4" model="gltf-toon" anim-autoplay="clip:ChuChang"></xr-gltf>
+    <xr-gltf id="gltf" position="0 -3 0" scale="3 3 3" model="gltf-toon" anim-autoplay="clip:ShuangShouJiangJie"></xr-gltf>
 
     <xr-camera
-      id="camera" node-id="camera" position="2 2 4" clear-color="0.9 0.92 0.93 1"
+      id="camera" node-id="camera" position="2 2 4" clear-color="0.96 0.96 0.96 1"
       target="camera-target" near="0.1" far="2000"
       camera-orbit-control=""
     ></xr-camera>

@@ -20,6 +20,7 @@
     "pages/gltf/scene-gltf-light-loading/index",
     "pages/gltf/scene-gltf-specularGlossiness/index",
     "pages/gltf/scene-gltf-sheen/index",
+    "pages/gltf/scene-gltf-transmission/index",
     "pages/gltf/scene-gltf-textureTransform/index",
     "pages/gltf/scene-gltf-lightsPunctual/index",
     "pages/ar/scene-ar-basic/index",

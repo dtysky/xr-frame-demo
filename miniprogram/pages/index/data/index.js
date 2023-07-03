@@ -47,11 +47,6 @@ const base = {
       label: '渲染目标',
       path: '/pages/basic/scene-basic-render-texture/index',
     },
-    // {
-    //   name: 'Physic',
-    //   label: '物理',
-    //   path: '/pages/basic/scene-basic-physic/index',
-    // },
     {
       name: 'ParticleSystem',
       label: '粒子系统',
@@ -111,6 +106,11 @@ const gltf = {
       name: '扩展',
       label: 'KHR_materials_sheen',
       path: '/pages/gltf/scene-gltf-sheen/index',
+    },
+    {
+      name: '扩展',
+      label: 'KHR_materials_transmission',
+      path: '/pages/gltf/scene-gltf-transmission/index',
     },
     {
       name: '扩展',
