@@ -10,6 +10,7 @@
       id="camera" node-id="camera" position="4 2 8" clear-color="0 1 0 1"
       near="0.1"
       far="2000"
+      background="skybox"
       target="camera-target" camera-orbit-control=""
     ></xr-camera>
   </xr-node>
