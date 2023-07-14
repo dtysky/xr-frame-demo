@@ -1,12 +1,7 @@
 {
   "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "packOptions": {
-    "ignore": [],
-    "include": []
-  },
   "miniprogramRoot": "miniprogram/",
   "compileType": "miniprogram",
-  "projectname": "xr-frame-demo",
   "setting": {
     "urlCheck": true,
     "es6": true,
@@ -27,8 +22,6 @@
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -49,16 +42,22 @@
     "ignoreDevUnusedFiles": false,
     "ignoreUploadUnusedFiles": false,
     "useStaticServer": true,
-    "condition": false
+    "condition": false,
+    "skylineRenderEnable": false
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "appid": "wx9600d039dad73317",
   "condition": {},
-  "libVersion": "2.24.3",
   "srcMiniprogramRoot": "miniprogram/",
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  }
+  },
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "appid": "wx9600d039dad73317",
+  "projectname": "xr-frame-demo",
+  "libVersion": "dev"
 }

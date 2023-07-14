@@ -5,7 +5,7 @@
     "useIsolateContext": true
   },
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "libVersion": "dev",
+  "libVersion": "2.32.2",
   "condition": {
     "miniprogram": {
       "list": [
@@ -153,6 +153,62 @@
           "name": "gltf-lightsPunctual",
           "pathName": "pages/gltf/scene-gltf-lightsPunctual/index",
           "query": "path=%2Fpages%2Fgltf%2Fscene-gltf-lightsPunctual%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "scene-gltf-sheen",
+          "pathName": "pages/gltf/scene-gltf-sheen/index",
+          "query": "path=%2Fpages%2Fgltf%2Fscene-gltf-sheen%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-gltfUVAnimation",
+          "pathName": "pages/template/xr-template-gltfUVAnimation/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-gltfUVAnimation%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "basic-particle",
+          "pathName": "pages/basic/scene-basic-particle/index",
+          "query": "path=%2Fpages%2Fbasic%2Fscene-basic-particle%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-blendDouble",
+          "pathName": "pages/template/xr-template-blendDouble/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-blendDouble%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-toon",
+          "pathName": "pages/template/xr-template-toon/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-toon%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "custom-render",
+          "pathName": "pages/custom/scene-custom-render/index",
+          "query": "path=%2Fpages%2Fcustom%2Fscene-custom-render%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "gltf-transmission",
+          "pathName": "pages/gltf/scene-gltf-transmission/index",
+          "query": "path=%2Fpages%2Fgltf%2Fscene-gltf-transmission%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "basic-render-texture",
+          "pathName": "pages/basic/scene-basic-render-texture/index",
+          "query": "path=%2Fpages%2Fbasic%2Fscene-basic-render-texture%2Findex",
           "launchMode": "default",
           "scene": null
         }

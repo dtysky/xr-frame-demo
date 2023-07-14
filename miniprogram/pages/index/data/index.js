@@ -47,11 +47,6 @@ const base = {
       label: '渲染目标',
       path: '/pages/basic/scene-basic-render-texture/index',
     },
-    // {
-    //   name: 'Physic',
-    //   label: '物理',
-    //   path: '/pages/basic/scene-basic-physic/index',
-    // },
     {
       name: 'ParticleSystem',
       label: '粒子系统',
@@ -111,6 +106,16 @@ const gltf = {
       name: '扩展',
       label: 'KHR_materials_pbrSpecularGlossiness',
       path: '/pages/gltf/scene-gltf-specularGlossiness/index',
+    },
+    {
+      name: '扩展',
+      label: 'KHR_materials_sheen',
+      path: '/pages/gltf/scene-gltf-sheen/index',
+    },
+    {
+      name: '扩展',
+      label: 'KHR_materials_transmission',
+      path: '/pages/gltf/scene-gltf-transmission/index',
     },
     {
       name: '扩展',
@@ -240,6 +245,11 @@ const template = {
       path: '/pages/template/xr-template-lookat/index',
     },
     {
+      name: 'Toon',
+      label: '模型切换为Toon渲染(自定义多pass)',
+      path: '/pages/template/xr-template-toon/index',
+    },
+    {
       name: 'glTF',
       label: '模型更换贴图',
       path: '/pages/template/xr-template-gltfEdit/index',
@@ -253,6 +263,16 @@ const template = {
       name: 'glTF',
       label: '设置 glTF 为遮挡模型',
       path: '/pages/template/xr-template-gltfOcclusion/index',
+    },
+    {
+      name: 'glTF',
+      label: '添加模型内UV动画',
+      path: '/pages/template/xr-template-gltfUVAnimation/index',
+    },
+    {
+      name: 'Blend',
+      label: '双面半透明模型渲染',
+      path: '/pages/template/xr-template-blendDouble/index',
     },
     {
       name: 'Animation',
