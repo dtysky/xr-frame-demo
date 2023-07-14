@@ -21,6 +21,7 @@
     "pages/gltf/scene-gltf-specularGlossiness/index",
     "pages/gltf/scene-gltf-textureTransform/index",
     "pages/gltf/scene-gltf-lightsPunctual/index",
+    "pages/gltf/scene-gltf-compressTextures/index",
     "pages/ar/scene-ar-basic/index",
     "pages/ar/scene-ar-2dmarker/index",
     "pages/ar/scene-ar-osdmarker/index",
