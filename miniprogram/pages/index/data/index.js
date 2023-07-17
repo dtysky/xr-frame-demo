@@ -245,6 +245,11 @@ const template = {
       path: '/pages/template/xr-template-toon/index',
     },
     {
+      name: 'Geometry',
+      label: '定制每帧变化的Geometry',
+      path: '/pages/template/xr-template-geometry/index',
+    },
+    {
       name: 'glTF',
       label: '模型更换贴图',
       path: '/pages/template/xr-template-gltfEdit/index',

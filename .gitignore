@@ -8,3 +8,6 @@ lib
 **/components/fallBack/*
 .rpt2_cache
 package-lock.json
+miniprogram/components/template/xr-template-geometry/man-data/indexData.js
+miniprogram/components/template/xr-template-geometry/man-data/uvData.js
+miniprogram/components/template/xr-template-geometry/man-data/vertexData.js
