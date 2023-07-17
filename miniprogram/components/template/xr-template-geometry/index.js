@@ -21,7 +21,6 @@ function batchVertexBuffer(positionData, uvDataArray) {
   return vb;
 }
 
-
 Component({
   behaviors: [require('../../common/share-behavior').default],
   properties: {
@@ -96,42 +95,9 @@ Component({
     },
     handleTick(delta) {
 
-      // console.log('this.geometryMan.vertexBuffer',this.geometryMan.vertexBuffer);
-      // console.log('this.geometryMan.indexBuffer',this.geometryMan.indexBuffer);
-
-      const xrFrameSystem  = wx.getXrFrameSystem()
-      const scene = this.scene;
-      
-      // const vl = scene.createVertexLayout({
-      //   attributes: [
-      //     {
-      //       name: "a_position",
-      //       format: xrFrameSystem.EVertexFormat.FLOAT3,
-      //       offset: 0,
-      //       usage: xrFrameSystem.EVertexLayoutUsage.POSITION
-      //     },
-      //     {
-      //       name: "a_texCoord",
-      //       format: xrFrameSystem.EVertexFormat.FLOAT2,
-      //       offset: 12,
-      //       usage: xrFrameSystem.EVertexLayoutUsage.UV0
-      //     }
-      //   ],
-      //   stride: 20
-      // });
-      
       const vb = batchVertexBuffer(positionData, uvData);
       const ib = iData;
     
-      // const geo = scene.createGeometry(vl, vb, ib);
-    
-      // geo.setBoundBall(new xrFrameSystem.Vector3(), 1);
-      // geo.addSubMesh(ib.length, 0, 0);
-
-      // this.meshMan.setData({
-      //   'geometry': geo
-      // });
-
       this.geometryMan.uploadVertexBuffer(0, vb);
       this.geometryMan.uploadIndexBuffer(0, new Uint16Array(ib));
     },
