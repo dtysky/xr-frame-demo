@@ -94,6 +94,11 @@ const gltf = {
     },
     {
       name: '扩展',
+      label: '压缩纹理',
+      path: '/pages/gltf/scene-gltf-compressTextures/index',
+    },
+    {
+      name: '扩展',
       label: 'KHR_texture_transform',
       path: '/pages/gltf/scene-gltf-textureTransform/index',
     },

@@ -57,5 +57,7 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wx9600d039dad73317"
+  "appid": "wx9600d039dad73317",
+  "projectname": "xr-frame-demo",
+  "libVersion": "dev"
 }
