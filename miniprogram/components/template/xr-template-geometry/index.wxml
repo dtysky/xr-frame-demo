@@ -5,7 +5,8 @@
   <xr-node>
     <xr-node node-id="camera-target" position="0 0 0"></xr-node>
 
-    <xr-mesh id="man" position="0 -1 0" geometry="man" material="simple-mat" rotation="0 0 0"/>
+    <xr-shadow id="geometryRoot" node-id="geometryRoot"></xr-shadow>
+
 
     <xr-camera
       id="camera" node-id="camera" position="2 2 4" clear-color="0.4 0.4 0.4 1"
