@@ -245,6 +245,11 @@ const template = {
       path: '/pages/template/xr-template-lookat/index',
     },
     {
+      name: 'AR',
+      label: '平面模式下的 UI 面板与点击',
+      path: '/pages/template/xr-template-arui/index',
+    },
+    {
       name: 'Toon',
       label: '模型切换为Toon渲染(自定义多pass)',
       path: '/pages/template/xr-template-toon/index',

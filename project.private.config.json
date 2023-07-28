@@ -218,6 +218,13 @@
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-geometry%2Findex",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "xr-template-arui",
+          "pathName": "pages/template/xr-template-arui/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-arui%2Findex",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
