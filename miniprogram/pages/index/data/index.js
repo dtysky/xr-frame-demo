@@ -241,12 +241,12 @@ const template = {
     },
     {
       name: 'AR',
-      label: '面向屏幕的面片',
+      label: '面向屏幕的面片与模型',
       path: '/pages/template/xr-template-lookat/index',
     },
     {
       name: 'AR',
-      label: '平面模式下的 UI 面板与点击',
+      label: '平面模式下的 UI 面板',
       path: '/pages/template/xr-template-arui/index',
     },
     {
