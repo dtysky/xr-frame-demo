@@ -217,16 +217,19 @@ const template = {
     {
       name: 'Message',
       label: '小程序混合通信',
+      class: 'message',
       path: '/pages/template/xr-template-message/index',
     },
     {
       name: 'Controller',
       label: '第一人称漫游',
+      class: 'message',
       path: '/pages/template/xr-template-control/index',
     },
     {
       name: 'Loading',
       label: '动态资源加载与使用',
+      class: 'message',
       path: '/pages/template/xr-template-loading/index',
     },
     {

@@ -70,6 +70,10 @@
   border-bottom-color: transparent;
 }
 
+.message {
+  border: 20rpx solid #000;
+}
+
 .ar {
   border: 20rpx solid #1D5B79;
 }
