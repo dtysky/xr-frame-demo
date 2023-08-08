@@ -263,6 +263,12 @@ const template = {
       path: '/pages/template/xr-template-toon/index',
     },
     {
+      name: 'Effect',
+      label: '平面阴影',
+      class: 'custom',
+      path: '/pages/template/xr-template-planeShadow/index',
+    },
+    {
       name: 'Geometry',
       label: '定制每帧变化的Geometry',
       class: 'custom',
