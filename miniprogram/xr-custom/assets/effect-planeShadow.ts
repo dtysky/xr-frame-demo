@@ -18,7 +18,6 @@ xrFrameSystem.registerEffect('plane-shadow', scene => scene.createEffect({
     "renderStates": {
       cullOn: false,
       blendOn: true,
-      cullFace: xrFrameSystem.ECullMode.BACK,
     },
     lightMode: "ForwardBase",
     useMaterialRenderStates: true,
