@@ -39,10 +39,10 @@ Component({
           passes: [
             {
               renderStates: {
-                cullOn: true,
                 blendOn: false,
                 depthWrite: true,
-                cullFace: xrFrameSystem.ECullMode.BACK,
+                cullOn: true,
+                cullFace: xrFrameSystem.ECullMode.FRONT,
               },
               lightMode: 'ForwardBase',
               useMaterialRenderStates: true,

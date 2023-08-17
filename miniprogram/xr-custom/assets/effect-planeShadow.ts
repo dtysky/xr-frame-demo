@@ -4,6 +4,14 @@ const xrFrameSystem = wx.getXrFrameSystem();
 
 xrFrameSystem.registerEffect('plane-shadow', scene => scene.createEffect({
   name: "plane-shadow",
+  properties: [
+    // 需保证，至少存在一个properties用于创建effect共享内存
+    {
+      key: 'u_holder',
+      type: xrFrameSystem.EUniformType.FLOAT4,
+      default: [1, 1, 1, 1]
+    }
+  ],
   images: [],
   defaultRenderQueue: 3000,
   passes: [{
