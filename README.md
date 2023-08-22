@@ -15,8 +15,12 @@ https://user-images.githubusercontent.com/7337763/199401152-d3e14ca2-bcde-41aa-9
 
 ## 快速索引
 
-### [常见问题QA](/qa/README.md)
-### [案例截图与描述](/screenshot/README.md)
+#### [常见问题QA](/qa/README.md)
+
+#### [基础库版本分布](https://developers.weixin.qq.com/miniprogram/dev/framework/client-lib/version.html)
+
+
+<!-- ### [案例截图与描述](/screenshot/README.md) -->
 
 ### 基础能力
 [基础案例](/miniprogram/components/xr-basic/) PBR材质下渲染的内置图形。
@@ -48,6 +52,8 @@ https://user-images.githubusercontent.com/7337763/199401152-d3e14ca2-bcde-41aa-9
 
 [平面识别案例](/miniprogram/components/xr-ar-basic/) 基础的平面识别案例。
 
+[平面识别叠加Marker案例](/miniprogram/components/xr-vio-marker/) 平面识别叠加Marker案例
+
 [相机旋转案例](/miniprogram/components/xr-ar-threeDof/) threeDof，用于在不需要SLAM的场景，支持手持相机旋转，兼容性较好。
 
 [2DMarker案例](/miniprogram/components/xr-ar-2dmarker/) 2DMarker识别案例。
@@ -60,6 +66,12 @@ https://user-images.githubusercontent.com/7337763/199401152-d3e14ca2-bcde-41aa-9
 
 [人体案例](/miniprogram/components/xr-ar-body/) 人体识别案例。
 
+### 物理 能力
+[射击积木案例](/miniprogram/components/xr-physics-shoot/) 射击积木案例
+
+[投球入筐案例](/miniprogram/components/xr-physics-throw/) 投球入筐案例
+
+
 ### glTF 能力
 [金属头盔案例](/miniprogram/components/xr-gltf-damageHelmet/) 包含完整MetalRougnessMap、EmissiveMap、NormalMap、OcclusionTexture 以及各类因子的 glTF 模型案例。
 
@@ -71,9 +83,16 @@ https://user-images.githubusercontent.com/7337763/199401152-d3e14ca2-bcde-41aa-9
 
 [无光照案例](/miniprogram/components/xr-gltf-unlit/) 应用 KHR_materials_unlit 扩展的 glTF 案例。
 
-[高光光泽度案例](/miniprogram/components/xr-gltf-specularGlossiness/) 应用 KHR_materials_pbrSpecularGlossiness 扩展的 glTF 案例。
+[扩展 - 压缩纹理](/miniprogram/components/xr-gltf-compressTextures/)
 
-[贴图矩阵变换案例](/miniprogram/components/xr-gltf-textureTransform/) 应用 KHR_texture_transform 扩展的 glTF 案例，glTF 贴图矩阵变换支持（需基础库2.31.0）。
+[扩展 - KHR_texture_transform 贴图矩阵变换案例](/miniprogram/components/xr-gltf-textureTransform/) 应用 KHR_texture_transform 扩展的 glTF 案例，glTF 贴图矩阵变换支持（需基础库2.31.0）。
+
+[扩展 - KHR_materials_pbrSpecularGlossiness 高光光泽度案例](/miniprogram/components/xr-gltf-specularGlossiness/)
+
+[扩展 - KHR_materials_sheen 布料与织物材质的模拟案例](/miniprogram/components/xr-gltf-sheen/) glTF Sheen 扩展，主要用于布料与织物材质的模拟。基础库 2.32.1 支持。
+
+[扩展 - KHR_lights_punctual](/miniprogram/components/xr-gltf-lightsPunctual/)
+
 
 ### 高级定制
 
@@ -83,23 +102,37 @@ https://user-images.githubusercontent.com/7337763/199401152-d3e14ca2-bcde-41aa-9
 
 ### 通用功能模版
 
-[小程序混合通信](/miniprogram/components/template/xr-template-message/) 通过小程序按钮事件，传递速度变量到 xr-frame 组件通信的案例。
+[ 小程序混合通信](/miniprogram/components/template/xr-template-message/) 通过小程序按钮事件，传递速度变量到 xr-frame 组件通信的案例。
 
-[第一人称漫游](/miniprogram/components/template/xr-template-control/) 第一人称相机控制器。
+[Controller 第一人称漫游](/miniprogram/components/template/xr-template-control/) 第一人称相机控制器。
 
-[动态资源加载与使用](/miniprogram/components/template/xr-template-loading/) 点击按钮进行对应资源的加载与使用。
+[Loading 动态资源加载与使用](/miniprogram/components/template/xr-template-loading/) 点击按钮进行对应资源的加载与使用。
 
-[动态多Tracker切换](/miniprogram/components/template/xr-template-tracker/) 点击按钮，对应不同识别效果 Marker 的添加与删除。
+[Tracker 动态多Tracker切换](/miniprogram/components/template/xr-template-tracker/) 点击按钮，对应不同识别效果 Marker 的添加与删除。
 
-[模型摆放与手势控制](/miniprogram/components/template/xr-template-arPreview/) 点击屏幕摆放，然后单指拖动屏幕进行旋转，双指拖动进行放大缩小。
+[AR 模型摆放与手势控制](/miniprogram/components/template/xr-template-arPreview/) 点击屏幕摆放，然后单指拖动屏幕进行旋转，双指拖动进行放大缩小。
 
-[面向屏幕的面片](/miniprogram/components/template/xr-template-lookat/) 通过脚本控制的，四个方向各有一个面向屏幕的平面。
+[AR 面向屏幕的面片与模型](/miniprogram/components/template/xr-template-lookat/) 通过脚本控制的，四个方向各有一个面向屏幕的物体。
 
-[模型更换贴图](/miniprogram/components/template/xr-template-gltfEdit/) 加载 glTF 模型，调整 glTF 的材质的贴图
+[AR 平面模式下的 UI 面板](/miniprogram/components/template/xr-template-arui/) AR环境下，简单的UI面板
 
-[模型更改渲染状态，glTF设为遮挡模型](/miniprogram/components/template/xr-template-gltfOcclusion/) 使用模型做遮挡剔除，让该模型剔除其他物体
+[Effect 模型切换为Toon渲染(自定义多pass)](/miniprogram/components/template/xr-template-toon/)
+
+[Geometry 定制每帧变化的Geometry](/miniprogram/components/template/xr-template-geometry/)
+
+[glTF 模型更换贴图](/miniprogram/components/template/xr-template-gltfEdit/) 加载 glTF 模型，调整 glTF 的材质的贴图
+
+[glTF 模型动画（脚本、骨骼）](/miniprogram/components/template/xr-template-gltfAnimation/)
+
+[glTF 模型更改渲染状态，glTF设为遮挡模型](/miniprogram/components/template/xr-template-gltfOcclusion/) 使用模型做遮挡剔除，让该模型剔除其他物体
+
+[glTF 添加模型内UV动画](/miniprogram/components/template/xr-template-gltfUVAnimation/) 
+
+[Touch 点选物体与动画控制](/miniprogram/components/template/xr-template-select/)
+
 
 [序列帧动画（雪碧图、GIF）](/miniprogram/components/template/xr-template-frameEffect/) 使用自定义材质实现的序列帧动画案例。
+
 
 [截屏与分享](/miniprogram/components/template/xr-template-share/) 通过分享系统截屏分享
 

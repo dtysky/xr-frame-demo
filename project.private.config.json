@@ -1,11 +1,11 @@
 {
   "projectname": "xr-frame-demo",
   "setting": {
-    "compileHotReLoad": false,
+    "compileHotReLoad": true,
     "useIsolateContext": true
   },
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "libVersion": "dev",
+  "libVersion": "3.0.0",
   "condition": {
     "miniprogram": {
       "list": [
@@ -209,6 +209,34 @@
           "name": "basic-render-texture",
           "pathName": "pages/basic/scene-basic-render-texture/index",
           "query": "path=%2Fpages%2Fbasic%2Fscene-basic-render-texture%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-geometry",
+          "pathName": "pages/template/xr-template-geometry/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-geometry%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "xr-template-arui",
+          "pathName": "pages/template/xr-template-arui/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-arui%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "ar-vio-marker",
+          "pathName": "pages/ar/scene-ar-vio-marker/index",
+          "query": "path=%2Fpages%2Far%2Fscene-ar-vio-marker%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-planeShadow",
+          "pathName": "pages/template/xr-template-planeShadow/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-planeShadow%2Findex",
           "launchMode": "default",
           "scene": null
         }
