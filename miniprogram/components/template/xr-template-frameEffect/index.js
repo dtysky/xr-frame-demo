@@ -42,7 +42,6 @@ Component({
                 cullOn: true,
                 blendOn: false,
                 depthWrite: true,
-                cullFace: xrFrameSystem.ECullMode.BACK,
               },
               lightMode: 'ForwardBase',
               useMaterialRenderStates: true,
@@ -103,7 +102,7 @@ Component({
         const xrScene = this.scene;
         const shadowRoot = xrScene.getElementById("shadow-root");
 
-        await xrScene.assets.loadAsset({type: 'texture', assetId: 'frame', src: 'https://webartest.hereto.cn/static-resources/mix-world/%E9%A3%9E%E4%B9%A620230412-155310.png'})
+        await xrScene.assets.loadAsset({type: 'texture', assetId: 'frame', src: 'https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/sprite-frames.png'})
 
         // 第一个参数是效果实例的引用，第二个参数是默认`uniforms`
         const frameMaterial = xrScene.createMaterial(
