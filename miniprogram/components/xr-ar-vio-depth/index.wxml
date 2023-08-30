@@ -1,5 +1,6 @@
 <xr-scene ar-system="modes:Plane; planeMode: 1; depthMask: true; depthNear: 0.1; depthFar: 20; depthDebug: true;" bind:ready="handleReady" bind:ar-ready="handleARReady">
   <!-- depthMask: true; depthNear: 0.001; depthFar:1000; depthDebug: true; -->
+  <!-- Beta 版本 -->
   <!-- vio + depth 模式下 planeMode 需设置为 1 (只允许水平面识别) -->
   <!-- depthMask 在支持的情况下，是否开启实时深度遮挡。 -->
   <!-- depthNear 开启实时深度遮挡时，遮挡的近处阈值。 -->
