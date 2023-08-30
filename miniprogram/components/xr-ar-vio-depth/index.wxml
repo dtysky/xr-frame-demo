@@ -14,7 +14,7 @@
       <xr-gltf model="anchor"></xr-gltf>
     </xr-ar-tracker>
     <xr-node node-id="setitem" visible="false">
-      <xr-gltf model="gltf-item" scale="0.006 0.006 0.006"></xr-gltf>
+      <xr-gltf model="gltf-item" scale="0.004 0.004 0.004"></xr-gltf>
     </xr-node>
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
