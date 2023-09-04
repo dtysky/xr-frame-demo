@@ -33,6 +33,11 @@ const base = {
       path: '/pages/basic/scene-basic-touch/index',
     },
     {
+      name: 'Share',
+      label: '录屏和截频',
+      path: '/pages/basic/scene-basic-share/index',
+    },
+    {
       name: 'VisibleLayer',
       label: '显示和图层',
       path: '/pages/basic/scene-basic-visible-layer/index',
