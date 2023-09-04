@@ -34,6 +34,7 @@
     "pages/ar/scene-ar-threeDof/index",
     "pages/ar/scene-ar-camera/index",
     "pages/ar/scene-ar-vio-marker/index",
+    "pages/ar/scene-ar-vio-depth/index",
     "pages/custom/scene-custom-logic/index",
     "pages/custom/scene-custom-render/index",
     "pages/scan/scene-scan-render/index",

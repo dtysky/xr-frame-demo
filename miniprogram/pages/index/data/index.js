@@ -175,8 +175,13 @@ const ar = {
     },
     {
       name: 'Plane+Marker',
-      label: 'AR 平面Marker融合',
+      label: 'AR 平面 Marker融合',
       path: '/pages/ar/scene-ar-vio-marker/index',
+    },
+    {
+      name: 'Plane+Depth',
+      label: 'AR 平面深度剔除',
+      path: '/pages/ar/scene-ar-vio-depth/index',
     },
   ],
 };
