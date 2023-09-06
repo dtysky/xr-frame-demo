@@ -19,6 +19,8 @@
     </xr-node>
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
+      near="0.1"
+      far="100"
       background="ar" is-ar-camera
     ></xr-camera>
   </xr-node>
