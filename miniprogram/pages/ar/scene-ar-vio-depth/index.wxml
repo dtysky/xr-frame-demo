@@ -1,6 +1,6 @@
 <xr-demo-viewer
   title="AR Plane 使用 深度剔除案例"
-  intro="在设备支持V2的`Plane`模式，开启使用，Beta版本"
+  intro="设备支持V2的`Plane`模式下开启使用，Beta版本"
   hint="预计在基础库版本 v3.1.1 支持。"
   code="{{xmlCode}}"
 >
