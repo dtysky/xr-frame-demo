@@ -8,6 +8,7 @@ import '../../xr-custom/elements/xr-shining-star';
 // 自定义effect
 import '../../xr-custom/assets/effect-shining';
 import '../../xr-custom/assets/effect-last-record-final';
+import '../../xr-custom/assets/effect-simple-vulkan';
 
 import list from './data/index';
 
