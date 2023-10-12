@@ -10,6 +10,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "template-arLine",
+          "pathName": "pages/template/xr-template-arLine/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-arLine%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-markerLock",
+          "pathName": "pages/template/xr-template-markerLock/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-markerLock%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "ar-vio-depth",
           "pathName": "pages/ar/scene-ar-vio-depth/index",
           "query": "path=%2Fpages%2Far%2Fscene-ar-vio-depth%2Findex",

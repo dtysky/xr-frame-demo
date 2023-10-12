@@ -220,7 +220,7 @@ const custom = {
   ]
 };
 
-const messageTemplete = {
+const messageTemplate = {
   name: '混合通信、资源加载、互动',
   tag: 'template',
   childArr: [
@@ -230,14 +230,14 @@ const messageTemplete = {
       path: '/pages/template/xr-template-message/index',
     },
     {
-      name: 'Controller',
-      label: '第一人称漫游',
-      path: '/pages/template/xr-template-control/index',
-    },
-    {
       name: 'Loading',
       label: '动态资源加载与使用',
       path: '/pages/template/xr-template-loading/index',
+    },
+    {
+      name: 'Controller',
+      label: '第一人称漫游',
+      path: '/pages/template/xr-template-control/index',
     },
     {
       name: 'Touch',
@@ -247,17 +247,32 @@ const messageTemplete = {
   ],
 };
 
-const arTemplete = {
-  name: 'AR常用定制能力',
+const arTemplate = {
+  name: '常用AR定制能力',
   tag: 'template',
   childArr: [
     {
-      name: 'AR',
+      name: 'Marker',
       label: '动态多Tracker切换（图片识别）',
       path: '/pages/template/xr-template-tracker/index',
     },
+    // {
+    //   name: 'Marker',
+    //   label: '识别后模型固定在屏幕中间',
+    //   path: '/pages/template/xr-template-markerCenter/index',
+    // },
     {
-      name: 'AR',
+      name: 'Plane+Marker',
+      label: '动态、识别后模型固定在世界空间',
+      path: '/pages/template/xr-template-markerLock/index',
+    },
+    {
+      name: 'Plane',
+      label: '世界空间，动态创建连线',
+      path: '/pages/template/xr-template-arLine/index',
+    },
+    {
+      name: 'Plane',
       label: '模型摆放与手势控制',
       path: '/pages/template/xr-template-arPreview/index',
     },
@@ -274,10 +289,15 @@ const arTemplete = {
   ],
 };
 
-const customTemplete = {
-  name: '高级定制(材质、几何体定制)',
+const customTemplate = {
+  name: '常用定制（材质、几何体、流程）',
   tag: 'template',
   childArr: [
+    {
+      name: 'Geometry',
+      label: '定制每帧变化的Geometry',
+      path: '/pages/template/xr-template-geometry/index',
+    },
     {
       name: 'Effect',
       label: '模型切换为卡通渲染(自定义多pass)',
@@ -287,11 +307,6 @@ const customTemplete = {
       name: 'Effect',
       label: '透明平面阴影',
       path: '/pages/template/xr-template-planeShadow/index',
-    },
-    {
-      name: 'Geometry',
-      label: '定制每帧变化的Geometry',
-      path: '/pages/template/xr-template-geometry/index',
     },
     {
       name: 'Effect',
@@ -306,7 +321,7 @@ const customTemplete = {
   ],
 };
 
-const gltfEditTemplete = {
+const gltfEditTemplate = {
   name: 'glTF动态修改',
   tag: 'template',
   childArr: [
@@ -338,7 +353,7 @@ const gltfEditTemplete = {
   ],
 };
 
-const toolTemplete = {
+const toolTemplate = {
   name: '通用基础能力',
   tag: 'template',
   childArr: [
@@ -432,4 +447,4 @@ const production = {
   ]
 };
 
-export default [base, ar, gltf, physics, custom, messageTemplete, arTemplete, customTemplete, gltfEditTemplete, toolTemplete, classic, scan, production];
+export default [base, ar, gltf, physics, custom, messageTemplate, arTemplate, customTemplate, gltfEditTemplate, toolTemplate, classic, scan, production];
