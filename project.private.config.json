@@ -5,10 +5,17 @@
     "useIsolateContext": true
   },
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "libVersion": "3.1.2",
+  "libVersion": "3.2.0",
   "condition": {
     "miniprogram": {
       "list": [
+        {
+          "name": "template-markerCenter",
+          "pathName": "pages/template/xr-template-markerCenter/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-markerCenter%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
         {
           "name": "template-arLine",
           "pathName": "pages/template/xr-template-arLine/index",
