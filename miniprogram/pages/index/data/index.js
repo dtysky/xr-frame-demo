@@ -315,14 +315,14 @@ const arTemplate = {
       label: '动态多Tracker切换（图片识别）',
       path: '/pages/template/xr-template-tracker/index',
     },
-    // {
-    //   name: 'Marker',
-    //   label: '识别后模型固定在屏幕中间',
-    //   path: '/pages/template/xr-template-markerCenter/index',
-    // },
+    {
+      name: 'Marker',
+      label: '识别后固定模型，在屏幕中间',
+      path: '/pages/template/xr-template-markerCenter/index',
+    },
     {
       name: 'Plane+Marker',
-      label: '动态、识别后模型固定在世界空间',
+      label: '识别后固定模型，在世界空间',
       path: '/pages/template/xr-template-markerLock/index',
     },
     {
