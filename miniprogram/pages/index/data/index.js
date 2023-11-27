@@ -53,11 +53,6 @@ const base = {
       path: '/pages/basic/scene-basic-render-texture/index',
     },
     {
-      name: 'ParticleSystem',
-      label: '粒子系统',
-      path: '/pages/basic/scene-basic-particle/index',
-    },
-    {
       name: 'PostProcessing',
       label: '后处理效果',
       path: '/pages/basic/scene-basic-postprocessing/index'
@@ -202,6 +197,70 @@ const physics = {
     }
   ]
 };
+
+const particle = {
+    name: '粒子能力',
+    tag: 'func',
+    childArr: [
+      {
+        name: 'Firework',
+        label: '喷射烟火',
+        path: '/pages/particle/scene-particle-firework/index'
+      },
+      {
+        name: 'Portal',
+        label: '传送门',
+        path: '/pages/particle/scene-particle-portal/index'
+      },
+      {
+        name: 'Orb',
+        label: '闪电光球',
+        path: '/pages/particle/scene-particle-orb/index'
+      },
+      {
+        name: 'ShapeEmitter',
+        label: '球形发射器',
+        path: '/pages/particle/scene-particle-shapeEmitter/index'
+      },
+      {
+        name: 'MeshEmitter',
+        label: '网格发射器',
+        path: '/pages/particle/scene-particle-meshEmitter/index'
+      },
+      {
+        name: 'HumanFace',
+        label: '自定义粒子系统',
+        path: '/pages/particle/scene-particle-custom/index'
+      },
+    ]
+  };
+
+const customParticle = {
+    name: '粒子定制能力',
+    tag: 'func',
+    childArr: [
+        {
+            name: 'Firework',
+            label: '喷射烟火',
+            path: '/pages/customParticle/scene-customParticle-firework/index'
+        },
+        {
+            name: 'Portal',
+            label: '传送门',
+            path: '/pages/customParticle/scene-customParticle-portal/index'
+          },
+          {
+            name: 'Orb',
+            label: '闪电光球',
+            path: '/pages/customParticle/scene-customParticle-orb/index'
+          },
+          {
+            name: 'ShapeEmitter',
+            label: '球形发射器',
+            path: '/pages/customParticle/scene-customParticle-shapeEmitter/index'
+          }
+    ]
+  };
 
 const custom = {
   name: '高级定制',
@@ -447,4 +506,4 @@ const production = {
   ]
 };
 
-export default [base, ar, gltf, physics, custom, messageTemplate, arTemplate, customTemplate, gltfEditTemplate, toolTemplate, classic, scan, production];
+export default [base, ar, gltf, physics, particle, customParticle, custom, messageTemplate, arTemplate, customTemplate, gltfEditTemplate, toolTemplate, classic, scan, production];

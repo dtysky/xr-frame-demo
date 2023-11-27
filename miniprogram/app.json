@@ -5,7 +5,6 @@
     "pages/basic/scene-basic-alpha/index",
     "pages/basic/scene-basic-light/index",
     "pages/basic/scene-basic-animation/index",
-    "pages/basic/scene-basic-particle/index",
     "pages/basic/scene-basic-touch/index",
     "pages/basic/scene-basic-visible-layer/index",
     "pages/basic/scene-basic-shadow/index",
@@ -70,7 +69,17 @@
     "pages/scene-last-record/index",
     "pages/scene-beside-edge/index",
     "pages/physics/scene-physics-shoot/index",
-    "pages/physics/scene-physics-throw/index"
+    "pages/physics/scene-physics-throw/index",
+    "pages/particle/scene-particle-firework/index",
+    "pages/particle/scene-particle-portal/index",
+    "pages/particle/scene-particle-orb/index",
+    "pages/particle/scene-particle-shapeEmitter/index",
+    "pages/particle/scene-particle-custom/index",
+    "pages/particle/scene-particle-meshEmitter/index",
+    "pages/customParticle/scene-customParticle-firework/index",
+    "pages/customParticle/scene-customParticle-orb/index",
+    "pages/customParticle/scene-customParticle-portal/index",
+    "pages/customParticle/scene-customParticle-shapeEmitter/index"
   ],
   "usingComponents": {},
   "window": {
