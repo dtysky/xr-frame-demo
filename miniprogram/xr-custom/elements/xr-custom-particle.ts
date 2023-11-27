@@ -36,8 +36,6 @@ export const CustomParticleDefaultComponents: XrFrame.IEntityComponents = Object
     'start-color': ['custom-particle', 'startColor'],
     'start-color2': ['custom-particle', 'startColor2'],
     texture: ['custom-particle', 'texture'],
-    'use-noise': ['custom-particle', 'useNoise'],
-    'noise-texture': ['custom-particle', 'noiseTexture'],
     'scale-x': ['custom-particle', 'scaleX'],
     'scale-y': ['custom-particle', 'scaleY'],
     'prewarm-cycles': ['custom-particle', 'prewarmCycles'],
