@@ -308,7 +308,7 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
     protected _renderMesh: Geometry = null;
     protected _vertexCount: number;
     protected _vertexData: Float32Array;
-    protected _indexData: Float32Array;
+    protected _indexData: UInt32Array;
     protected _eachIndexSize: number;
     protected _indexSize: number = 0;
     protected _vertexSize: number = 0;
@@ -604,6 +604,12 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
                             break;
                     }
                     break;
+                case 'mesh':
+                    if (v == undefined)
+                        break;
+                    this._renderMesh = v;
+                    this._vertexCount = this._renderMesh._getRawVertexBuffer().byteLength / this._renderMesh.vertexLayout.stride;
+                    break;
                 case 'delay':
                     this._delay = v;
                     break;
@@ -813,13 +819,33 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
     }
 
     protected _createVertexBuffers() {
-        //*4 是因为每一个粒子面片由上下左右四个点构成 
-        this._vertexSize = this._capacity * 4;
-        // 这里构建顶点数据数组的长度，为顶点属性的元素数乘以顶点总数
-        this._vertexData = new Float32Array(this.particleVertexSize * this._vertexSize);
+        if (this._useRenderMesh) {
+            const layout = this._renderMesh.getVertexLayout();
+            const stride = layout.stride;
+            this._vertexData  = this._renderMesh._getRawVertexBuffer();
+            const vertexCount = this._vertexData .byteLength / stride;
+            this._vertexSize = this._capacity * vertexCount;
+        } else {
+            //*4 是因为每一个粒子面片由上下左右四个点构成 
+            this._vertexSize = this._capacity * 4;
+            // 这里构建顶点数据数组的长度，为顶点属性的元素数乘以顶点总数
+            this._vertexData = new Float32Array(this.particleVertexSize * this._vertexSize);
+        }
     }
 
     protected _createIndexBuffer() {
+        if (this._useRenderMesh) {
+            const indexBuffer = this._renderMesh._getRawIndiceBuffer();
+            this._eachIndexSize = indexBuffer.byteLength / 2;
+            this._indexSize = this._capacity * this._eachIndexSize;
+            this._indexData = new Uint16Array(this._indexSize);
+            for (let i = 0; i < this._capacity; i++) {
+              var firstIndex = i * this._eachIndexSize;
+              for (let j = 0; j < this._eachIndexSize; j++) {
+                this._indexData[firstIndex + j] = indexBuffer[j] + i * this._vertexCount;
+              }
+            }
+        }else{
         // 粒子索引数量
         this._indexSize = this._capacity * 6;
         this._indexData = new Uint16Array(this._indexSize);
@@ -831,6 +857,7 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
             this._indexData[i * 6 + 4] = i * 4 + 2;
             this._indexData[i * 6 + 5] = i * 4 + 3;
         }
+    }
     }
 
     // 创建材质与mesh网络
@@ -847,10 +874,25 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
 
     //往顶点数据数组里设置值，分别为四个点设置偏移与uv值
     protected _appendParticleVertices(offset, instance: ParticleInstance = null) {
-        this._appendParticleVertex(offset++, instance, -1, -1, 0, 0, 1);
-        this._appendParticleVertex(offset++, instance, 1, -1, 0, 1, 1);
-        this._appendParticleVertex(offset++, instance, 1, 1, 0, 1, 0);
-        this._appendParticleVertex(offset++, instance, -1, 1, 0, 0, 0);
+        if (this._useRenderMesh) {
+            const vertexBufferView = this._renderMesh._getRawVertexBuffer();
+            const layout = this._renderMesh.vertexLayout;
+            const stride = layout.stride;
+            for (var i = 0; i < this._vertexCount; i++) {
+              const aUV = layout.getConfigByName("a_texCoord");
+              const aPosition = layout.getConfigByName("a_position");
+              const realStride = stride / 4;
+              const posBase = i * realStride + aPosition.offset / 4;
+              const uvBase = i * realStride + aUV.offset / 4;
+              this._appendParticleVertex(offset++, instance, vertexBufferView[posBase + 0], vertexBufferView[posBase + 1], vertexBufferView[posBase + 2],
+                vertexBufferView[uvBase + 0], vertexBufferView[uvBase + 1]);
+            }
+        }else{
+            this._appendParticleVertex(offset++, instance, -1, -1, 0, 0, 1);
+            this._appendParticleVertex(offset++, instance, 1, -1, 0, 1, 1);
+            this._appendParticleVertex(offset++, instance, 1, 1, 0, 1, 0);
+            this._appendParticleVertex(offset++, instance, -1, 1, 0, 0, 0);
+        }
     };
 
     protected _appendParticleVertex(index, instance: ParticleInstance, offsetX, offsetY, offsetZ, u, v) {

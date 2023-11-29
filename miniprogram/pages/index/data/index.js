@@ -258,6 +258,11 @@ const customParticle = {
             name: 'ShapeEmitter',
             label: '球形发射器',
             path: '/pages/customParticle/scene-customParticle-shapeEmitter/index'
+          },
+          {
+            name: 'MeshEmitter',
+            label: '网格发射器',
+            path: '/pages/customParticle/scene-customParticle-meshEmitter/index'
           }
     ]
   };

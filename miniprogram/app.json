@@ -80,7 +80,8 @@
     "pages/customParticle/scene-customParticle-firework/index",
     "pages/customParticle/scene-customParticle-orb/index",
     "pages/customParticle/scene-customParticle-portal/index",
-    "pages/customParticle/scene-customParticle-shapeEmitter/index"
+    "pages/customParticle/scene-customParticle-shapeEmitter/index",
+    "pages/customParticle/scene-customParticle-meshEmitter/index"
   ],
   "usingComponents": {},
   "window": {
