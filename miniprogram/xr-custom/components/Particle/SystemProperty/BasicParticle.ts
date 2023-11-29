@@ -822,9 +822,10 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
         if (this._useRenderMesh) {
             const layout = this._renderMesh.getVertexLayout();
             const stride = layout.stride;
-            this._vertexData  = this._renderMesh._getRawVertexBuffer();
-            const vertexCount = this._vertexData .byteLength / stride;
+            const vertexBuffer = this._renderMesh._getRawVertexBuffer();
+            const vertexCount = vertexBuffer .byteLength / stride;
             this._vertexSize = this._capacity * vertexCount;
+            this._vertexData = new Float32Array(this.particleVertexSize * this._vertexSize);
         } else {
             //*4 是因为每一个粒子面片由上下左右四个点构成 
             this._vertexSize = this._capacity * 4;
@@ -868,6 +869,7 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
             this._mesh = this.particleEl.addComponent(xrFrameSystem.Mesh, {
                 geometry: this._geometry,
                 material: this._material,
+                meshCount: this._renderMesh ? this._renderMesh.getSubMeshCount() : 1,
             });
         }
     }

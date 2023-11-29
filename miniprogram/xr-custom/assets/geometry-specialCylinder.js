@@ -6,7 +6,7 @@ const boundCenter = xrFrameSystem.Vector3.createFromNumber(0, 0, 0);
 const boundSize = xrFrameSystem.Vector3.createFromNumber(1, 1, 1);
 const defaultSubMeshLength = iBufferSpecialCylinder.length;
 
-xrFrameSystem.registerGeometry('specialCylinder', scene => {
+xrFrameSystem.registerGeometry('specialCylinderCustom', scene => {
   const geo = scene.createGeometry(getSpecialVertexLayout(scene), vBufferSpecialCylinder, iBufferSpecialCylinder);
 
   geo.setBoundBox(boundCenter, boundSize);

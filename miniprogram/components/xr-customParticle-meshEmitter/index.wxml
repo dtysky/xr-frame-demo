@@ -9,7 +9,7 @@
     ></xr-mesh>
     <xr-env sky-map="sky" is-sky2d/>
 
-    <xr-custom-particle  id="magicField" position="0 0 0" rotation="0 0 180" capacity="10" speed="0.1" size="2" emit-rate="6" life-time="0.5" angle="0"  render-mode="mesh" mesh="star" texture="glow_circle" angular-speed="0"></xr-custom-particle>
+    <xr-custom-particle  id="magicField" position="0 0 0" rotation="0 0 180" capacity="10" speed="0.1" size="2" emit-rate="6" life-time="0.5" angle="0"  render-mode="mesh" mesh="specialCylinder" texture="glow_circle" angular-speed="0"></xr-custom-particle>
 
     <xr-camera
       id="camera" node-id="camera" position="0 6 -6" clear-color="0.1 0.1 0.1 1"

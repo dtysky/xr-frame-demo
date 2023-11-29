@@ -25,7 +25,7 @@ Component({
         console.log('xr-scene', xrScene);
         const xrFrameSystem = wx.getXrFrameSystem()
         const magicField = xrScene.getElementById("magicField");
-        const tempSystem = magicField.getComponent(xrFrameSystem.CustomParticle)
+        const tempSystem = magicField.getComponent("custom-particle")
         tempSystem.addSizeGradient(0,0.7);
         tempSystem.addSizeGradient(0.5,1.0);
         tempSystem.addColorGradient(0, xrFrameSystem.Vector4.createFromNumber(1,0.89,0.27,1));

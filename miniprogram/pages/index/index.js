@@ -6,6 +6,7 @@ import '../../xr-custom/elements/xr-auto-rotate-touchable-gltf';
 import '../../xr-custom/elements/xr-custom-particle';
 // 自定义Geometry
 import '../../xr-custom/assets/geometry-star';
+import '../../xr-custom/assets/geometry-specialCylinder';
 // 自定义材质
 import '../../xr-custom/elements/xr-shining-star';
 // 自定义effect
