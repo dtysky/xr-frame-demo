@@ -30,6 +30,7 @@ export const CustomParticleDefaultComponents: XrFrame.IEntityComponents = Object
     gravity: ['custom-particle', 'gravity'],
     'life-time': ['custom-particle', 'lifeTime'],
     'render-mode': ['custom-particle', 'renderMode'],
+    'render-model': ['custom-particle', 'renderModel'],
     size: ['custom-particle', 'size'],
     'stop-duration': ['custom-particle', 'stopDuration'],
     speed: ['custom-particle', 'speed'],

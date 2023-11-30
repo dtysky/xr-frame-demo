@@ -1,6 +1,7 @@
 <xr-scene id="xr-scene" bind:ready="handleReady"   bind:assetsLoaded="handleLoaded">
-  <xr-assets>
+  <xr-assets bind:loaded="handleAssetsLoaded">
     <xr-asset-load type="texture" asset-id="glow_circle" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/particles/glow_circle.png" />
+    <xr-asset-load type="gltf" asset-id="gltf-ballon" src="https://webar.hereto.cn/asset/fe/ast-show/ballon-anim.glb" /> 
   </xr-assets>
 
   <xr-node>
@@ -9,7 +10,11 @@
     ></xr-mesh>
     <xr-env sky-map="sky" is-sky2d/>
 
-    <xr-custom-particle  id="magicField" position="0 0 0" rotation="0 0 180" capacity="10" speed="0.1" size="2" emit-rate="6" life-time="0.5" angle="0"  render-mode="mesh" mesh="specialCylinder" texture="glow_circle" angular-speed="0"></xr-custom-particle>
+    <!-- <xr-custom-particle  id="magicField" position="0 0 0" rotation="0 0 180" capacity="10" speed="0.1" size="2" emit-rate="6" life-time="0.5" angle="0"  render-mode="mesh" mesh="specialCylinder" texture="glow_circle" angular-speed="0"></xr-custom-particle> -->
+
+    <xr-custom-particle  id="magicField" position="0 0 0" rotation="0 0 0" capacity="10" speed="0.1" size="0.02" emit-rate="6" life-time="0.5" angle="0"  texture="glow_circle" angular-speed="0" render-model="gltf-ballon"></xr-custom-particle>
+
+    <xr-gltf id="ballon" node-id="gltf-ballon" position="0.8 0 0" rotation="0 0 0" scale="1.2 1.2 1.2" model="gltf-ballon"></xr-gltf>
 
     <xr-camera
       id="camera" node-id="camera" position="0 6 -6" clear-color="0.1 0.1 0.1 1"

@@ -10,6 +10,8 @@ export interface IParticleData {
     renderMode?: string;
     uniforms?: [string, string][];
     states?: [string, string][];
+
+    renderModel?: xrFrameSystem.GLTFModel;
     /**
      * 纹理信息。
      */
@@ -135,6 +137,7 @@ export interface IParticleData {
  * 此处声明属性在框架内运行时的真正类型
  */
 export const ParticleSchema: xrFrameSystem.IComponentSchema = {
+    renderModel: { type: 'gltf' },
     neverCull: { type: 'boolean', defaultValue: false },
     renderMode: { type: 'string', defaultValue: 'default' },
     uniforms: { type: 'map' },

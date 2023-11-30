@@ -608,7 +608,11 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
                     if (v == undefined)
                         break;
                     this._renderMesh = v;
-                    this._vertexCount = this._renderMesh._getRawVertexBuffer().byteLength / this._renderMesh.vertexLayout.stride;
+                    break;
+                case 'renderModel':
+                    if (v == undefined)
+                        break;
+                    this.processRenderModel(v);
                     break;
                 case 'delay':
                     this._delay = v;
@@ -797,6 +801,14 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
         }
     }
 
+    protected processRenderModel(value){
+        for(const mesh of value.model.meshes) {
+            this._renderMesh = mesh.subMeshes[0].geometry
+        }
+        this.useBillboard = false;
+        this._useRenderMesh = true;
+    }
+
     protected _chooseEmitterProcess() {
         if (this._particleEmitter != null) {
             return;
@@ -823,8 +835,8 @@ export default class BasicParticle extends xrFrameSystem.Component<IParticleData
             const layout = this._renderMesh.getVertexLayout();
             const stride = layout.stride;
             const vertexBuffer = this._renderMesh._getRawVertexBuffer();
-            const vertexCount = vertexBuffer .byteLength / stride;
-            this._vertexSize = this._capacity * vertexCount;
+            this._vertexCount = vertexBuffer .byteLength / stride;
+            this._vertexSize = this._capacity * this._vertexCount;
             this._vertexData = new Float32Array(this.particleVertexSize * this._vertexSize);
         } else {
             //*4 是因为每一个粒子面片由上下左右四个点构成 
