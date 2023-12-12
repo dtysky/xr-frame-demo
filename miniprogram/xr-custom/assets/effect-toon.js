@@ -85,7 +85,7 @@ xrFrameSystem.registerEffect('toon-user', scene => scene.createEffect(
   {
       v_uv = a_texCoord;
 
-      vec4 worldPosition = vec4(a_position, 1.0);
+      vec4 worldPosition = u_world * vec4(a_position, 1.0);
       vec4 lightPos = u_lightSpaceMatrix * worldPosition;
       v_z = lightPos.z / lightPos.w;
       v_z = lightPos.z / lightPos.w;
@@ -115,9 +115,9 @@ xrFrameSystem.registerEffect('toon-user', scene => scene.createEffect(
   void main()
   {
 
-    // gl_FragData[0] = packDepth(v_z * 0.5 + 0.5);
+    gl_FragData[0] = packDepth(v_z * 0.5 + 0.5);
 
-    gl_FragData[0] = vec4(v_z * 0.5 + 0.5, 0.0, 0.0, 1.0);
+    // gl_FragData[0] = vec4(v_z * 0.5 + 0.5, 0.0, 0.0, 1.0);
 
   }  
     `
