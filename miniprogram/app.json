@@ -62,6 +62,7 @@
     "pages/template/xr-template-arLine/index",
     "pages/template/xr-template-select/index",
     "pages/template/xr-template-share/index",
+    "pages/template/xr-template-textEdit/index",
     "pages/template/xr-template-removeBlack/index",
     "pages/template/xr-template-featherVideo/index",
     "pages/template/xr-template-arPreview/index",
