@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "xr-template-arGlasses/",
+          "pathName": "pages/template/xr-template-arGlasses/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-arGlasses%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "template-textEdit",
           "pathName": "pages/template/xr-template-textEdit/index",
           "query": "path=%2Fpages%2Ftemplate%2Fxr-template-textEdit%2Findex",

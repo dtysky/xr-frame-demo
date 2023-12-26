@@ -342,6 +342,11 @@ const arTemplate = {
     },
     {
       name: 'AR',
+      label: '人脸试戴眼镜（带遮挡）',
+      path: '/pages/template/xr-template-arGlasses/index',
+    },
+    {
+      name: 'AR',
       label: '模型控制朝向(面向屏幕的面片与模型)',
       path: '/pages/template/xr-template-lookat/index',
     },
