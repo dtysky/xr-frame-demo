@@ -28,7 +28,7 @@ Component({
         for(const mesh of faceGLTF.meshes) {  
           // 通过alphaMode 的 Setter 设置，或者写入renderState，但需要手动控制宏
           mesh.material.alphaMode = "BLEND";
-          mesh.material.setVector('u_baseColorFactor', xrSystem.Vector4.createFromNumber(1, 1, 1, 0.2));
+          mesh.material.setVector('u_baseColorFactor', xrSystem.Vector4.createFromNumber(1, 1, 1, 0.0));
         }
       }, 33);
     },
