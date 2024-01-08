@@ -1,17 +1,112 @@
 <xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
-    <xr-asset-material asset-id="standard-mat" effect="standard" />
   </xr-assets>
   <xr-node>
-    <xr-mesh node-id="mesh-plane" position="0 -0.02 -4" rotation="0 0 0" scale="5 1 5" geometry="plane" uniforms="u_baseColorFactor:0.48 0.78 0.64 1" receive-shadow></xr-mesh>
+    <xr-node node-id="center" position="0 2 0" ></xr-node>
+    <xr-mesh node-id="mesh-plane" position="0 0 0" rotation="0 0 0" scale="20 1 20" geometry="plane" uniforms="u_baseColorFactor:0 0 0 1"></xr-mesh>
+    <!-- 用于默认缩放的容器 -->
+    <xr-node scale="0.1 0.1 0.1"  position="0 2 0">
+      <!-- 示例1 对齐 -->
+      <xr-node position="-10 11 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.2 0.6 0.2 0.8"></xr-mesh>
+        <xr-text
+          value="居中"
+          position="0 0 0" never-cull
+          size="2" anchor="0.5 0.5" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+        ></xr-text>
+      </xr-node>
+      <xr-node position="0 11 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.2 0.6 0.2 0.8"></xr-mesh>
+        <xr-text
+          value="居左上"
+          position="-4 4 0" never-cull
+          size="2" anchor="0 1" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+        ></xr-text>
+      </xr-node>
+      <xr-node position="10 11 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.2 0.6 0.2 0.8"></xr-mesh>
+        <xr-text
+          value="居右下"
+          position="4 -4 0" never-cull
+          size="2" anchor="1 0" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+        ></xr-text>
+      </xr-node>
+      <!-- 示例2 多行 -->
+      <xr-node position="-10 0 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.2 0.2 0.6 0.8"></xr-mesh>
+        <xr-text
+          value="多行文本，基于宽度进行自动换行"
+          position="-4 4 0" never-cull
+          width="8"
+          size="1.5" anchor="0 1" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+        ></xr-text>
+      </xr-node>
+      <xr-node position="-1.5 0 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.2 0.2 0.6 0.8"></xr-mesh>
+        <xr-text
+          value="右下文本，基于宽度自动换行"
+          position="-4 4 0" never-cull
+          horzAlign="right" vertAlign="bottom"
+          width="8" height="8"
+          size="1.5" anchor="0 1" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+        ></xr-text>
+      </xr-node>
+      <xr-node position="4 0 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="2 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.2 0.2 0.6 0.8"></xr-mesh>
+        <xr-text
+          value="实现竖排"
+          position="-1 4 0" never-cull
+          width="2"
+          size="2" anchor="0 1" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+        ></xr-text>
+      </xr-node>
+       <xr-node position="10 0 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.2 0.2 0.6 0.8"></xr-mesh>
+        <xr-text
+          value="换行符\n行二\n行三\n"
+          position="-4 4 0" never-cull
+          size="2" anchor="0 1" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+        ></xr-text>
+      </xr-node>
+      <!-- 示例3 变化 -->
+      <xr-node position="-10 -11 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.6 0.2 0.2 0.8"></xr-mesh>
+        <xr-text
+          value="变化数字: {{words}}"
+          position="0 0 0" never-cull
+          horzAlign="center"
+          width="8"
+          lineHeight="2"
+          size="1" anchor="0.5 0.5" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+        ></xr-text>
+      </xr-node>
+      <xr-node position="0 -11 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.6 0.2 0.2 0.8"></xr-mesh>
+        <xr-text
+          value="变色文本"
+          position="0 0 0" never-cull
+          horzAlign="center"
+          size="1" anchor="0.5 0.5" uniforms="u_baseColorFactor:{{fontColor}} 1"
+        ></xr-text>
+      </xr-node>
+      <xr-node position="10 -11 0">
+        <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.6 0.2 0.2 0.8"></xr-mesh>
+        <xr-text
+          value="变化大小"
+          position="0 0 0" never-cull
+          horzAlign="center"
+          size="{{fontSize}}" anchor="0.5 0.5" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
+        ></xr-text>
+      </xr-node>
+    </xr-node>
     <xr-camera
-      id="camera" node-id="camera" position="0 1.6 0" clear-color="0.925 0.925 0.925 1"
-      target="mesh-sphere"
+      id="camera" node-id="camera" position="0 2 4" clear-color="0.8 0.8 0.8 1"
+      target="center"
       camera-orbit-control=""
     ></xr-camera>
   </xr-node>
   <xr-node node-id="lights">
     <xr-light type="ambient" color="1 1 1" intensity="1" />
-    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3" cast-shadow/>
+    <xr-light type="directional" rotation="40 170 0" color="1 1 1" intensity="3"/>
   </xr-node>
 </xr-scene>
