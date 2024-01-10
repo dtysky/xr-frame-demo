@@ -2,7 +2,7 @@
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
   </xr-assets>
   <xr-node>
-    <xr-node node-id="center" position="0 2 0" ></xr-node>
+    <xr-node node-id="center" position="0 2 0" test></xr-node>
     <xr-mesh node-id="mesh-plane" position="0 0 0" rotation="0 0 0" scale="20 1 20" geometry="plane" uniforms="u_baseColorFactor:0 0 0 1"></xr-mesh>
     <!-- 用于默认缩放的容器 -->
     <xr-node scale="0.1 0.1 0.1"  position="0 2 0">
@@ -37,7 +37,7 @@
         <xr-text
           value="多行文本，基于宽度进行自动换行"
           position="-4 4 0" never-cull
-          width="8"
+          width="8" line-height="1.4"
           size="1.5" anchor="0 1" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
         ></xr-text>
       </xr-node>
@@ -46,7 +46,7 @@
         <xr-text
           value="右下文本，基于宽度自动换行"
           position="-4 4 0" never-cull
-          horzAlign="right" vertAlign="bottom"
+          horz-align="right" vert-align="bottom"
           width="8" height="8"
           size="1.5" anchor="0 1" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
         ></xr-text>
@@ -72,29 +72,31 @@
       <xr-node position="-10 -11 0">
         <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.6 0.2 0.2 0.8"></xr-mesh>
         <xr-text
+          id="changeNumber"
           value="变化数字: {{words}}"
           position="0 0 0" never-cull
-          horzAlign="center"
+          horz-align="center"
           width="8"
-          lineHeight="2"
           size="1" anchor="0.5 0.5" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
         ></xr-text>
       </xr-node>
       <xr-node position="0 -11 0">
         <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.6 0.2 0.2 0.8"></xr-mesh>
         <xr-text
+          id="changeColor"
           value="变色文本"
           position="0 0 0" never-cull
-          horzAlign="center"
+          horz-align="center"
           size="1" anchor="0.5 0.5" uniforms="u_baseColorFactor:{{fontColor}} 1"
         ></xr-text>
       </xr-node>
       <xr-node position="10 -11 0">
         <xr-mesh position="0 0 -0.01" rotation="90 0 0" scale="8 1 8" geometry="plane" states="renderQueue: 2009, alphaMode: BLEND, cullOn: false" uniforms="u_baseColorFactor:0.6 0.2 0.2 0.8"></xr-mesh>
         <xr-text
+          id="changeSize"
           value="变化大小"
           position="0 0 0" never-cull
-          horzAlign="center"
+          horz-align="center"
           size="{{fontSize}}" anchor="0.5 0.5" uniforms="u_baseColorFactor:1.0 1.0 1.0 1"
         ></xr-text>
       </xr-node>
