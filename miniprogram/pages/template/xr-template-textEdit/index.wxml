@@ -1,6 +1,7 @@
 <xr-demo-viewer
   title="自定义文字案例"
-  intro=""
+  intro="文本显示与排版示例"
+  hint="要求基础库 v3.3.3 及以上"
 >
   <xr-template-textEdit
     disable-scroll

@@ -159,14 +159,29 @@ const ar = {
       path: '/pages/ar/scene-ar-face/index',
     },
     {
+      name: 'Face',
+      label: 'AR 三维人脸',
+      path: '/pages/ar/scene-ar-face-3d/index',
+    },
+    {
       name: 'Hand',
       label: 'AR 人手',
       path: '/pages/ar/scene-ar-hand/index',
     },
     {
+      name: 'Hand',
+      label: 'AR 三维人手',
+      path: '/pages/ar/scene-ar-hand-3d/index',
+    },
+    {
       name: 'Body',
       label: 'AR 人体',
       path: '/pages/ar/scene-ar-body/index',
+    },
+    {
+      name: 'Body',
+      label: 'AR 三维人体',
+      path: '/pages/ar/scene-ar-body-3d/index',
     },
     {
       name: 'Plane+Marker',
