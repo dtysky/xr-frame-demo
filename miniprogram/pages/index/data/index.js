@@ -184,6 +184,11 @@ const ar = {
       path: '/pages/ar/scene-ar-body-3d/index',
     },
     {
+      name: 'Shoe',
+      label: 'AR 试鞋',
+      path: '/pages/ar/scene-ar-shoe/index',
+    },
+    {
       name: 'Plane+Marker',
       label: 'AR 平面 Marker融合',
       path: '/pages/ar/scene-ar-vio-marker/index',

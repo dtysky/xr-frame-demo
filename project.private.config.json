@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "ar-shoe",
+          "pathName": "pages/ar/scene-ar-shoe/index",
+          "query": "path=%2Fpages%2Far%2Fscene-ar-shoe%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "ar-face-3d",
           "pathName": "pages/ar/scene-ar-face-3d/index",
           "query": "path=%2Fpages%2Far%2Fscene-ar-face-3d%2Findex",

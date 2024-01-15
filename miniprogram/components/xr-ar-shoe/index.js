@@ -7,7 +7,7 @@ Component({
     syncNumber: 0,
     syncStr: '',
     syncList: [],
-    syncBoxSize: 0.03
+    syncBoxSize: 0.2
   },
   infoInited: false,
   methods: {
@@ -16,19 +16,19 @@ Component({
       xrScene.event.add('tick', this.handleTick.bind(this));
       console.log('xr-scene', xrScene);
 
+
       // 同步点信息
-      const syncNumber = 106;
+      const syncNumber = 8;
       
       let syncStr = '';
       const syncList = [];
 
-      for (let i = 1; i <= syncNumber; i++) {
-        const colorFloat = i / 106;
+      for (let i = 0; i < syncNumber; i++) {
+        const colorFloat = i / 8;
         const colorR = 1.0 - colorFloat;
         syncStr += ` ${i}`;
         syncList.push(`1.0 ${colorR} ${colorR} 1.0`)
       }
-
 
       this.setData({
         trackerReady: true,
@@ -36,8 +36,6 @@ Component({
         syncStr: syncStr,
         syncList: syncList
       })
-
-
     },
     handleAssetsProgress: function ({detail}) {
       console.log('assets progress', detail.value);
@@ -55,20 +53,7 @@ Component({
 
       console.log('handleInfoInit')
 
-      // 延时保证glTF加载完毕
-      setTimeout(()=>{
-        const xrSystem = wx.getXrFrameSystem();
-        // 头模设为半透明
-        const faceElem = this.scene.getElementById('face');
-        const faceGLTF = faceElem.getComponent(xrSystem.GLTF);
-        console.log(faceGLTF, faceGLTF.meshes);
-        for(const mesh of faceGLTF.meshes) {  
-          // 通过alphaMode 的 Setter 设置，或者写入renderState，但需要手动控制宏
-          mesh.material.alphaMode = "BLEND";
-          mesh.material.renderQueue = 3000;
-          mesh.material.setVector('u_baseColorFactor', xrSystem.Vector4.createFromNumber(1, 1, 1, 0.4));
-        }
-      }, 30)
+      
     },
     handleTick: function () {
       const xrSystem = wx.getXrFrameSystem();
@@ -77,7 +62,7 @@ Component({
         this.handleInfoInit();
       }
 
-      const trackerEl = this.scene.getElementById('tracker');
+      const trackerEl = this.scene.getElementById('tracker-1');
       if (!trackerEl) {
         return;
       }

@@ -30,6 +30,7 @@
     "pages/ar/scene-ar-face/index",
     "pages/ar/scene-ar-hand/index",
     "pages/ar/scene-ar-body/index",
+    "pages/ar/scene-ar-shoe/index",
     "pages/ar/scene-ar-face-3d/index",
     "pages/ar/scene-ar-hand-3d/index",
     "pages/ar/scene-ar-body-3d/index",
