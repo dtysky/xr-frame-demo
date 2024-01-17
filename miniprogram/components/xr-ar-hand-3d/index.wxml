@@ -1,4 +1,4 @@
-<xr-scene ar-system="modes:Hand" bind:ready="handleReady" bind:ar-ready="handleARReady">
+<xr-scene ar-system="modes:Hand;pose3d: true;" bind:ready="handleReady" bind:ar-ready="handleARReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
   </xr-assets>
   <xr-node wx:if="{{arReady}}">

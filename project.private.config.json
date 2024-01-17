@@ -5,10 +5,38 @@
     "useIsolateContext": true
   },
   "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "libVersion": "3.2.0",
+  "libVersion": "3.3.0",
   "condition": {
     "miniprogram": {
       "list": [
+        {
+          "name": "ar-shoe",
+          "pathName": "pages/ar/scene-ar-shoe/index",
+          "query": "path=%2Fpages%2Far%2Fscene-ar-shoe%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "ar-face-3d",
+          "pathName": "pages/ar/scene-ar-face-3d/index",
+          "query": "path=%2Fpages%2Far%2Fscene-ar-face-3d%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "xr-template-arGlasses/",
+          "pathName": "pages/template/xr-template-arGlasses/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-arGlasses%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "template-textEdit",
+          "pathName": "pages/template/xr-template-textEdit/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-textEdit%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
         {
           "name": "template-markerCenter",
           "pathName": "pages/template/xr-template-markerCenter/index",

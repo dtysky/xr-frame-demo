@@ -159,14 +159,34 @@ const ar = {
       path: '/pages/ar/scene-ar-face/index',
     },
     {
+      name: 'Face',
+      label: 'AR 三维人脸',
+      path: '/pages/ar/scene-ar-face-3d/index',
+    },
+    {
       name: 'Hand',
       label: 'AR 人手',
       path: '/pages/ar/scene-ar-hand/index',
     },
     {
+      name: 'Hand',
+      label: 'AR 三维人手',
+      path: '/pages/ar/scene-ar-hand-3d/index',
+    },
+    {
       name: 'Body',
       label: 'AR 人体',
       path: '/pages/ar/scene-ar-body/index',
+    },
+    {
+      name: 'Body',
+      label: 'AR 三维人体',
+      path: '/pages/ar/scene-ar-body-3d/index',
+    },
+    {
+      name: 'Shoe',
+      label: 'AR 试鞋',
+      path: '/pages/ar/scene-ar-shoe/index',
     },
     {
       name: 'Plane+Marker',
@@ -342,6 +362,11 @@ const arTemplate = {
     },
     {
       name: 'AR',
+      label: '人脸试戴眼镜（带遮挡）',
+      path: '/pages/template/xr-template-arGlasses/index',
+    },
+    {
+      name: 'AR',
       label: '模型控制朝向(面向屏幕的面片与模型)',
       path: '/pages/template/xr-template-lookat/index',
     },
@@ -425,6 +450,11 @@ const toolTemplate = {
       name: 'Share',
       label: '截图与分享',
       path: '/pages/template/xr-template-share/index',
+    },
+    {
+      name: 'Text',
+      label: '自定义文本',
+      path: '/pages/template/xr-template-textEdit/index',
     },
     {
         name: 'VideoRender',
