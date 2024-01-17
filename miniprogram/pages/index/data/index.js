@@ -425,6 +425,11 @@ const toolTemplate = {
       name: 'Share',
       label: '截图与分享',
       path: '/pages/template/xr-template-share/index',
+    },
+    {
+        name: 'VideoRender',
+        label: '视频渲染',
+        path: '/pages/template/xr-video-render/index',
     }
     // {
     //   name: 'Video',
