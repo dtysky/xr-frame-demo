@@ -73,7 +73,7 @@
     "pages/template/xr-template-arGlasses/index",
     "pages/template/xr-template-lookat/index",
     "pages/template/xr-template-arui/index",
-    "pages/template/xr-video-render/index",
+    "pages/template/xr-template-volumeVideo/index",
     "pages/scene-last-record/index",
     "pages/scene-beside-edge/index",
     "pages/physics/scene-physics-shoot/index",

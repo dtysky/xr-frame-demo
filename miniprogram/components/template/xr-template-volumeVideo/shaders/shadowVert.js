@@ -19,7 +19,6 @@ highp float height = 60.0;
 vec4 texelFetch1(int x, int y) {
       return texture2D(texture2, vec2((float(x) + 0.5) / width, (float(y) + 0.5) / height));
 }
-
 mat4 getBoneMatrix(int boneNdx) {
   return mat4(
     texelFetch1(0, boneNdx),
@@ -27,7 +26,6 @@ mat4 getBoneMatrix(int boneNdx) {
     texelFetch1(2, boneNdx),
     texelFetch1(3, boneNdx));
 }
-
 void main(){
   v_UV = a_texCoord;
   vec4 totalPosition = vec4(0.0);

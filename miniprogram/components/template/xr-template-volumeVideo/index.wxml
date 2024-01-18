@@ -1,11 +1,10 @@
 <xr-scene id="xr-scene" bind:ready="handleReady">
   <xr-assets bind:progress="handleAssetsProgress" bind:loaded="handleAssetsLoaded">
     <xr-asset-material asset-id="plane-shadow-mat" effect="plane-shadow" />
-    <xr-asset-load type="gltf" asset-id="gltf-just_a_girl" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/just_a_girl/index.glb" />
   </xr-assets>
 
   <xr-mesh position="0 0 0" scale="10 1 10" geometry="plane" material="plane-shadow-mat" receive-shadow></xr-mesh>
-  
+
   <xr-env env-data="xr-frame-team-workspace-day2" />
   <xr-node>
     <xr-node cast-shadow id="preview-model-videoData">

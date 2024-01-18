@@ -2,7 +2,7 @@
   title="视频渲染"
   intro="根据体积视频进行三维模型渲染"
 >
-  <xr-video-render
+  <xr-template-volumeVideo
     disable-scroll
     id="main-frame"
     width="{{renderWidth}}"

@@ -62,12 +62,14 @@ uniform vec4 u_mainLightColorIns;
     uniform vec4 u_csmFarBounds;
     uniform vec4 u_shadowTilingOffsets[4];
 #endif
+
 float unpackDepth(const in vec4 rgbaDepth)
 {
   vec4 bitShift = vec4(1.0 / (256.0 * 256.0 * 256.0), 1.0 / (256.0 * 256.0), 1.0 / 256.0, 1.0);
   float depth = dot(rgbaDepth, bitShift);
   return depth;
 }
+
 float shadowCalculation(vec3 posWorld) {
   float srcShadow = 1.0;
   vec4 shadowCoord = u_csmLightSpaceMatrices[0] * vec4(posWorld, 1.0);

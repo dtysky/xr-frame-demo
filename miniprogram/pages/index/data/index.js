@@ -459,7 +459,7 @@ const toolTemplate = {
     {
         name: 'VideoRender',
         label: '视频渲染',
-        path: '/pages/template/xr-video-render/index',
+        path: '/pages/template/xr-template-volumeVideo/index',
     }
     // {
     //   name: 'Video',

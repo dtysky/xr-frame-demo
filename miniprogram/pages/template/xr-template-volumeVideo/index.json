@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
-    "xr-video-render": "../../../components/template/xr-video-render/index"
+    "xr-template-volumeVideo": "../../../components/template/xr-template-volumeVideo/index"
   },
   "disableScroll": true
 }
