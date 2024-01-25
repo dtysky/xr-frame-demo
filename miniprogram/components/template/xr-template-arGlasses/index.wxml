@@ -6,8 +6,8 @@
   <xr-env env-data="xr-frame-team-workspace-day" />
   <xr-node>
     <xr-ar-tracker id='tracker' mode="Face">
-      <xr-gltf id="face" node-id="gltf-face" position="0 0 0" rotation="0 0 0" scale="1 1 1" model="gltf-face" never-cull></xr-gltf>
-      <xr-gltf node-id="gltf-glass" position="0 0 0" rotation="0 0 0" scale="1 1 1" model="gltf-glass"></xr-gltf>
+      <xr-gltf id="face" node-id="gltf-face" visible="{{loaded}}" position="0 0 0" rotation="0 0 0" scale="1 1 1" model="gltf-face" never-cull></xr-gltf>
+      <xr-gltf node-id="gltf-glass" visible="{{loaded}}" position="0 0 0" rotation="0 0 0" scale="1 1 1" model="gltf-glass"></xr-gltf>
     </xr-ar-tracker>
     <xr-camera
       id="camera" node-id="camera" clear-color="0.925 0.925 0.925 1"
