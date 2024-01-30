@@ -457,8 +457,8 @@ const toolTemplate = {
       path: '/pages/template/xr-template-textEdit/index',
     },
     {
-        name: 'VideoRender',
-        label: '视频渲染',
+        name: 'volumeVideo',
+        label: '体积视频渲染',
         path: '/pages/template/xr-template-volumeVideo/index',
     }
     // {
