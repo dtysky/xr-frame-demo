@@ -22,7 +22,7 @@ Component({
       let syncStr = '';
       const syncList = [];
 
-      for (let i = 1; i <= syncNumber; i++) {
+      for (let i = 0; i <= syncNumber; i++) {
         const colorFloat = i / 106;
         const colorR = 1.0 - colorFloat;
         syncStr += ` ${i}`;

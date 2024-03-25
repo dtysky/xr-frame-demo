@@ -1,5 +1,5 @@
 <xr-demo-viewer
-  title="视频渲染"
+  title="体积视频渲染"
   intro="根据体积视频进行三维模型渲染"
 >
   <xr-template-volumeVideo
