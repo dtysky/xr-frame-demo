@@ -393,6 +393,11 @@ const customTemplate = {
       path: '/pages/template/xr-template-toon/index',
     },
     {
+        name: 'Effect',
+        label: '自定义PBR渲染',
+        path: '/pages/template/xr-template-pbr/index',
+    },
+    {
       name: 'Effect',
       label: '透明平面阴影',
       path: '/pages/template/xr-template-planeShadow/index',
@@ -460,6 +465,11 @@ const toolTemplate = {
         name: 'VideoRender',
         label: '视频渲染',
         path: '/pages/template/xr-template-volumeVideo/index',
+    },
+    {
+        name: 'Dissolve',
+        label: '消融特效',
+        path: '/pages/template/xr-template-dissolve/index',
     }
     // {
     //   name: 'Video',
