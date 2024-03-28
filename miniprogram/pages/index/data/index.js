@@ -461,11 +461,11 @@ const toolTemplate = {
       label: '自定义文本',
       path: '/pages/template/xr-template-textEdit/index',
     },
-    {
-        name: 'volumeVideo',
-        label: '体积视频渲染',
-        path: '/pages/template/xr-template-volumeVideo/index',
-    },
+    // {
+    //     name: 'volumeVideo',
+    //     label: '体积视频渲染',
+    //     path: '/pages/template/xr-template-volumeVideo/index',
+    // },
     {
         name: 'Dissolve',
         label: '消融特效',
