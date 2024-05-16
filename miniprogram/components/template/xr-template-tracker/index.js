@@ -240,11 +240,19 @@ Component({
           } = res
           const widthDivideHeight = width / height;
 
-          this.setData({
-            markerWidth: 1,
-            markerHeight: (1 / widthDivideHeight).toFixed(2),
-            videoRatioLoaded: true,
-          });
+          if (widthDivideHeight > 1) {
+            this.setData({
+              markerWidth: widthDivideHeight * 0.7,
+              markerHeight: 1 * 0.7,
+              videoRatioLoaded: true,
+            });
+          } else {
+            this.setData({
+              markerWidth: 1,
+              markerHeight: (1 / widthDivideHeight).toFixed(2),
+              videoRatioLoaded: true,
+            });
+          }
 
         },
         fail: res => {
