@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+      "xr-demo-viewer": "../../../components/xr-demo-viewer/index",
+      "xr-template-water": "../../../components/template/xr-template-water/index"
+    },
+    "disableScroll": true, "renderer": "webview"
+  }

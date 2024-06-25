@@ -52,6 +52,7 @@
     "pages/template/xr-template-control/index",
     "pages/template/xr-template-loading/index",
     "pages/template/xr-template-toon/index",
+    "pages/template/xr-template-water/index",
     "pages/template/xr-template-pbr/index",
     "pages/template/xr-template-planeShadow/index",
     "pages/template/xr-template-geometry/index",

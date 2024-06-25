@@ -394,6 +394,11 @@ const customTemplate = {
     },
     {
         name: 'Effect',
+        label: '自定义水纹理效果',
+        path: '/pages/template/xr-template-water/index',
+    },
+    {
+        name: 'Effect',
         label: '自定义PBR渲染',
         path: '/pages/template/xr-template-pbr/index',
     },

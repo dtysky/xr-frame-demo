@@ -10,6 +10,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/template/xr-template-water/index",
+          "pathName": "pages/template/xr-template-water/index",
+          "query": "path=%2Fpages%2Ftemplate%2Fxr-template-water%2Findex",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "ar-threeDof",
           "pathName": "pages/ar/scene-ar-threeDof/index",
           "query": "path=%2Fpages%2Far%2Fscene-ar-threeDof%2Findex",
